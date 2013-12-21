@@ -1,6 +1,8 @@
 # jQuery.plainModal
 
 The simple jQuery Plugin for customizable modal windows. plainModal has basic functions only, and it does nothing for styles. It has no image files and no CSS files.  
+**See <a href="http://anseki.github.io/jquery-plainmodal">DEMO</a>**
+
 Many great plugins already exist.
 
 - The gorgeous plugins which has many functions and rich styles.
@@ -18,8 +20,10 @@ plainModal do:
 - Hiding modal window when Escape key is pressed.
 
 ```js
-$('#modal').plainModal('open'); // Show modal window. <div id="modal"> is styled via your CSS.
-$('#modal').plainModal('close'); // Hide modal window.
+// Show modal window. <div id="modal"> is styled via your CSS.
+$('#modal').plainModal('open');
+// Hide modal window.
+$('#modal').plainModal('close');
 ```
 
 ## Methods
@@ -57,16 +61,19 @@ In this code, unneeded initializing is done again, again, and again.
 
 ```js
 $('#open-button').click(function() {
-  $('#modal').plainModal('open', {duration: 500}); // Same initializing per every showing
+  // Same initializing per every showing
+  $('#modal').plainModal('open', {duration: 500});
 });
 ```
 
 In this code, initializing is done at once.
 
 ```js
-var modal = $('#modal').plainModal({duration: 500}); // Initialize only once
+// Initialize only once
+var modal = $('#modal').plainModal({duration: 500});
 $('#open-button').click(function() {
-  modal.plainModal('open'); // Show without initializing
+  // Show without initializing
+  modal.plainModal('open');
 });
 ```
 
@@ -74,7 +81,8 @@ In this code, initializing is done at once.
 
 ```js
 $('#open-button').click(function() {
-  modal.plainModal('open'); // Initializing is done at only first time
+  // Initializing is done at only first time
+  modal.plainModal('open');
 });
 ```
 
@@ -90,7 +98,7 @@ Default: Calculated center position
 A Object that has `left` and `top`, relative to the view area.
 
 ```js
-$('#modal').plainModal({offset: {left: 300, top: 100}});
+$('#modal').plainModal({offset: {left: 100, top: 50}});
 ```
 
 ### `overlay`
@@ -100,12 +108,23 @@ Default: `{color: '#000', opacity: 0.3}`
 
 A Object that has `color` and `opacity` of overlay.
 
+```js
+$('#modal').plainModal({overlay: {color: '#fff', opacity: 0.5}});
+```
+
 ### `closeClass`
 
 Type: String  
 Default: `'plainmodal-close'`
 
 If the element that has this class name is found, the [Close](#close) method is attached to `click` event of it.
+
+```html
+<div>
+<p>Lorem ipsum dolor ...</p>
+<div class="plainmodal-close">Close</div>
+</div>
+```
 
 ### `duration`
 
@@ -135,11 +154,16 @@ $('#modal').plainModal({
   duration: 500,
   effect: {
     open: function(duration, complete) {
-      this.css({display: 'block', marginTop: -100 - this.outerHeight()})
-        .animate({marginTop: 0}, duration, complete);
+      this.css({
+        display:          'block',
+        marginTop:        -100 - this.outerHeight()
+      })
+      .animate({marginTop: 0}, duration, complete);
     },
     close: function(duration, complete) {
-      this.animate({marginTop: -100 - this.outerHeight()}, duration, function() {
+      this.animate({
+        marginTop:        -100 - this.outerHeight()
+      }, duration, function() {
         $(this).css({display: 'none'});
         complete();
       });
@@ -154,14 +178,21 @@ These Functions can ignore `duration`, but it must call `complete`, when the eff
 $('#modal').plainModal({
   effect: {
     open: function(duration, complete) {
-      var self = this.css({display: 'block', color: '#fff', backgroundColor: '#fff'});
+      var self = this.css({
+        display:          'block',
+        color:            '#fff',
+        backgroundColor:  '#fff'
+      });
       setTimeout(function() {
         self.css({color: '', backgroundColor: ''});
         complete();
       }, 500);
     },
     close: function(duration, complete) {
-      var self = this.css({color: '#fff', backgroundColor: '#fff'});
+      var self = this.css({
+        color:            '#fff',
+        backgroundColor:  '#fff'
+      });
       setTimeout(function() {
         self.css({display: 'none'});
         complete();

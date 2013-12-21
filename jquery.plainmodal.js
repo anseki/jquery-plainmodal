@@ -10,7 +10,8 @@
 
 var jqOpened = null, // jqOpened === null : Not opened / jqOpened === 0 : Fading now
     jqBody, jqOverlay, jqTrigger, jq1st,
-    orgOverflow, addMarginR, addMarginB;
+    orgOverflow, addMarginR, addMarginB,
+    jqWin, winLeft, winTop;
 
 function init(jq, options) {
   var opt = $.extend({
@@ -31,6 +32,7 @@ function init(jq, options) {
     display:        'none',
     zIndex:         9000
   }).appendTo(jqBody).click(modalClose);
+  jqWin = jqWin || $(window);
 
   return jq.each(function() {
     var self = $(this),
@@ -73,6 +75,9 @@ function modalOpen(jq, options) {
     if (calMarginR < 0) { jqBody.css('marginRight', '+=' + (addMarginR = -calMarginR)); }
     if (calMarginB < 0) { jqBody.css('marginBottom', '+=' + (addMarginB = -calMarginB)); }
 
+    winLeft = jqWin.scrollLeft();
+    winTop = jqWin.scrollTop();
+
     jqTrigger = $(document.activeElement); // Save activeElement
     opt.effect.open.call(target, opt.duration, function() {
       jq1st = null;
@@ -85,6 +90,7 @@ function modalOpen(jq, options) {
       });
       $(document.activeElement).blur();
       $(document).focusin(forceFocus).keydown(keyEscape);
+      jqWin.scroll(winScroll);
       jqOpened = target;
     });
     jqOverlay.css('backgroundColor', opt.overlay.color)
@@ -99,19 +105,14 @@ function modalClose(jq) {
   if (jqOpened) {
     opt = jqOpened.data('plainModal');
     opt.effect.close.call(jqOpened, opt.duration, function() {
-      var jqWin, winLeft, winTop;
       $(document).off('focusin', forceFocus).off('keydown', keyEscape);
+      jqWin.off('scroll', winScroll);
       jqBody.css('overflow', orgOverflow);
       if (addMarginR) { jqBody.css('marginRight', '-=' + addMarginR); }
       if (addMarginB) { jqBody.css('marginBottom', '-=' + addMarginB); }
-      if (jqTrigger && jqTrigger.length) { // Restore activeElement
-        jqWin = $(window); // Window may scroll via focus().
-        winLeft = jqWin.scrollLeft();
-        winTop = jqWin.scrollTop();
-        jqTrigger.focus();
-        jqWin.scrollLeft(winLeft);
-        jqWin.scrollTop(winTop);
-      }
+      if (jqTrigger && jqTrigger.length) { jqTrigger.focus(); } // Restore activeElement
+      jqWin.scrollLeft(winLeft);
+      jqWin.scrollTop(winTop);
       jqOpened = null;
     });
     jqOverlay.fadeOut(opt.duration);
@@ -134,6 +135,13 @@ function keyEscape(e) {
     e.preventDefault();
     return false;
   }
+}
+
+function winScroll(e) {
+  jqWin.scrollLeft(winLeft);
+  jqWin.scrollTop(winTop);
+  e.preventDefault();
+  return false;
 }
 
 $.fn.plainModal = function(action, options) {
