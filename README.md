@@ -203,4 +203,5 @@ $('#modal').plainModal({
 ```
 
 ## Release History
+ * 2013-12-22			v0.1.1			Fix: scroll control
  * 2013-12-21			v0.1.0			Initial release.
