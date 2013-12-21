@@ -25,6 +25,6 @@
   "docs": "http://anseki.github.io/jquery-plainmodal/",
   "download": "http://anseki.github.io/jquery-plainmodal/",
   "dependencies": {
-    "jquery": ">=1.5"
+    "jquery": ">=1.8"
   }
 }
