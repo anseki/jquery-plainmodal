@@ -34,8 +34,9 @@
         <h1>
 <a name="jqueryplainmodal" class="anchor" href="#jqueryplainmodal"><span class="octicon octicon-link"></span></a>jQuery.plainModal</h1>
 
-<p>The simple jQuery Plugin for customizable modal windows. plainModal has basic functions only, and it does nothing for styles. It has no image files and no CSS files.<br>
-Many great plugins already exist.</p>
+<p>The simple jQuery Plugin for customizable modal windows. plainModal has basic functions only, and it does nothing for styles. It has no image files and no CSS files.  </p>
+
+<p>Many great plugins already exist.</p>
 
 <ul>
 <li>The gorgeous plugins which has many functions and rich styles.</li>
@@ -133,7 +134,7 @@ Default: Calculated center position</p>
 
 <p>A Object that has <code>left</code> and <code>top</code>, relative to the view area.</p>
 
-<div class="highlight highlight-js"><pre><span class="nx">$</span><span class="p">(</span><span class="s1">'#modal'</span><span class="p">).</span><span class="nx">plainModal</span><span class="p">({</span><span class="nx">offset</span><span class="o">:</span> <span class="p">{</span><span class="nx">left</span><span class="o">:</span> <span class="mi">300</span><span class="p">,</span> <span class="nx">top</span><span class="o">:</span> <span class="mi">100</span><span class="p">}});</span>
+<div class="highlight highlight-js"><pre><span class="nx">$</span><span class="p">(</span><span class="s1">'#modal'</span><span class="p">).</span><span class="nx">plainModal</span><span class="p">({</span><span class="nx">offset</span><span class="o">:</span> <span class="p">{</span><span class="nx">left</span><span class="o">:</span> <span class="mi">100</span><span class="p">,</span> <span class="nx">top</span><span class="o">:</span> <span class="mi">50</span><span class="p">}});</span>
 </pre></div>
 
 <h3>
@@ -145,6 +146,9 @@ Default: <code>{color: '#000', opacity: 0.3}</code></p>
 
 <p>A Object that has <code>color</code> and <code>opacity</code> of overlay.</p>
 
+<div class="highlight highlight-js"><pre><span class="nx">$</span><span class="p">(</span><span class="s1">'#modal'</span><span class="p">).</span><span class="nx">plainModal</span><span class="p">({</span><span class="nx">overlay</span><span class="o">:</span> <span class="p">{</span><span class="nx">color</span><span class="o">:</span> <span class="s1">'#fff'</span><span class="p">,</span> <span class="nx">opacity</span><span class="o">:</span> <span class="mf">0.5</span><span class="p">}});</span>
+</pre></div>
+
 <h3>
 <a name="closeclass" class="anchor" href="#closeclass"><span class="octicon octicon-link"></span></a><code>closeClass</code>
 </h3>
@@ -153,6 +157,12 @@ Default: <code>{color: '#000', opacity: 0.3}</code></p>
 Default: <code>'plainmodal-close'</code></p>
 
 <p>If the element that has this class name is found, the <a href="#close">Close</a> method is attached to <code>click</code> event of it.</p>
+
+<div class="highlight highlight-html"><pre><span class="nt">&lt;div&gt;</span>
+<span class="nt">&lt;p&gt;</span>Lorem ipsum dolor ...<span class="nt">&lt;/p&gt;</span>
+<span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"plainmodal-close"</span><span class="nt">&gt;</span>Close<span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+</pre></div>
 
 <h3>
 <a name="duration" class="anchor" href="#duration"><span class="octicon octicon-link"></span></a><code>duration</code>
