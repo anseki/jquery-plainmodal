@@ -1,6 +1,6 @@
 # jQuery.plainModal
 
-The simple jQuery Plugin for customizable modal windows. plainModal has basic functions only, and it does nothing for styles. It has no image files and no CSS files.  
+The simple jQuery Plugin for customizable modal windows. plainModal has basic functions only, and it does nothing for styles. It has no image files and no CSS files. Just one small file (2KB minified).  
 **See <a href="http://anseki.github.io/jquery-plainmodal">DEMO</a>**
 
 Many great plugins already exist.
@@ -201,6 +201,11 @@ $('#modal').plainModal({
   }
 });
 ```
+
+## Note
+
+As everyone knows, IE8- has many problems. CSS `position:fixed` in HTML without `<!DOCTYPE>` is ignored.  
+If your web site supports IE8- and it use `position:fixed`, HTML must include `<!DOCTYPE>` even if plainModal is not used. And plainModal uses `position:fixed`.
 
 ## Release History
  * 2013-12-22			v0.1.1			Fix: scroll control
