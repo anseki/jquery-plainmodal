@@ -15,7 +15,7 @@ plainModal do:
 
 - Showing specified element as modal window, and hiding it.
 - Covering a page with a overlay.
-- Avoiding focusing outer elements of modal window. (by pressing Tab key)
+- Avoiding focusing outside elements of modal window. (by pressing Tab key)
 - Avoiding scrolling a page window.
 - Hiding modal window when Escape key is pressed.
 
