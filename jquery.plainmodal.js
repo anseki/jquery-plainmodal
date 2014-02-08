@@ -6,14 +6,16 @@
  * Licensed under the MIT license.
  */
 
-(function($) {
+;(function($) {
 
 var jqOpened = null, // jqOpened === null : Not opened / jqOpened === 0 : Fading now
-    jqBody, jqOverlay, jqTrigger, jq1st,
+    jqBody, jqOverlay, jqActive, jq1st,
     orgOverflow, addMarginR, addMarginB,
     jqWin, winLeft, winTop;
 
 function init(jq, options) {
+  // The options object is shared by all elements in jq.
+  // Therefore, don't change properties later. (Replace options object for new object.)
   var opt = $.extend({
         duration:       200,
         effect:         {open: $.fn.fadeIn, close: $.fn.fadeOut},
@@ -66,11 +68,11 @@ function modalOpen(jq, options) {
     }
 
     orgOverflow = jqBody.css('overflow');
-    calMarginR = jqBody.width();
-    calMarginB = jqBody.height();
+    calMarginR = jqBody.prop('clientWidth');
+    calMarginB = jqBody.prop('clientHeight');
     jqBody.css('overflow', 'hidden');
-    calMarginR -= jqBody.width();
-    calMarginB -= jqBody.height();
+    calMarginR -= jqBody.prop('clientWidth');
+    calMarginB -= jqBody.prop('clientHeight');
     addMarginR = addMarginB = 0;
     if (calMarginR < 0) { jqBody.css('marginRight', '+=' + (addMarginR = -calMarginR)); }
     if (calMarginB < 0) { jqBody.css('marginBottom', '+=' + (addMarginB = -calMarginB)); }
@@ -78,7 +80,7 @@ function modalOpen(jq, options) {
     winLeft = jqWin.scrollLeft();
     winTop = jqWin.scrollTop();
 
-    jqTrigger = $(document.activeElement); // Save activeElement
+    jqActive = $(document.activeElement); // Save activeElement
     opt.effect.open.call(target, opt.duration, function() {
       jq1st = null;
       target.find('a,input,select,textarea,button,object,area,img,map').each(function() {
@@ -110,7 +112,7 @@ function modalClose(jq) {
       jqBody.css('overflow', orgOverflow);
       if (addMarginR) { jqBody.css('marginRight', '-=' + addMarginR); }
       if (addMarginB) { jqBody.css('marginBottom', '-=' + addMarginB); }
-      if (jqTrigger && jqTrigger.length) { jqTrigger.focus(); } // Restore activeElement
+      if (jqActive && jqActive.length) { jqActive.focus(); } // Restore activeElement
       jqWin.scrollLeft(winLeft);
       jqWin.scrollTop(winTop);
       jqOpened = null;
@@ -151,4 +153,4 @@ $.fn.plainModal = function(action, options) {
                           init(this, action)); // options.
 };
 
-}(jQuery)); 
+})(jQuery);
