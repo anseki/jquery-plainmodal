@@ -87,6 +87,15 @@ $('#sample-button2').click(function() {
 </pre></div>
 
 <h2>
+<a name="getting-started" class="anchor" href="#getting-started"><span class="octicon octicon-link"></span></a>Getting Started</h2>
+
+<p>Load after jQuery.</p>
+
+<div class="highlight highlight-html"><pre><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"jquery-1.11.0.min.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"jquery.plainmodal.min.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+</pre></div>
+
+<h2>
 <a name="methods" class="anchor" href="#methods"><span class="octicon octicon-link"></span></a>Methods</h2>
 
 <h3>
@@ -118,7 +127,7 @@ A element can be initialized by new <code>options</code> any number of times.</p
 
 <p>Initialize specified element as modal window.<br>
 The <a href="#open">Open</a> method can initialize too. This is used to initialize without showing modal window at voluntary time.<br>
-You can specify <code>options</code> to every <a href="#open">Open</a> method. But, if <code>options</code> of a element isn't changed, re-initializing a element isn't needed. Then, you specify <code>options</code> to only first <a href="#open">Open</a> method, or use this method for initializing only once.<br>
+You can specify <code>options</code> to every <a href="#open">Open</a> method. But, if <code>options</code> of a element isn't changed, re-initializing it isn't needed. Then, you specify <code>options</code> to only first <a href="#open">Open</a> method, or use this method for initializing it only once.<br>
 If you don't customize <a href="#options">Options</a> (using default all), this method isn't needed because <code>options</code> isn't specified to <a href="#open">Open</a> method, and element is initialized at only first time.</p>
 
 <p>In this code, unneeded initializing is done again, again, and again.</p>
@@ -131,7 +140,7 @@ If you don't customize <a href="#options">Options</a> (using default all), this 
 
 <p>In this code, initializing is done at once.</p>
 
-<div class="highlight highlight-js"><pre><span class="c1">// Initialize only once</span>
+<div class="highlight highlight-js"><pre><span class="c1">// Initialize without showing</span>
 <span class="kd">var</span> <span class="nx">modal</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">'#modal'</span><span class="p">).</span><span class="nx">plainModal</span><span class="p">({</span><span class="nx">duration</span><span class="o">:</span> <span class="mi">500</span><span class="p">});</span>
 <span class="nx">$</span><span class="p">(</span><span class="s1">'#open-button'</span><span class="p">).</span><span class="nx">click</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
   <span class="c1">// Show without initializing</span>
@@ -157,7 +166,7 @@ If you don't customize <a href="#options">Options</a> (using default all), this 
 <a name="offset" class="anchor" href="#offset"><span class="octicon octicon-link"></span></a><code>offset</code>
 </h3>
 
-<p>Type: Object<br>
+<p>Type: Object or Function<br>
 Default: Calculated center position</p>
 
 <p>A Object that has <code>left</code> and <code>top</code>, relative to the view area.</p>
@@ -174,6 +183,49 @@ Default: Calculated center position</p>
 $('#sample-button3').click(function() {
   $('#sample3').plainModal('open', {offset: {left: 100, top: 50}});
 });
+</script>
+<!-- ======== /sample -->
+
+<p>Or, a Function that returns above Object. This Function is called by <a href="#open">Open</a> method, not <a href="#initialize">Initialize</a> method. Therefore position be able to change according to the situation.</p>
+
+<div class="highlight highlight-js"><pre><span class="kd">var</span> <span class="nx">button</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">'#open-button'</span><span class="p">).</span><span class="nx">click</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+      <span class="nx">modal</span><span class="p">.</span><span class="nx">plainModal</span><span class="p">(</span><span class="s1">'open'</span><span class="p">);</span>
+    <span class="p">}),</span>
+    <span class="nx">modal</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">'#modal'</span><span class="p">).</span><span class="nx">plainModal</span><span class="p">({</span>
+      <span class="nx">offset</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+        <span class="c1">// Fit the position to a button.</span>
+        <span class="kd">var</span> <span class="nx">btnOffset</span> <span class="o">=</span> <span class="nx">button</span><span class="p">.</span><span class="nx">offset</span><span class="p">(),</span> <span class="nx">win</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="nb">window</span><span class="p">);</span>
+        <span class="k">return</span> <span class="p">{</span>
+          <span class="nx">left</span><span class="o">:</span>   <span class="nx">btnOffset</span><span class="p">.</span><span class="nx">left</span> <span class="o">-</span> <span class="nx">win</span><span class="p">.</span><span class="nx">scrollLeft</span><span class="p">()</span>
+                    <span class="o">+</span> <span class="nb">parseInt</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">css</span><span class="p">(</span><span class="s1">'borderLeftWidth'</span><span class="p">),</span> <span class="mi">10</span><span class="p">),</span>
+          <span class="nx">top</span><span class="o">:</span>    <span class="nx">btnOffset</span><span class="p">.</span><span class="nx">top</span> <span class="o">-</span> <span class="nx">win</span><span class="p">.</span><span class="nx">scrollTop</span><span class="p">()</span>
+                    <span class="o">+</span> <span class="nb">parseInt</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">css</span><span class="p">(</span><span class="s1">'borderTopWidth'</span><span class="p">),</span> <span class="mi">10</span><span class="p">)</span>
+        <span class="p">};</span>
+      <span class="p">}</span>
+    <span class="p">});</span>
+</pre></div>
+
+<!-- ======== sample -->
+<div id="sample8" class="sample-window">
+<p>Click outside area of this window, or press Escape key to close this window.</p>
+</div>
+<div class="sample-button" id="sample-button8">Open Sample</div>
+<script>
+var button = $('#sample-button8').click(function() {
+      modal.plainModal('open');
+    }),
+    modal = $('#sample8').plainModal({
+      offset: function() {
+        // Fit the position to a button.
+        var btnOffset = button.offset(), win = $(window);
+        return {
+          left:   btnOffset.left - win.scrollLeft()
+                    + parseInt(this.css('borderLeftWidth'), 10),
+          top:    btnOffset.top - win.scrollTop()
+                    + parseInt(this.css('borderTopWidth'), 10)
+        };
+      }
+    });
 </script>
 <!-- ======== /sample -->
 
@@ -377,8 +429,11 @@ $('#sample-button7').click(function() {
 <h2>
 <a name="note" class="anchor" href="#note"><span class="octicon octicon-link"></span></a>Note</h2>
 
-<p>As everyone knows, IE8- has many problems. CSS <code>position:fixed</code> in HTML without <code>&lt;!DOCTYPE&gt;</code> is ignored.<br>
-If your web site supports IE8- and it use <code>position:fixed</code>, HTML must include <code>&lt;!DOCTYPE&gt;</code> even if plainModal is not used. And plainModal uses <code>position:fixed</code>.</p>
+<ul>
+<li>As everyone knows, IE8- has many problems. CSS <code>position:fixed</code> in HTML without <code>&lt;!DOCTYPE&gt;</code> is ignored.<br>
+If your web site supports IE8- and it use <code>position:fixed</code>, HTML must include <code>&lt;!DOCTYPE&gt;</code> even if plainModal is not used. And plainModal uses <code>position:fixed</code>.</li>
+<li>The <a href="#initialize">Initialize</a> method set <code>display:'none'</code> to specified element. You can hide the element before Initialize method, by your stylesheet.</li>
+</ul>
 
       </section>
     </div>
