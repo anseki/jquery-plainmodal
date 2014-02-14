@@ -2,7 +2,7 @@
  * jQuery.plainModal
  * https://github.com/anseki/jquery-plainmodal
  *
- * Copyright (c) 2013 anseki
+ * Copyright (c) 2014 anseki
  * Licensed under the MIT license.
  */
 
@@ -44,8 +44,10 @@ function init(jq, options) {
           zIndex:         9001
         };
     if (opt.offset) {
-      cssProp.left = opt.offset.left;
-      cssProp.top = opt.offset.top;
+      if (typeof opt.offset !== 'function') {
+        cssProp.left = opt.offset.left;
+        cssProp.top = opt.offset.top;
+      }
       cssProp.marginLeft = cssProp.marginTop = ''; // for change
     } else {
       cssProp.left = cssProp.top = '50%';
@@ -60,7 +62,7 @@ function init(jq, options) {
 }
 
 function modalOpen(jq, options) {
-  var target, opt, inlineStyles, calMarginR, calMarginB;
+  var target, opt, inlineStyles, calMarginR, calMarginB, offset;
   if (jqOpened === null && jq.length) {
     target = jq.eq(0);
     if (options || !(opt = target.data('plainModal'))) {
@@ -86,6 +88,10 @@ function modalOpen(jq, options) {
     winTop = jqWin.scrollTop();
     jqWin.scroll(avoidScroll);
 
+    if (typeof opt.offset === 'function') {
+      offset = opt.offset.call(target);
+      target.css({left: offset.left, top: offset.top});
+    }
     opt.effect.open.call(target, opt.duration, function() {
       target.find('a,input,select,textarea,button,object,area,img,map').each(function() {
         var that = $(this);

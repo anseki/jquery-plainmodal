@@ -26,6 +26,14 @@ $('#modal').plainModal('open');
 $('#modal').plainModal('close');
 ```
 
+## Getting Started
+Load after jQuery.
+
+```html
+<script src="jquery-1.11.0.min.js"></script>
+<script src="jquery.plainmodal.min.js"></script>
+```
+
 ## Methods
 
 ### <a name ="open">Open</a>
@@ -54,7 +62,7 @@ element.plainModal([options])
 
 Initialize specified element as modal window.  
 The [Open](#open) method can initialize too. This is used to initialize without showing modal window at voluntary time.  
-You can specify `options` to every [Open](#open) method. But, if `options` of a element isn't changed, re-initializing a element isn't needed. Then, you specify `options` to only first [Open](#open) method, or use this method for initializing only once.  
+You can specify `options` to every [Open](#open) method. But, if `options` of a element isn't changed, re-initializing it isn't needed. Then, you specify `options` to only first [Open](#open) method, or use this method for initializing it only once.  
 If you don't customize [Options](#options) (using default all), this method isn't needed because `options` isn't specified to [Open](#open) method, and element is initialized at only first time.
 
 In this code, unneeded initializing is done again, again, and again.
@@ -69,7 +77,7 @@ $('#open-button').click(function() {
 In this code, initializing is done at once.
 
 ```js
-// Initialize only once
+// Initialize without showing
 var modal = $('#modal').plainModal({duration: 500});
 $('#open-button').click(function() {
   // Show without initializing
@@ -92,13 +100,33 @@ A `options` Object can be specified to [Open](#open) method or [Initialize](#ini
 
 ### `offset`
 
-Type: Object  
+Type: Object or Function  
 Default: Calculated center position
 
 A Object that has `left` and `top`, relative to the view area.
 
 ```js
 $('#modal').plainModal({offset: {left: 100, top: 50}});
+```
+
+Or, a Function that returns above Object. This Function is called by [Open](#open) method, not [Initialize](#initialize) method. Therefore position be able to change according to the situation.
+
+```js
+var button = $('#open-button').click(function() {
+      modal.plainModal('open');
+    }),
+    modal = $('#modal').plainModal({
+      offset: function() {
+        // Fit the position to a button.
+        var btnOffset = button.offset(), win = $(window);
+        return {
+          left:   btnOffset.left - win.scrollLeft()
+                    + parseInt(this.css('borderLeftWidth'), 10),
+          top:    btnOffset.top - win.scrollTop()
+                    + parseInt(this.css('borderTopWidth'), 10)
+        };
+      }
+    });
 ```
 
 ### `overlay`
@@ -204,9 +232,11 @@ $('#modal').plainModal({
 
 ## Note
 
-As everyone knows, IE8- has many problems. CSS `position:fixed` in HTML without `<!DOCTYPE>` is ignored.  
+- As everyone knows, IE8- has many problems. CSS `position:fixed` in HTML without `<!DOCTYPE>` is ignored.  
 If your web site supports IE8- and it use `position:fixed`, HTML must include `<!DOCTYPE>` even if plainModal is not used. And plainModal uses `position:fixed`.
+- The [Initialize](#initialize) method set `display:'none'` to specified element. You can hide the element before Initialize method, by your stylesheet.
 
 ## Release History
+ * 2014-02-14			v0.2.0			`offset` option accept Function
  * 2013-12-22			v0.1.1			Fix: scroll control
  * 2013-12-21			v0.1.0			Initial release.
