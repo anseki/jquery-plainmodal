@@ -7,6 +7,9 @@
     <meta name="description" content="jQuery.plainModal : The simple jQuery Plugin for customizable modal windows." />
 
     <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/sample.css">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="javascripts/jquery.plainmodal.min.js"></script>
 
     <title>jQuery.plainModal</title>
   </head>
@@ -31,10 +34,22 @@
     <!-- MAIN CONTENT -->
     <div id="main_content_wrap" class="outer">
       <section id="main_content" class="inner">
-        <h1>
-<a name="jqueryplainmodal" class="anchor" href="#jqueryplainmodal"><span class="octicon octicon-link"></span></a>jQuery.plainModal</h1>
 
-<p>The simple jQuery Plugin for customizable modal windows. plainModal has basic functions only, and it does nothing for styles. It has no image files and no CSS files. Just one small file (2KB minified).<br><strong>See <a href="http://anseki.github.io/jquery-plainmodal">DEMO</a></strong></p>
+<p>The simple jQuery Plugin for customizable modal windows. plainModal has basic functions only, and it does nothing for styles. It has no image files and no CSS files. Just one small file (2KB minified).</p>
+
+<!-- ======== sample -->
+<div id="sample-style">
+<div class="plainmodal-close"></div>
+<p class="sample-head">jQuery.plainModal</p>
+<p><img src="images/GitHub-Mark-120px-plus.png" width="120" height="120" alt="">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.</p>
+</div>
+<div class="sample-button" id="sample-button1">Open Sample</div>
+<script>
+$('#sample-button1').click(function() {
+  $('#sample-style').plainModal('open');
+});
+</script>
+<!-- ======== /sample -->
 
 <p>Many great plugins already exist.</p>
 
@@ -43,6 +58,19 @@
 <li>The simple plugins which has small functions and customizable styles.</li>
 </ul><p>The many web sites use same functions almost. And these have different styles.<br>
 plainModal has basic functions for showing modal windows. That's all. The styling it is your job. You can free style it to perfect match for your web site.</p>
+
+<!-- ======== sample -->
+<div id="sample-nostyle">
+<p>This is non-styles except background-color.</p>
+<p>Click outside area of this window, or press Escape key to close this window.</p>
+</div>
+<div class="sample-button" id="sample-button2">Open Sample (Non-Styles)</div>
+<script>
+$('#sample-button2').click(function() {
+  $('#sample-nostyle').plainModal('open');
+});
+</script>
+<!-- ======== /sample -->
 
 <p>plainModal do:</p>
 
@@ -56,15 +84,6 @@ plainModal has basic functions for showing modal windows. That's all. The stylin
 <span class="nx">$</span><span class="p">(</span><span class="s1">'#modal'</span><span class="p">).</span><span class="nx">plainModal</span><span class="p">(</span><span class="s1">'open'</span><span class="p">);</span>
 <span class="c1">// Hide modal window.</span>
 <span class="nx">$</span><span class="p">(</span><span class="s1">'#modal'</span><span class="p">).</span><span class="nx">plainModal</span><span class="p">(</span><span class="s1">'close'</span><span class="p">);</span>
-</pre></div>
-
-<h2>
-<a name="getting-started" class="anchor" href="#getting-started"><span class="octicon octicon-link"></span></a>Getting Started</h2>
-
-<p>Load after jQuery.</p>
-
-<div class="highlight highlight-html"><pre><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"jquery-1.11.0.min.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
-<span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"jquery.plainmodal.min.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
 </pre></div>
 
 <h2>
@@ -99,7 +118,7 @@ A element can be initialized by new <code>options</code> any number of times.</p
 
 <p>Initialize specified element as modal window.<br>
 The <a href="#open">Open</a> method can initialize too. This is used to initialize without showing modal window at voluntary time.<br>
-You can specify <code>options</code> to every <a href="#open">Open</a> method. But, if <code>options</code> of a element isn't changed, re-initializing it isn't needed. Then, you specify <code>options</code> to only first <a href="#open">Open</a> method, or use this method for initializing it only once.<br>
+You can specify <code>options</code> to every <a href="#open">Open</a> method. But, if <code>options</code> of a element isn't changed, re-initializing a element isn't needed. Then, you specify <code>options</code> to only first <a href="#open">Open</a> method, or use this method for initializing only once.<br>
 If you don't customize <a href="#options">Options</a> (using default all), this method isn't needed because <code>options</code> isn't specified to <a href="#open">Open</a> method, and element is initialized at only first time.</p>
 
 <p>In this code, unneeded initializing is done again, again, and again.</p>
@@ -112,7 +131,7 @@ If you don't customize <a href="#options">Options</a> (using default all), this 
 
 <p>In this code, initializing is done at once.</p>
 
-<div class="highlight highlight-js"><pre><span class="c1">// Initialize without showing</span>
+<div class="highlight highlight-js"><pre><span class="c1">// Initialize only once</span>
 <span class="kd">var</span> <span class="nx">modal</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">'#modal'</span><span class="p">).</span><span class="nx">plainModal</span><span class="p">({</span><span class="nx">duration</span><span class="o">:</span> <span class="mi">500</span><span class="p">});</span>
 <span class="nx">$</span><span class="p">(</span><span class="s1">'#open-button'</span><span class="p">).</span><span class="nx">click</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
   <span class="c1">// Show without initializing</span>
@@ -138,7 +157,7 @@ If you don't customize <a href="#options">Options</a> (using default all), this 
 <a name="offset" class="anchor" href="#offset"><span class="octicon octicon-link"></span></a><code>offset</code>
 </h3>
 
-<p>Type: Object or Function<br>
+<p>Type: Object<br>
 Default: Calculated center position</p>
 
 <p>A Object that has <code>left</code> and <code>top</code>, relative to the view area.</p>
@@ -146,24 +165,17 @@ Default: Calculated center position</p>
 <div class="highlight highlight-js"><pre><span class="nx">$</span><span class="p">(</span><span class="s1">'#modal'</span><span class="p">).</span><span class="nx">plainModal</span><span class="p">({</span><span class="nx">offset</span><span class="o">:</span> <span class="p">{</span><span class="nx">left</span><span class="o">:</span> <span class="mi">100</span><span class="p">,</span> <span class="nx">top</span><span class="o">:</span> <span class="mi">50</span><span class="p">}});</span>
 </pre></div>
 
-<p>Or, a Function that returns above Object. This Function is called by <a href="#open">Open</a> method, not <a href="#initialize">Initialize</a> method. Therefore position be able to change according to the situation.</p>
-
-<div class="highlight highlight-js"><pre><span class="kd">var</span> <span class="nx">button</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">'#open-button'</span><span class="p">).</span><span class="nx">click</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-      <span class="nx">modal</span><span class="p">.</span><span class="nx">plainModal</span><span class="p">(</span><span class="s1">'open'</span><span class="p">);</span>
-    <span class="p">}),</span>
-    <span class="nx">modal</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">'#modal'</span><span class="p">).</span><span class="nx">plainModal</span><span class="p">({</span>
-      <span class="nx">offset</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-        <span class="c1">// Fit the position to a button.</span>
-        <span class="kd">var</span> <span class="nx">btnOffset</span> <span class="o">=</span> <span class="nx">button</span><span class="p">.</span><span class="nx">offset</span><span class="p">(),</span> <span class="nx">win</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="nb">window</span><span class="p">);</span>
-        <span class="k">return</span> <span class="p">{</span>
-          <span class="nx">left</span><span class="o">:</span>   <span class="nx">btnOffset</span><span class="p">.</span><span class="nx">left</span> <span class="o">-</span> <span class="nx">win</span><span class="p">.</span><span class="nx">scrollLeft</span><span class="p">()</span>
-                    <span class="o">+</span> <span class="nb">parseInt</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">css</span><span class="p">(</span><span class="s1">'borderLeftWidth'</span><span class="p">),</span> <span class="mi">10</span><span class="p">),</span>
-          <span class="nx">top</span><span class="o">:</span>    <span class="nx">btnOffset</span><span class="p">.</span><span class="nx">top</span> <span class="o">-</span> <span class="nx">win</span><span class="p">.</span><span class="nx">scrollTop</span><span class="p">()</span>
-                    <span class="o">+</span> <span class="nb">parseInt</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">css</span><span class="p">(</span><span class="s1">'borderTopWidth'</span><span class="p">),</span> <span class="mi">10</span><span class="p">)</span>
-        <span class="p">};</span>
-      <span class="p">}</span>
-    <span class="p">});</span>
-</pre></div>
+<!-- ======== sample -->
+<div id="sample3" class="sample-window">
+<p>Click outside area of this window, or press Escape key to close this window.</p>
+</div>
+<div class="sample-button" id="sample-button3">Open Sample</div>
+<script>
+$('#sample-button3').click(function() {
+  $('#sample3').plainModal('open', {offset: {left: 100, top: 50}});
+});
+</script>
+<!-- ======== /sample -->
 
 <h3>
 <a name="overlay" class="anchor" href="#overlay"><span class="octicon octicon-link"></span></a><code>overlay</code>
@@ -176,6 +188,18 @@ Default: <code>{color: '#000', opacity: 0.3}</code></p>
 
 <div class="highlight highlight-js"><pre><span class="nx">$</span><span class="p">(</span><span class="s1">'#modal'</span><span class="p">).</span><span class="nx">plainModal</span><span class="p">({</span><span class="nx">overlay</span><span class="o">:</span> <span class="p">{</span><span class="nx">color</span><span class="o">:</span> <span class="s1">'#fff'</span><span class="p">,</span> <span class="nx">opacity</span><span class="o">:</span> <span class="mf">0.5</span><span class="p">}});</span>
 </pre></div>
+
+<!-- ======== sample -->
+<div id="sample4" class="sample-window">
+<p>Click outside area of this window, or press Escape key to close this window.</p>
+</div>
+<div class="sample-button" id="sample-button4">Open Sample</div>
+<script>
+$('#sample-button4').click(function() {
+  $('#sample4').plainModal('open', {overlay: {color: '#fff', opacity: 0.5}});
+});
+</script>
+<!-- ======== /sample -->
 
 <h3>
 <a name="closeclass" class="anchor" href="#closeclass"><span class="octicon octicon-link"></span></a><code>closeClass</code>
@@ -191,6 +215,19 @@ Default: <code>'plainmodal-close'</code></p>
 <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"plainmodal-close"</span><span class="nt">&gt;</span>Close<span class="nt">&lt;/div&gt;</span>
 <span class="nt">&lt;/div&gt;</span>
 </pre></div>
+
+<!-- ======== sample -->
+<div id="sample5" class="sample-window">
+<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+<div class="plainmodal-close">Close</div>
+</div>
+<div class="sample-button" id="sample-button5">Open Sample</div>
+<script>
+$('#sample-button5').click(function() {
+  $('#sample5').plainModal('open');
+});
+</script>
+<!-- ======== /sample -->
 
 <h3>
 <a name="duration" class="anchor" href="#duration"><span class="octicon octicon-link"></span></a><code>duration</code>
@@ -240,6 +277,38 @@ It's same to standard effect methods of jQuery (slideDown(), slideUp(), animate(
 <span class="p">});</span>
 </pre></div>
 
+<!-- ======== sample -->
+<div id="sample6" class="sample-window">
+<p>Click outside area of this window, or press Escape key to close this window.</p>
+</div>
+<div class="sample-button" id="sample-button6">Open Sample</div>
+<script>
+$('#sample-button6').click(function() {
+  $('#sample6').plainModal('open', {
+    offset: {left: 300, top: 100},
+    duration: 500,
+    effect: {
+      open: function(duration, complete) {
+        this.css({
+          display:          'block',
+          marginTop:        -100 - this.outerHeight()
+        })
+        .animate({marginTop: 0}, duration, complete);
+      },
+      close: function(duration, complete) {
+        this.animate({
+          marginTop:        -100 - this.outerHeight()
+        }, duration, function() {
+          $(this).css({display: 'none'});
+          complete();
+        });
+      }
+    }
+  });
+});
+</script>
+<!-- ======== /sample -->
+
 <p>These Functions can ignore <code>duration</code>, but it must call <code>complete</code>, when the effect was finished.</p>
 
 <div class="highlight highlight-js"><pre><span class="nx">$</span><span class="p">(</span><span class="s1">'#modal'</span><span class="p">).</span><span class="nx">plainModal</span><span class="p">({</span>
@@ -269,21 +338,48 @@ It's same to standard effect methods of jQuery (slideDown(), slideUp(), animate(
 <span class="p">});</span>
 </pre></div>
 
+<!-- ======== sample -->
+<div id="sample7" class="sample-window">
+<p>Click outside area of this window, or press Escape key to close this window.</p>
+</div>
+<div class="sample-button" id="sample-button7">Open Sample</div>
+<script>
+$('#sample-button7').click(function() {
+  $('#sample7').plainModal('open', {
+    effect: {
+      open: function(duration, complete) {
+        var self = this.css({
+          display:          'block',
+          color:            '#fff',
+          backgroundColor:  '#fff'
+        });
+        setTimeout(function() {
+          self.css({color: '', backgroundColor: ''});
+          complete();
+        }, 500);
+      },
+      close: function(duration, complete) {
+        var self = this.css({
+          color:            '#fff',
+          backgroundColor:  '#fff'
+        });
+        setTimeout(function() {
+          self.css({display: 'none'});
+          complete();
+        }, 500);
+      }
+    }
+  });
+});
+</script>
+<!-- ======== /sample -->
+
 <h2>
 <a name="note" class="anchor" href="#note"><span class="octicon octicon-link"></span></a>Note</h2>
 
-<ul>
-<li>As everyone knows, IE8- has many problems. CSS <code>position:fixed</code> in HTML without <code>&lt;!DOCTYPE&gt;</code> is ignored.<br>
-If your web site supports IE8- and it use <code>position:fixed</code>, HTML must include <code>&lt;!DOCTYPE&gt;</code> even if plainModal is not used. And plainModal uses <code>position:fixed</code>.</li>
-<li>The <a href="#initialize">Initialize</a> method set <code>display:'none'</code> to specified element. You can hide the element before Initialize method, by your stylesheet.</li>
-</ul><h2>
-<a name="release-history" class="anchor" href="#release-history"><span class="octicon octicon-link"></span></a>Release History</h2>
+<p>As everyone knows, IE8- has many problems. CSS <code>position:fixed</code> in HTML without <code>&lt;!DOCTYPE&gt;</code> is ignored.<br>
+If your web site supports IE8- and it use <code>position:fixed</code>, HTML must include <code>&lt;!DOCTYPE&gt;</code> even if plainModal is not used. And plainModal uses <code>position:fixed</code>.</p>
 
-<ul>
-<li>2014-02-14           v0.2.0          <code>offset</code> option accept Function</li>
-<li>2013-12-22           v0.1.1          Fix: scroll control</li>
-<li>2013-12-21           v0.1.0          Initial release.</li>
-</ul>
       </section>
     </div>
 
