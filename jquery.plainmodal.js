@@ -7,6 +7,7 @@
  */
 
 ;(function($) {
+'use strict';
 
 var jqOpened = null, // jqOpened === null : Not opened / jqOpened === 0 : Fading now
     jqBody, jqOverlay, jqActive, jq1st,
