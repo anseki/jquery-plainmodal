@@ -236,6 +236,10 @@ $('#modal').plainModal({
 If your web site supports IE8- and it use `position:fixed`, HTML must include `<!DOCTYPE>` even if plainModal is not used. And plainModal uses `position:fixed`.
 - The [Initialize](#initialize) method set `display:'none'` to specified element. You can hide the element before Initialize method, by your stylesheet.
 
+## See Also
+
+[jQuery.plainOverlay](http://anseki.github.io/jquery-plainoverlay) may be better, if you want the overlay that covers a page, elements or iframe-windows.
+
 ## Release History
  * 2014-02-14			v0.2.0			`offset` option accept Function
  * 2013-12-22			v0.1.1			Fix: scroll control
