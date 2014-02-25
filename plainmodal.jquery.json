@@ -6,11 +6,12 @@
     "modal",
     "popup",
     "dialog",
+    "ui",
     "simple",
     "customizable",
     "window"
   ],
-  "version": "0.2.2",
+  "version": "0.2.3",
   "author": {
     "name": "anseki",
     "url": "https://github.com/anseki"
