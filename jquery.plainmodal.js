@@ -20,10 +20,11 @@ function init(jq, options) {
   var opt = $.extend({
         duration:       200,
         effect:         {open: $.fn.fadeIn, close: $.fn.fadeOut},
-        overlay:        {color: '#000', opacity: 0.3},
+        overlay:        {color: '#000', opacity: 0.3, zIndex: 9000},
         closeClass:     'plainmodal-close'
         //offset
       }, options);
+  opt.zIndex = opt.zIndex || opt.overlay.zIndex + 1;
 
   if (!jqWin) { // page init
     jqWin = $(window);
@@ -33,8 +34,7 @@ function init(jq, options) {
       top:            0,
       width:          '100%',
       height:         '100%',
-      display:        'none',
-      zIndex:         9000
+      display:        'none'
     }).appendTo(jqBody = $('body')).click(modalClose);
     $(document).focusin(function(e) {
       if (jqOpened && !jqOpened.has(e.target).length) {
@@ -54,7 +54,7 @@ function init(jq, options) {
         cssProp = {
           position:       'fixed',
           display:        'none',
-          zIndex:         9001
+          zIndex:         opt.zIndex
         };
     if (opt.offset) {
       if (typeof opt.offset !== 'function') {
@@ -114,7 +114,8 @@ function modalOpen(jq, options) {
       });
       jqOpened = jqTarget;
     });
-    jqOverlay.css('backgroundColor', opt.overlay.color)
+    // Style the overlay that is shared by all 'opt'.
+    jqOverlay.css({backgroundColor: opt.overlay.color, zIndex: opt.overlay.zIndex})
       .fadeTo(opt.duration, opt.overlay.opacity);
     jqOpened = 0;
   }
