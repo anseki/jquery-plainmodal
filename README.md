@@ -132,9 +132,9 @@ var button = $('#open-button').click(function() {
 ### `overlay`
 
 Type: Object  
-Default: `{color: '#000', opacity: 0.3}`
+Default: `{color: '#000', opacity: 0.3, zIndex: 9000}`
 
-A Object that has `color` and `opacity` of overlay.
+A Object that can have `color` (fill-color), `opacity` and `zIndex` CSS properties of overlay.
 
 ```js
 $('#modal').plainModal({overlay: {color: '#fff', opacity: 0.5}});
@@ -166,7 +166,7 @@ A number determining how long (milliseconds) the effect animation for showing an
 Type: Object  
 Default: `{open: $.fn.fadeIn, close: $.fn.fadeOut}`
 
-A Object that has `open` and `close` Functions for showing and hiding modal window.  
+A Object that can have `open` and `close` Functions for showing and hiding modal window.  
 These Functions are called with `duration` Number (see above) and `complete` Function.  
 It's same to standard effect methods of jQuery (slideDown(), slideUp(), animate(), etc.). Therefore, those methods can be specified.
 
@@ -230,6 +230,13 @@ $('#modal').plainModal({
 });
 ```
 
+### `zIndex`
+
+Type: Number  
+Default: `options.overlay.zIndex + 1`
+
+A `z-index` CSS property of modal window. This number have to be bigger than `options.overlay.zIndex`.
+
 ## Note
 
 - As everyone knows, IE8- has many problems. CSS `position:fixed` in HTML without `<!DOCTYPE>` is ignored.  
@@ -241,6 +248,7 @@ If your web site supports IE8- and it use `position:fixed`, HTML must include `<
 [jQuery.plainOverlay](http://anseki.github.io/jquery-plainoverlay) may be better, if you want the overlay that covers a page, elements or iframe-windows.
 
 ## Release History
+ * 2014-03-10			v0.3.0			 Add `options.zIndex` and `options.overlay.zIndex`
  * 2014-02-14			v0.2.0			`offset` option accept Function
  * 2013-12-22			v0.1.1			Fix: scroll control
  * 2013-12-21			v0.1.0			Initial release.

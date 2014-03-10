@@ -17,7 +17,7 @@ var jqOpened = null, // jqOpened === null : Not opened / jqOpened === 0 : Fading
 function init(jq, options) {
   // The options object is shared by all elements in jq.
   // Therefore, don't change properties later. (Replace options object for new object.)
-  var opt = $.extend({
+  var opt = $.extend(true, {
         duration:       200,
         effect:         {open: $.fn.fadeIn, close: $.fn.fadeOut},
         overlay:        {color: '#000', opacity: 0.3, zIndex: 9000},
@@ -114,7 +114,7 @@ function modalOpen(jq, options) {
       });
       jqOpened = jqTarget;
     });
-    // Style the overlay that is shared by all 'opt'.
+    // Re-Style the overlay that is shared by all 'opt'.
     jqOverlay.css({backgroundColor: opt.overlay.color, zIndex: opt.overlay.zIndex})
       .fadeTo(opt.duration, opt.overlay.opacity);
     jqOpened = 0;
