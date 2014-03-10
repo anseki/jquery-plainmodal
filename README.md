@@ -248,7 +248,7 @@ If your web site supports IE8- and it use `position:fixed`, HTML must include `<
 [plainOverlay](http://anseki.github.io/jquery-plainoverlay) may be better, if you want the overlay that covers a page, elements or iframe-windows.
 
 ## Release History
- * 2014-03-10			v0.3.0			 Add `options.zIndex` and `options.overlay.zIndex`
+ * 2014-03-10			v0.3.0			Add `options.zIndex` and `options.overlay.zIndex`
  * 2014-02-14			v0.2.0			`offset` option accept Function
  * 2013-12-22			v0.1.1			Fix: scroll control
  * 2013-12-21			v0.1.0			Initial release.
