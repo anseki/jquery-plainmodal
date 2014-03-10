@@ -4,14 +4,14 @@
   <head>
     <meta charset='utf-8' />
     <meta http-equiv="X-UA-Compatible" content="chrome=1" />
-    <meta name="description" content="jQuery.plainModal : The simple jQuery Plugin for customizable modal windows." />
+    <meta name="description" content="plainModal : The simple jQuery Plugin for customizable modal windows." />
 
     <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
     <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/sample.css">
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     <script src="javascripts/jquery.plainmodal.min.js"></script>
 
-    <title>jQuery.plainModal</title>
+    <title>plainModal</title>
   </head>
 
   <body>
@@ -21,7 +21,7 @@
         <header class="inner">
           <a id="forkme_banner" href="https://github.com/anseki/jquery-plainmodal">View on GitHub</a>
 
-          <h1 id="project_title">jQuery.plainModal</h1>
+          <h1 id="project_title">plainModal</h1>
           <h2 id="project_tagline">The simple jQuery Plugin for customizable modal windows.</h2>
 
             <section id="downloads">
@@ -234,9 +234,9 @@ var button = $('#sample-button8').click(function() {
 </h3>
 
 <p>Type: Object<br>
-Default: <code>{color: '#000', opacity: 0.3}</code></p>
+Default: <code>{color: '#000', opacity: 0.3, zIndex: 9000}</code></p>
 
-<p>A Object that has <code>color</code> and <code>opacity</code> of overlay.</p>
+<p>A Object that can have <code>color</code> (fill-color), <code>opacity</code> and <code>zIndex</code> CSS properties of overlay.</p>
 
 <div class="highlight highlight-js"><pre><span class="nx">$</span><span class="p">(</span><span class="s1">'#modal'</span><span class="p">).</span><span class="nx">plainModal</span><span class="p">({</span><span class="nx">overlay</span><span class="o">:</span> <span class="p">{</span><span class="nx">color</span><span class="o">:</span> <span class="s1">'#fff'</span><span class="p">,</span> <span class="nx">opacity</span><span class="o">:</span> <span class="mf">0.5</span><span class="p">}});</span>
 </pre></div>
@@ -297,7 +297,7 @@ Default: <code>200</code></p>
 <p>Type: Object<br>
 Default: <code>{open: $.fn.fadeIn, close: $.fn.fadeOut}</code></p>
 
-<p>A Object that has <code>open</code> and <code>close</code> Functions for showing and hiding modal window.<br>
+<p>A Object that can have <code>open</code> and <code>close</code> Functions for showing and hiding modal window.<br>
 These Functions are called with <code>duration</code> Number (see above) and <code>complete</code> Function.<br>
 It's same to standard effect methods of jQuery (slideDown(), slideUp(), animate(), etc.). Therefore, those methods can be specified.</p>
 
@@ -426,6 +426,15 @@ $('#sample-button7').click(function() {
 </script>
 <!-- ======== /sample -->
 
+<h3>
+<a name="zindex" class="anchor" href="#zindex"><span class="octicon octicon-link"></span></a><code>zIndex</code>
+</h3>
+
+<p>Type: Number<br>
+Default: <code>options.overlay.zIndex + 1</code></p>
+
+<p>A <code>z-index</code> CSS property of modal window. This number have to be bigger than <code>options.overlay.zIndex</code>.</p>
+
 <h2>
 <a name="note" class="anchor" href="#note"><span class="octicon octicon-link"></span></a>Note</h2>
 
@@ -438,7 +447,7 @@ If your web site supports IE8- and it use <code>position:fixed</code>, HTML must
 <h2>
 <a name="see-also" class="anchor" href="#see-also"><span class="octicon octicon-link"></span></a>See Also</h2>
 
-<p><a href="http://anseki.github.io/jquery-plainoverlay">jQuery.plainOverlay</a> may be better, if you want the overlay that covers a page, elements or iframe-windows.</p>
+<p><a href="http://anseki.github.io/jquery-plainoverlay">plainOverlay</a> may be better, if you want the overlay that covers a page, elements or iframe-windows.</p>
 
       </section>
     </div>
@@ -446,7 +455,7 @@ If your web site supports IE8- and it use <code>position:fixed</code>, HTML must
     <!-- FOOTER  -->
     <div id="footer_wrap" class="outer">
       <footer class="inner">
-        <p class="copyright">jQuery.plainModal maintained by <a href="https://github.com/anseki">anseki</a></p>
+        <p class="copyright">plainModal maintained by <a href="https://github.com/anseki">anseki</a></p>
         <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
       </footer>
     </div>
