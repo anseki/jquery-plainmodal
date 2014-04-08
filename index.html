@@ -234,7 +234,7 @@ var button = $('#sample-button8').click(function() {
 </h3>
 
 <p>Type: Object<br>
-Default: <code>{color: '#000', opacity: 0.3, zIndex: 9000}</code></p>
+Default: <code>{color: '#888', opacity: 0.6, zIndex: 9000}</code></p>
 
 <p>A Object that can have <code>color</code> (fill-color), <code>opacity</code> and <code>zIndex</code> CSS properties of overlay.</p>
 
@@ -366,23 +366,23 @@ $('#sample-button6').click(function() {
 <div class="highlight highlight-js"><pre><span class="nx">$</span><span class="p">(</span><span class="s1">'#modal'</span><span class="p">).</span><span class="nx">plainModal</span><span class="p">({</span>
   <span class="nx">effect</span><span class="o">:</span> <span class="p">{</span>
     <span class="nx">open</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">duration</span><span class="p">,</span> <span class="nx">complete</span><span class="p">)</span> <span class="p">{</span>
-      <span class="kd">var</span> <span class="nx">self</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">css</span><span class="p">({</span>
+      <span class="kd">var</span> <span class="nx">that</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">css</span><span class="p">({</span>
         <span class="nx">display</span><span class="o">:</span>          <span class="s1">'block'</span><span class="p">,</span>
         <span class="nx">color</span><span class="o">:</span>            <span class="s1">'#fff'</span><span class="p">,</span>
-        <span class="nx">backgroundColor</span><span class="o">:</span>  <span class="s1">'#fff'</span>
+        <span class="nx">backgroundColor</span><span class="o">:</span>  <span class="s1">'#f1e470'</span>
       <span class="p">});</span>
       <span class="nx">setTimeout</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-        <span class="nx">self</span><span class="p">.</span><span class="nx">css</span><span class="p">({</span><span class="nx">color</span><span class="o">:</span> <span class="s1">''</span><span class="p">,</span> <span class="nx">backgroundColor</span><span class="o">:</span> <span class="s1">''</span><span class="p">});</span>
+        <span class="nx">that</span><span class="p">.</span><span class="nx">css</span><span class="p">({</span><span class="nx">color</span><span class="o">:</span> <span class="s1">''</span><span class="p">,</span> <span class="nx">backgroundColor</span><span class="o">:</span> <span class="s1">''</span><span class="p">});</span>
         <span class="nx">complete</span><span class="p">();</span>
       <span class="p">},</span> <span class="mi">500</span><span class="p">);</span>
     <span class="p">},</span>
     <span class="nx">close</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">duration</span><span class="p">,</span> <span class="nx">complete</span><span class="p">)</span> <span class="p">{</span>
-      <span class="kd">var</span> <span class="nx">self</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">css</span><span class="p">({</span>
+      <span class="kd">var</span> <span class="nx">that</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">css</span><span class="p">({</span>
         <span class="nx">color</span><span class="o">:</span>            <span class="s1">'#fff'</span><span class="p">,</span>
-        <span class="nx">backgroundColor</span><span class="o">:</span>  <span class="s1">'#fff'</span>
+        <span class="nx">backgroundColor</span><span class="o">:</span>  <span class="s1">'#f1e470'</span>
       <span class="p">});</span>
       <span class="nx">setTimeout</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-        <span class="nx">self</span><span class="p">.</span><span class="nx">css</span><span class="p">({</span><span class="nx">display</span><span class="o">:</span> <span class="s1">'none'</span><span class="p">});</span>
+        <span class="nx">that</span><span class="p">.</span><span class="nx">css</span><span class="p">({</span><span class="nx">display</span><span class="o">:</span> <span class="s1">'none'</span><span class="p">});</span>
         <span class="nx">complete</span><span class="p">();</span>
       <span class="p">},</span> <span class="mi">500</span><span class="p">);</span>
     <span class="p">}</span>
@@ -400,23 +400,23 @@ $('#sample-button7').click(function() {
   $('#sample7').plainModal('open', {
     effect: {
       open: function(duration, complete) {
-        var self = this.css({
+        var that = this.css({
           display:          'block',
           color:            '#fff',
-          backgroundColor:  '#fff'
+          backgroundColor:  '#f1e470'
         });
         setTimeout(function() {
-          self.css({color: '', backgroundColor: ''});
+          that.css({color: '', backgroundColor: ''});
           complete();
         }, 500);
       },
       close: function(duration, complete) {
-        var self = this.css({
+        var that = this.css({
           color:            '#fff',
-          backgroundColor:  '#fff'
+          backgroundColor:  '#f1e470'
         });
         setTimeout(function() {
-          self.css({display: 'none'});
+          that.css({display: 'none'});
           complete();
         }, 500);
       }
