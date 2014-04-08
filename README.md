@@ -206,23 +206,23 @@ These Functions can ignore `duration`, but it must call `complete`, when the eff
 $('#modal').plainModal({
   effect: {
     open: function(duration, complete) {
-      var self = this.css({
+      var that = this.css({
         display:          'block',
         color:            '#fff',
-        backgroundColor:  '#fff'
+        backgroundColor:  '#f1e470'
       });
       setTimeout(function() {
-        self.css({color: '', backgroundColor: ''});
+        that.css({color: '', backgroundColor: ''});
         complete();
       }, 500);
     },
     close: function(duration, complete) {
-      var self = this.css({
+      var that = this.css({
         color:            '#fff',
-        backgroundColor:  '#fff'
+        backgroundColor:  '#f1e470'
       });
       setTimeout(function() {
-        self.css({display: 'none'});
+        that.css({display: 'none'});
         complete();
       }, 500);
     }
