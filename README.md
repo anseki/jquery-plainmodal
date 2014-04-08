@@ -132,7 +132,7 @@ var button = $('#open-button').click(function() {
 ### `overlay`
 
 Type: Object  
-Default: `{color: '#000', opacity: 0.3, zIndex: 9000}`
+Default: `{color: '#888', opacity: 0.6, zIndex: 9000}`
 
 A Object that can have `color` (fill-color), `opacity` and `zIndex` CSS properties of overlay.
 
@@ -248,6 +248,7 @@ If your web site supports IE8- and it use `position:fixed`, HTML must include `<
 [plainOverlay](http://anseki.github.io/jquery-plainoverlay) may be better, if you want the overlay that covers a page, elements or iframe-windows.
 
 ## Release History
+ * 2014-04-08			v0.3.2			Thicken overlay as default. (color, opacity)
  * 2014-03-10			v0.3.0			Add `options.zIndex` and `options.overlay.zIndex`
  * 2014-02-14			v0.2.0			`offset` option accept Function
  * 2013-12-22			v0.1.1			Fix: scroll control

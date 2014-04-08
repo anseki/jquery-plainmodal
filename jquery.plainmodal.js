@@ -20,7 +20,7 @@ function init(jq, options) {
   var opt = $.extend(true, {
         duration:       200,
         effect:         {open: $.fn.fadeIn, close: $.fn.fadeOut},
-        overlay:        {color: '#000', opacity: 0.3, zIndex: 9000},
+        overlay:        {color: '#888', opacity: 0.6, zIndex: 9000},
         closeClass:     'plainmodal-close'
         //offset
       }, options);
