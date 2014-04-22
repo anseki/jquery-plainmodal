@@ -164,7 +164,7 @@ A number determining how long (milliseconds) the effect animation for showing an
 ### `effect`
 
 Type: Object  
-Default: `{open: $.fn.fadeIn, close: $.fn.fadeOut}`
+Default: `{open: jQuery.fn.fadeIn, close: jQuery.fn.fadeOut}`
 
 A Object that can have `open` and `close` Functions for showing and hiding the modal window.  
 These Functions are called with `duration` Number (see above) and `complete` Function.  
