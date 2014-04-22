@@ -21,6 +21,7 @@ function init(jq, options) {
         duration:       200,
         effect:         {open: $.fn.fadeIn, close: $.fn.fadeOut},
         overlay:        {color: '#888', opacity: 0.6, zIndex: 9000},
+        onClose:        function() {},
         closeClass:     'plainmodal-close'
         //offset
       }, options);
@@ -142,6 +143,9 @@ function modalClose(jq) { // jq: target/event
     }
   }
   if (isEvent) { jq.preventDefault(); return false; }
+  if(typeof opt.onClose == 'function'){
+      opt.onClose.call(this);
+  }
   return jq;
 }
 
@@ -155,7 +159,7 @@ $.fn.plainModal = function(action, options) {
   return (
     action === 'open' ?   modalOpen(this, options) :
     action === 'close' ?  modalClose(this) :
-                          init(this, action)); // options.
+    init(this, action)); // options.
 };
 
 })(jQuery);
