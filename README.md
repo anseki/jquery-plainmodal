@@ -15,9 +15,9 @@ plainModal do:
 
 - Showing specified element as modal window, and hiding it.
 - Covering a page with a overlay.
-- Avoiding focusing outside elements of modal window. (by pressing Tab key)
+- Avoiding focusing outside elements of the modal window. (by pressing Tab key)
 - Avoiding scrolling a page window.
-- Hiding modal window when Escape key is pressed.
+- Hiding the modal window when Escape key is pressed.
 
 ```js
 // Show modal window. <div id="modal"> is styled via your CSS.
@@ -52,7 +52,7 @@ A element can be initialized by new `options` any number of times.
 element.plainModal('close')
 ```
 
-Hide modal window.
+Hide the modal window.
 
 ### <a name ="initialize">Initialize</a>
 
@@ -61,7 +61,7 @@ element.plainModal([options])
 ```
 
 Initialize specified element as modal window.  
-The [Open](#open) method can initialize too. This is used to initialize without showing modal window at voluntary time.  
+The [Open](#open) method can initialize too. This is used to initialize without showing the modal window at voluntary time.  
 You can specify `options` to every [Open](#open) method. But, if `options` of a element isn't changed, re-initializing it isn't needed. Then, you specify `options` to only first [Open](#open) method, or use this method for initializing it only once.  
 If you don't customize [Options](#options) (using default all), this method isn't needed because `options` isn't specified to [Open](#open) method, and element is initialized at only first time.
 
@@ -159,14 +159,14 @@ If the element that has this class name is found, the [Close](#close) method is 
 Type: Number  
 Default: `200`
 
-A number determining how long (milliseconds) the effect animation for showing and hiding modal window will run.
+A number determining how long (milliseconds) the effect animation for showing and hiding the modal window will run.
 
 ### `effect`
 
 Type: Object  
 Default: `{open: $.fn.fadeIn, close: $.fn.fadeOut}`
 
-A Object that can have `open` and `close` Functions for showing and hiding modal window.  
+A Object that can have `open` and `close` Functions for showing and hiding the modal window.  
 These Functions are called with `duration` Number (see above) and `complete` Function.  
 It's same to standard effect methods of jQuery (slideDown(), slideUp(), animate(), etc.). Therefore, those methods can be specified.
 
@@ -235,7 +235,53 @@ $('#modal').plainModal({
 Type: Number  
 Default: `options.overlay.zIndex + 1`
 
-A `z-index` CSS property of modal window. This number have to be bigger than `options.overlay.zIndex`.
+A `z-index` CSS property of the modal window. This number have to be bigger than `options.overlay.zIndex`.
+
+### `open`
+
+Type: Function  
+Default: `undefined`
+
+A `plainmodalopen` event handler. (see [Events](#events))
+
+```js
+$('#modal').plainModal({open: function(event) { console.log(event); } });
+```
+
+### `close`
+
+Type: Function  
+Default: `undefined`
+
+A `plainmodalclose` event handler. (see [Events](#events))
+
+```js
+$('#modal').plainModal({close: function(event) { console.log(event); } });
+```
+
+## <a name ="events">Events</a>
+
+### `plainmodalopen`
+
+Triggered when the modal window is opened. (after the `effect.open` took `duration` to complete.)  
+An event handler can be attached when initializing too via `options.open`. (see [Options](#options))
+
+```js
+$('#modal').on('plainmodalopen', function(event) {
+  $('textarea', event.target).addClass('highlight');
+});
+```
+
+### `plainmodalclose`
+
+Triggered when the modal window is closeed. (after the `effect.close` took `duration` to complete.)  
+An event handler can be attached when initializing too via `options.close`. (see [Options](#options))
+
+```js
+$('#modal').on('plainmodalclose', function(event) {
+  $('#screen').show();
+});
+```
 
 ## Note
 
@@ -248,6 +294,7 @@ If your web site supports IE8- and it use `position:fixed`, HTML must include `<
 [plainOverlay](http://anseki.github.io/jquery-plainoverlay) may be better, if you want the overlay that covers a page, elements or iframe-windows.
 
 ## Release History
+ * 2014-04-23			v0.4.0			Add custom events `plainmodalopen` and `plainmodalclose`
  * 2014-04-08			v0.3.2			Thicken overlay as default. (color, opacity)
  * 2014-03-10			v0.3.0			Add `options.zIndex` and `options.overlay.zIndex`
  * 2014-02-14			v0.2.0			`offset` option accept Function

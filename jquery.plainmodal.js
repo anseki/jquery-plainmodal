@@ -22,7 +22,7 @@ function init(jq, options) {
         effect:         {open: $.fn.fadeIn, close: $.fn.fadeOut},
         overlay:        {color: '#888', opacity: 0.6, zIndex: 9000},
         closeClass:     'plainmodal-close'
-        //offset
+        // Optional: offset, open, close
       }, options);
   opt.zIndex = opt.zIndex || opt.overlay.zIndex + 1;
 
@@ -70,6 +70,12 @@ function init(jq, options) {
     if (opt.closeClass) {
       that.find('.' + opt.closeClass).off('click', modalClose).click(modalClose);
     }
+    if (typeof opt.open === 'function') {
+      that.on('plainmodalopen', opt.open);
+    }
+    if (typeof opt.close === 'function') {
+      that.on('plainmodalclose', opt.close);
+    }
     that.css(cssProp).data('plainModal', opt).appendTo(jqBody);
   });
 }
@@ -112,7 +118,7 @@ function modalOpen(jq, options) {
           return false;
         }
       });
-      jqOpened = jqTarget;
+      jqOpened = jqTarget.trigger('plainmodalopen');
     });
     // Re-Style the overlay that is shared by all 'opt'.
     jqOverlay.css({backgroundColor: opt.overlay.color, zIndex: opt.overlay.zIndex})
@@ -135,6 +141,7 @@ function modalClose(jq) { // jq: target/event
         jqBody.css({overflow: orgOverflow, marginRight: orgMarginR, marginBottom: orgMarginB});
         if (jqActive && jqActive.length) { jqActive.focus(); } // Restore activeElement
         jqWin.off('scroll', avoidScroll).scrollLeft(winLeft).scrollTop(winTop);
+        jqTarget.trigger('plainmodalclose');
         jqOpened = null;
       });
       jqOverlay.fadeOut(opt.duration);
