@@ -77,9 +77,9 @@ $('#sample-button2').click(function() {
 <ul>
 <li>Showing specified element as modal window, and hiding it.</li>
 <li>Covering a page with a overlay.</li>
-<li>Avoiding focusing outside elements of modal window. (by pressing Tab key)</li>
+<li>Avoiding focusing outside elements of the modal window. (by pressing Tab key)</li>
 <li>Avoiding scrolling a page window.</li>
-<li>Hiding modal window when Escape key is pressed.</li>
+<li>Hiding the modal window when Escape key is pressed.</li>
 </ul><div class="highlight highlight-js"><pre><span class="c1">// Show modal window. &lt;div id="modal"&gt; is styled via your CSS.</span>
 <span class="nx">$</span><span class="p">(</span><span class="s1">'#modal'</span><span class="p">).</span><span class="nx">plainModal</span><span class="p">(</span><span class="s1">'open'</span><span class="p">);</span>
 <span class="c1">// Hide modal window.</span>
@@ -116,7 +116,7 @@ A element can be initialized by new <code>options</code> any number of times.</p
 <div class="highlight highlight-js"><pre><span class="nx">element</span><span class="p">.</span><span class="nx">plainModal</span><span class="p">(</span><span class="s1">'close'</span><span class="p">)</span>
 </pre></div>
 
-<p>Hide modal window.</p>
+<p>Hide the modal window.</p>
 
 <h3>
 <a name="initialize" class="anchor" href="#initialize"><span class="octicon octicon-link"></span></a><a name="initialize">Initialize</a>
@@ -126,7 +126,7 @@ A element can be initialized by new <code>options</code> any number of times.</p
 </pre></div>
 
 <p>Initialize specified element as modal window.<br>
-The <a href="#open">Open</a> method can initialize too. This is used to initialize without showing modal window at voluntary time.<br>
+The <a href="#open">Open</a> method can initialize too. This is used to initialize without showing the modal window at voluntary time.<br>
 You can specify <code>options</code> to every <a href="#open">Open</a> method. But, if <code>options</code> of a element isn't changed, re-initializing it isn't needed. Then, you specify <code>options</code> to only first <a href="#open">Open</a> method, or use this method for initializing it only once.<br>
 If you don't customize <a href="#options">Options</a> (using default all), this method isn't needed because <code>options</code> isn't specified to <a href="#open">Open</a> method, and element is initialized at only first time.</p>
 
@@ -288,7 +288,7 @@ $('#sample-button5').click(function() {
 <p>Type: Number<br>
 Default: <code>200</code></p>
 
-<p>A number determining how long (milliseconds) the effect animation for showing and hiding modal window will run.</p>
+<p>A number determining how long (milliseconds) the effect animation for showing and hiding the modal window will run.</p>
 
 <h3>
 <a name="effect" class="anchor" href="#effect"><span class="octicon octicon-link"></span></a><code>effect</code>
@@ -297,7 +297,7 @@ Default: <code>200</code></p>
 <p>Type: Object<br>
 Default: <code>{open: $.fn.fadeIn, close: $.fn.fadeOut}</code></p>
 
-<p>A Object that can have <code>open</code> and <code>close</code> Functions for showing and hiding modal window.<br>
+<p>A Object that can have <code>open</code> and <code>close</code> Functions for showing and hiding the modal window.<br>
 These Functions are called with <code>duration</code> Number (see above) and <code>complete</code> Function.<br>
 It's same to standard effect methods of jQuery (slideDown(), slideUp(), animate(), etc.). Therefore, those methods can be specified.</p>
 
@@ -433,7 +433,59 @@ $('#sample-button7').click(function() {
 <p>Type: Number<br>
 Default: <code>options.overlay.zIndex + 1</code></p>
 
-<p>A <code>z-index</code> CSS property of modal window. This number have to be bigger than <code>options.overlay.zIndex</code>.</p>
+<p>A <code>z-index</code> CSS property of the modal window. This number have to be bigger than <code>options.overlay.zIndex</code>.</p>
+
+<h3>
+<a name="open-1" class="anchor" href="#open-1"><span class="octicon octicon-link"></span></a><code>open</code>
+</h3>
+
+<p>Type: Function<br>
+Default: <code>undefined</code></p>
+
+<p>A <code>plainmodalopen</code> event handler. (see <a href="#events">Events</a>)</p>
+
+<div class="highlight highlight-js"><pre><span class="nx">$</span><span class="p">(</span><span class="s1">'#modal'</span><span class="p">).</span><span class="nx">plainModal</span><span class="p">({</span><span class="nx">open</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">event</span><span class="p">);</span> <span class="p">}</span> <span class="p">});</span>
+</pre></div>
+
+<h3>
+<a name="close-1" class="anchor" href="#close-1"><span class="octicon octicon-link"></span></a><code>close</code>
+</h3>
+
+<p>Type: Function<br>
+Default: <code>undefined</code></p>
+
+<p>A <code>plainmodalclose</code> event handler. (see <a href="#events">Events</a>)</p>
+
+<div class="highlight highlight-js"><pre><span class="nx">$</span><span class="p">(</span><span class="s1">'#modal'</span><span class="p">).</span><span class="nx">plainModal</span><span class="p">({</span><span class="nx">close</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">event</span><span class="p">);</span> <span class="p">}</span> <span class="p">});</span>
+</pre></div>
+
+<h2>
+<a name="events" class="anchor" href="#events"><span class="octicon octicon-link"></span></a><a name="events">Events</a>
+</h2>
+
+<h3>
+<a name="plainmodalopen" class="anchor" href="#plainmodalopen"><span class="octicon octicon-link"></span></a><code>plainmodalopen</code>
+</h3>
+
+<p>Triggered when the modal window is opened. (after the <code>effect.open</code> took <code>duration</code> to complete.)<br>
+An event handler can be attached when initializing too via <code>options.open</code>. (see <a href="#options">Options</a>)</p>
+
+<div class="highlight highlight-js"><pre><span class="nx">$</span><span class="p">(</span><span class="s1">'#modal'</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="s1">'plainmodalopen'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">$</span><span class="p">(</span><span class="s1">'textarea'</span><span class="p">,</span> <span class="nx">event</span><span class="p">.</span><span class="nx">target</span><span class="p">).</span><span class="nx">addClass</span><span class="p">(</span><span class="s1">'highlight'</span><span class="p">);</span>
+<span class="p">});</span>
+</pre></div>
+
+<h3>
+<a name="plainmodalclose" class="anchor" href="#plainmodalclose"><span class="octicon octicon-link"></span></a><code>plainmodalclose</code>
+</h3>
+
+<p>Triggered when the modal window is closeed. (after the <code>effect.close</code> took <code>duration</code> to complete.)<br>
+An event handler can be attached when initializing too via <code>options.close</code>. (see <a href="#options">Options</a>)</p>
+
+<div class="highlight highlight-js"><pre><span class="nx">$</span><span class="p">(</span><span class="s1">'#modal'</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="s1">'plainmodalclose'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">$</span><span class="p">(</span><span class="s1">'#screen'</span><span class="p">).</span><span class="nx">show</span><span class="p">();</span>
+<span class="p">});</span>
+</pre></div>
 
 <h2>
 <a name="note" class="anchor" href="#note"><span class="octicon octicon-link"></span></a>Note</h2>
