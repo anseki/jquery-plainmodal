@@ -110,7 +110,8 @@ function modalOpen(jq, options) {
       offset = opt.offset.call(jqTarget);
       jqTarget.css({left: offset.left, top: offset.top});
     }
-    opt.effect.open.call(jqTarget, opt.duration, function() {
+    // If duration is 0, callback is called now.
+    opt.effect.open.call(jqTarget, opt.duration || 1, function() {
       jqTarget.find('a,input,select,textarea,button,object,area,img,map').each(function() {
         var that = $(this);
         if (that.focus().get(0) === document.activeElement) { // Can focus
@@ -137,7 +138,8 @@ function modalClose(jq) { // jq: target/event
     })();
     if (jqTarget) {
       opt = jqTarget.data('plainModal');
-      opt.effect.close.call(jqTarget, opt.duration, function() {
+      // If duration is 0, callback is called now.
+      opt.effect.close.call(jqTarget, opt.duration || 1, function() {
         jqBody.css({overflow: orgOverflow, marginRight: orgMarginR, marginBottom: orgMarginB});
         if (jqActive && jqActive.length) { jqActive.focus(); } // Restore activeElement
         jqWin.off('scroll', avoidScroll).scrollLeft(winLeft).scrollTop(winTop);

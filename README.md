@@ -294,9 +294,10 @@ If your web site supports IE8- and it use `position:fixed`, HTML must include `<
 [plainOverlay](http://anseki.github.io/jquery-plainoverlay) may be better, if you want the overlay that covers a page, elements or iframe-windows.
 
 ## Release History
+ * 2014-05-06			v0.4.1			Fix: If `options.duration` is 0, the status become invalid.
  * 2014-04-23			v0.4.0			Add custom events `plainmodalopen` and `plainmodalclose`
  * 2014-04-08			v0.3.2			Thicken overlay as default. (color, opacity)
  * 2014-03-10			v0.3.0			Add `options.zIndex` and `options.overlay.zIndex`
- * 2014-02-14			v0.2.0			`offset` option accept Function
+ * 2014-02-14			v0.2.0			`options.offset` accept Function
  * 2013-12-22			v0.1.1			Fix: scroll control
  * 2013-12-21			v0.1.0			Initial release.
