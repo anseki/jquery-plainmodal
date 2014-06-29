@@ -28,7 +28,7 @@ function init(jq, options) {
 
   if (!jqWin) { // page init
     jqWin = $(window);
-    jqOverlay = $('<div />').css({
+    jqOverlay = $('<div class="plainmodal-overlay" />').css({
       position:       'fixed',
       left:           0,
       top:            0,

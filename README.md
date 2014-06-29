@@ -140,6 +140,14 @@ A Object that can have `color` (fill-color), `opacity` and `zIndex` CSS properti
 $('#modal').plainModal({overlay: {color: '#fff', opacity: 0.5}});
 ```
 
+If you want to style the overlay more, add style to `plainmodal-overlay` class.
+
+```css
+.plainmodal-overlay {
+  background-image: url('bg.png');
+}
+```
+
 ### `closeClass`
 
 Type: String  
@@ -294,6 +302,7 @@ If your web site supports IE8- and it use `position:fixed`, HTML must include `<
 [plainOverlay](http://anseki.github.io/jquery-plainoverlay) may be better, if you want the overlay that covers a page, elements or iframe-windows.
 
 ## Release History
+ * 2014-06-30			v0.5.0			Add `plainmodal-overlay` class.
  * 2014-05-06			v0.4.1			Fix: If `options.duration` is 0, the status become invalid.
  * 2014-04-23			v0.4.0			Add custom events `plainmodalopen` and `plainmodalclose`
  * 2014-04-08			v0.3.2			Thicken overlay as default. (color, opacity)
