@@ -212,9 +212,9 @@ $('#sample-button3').click(function() {
 <div class="sample-button" id="sample-button8">Open Sample</div>
 <script>
 var button = $('#sample-button8').click(function() {
-      modal.plainModal('open');
+      modal8.plainModal('open');
     }),
-    modal = $('#sample8').plainModal({
+    modal8 = $('#sample8').plainModal({
       offset: function() {
         // Fit the position to a button.
         var btnOffset = button.offset(), win = $(window);
@@ -249,6 +249,29 @@ Default: <code>{color: '#888', opacity: 0.6, zIndex: 9000}</code></p>
 <script>
 $('#sample-button4').click(function() {
   $('#sample4').plainModal('open', {overlay: {color: '#fff', opacity: 0.5}});
+});
+</script>
+<!-- ======== /sample -->
+
+<p>If you want to style the overlay more, add style to <code>plainmodal-overlay</code> class.</p>
+
+<div class="highlight highlight-css"><pre><span class="nc">.plainmodal-overlay</span> <span class="p">{</span>
+  <span class="k">background-image</span><span class="o">:</span> <span class="sx">url('bg.png')</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+
+<!-- ======== sample -->
+<div id="sample9" class="sample-window">
+<p>Click outside area of this window, or press Escape key to close this window.</p>
+</div>
+<div class="sample-button" id="sample-button9">Open Sample</div>
+<script>
+var modal9 = $('#sample9').plainModal({
+      open: function() { $('.plainmodal-overlay').css('backgroundImage', 'url("images/bg.png")'); },
+      close: function() { $('.plainmodal-overlay').css('backgroundImage', 'none'); }
+    });
+$('#sample-button9').click(function() {
+  modal9.plainModal('open');
 });
 </script>
 <!-- ======== /sample -->
