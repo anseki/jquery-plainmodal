@@ -44,7 +44,7 @@ element.plainModal('open'[, options])
 
 Show specified element as modal window.  
 If `options` (see [Options](#options)) is specified, element is initialized with specified `options` before it is shown. If element is not initialized yet, element is initialized even if `options` is not specified.  
-A element can be initialized by new `options` any number of times.
+An element can be initialized by new `options` any number of times.
 
 ### <a name ="close">Close</a>
 
@@ -62,7 +62,7 @@ element.plainModal([options])
 
 Initialize specified element as modal window.  
 The [Open](#open) method can initialize too. This is used to initialize without showing the modal window at voluntary time.  
-You can specify `options` to every [Open](#open) method. But, if `options` of a element isn't changed, re-initializing it isn't needed. Then, you specify `options` to only first [Open](#open) method, or use this method for initializing it only once.  
+You can specify `options` to every [Open](#open) method. But, if `options` of an element isn't changed, re-initializing it isn't needed. Then, you specify `options` to only first [Open](#open) method, or use this method for initializing it only once.  
 If you don't customize [Options](#options) (using default all), this method isn't needed because `options` isn't specified to [Open](#open) method, and element is initialized at only first time.
 
 In this code, unneeded initializing is done again, again, and again.
