@@ -43,7 +43,7 @@ function init(jq, options) {
       }
     })
     .keydown(function(e) {
-      if (e.keyCode === 27) { // Escape
+      if (jqOpened && e.keyCode === 27) { // Escape key
         return modalClose(e);
       }
     });
@@ -70,12 +70,8 @@ function init(jq, options) {
     if (opt.closeClass) {
       that.find('.' + opt.closeClass).off('click', modalClose).click(modalClose);
     }
-    if (typeof opt.open === 'function') {
-      that.on('plainmodalopen', opt.open);
-    }
-    if (typeof opt.close === 'function') {
-      that.on('plainmodalclose', opt.close);
-    }
+    if (typeof opt.open === 'function') { that.on('plainmodalopen', opt.open); }
+    if (typeof opt.close === 'function') { that.on('plainmodalclose', opt.close); }
     that.css(cssProp).data('plainModal', opt).appendTo(jqBody);
   });
 }
