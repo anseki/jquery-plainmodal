@@ -11,14 +11,14 @@
   cursor: pointer;
 }
 
-.sample-window .plainmodal-close {
+.sample-window .plainmodal-close, #sample-svg .plainmodal-close {
   display: inline-block;
   padding: 1px 3px;
   color: #fff;
   background-color: #224388;
 }
 
-.sample-window .plainmodal-close:hover {
+.sample-window .plainmodal-close:hover, #sample-svg .plainmodal-close:hover {
   background-color: #1f99e2;
 }
 
@@ -90,6 +90,14 @@
 
 #sample-style .plainmodal-close:hover {
   background-position: -45px 0;
+}
+
+#sample-svg p {
+  margin: 0;
+  color: #fff;
+  font-family: 'Georgia', serif;
+  font-size: 18px;
+  text-align: center;
 }
 
 #sample-nostyle {

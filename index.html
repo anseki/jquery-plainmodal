@@ -8,7 +8,7 @@
 
     <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
     <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/sample.css">
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     <script src="javascripts/jquery.plainmodal.min.js"></script>
 
     <title>plainModal</title>
@@ -38,15 +38,113 @@
 <p>The simple jQuery Plugin for customizable modal windows. plainModal has basic functions only, and it does nothing for styles. It has no image files and no CSS files. Just one small file (2KB minified).</p>
 
 <!-- ======== sample -->
+<div>
+<div class="sample-button" style="display: inline-block;" id="sample-button1">Open Sample</div>
+<div class="sample-button" style="display: inline-block;" id="sample-buttonA">Open Sample (SVG)</div>
+</div>
+<!-- ======== /sample -->
+
+<!-- ======== sample -->
 <div id="sample-style">
 <div class="plainmodal-close"></div>
 <p class="sample-head">jQuery.plainModal</p>
 <p><img src="images/GitHub-Mark-120px-plus.png" width="120" height="120" alt="">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.</p>
 </div>
-<div class="sample-button" id="sample-button1">Open Sample</div>
 <script>
 $('#sample-button1').click(function() {
   $('#sample-style').plainModal('open');
+});
+</script>
+<!-- ======== /sample -->
+
+<!-- ======== sample -->
+<svg version="1.1" width="400" height="300" viewBox="0 0 400 300" id="sample-svg">
+  <defs>
+    <path d="M400,121.533c0-20.092-15.616-37.266-37.697-44.263c0.402-2.535,0.628-5.117,0.628-7.744
+      c0-32.351-31.332-58.577-69.984-58.577c-19.546,0-37.212,6.713-49.911,17.527C232.199,11.589,209.944,0,184.232,0
+      c-26.311,0-49.008,12.131-59.549,29.661c-3.772-0.418-7.623-0.646-11.543-0.646c-44.764,0-81.052,28.187-81.052,62.956
+      c0,6.107,1.142,12.003,3.229,17.585C13.914,118.418,0,132.738,0,148.905c0,18.575,18.358,34.718,45.357,42.939
+      c-7.651,8.127-12.163,18.051-12.163,28.776c0,27.515,29.6,49.817,66.114,49.817c9.918,0,19.317-1.657,27.76-4.605
+      C133.521,285.41,158.351,300,188.021,300c34.573,0,62.6-19.805,62.6-44.234c0-1.057-0.07-2.103-0.173-3.14
+      c12.123,5.738,26.391,9.053,41.667,9.053c44.002,0,79.669-27.451,79.669-61.313c0-12.388-4.789-23.91-12.999-33.553
+      C382.707,160.594,400,142.677,400,121.533z" id="base-path" />
+    <clipPath id="clip"><use xlink:href="#base-path" /></clipPath>
+  </defs>
+  <g clip-path="url(#clip)">
+    <use xlink:href="#base-path"
+      stroke="#0e1bac" stroke-width="10" stroke-dasharray="20.7432861328125,10" fill="#2069b9" id="bg" />
+    <path d="M-20,300 Q10,10 200,150 Q390,290 420,0"
+      stroke="#bfd8fd" stroke-width="50" fill="none" id="bgline" />
+    <foreignObject x="60" y="50" width="280" height="200">
+      <div style="text-align: right;"><span class="plainmodal-close">Close</span></div>
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.</p>
+    </foreignObject>
+  </g>
+  <animateTransform xlink:href="#clip"
+    attributeName="transform" type="translate" from="200,150" to="200,150" additive="sum"
+    begin="indefinite" id="anim1" />
+  <animateTransform xlink:href="#clip"
+    attributeName="transform" type="scale" from="0.1,0.1" to="1,1" additive="sum"
+    begin="indefinite" dur="1s" fill="freeze" id="anim2" />
+  <animateTransform xlink:href="#clip"
+    attributeName="transform" type="translate" from="-200,-150" to="-200,-150" additive="sum"
+    begin="indefinite" id="anim3" />
+  <animate xlink:href="#bgline"
+    attributeName="d"
+    values="M-40,300 Q10,10 200,150 Q390,290 440,0;
+      M-40,300 Q10,10 200,150 Q390,290 440,0;
+      M-40,300 Q-40,300 200,150 Q440,0 440,0;
+      M-40,300 Q-80,-50 200,-60 Q480,-80 440,300"
+    keyTimes="0;0.2;0.5;1"
+    begin="indefinite" dur="3s" fill="freeze" id="anim4" />
+  <animate xlink:href="#bg"
+    attributeName="stroke-dashoffset" from="0" to="-30.7432861328125"
+    begin="indefinite" dur="2s" repeatCount="indefinite" id="anim5" />
+</svg>
+<script>
+$(function() {
+// webkit doesn't support smil (begin="anim1.begin" etc.)
+var scaleS = '0.1,0.1', scaleD = '1,1',
+  anim1 = document.getElementById('anim1'),
+  anim2 = document.getElementById('anim2'),
+  anim3 = document.getElementById('anim3'),
+  anim4 = document.getElementById('anim4'),
+  anim5 = document.getElementById('anim5'),
+  dlgSvg = $('#sample-svg').plainModal({duration: 1000, effect: {
+    open: function(duration, complete) {
+      var that = this;
+      that.get(0).setCurrentTime(0);
+      anim2.setAttribute('from', scaleS);
+      anim2.setAttribute('to', scaleD);
+      that.css('display', '');
+      anim1.beginElement();
+      anim2.beginElement();
+      anim3.beginElement();
+      anim4.beginElement();
+      anim5.beginElementAt(0.8);
+      setTimeout(function() { complete(); }, 3000);
+    },
+    close: function(duration, complete) {
+      var that = this;
+      anim2.setAttribute('from', scaleD);
+      anim2.setAttribute('to', scaleS);
+      anim1.beginElement();
+      anim2.beginElement();
+      anim3.beginElement();
+      setTimeout(function() {
+        anim1.endElement();
+        anim2.endElement();
+        anim3.endElement();
+        anim4.endElement();
+        anim5.endElement();
+        that.css('display', 'none');
+        complete();
+      }, 1000);
+    }
+  }});
+  $('#sample-buttonA').click(function() {
+    dlgSvg.plainModal('open');
+  });
 });
 </script>
 <!-- ======== /sample -->
