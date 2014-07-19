@@ -132,13 +132,15 @@ var button = $('#open-button').click(function() {
 ### `overlay`
 
 Type: Object  
-Default: `{color: '#888', opacity: 0.6, zIndex: 9000}`
+Default: `{fillColor: '#888', opacity: 0.6, zIndex: 9000}`
 
-A Object that can have `color` (fill-color), `opacity` and `zIndex` CSS properties of overlay.
+A Object that can have `fillColor` (fill-color), `opacity` and `zIndex` of overlay.
 
 ```js
-$('#modal').plainModal({overlay: {color: '#fff', opacity: 0.5}});
+$('#modal').plainModal({overlay: {fillColor: '#fff', opacity: 0.5}});
 ```
+
+`color` is an alias for `fillColor`.
 
 If you want to style the overlay more, add style to `plainmodal-overlay` class.
 
@@ -302,6 +304,7 @@ If your web site supports IE8- and it use `position:fixed`, HTML must include `<
 [plainOverlay](http://anseki.github.io/jquery-plainoverlay) may be better, if you want the overlay that covers a page, elements or iframe-windows.
 
 ## Release History
+ * 2014-07-19			v0.6.0			Rename `options.overlay.color` to `options.overlay.fillColor`.
  * 2014-06-30			v0.5.0			Add `plainmodal-overlay` class.
  * 2014-05-06			v0.4.1			Fix: If `options.duration` is 0, the status become invalid.
  * 2014-04-23			v0.4.0			Add custom events `plainmodalopen` and `plainmodalclose`

@@ -20,10 +20,11 @@ function init(jq, options) {
   var opt = $.extend(true, {
         duration:       200,
         effect:         {open: $.fn.fadeIn, close: $.fn.fadeOut},
-        overlay:        {color: '#888', opacity: 0.6, zIndex: 9000},
+        overlay:        {opacity: 0.6, zIndex: 9000},
         closeClass:     'plainmodal-close'
         // Optional: offset, open, close
       }, options);
+  opt.overlay.fillColor = opt.overlay.fillColor || opt.overlay.color /* alias */ || '#888';
   opt.zIndex = opt.zIndex || opt.overlay.zIndex + 1;
 
   if (!jqWin) { // page init
@@ -118,7 +119,7 @@ function modalOpen(jq, options) {
       jqOpened = jqTarget.trigger('plainmodalopen');
     });
     // Re-Style the overlay that is shared by all 'opt'.
-    jqOverlay.css({backgroundColor: opt.overlay.color, zIndex: opt.overlay.zIndex})
+    jqOverlay.css({backgroundColor: opt.overlay.fillColor, zIndex: opt.overlay.zIndex})
       .fadeTo(opt.duration, opt.overlay.opacity);
     jqOpened = 0;
   }
