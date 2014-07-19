@@ -332,11 +332,11 @@ var button = $('#sample-button8').click(function() {
 </h3>
 
 <p>Type: Object<br>
-Default: <code>{color: '#888', opacity: 0.6, zIndex: 9000}</code></p>
+Default: <code>{fillColor: '#888', opacity: 0.6, zIndex: 9000}</code></p>
 
-<p>A Object that can have <code>color</code> (fill-color), <code>opacity</code> and <code>zIndex</code> CSS properties of overlay.</p>
+<p>A Object that can have <code>fillColor</code> (fill-color), <code>opacity</code> and <code>zIndex</code> CSS properties of overlay.</p>
 
-<div class="highlight highlight-js"><pre><span class="nx">$</span><span class="p">(</span><span class="s1">'#modal'</span><span class="p">).</span><span class="nx">plainModal</span><span class="p">({</span><span class="nx">overlay</span><span class="o">:</span> <span class="p">{</span><span class="nx">color</span><span class="o">:</span> <span class="s1">'#fff'</span><span class="p">,</span> <span class="nx">opacity</span><span class="o">:</span> <span class="mf">0.5</span><span class="p">}});</span>
+<div class="highlight highlight-js"><pre><span class="nx">$</span><span class="p">(</span><span class="s1">'#modal'</span><span class="p">).</span><span class="nx">plainModal</span><span class="p">({</span><span class="nx">overlay</span><span class="o">:</span> <span class="p">{</span><span class="nx">fillColor</span><span class="o">:</span> <span class="s1">'#fff'</span><span class="p">,</span> <span class="nx">opacity</span><span class="o">:</span> <span class="mf">0.5</span><span class="p">}});</span>
 </pre></div>
 
 <!-- ======== sample -->
@@ -346,10 +346,12 @@ Default: <code>{color: '#888', opacity: 0.6, zIndex: 9000}</code></p>
 <div class="sample-button" id="sample-button4">Open Sample</div>
 <script>
 $('#sample-button4').click(function() {
-  $('#sample4').plainModal('open', {overlay: {color: '#fff', opacity: 0.5}});
+  $('#sample4').plainModal('open', {overlay: {fillColor: '#fff', opacity: 0.5}});
 });
 </script>
 <!-- ======== /sample -->
+
+<p><code>color</code> is an alias for <code>fillColor</code>.</p>
 
 <p>If you want to style the overlay more, add style to <code>plainmodal-overlay</code> class.</p>
 
