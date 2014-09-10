@@ -297,13 +297,13 @@ $('#modal').on('plainmodalclose', function(event) {
 
 - As everyone knows, IE8- has many problems. CSS `position:fixed` in HTML without `<!DOCTYPE>` is ignored.  
 If your web site supports IE8- and it use `position:fixed`, HTML must include `<!DOCTYPE>` even if plainModal is not used. And plainModal uses `position:fixed`.
-- The [Initialize](#initialize) method set `display:'none'` to specified element. You can hide the element before Initialize method, by your stylesheet.
+- The [Initialize](#initialize) method set `display:none` to specified element. You can hide the element before Initialize method, by your stylesheet.
 
 ## See Also
 
 [plainOverlay](http://anseki.github.io/jquery-plainoverlay) may be better, if you want the overlay that covers a page, elements or iframe-windows.
 
-## Release History
+## History
  * 2014-07-19			v0.6.0			Rename `options.overlay.color` to `options.overlay.fillColor`.
  * 2014-06-30			v0.5.0			Add `plainmodal-overlay` class.
  * 2014-05-06			v0.4.1			Fix: If `options.duration` is 0, the status become invalid.
