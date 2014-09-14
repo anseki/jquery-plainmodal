@@ -1,6 +1,7 @@
 # plainModal
 
-The simple jQuery Plugin for customizable modal windows. plainModal has basic functions only, and it does nothing for styles. It has no image files and no CSS files. Just one small file (2KB minified).  
+The simple jQuery Plugin for customizable modal windows. plainModal has basic functions only, and it does nothing for styles. It has no image files and no CSS files. Just one small file (2KB minified).
+
 **See <a href="http://anseki.github.io/jquery-plainmodal">DEMO</a>**
 
 Many great plugins already exist.
@@ -252,10 +253,30 @@ A `z-index` CSS property of the modal window. This number have to be bigger than
 Type: Function  
 Default: `undefined`
 
-A `plainmodalopen` event handler. (see [Events](#events))
+A `plainmodalopen` event handler. This is convenient way to do `on('plainmodalopen', handler)` method. (see [Events](#events))
 
 ```js
 $('#modal').plainModal({open: function(event) { console.log(event); } });
+```
+
+*NOTE:* If this option is specified in the [Open](#open) method, declared Function or the variable the Function is assigned should be specified (Don't specify the function expression). Because the [Open](#open) method may be called again, and the *function expression* generates the new Function every time.  
+The *"function statement"* and the *"function operator"* are different.  
+See [https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions#Defining_functions](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions#Defining_functions)  
+For example: this code is OK.
+
+```js
+function handler(event) { console.log(event); }
+$('#open-button').click(function() {
+  $('#modal').plainModal('open', {open: handler});
+});
+```
+
+This code registers event handler repeatedly when the [Open](#open) method is called.
+
+```js
+$('#open-button').click(function() {
+  $('#modal').plainModal('open', {open: function(event) { console.log(event); } });
+});
 ```
 
 ### `close`
@@ -263,11 +284,13 @@ $('#modal').plainModal({open: function(event) { console.log(event); } });
 Type: Function  
 Default: `undefined`
 
-A `plainmodalclose` event handler. (see [Events](#events))
+A `plainmodalclose` event handler. This is convenient way to do `on('plainmodalclose', handler)` method. (see [Events](#events))
 
 ```js
 $('#modal').plainModal({close: function(event) { console.log(event); } });
 ```
+
+*NOTE:* See "NOTE" in `open` option.
 
 ## <a name ="events">Events</a>
 
@@ -304,6 +327,7 @@ If your web site supports IE8- and it use `position:fixed`, HTML must include `<
 [plainOverlay](http://anseki.github.io/jquery-plainoverlay) may be better, if you want the overlay that covers a page, elements or iframe-windows.
 
 ## History
+ * 2014-09-15			v0.6.2			Fix: The event handler by initialize is registered repeatedly.
  * 2014-07-19			v0.6.0			Rename `options.overlay.color` to `options.overlay.fillColor`.
  * 2014-06-30			v0.5.0			Add `plainmodal-overlay` class.
  * 2014-05-06			v0.4.1			Fix: If `options.duration` is 0, the status become invalid.
