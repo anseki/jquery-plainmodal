@@ -334,7 +334,7 @@ var button = $('#sample-button8').click(function() {
 <p>Type: Object<br>
 Default: <code>{fillColor: '#888', opacity: 0.6, zIndex: 9000}</code></p>
 
-<p>A Object that can have <code>fillColor</code> (fill-color), <code>opacity</code> and <code>zIndex</code> CSS properties of overlay.</p>
+<p>A Object that can have <code>fillColor</code> (fill-color), <code>opacity</code> and <code>zIndex</code> of overlay.</p>
 
 <div class="highlight highlight-js"><pre><span class="nx">$</span><span class="p">(</span><span class="s1">'#modal'</span><span class="p">).</span><span class="nx">plainModal</span><span class="p">({</span><span class="nx">overlay</span><span class="o">:</span> <span class="p">{</span><span class="nx">fillColor</span><span class="o">:</span> <span class="s1">'#fff'</span><span class="p">,</span> <span class="nx">opacity</span><span class="o">:</span> <span class="mf">0.5</span><span class="p">}});</span>
 </pre></div>
@@ -565,9 +565,27 @@ Default: <code>options.overlay.zIndex + 1</code></p>
 <p>Type: Function<br>
 Default: <code>undefined</code></p>
 
-<p>A <code>plainmodalopen</code> event handler. (see <a href="#events">Events</a>)</p>
+<p>A <code>plainmodalopen</code> event handler. This is convenient way to do <code>on('plainmodalopen', handler)</code> method. (see <a href="#events">Events</a>)</p>
 
 <div class="highlight highlight-js"><pre><span class="nx">$</span><span class="p">(</span><span class="s1">'#modal'</span><span class="p">).</span><span class="nx">plainModal</span><span class="p">({</span><span class="nx">open</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">event</span><span class="p">);</span> <span class="p">}</span> <span class="p">});</span>
+</pre></div>
+
+<p><em>NOTE:</em> If this option is specified in the <a href="#open">Open</a> method, declared Function or the variable the Function is assigned should be specified (Don't specify the function expression). Because the <a href="#open">Open</a> method may be called again, and the <em>function expression</em> generates the new Function every time.<br>
+The <em>"function statement"</em> and the <em>"function operator"</em> are different.<br>
+See <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions#Defining_functions">https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions#Defining_functions</a><br>
+For example: this code is OK.</p>
+
+<div class="highlight highlight-js"><pre><span class="kd">function</span> <span class="nx">handler</span><span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">event</span><span class="p">);</span> <span class="p">}</span>
+<span class="nx">$</span><span class="p">(</span><span class="s1">'#open-button'</span><span class="p">).</span><span class="nx">click</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="nx">$</span><span class="p">(</span><span class="s1">'#modal'</span><span class="p">).</span><span class="nx">plainModal</span><span class="p">(</span><span class="s1">'open'</span><span class="p">,</span> <span class="p">{</span><span class="nx">open</span><span class="o">:</span> <span class="nx">handler</span><span class="p">});</span>
+<span class="p">});</span>
+</pre></div>
+
+<p>This code registers event handler repeatedly when the <a href="#open">Open</a> method is called.</p>
+
+<div class="highlight highlight-js"><pre><span class="nx">$</span><span class="p">(</span><span class="s1">'#open-button'</span><span class="p">).</span><span class="nx">click</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="nx">$</span><span class="p">(</span><span class="s1">'#modal'</span><span class="p">).</span><span class="nx">plainModal</span><span class="p">(</span><span class="s1">'open'</span><span class="p">,</span> <span class="p">{</span><span class="nx">open</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">event</span><span class="p">);</span> <span class="p">}</span> <span class="p">});</span>
+<span class="p">});</span>
 </pre></div>
 
 <h3>
@@ -577,10 +595,12 @@ Default: <code>undefined</code></p>
 <p>Type: Function<br>
 Default: <code>undefined</code></p>
 
-<p>A <code>plainmodalclose</code> event handler. (see <a href="#events">Events</a>)</p>
+<p>A <code>plainmodalclose</code> event handler. This is convenient way to do <code>on('plainmodalclose', handler)</code> method. (see <a href="#events">Events</a>)</p>
 
 <div class="highlight highlight-js"><pre><span class="nx">$</span><span class="p">(</span><span class="s1">'#modal'</span><span class="p">).</span><span class="nx">plainModal</span><span class="p">({</span><span class="nx">close</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">event</span><span class="p">);</span> <span class="p">}</span> <span class="p">});</span>
 </pre></div>
+
+<p><em>NOTE:</em> See "NOTE" in <code>open</code> option.</p>
 
 <h2>
 <a name="events" class="anchor" href="#events"><span class="octicon octicon-link"></span></a><a name="events">Events</a>
