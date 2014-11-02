@@ -327,6 +327,7 @@ If your web site supports IE8- and it use `position:fixed`, HTML must include `<
 [plainOverlay](http://anseki.github.io/jquery-plainoverlay) may be better, if you want the overlay that covers a page, elements or iframe-windows.
 
 ## History
+ * 2014-11-02			v0.6.4			Fix: touch devices scroll the window.
  * 2014-09-15			v0.6.2			Fix: The event handler by initialize is registered repeatedly.
  * 2014-07-19			v0.6.0			Rename `options.overlay.color` to `options.overlay.fillColor`.
  * 2014-06-30			v0.5.0			Add `plainmodal-overlay` class.

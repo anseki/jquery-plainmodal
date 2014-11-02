@@ -39,9 +39,10 @@ function init(jq, options) {
       left:           0,
       top:            0,
       width:          '100%',
-      height:         '100%',
+      height:         '150%', // for Address Bar of Firefox for Android
       display:        'none'
-    }).appendTo(jqBody = $('body')).click(modalClose);
+    }).appendTo(jqBody = $('body')).click(modalClose)
+      .on('touchmove', function() { return false; }); // avoid scroll on touch devices
     $(document).focusin(function(e) {
       if (jqOpened && !jqOpened.has(e.target).length) {
         if (jq1st) { jq1st.focus(); }
@@ -80,7 +81,8 @@ function init(jq, options) {
       { that.off(EVENT_TYPE_OPEN, opt.open).on(EVENT_TYPE_OPEN, opt.open); }
     if (typeof opt.close === 'function')
       { that.off(EVENT_TYPE_CLOSE, opt.close).on(EVENT_TYPE_CLOSE, opt.close); }
-    that.css(cssProp).data(APP_NAME, opt).appendTo(jqBody);
+    that.css(cssProp).data(APP_NAME, opt).appendTo(jqBody)
+      .on('touchmove', function() { return false; }); // avoid scroll on touch devices
   });
 }
 
