@@ -1,7 +1,6 @@
 {
   "name": "jquery-plainmodal",
   "version": "0.6.5",
-  "title": "plainModal",
   "description": "The simple jQuery Plugin for customizable modal windows.",
   "keywords": [
     "jquery-plugin",
@@ -13,18 +12,27 @@
     "customizable",
     "window"
   ],
+  "main": "jquery.plainmodal.min.js",
   "dependencies": {
     "jquery": ">=1.8"
   },
   "homepage": "http://anseki.github.io/jquery-plainmodal/",
   "repository": {
     "type": "git",
-    "url": "git://github.com/anseki/jquery-plainmodal.git"
+    "url": "git://github.com/anseki/jquery-jquery-plainmodal.git"
   },
-  "bugs": "https://github.com/anseki/jquery-plainmodal/issues",
-  "licenses": "MIT",
-  "author": {
-    "name": "anseki",
-    "url": "https://github.com/anseki"
-  }
+  "moduleType": [
+    "es6"
+  ],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "license": "MIT",
+  "authors": [
+    "anseki <AnSeki.aff@gmail.com>"
+  ]
 }
