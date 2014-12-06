@@ -2,9 +2,9 @@
 <html>
 
   <head>
-    <meta charset='utf-8' />
-    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
-    <meta name="description" content="plainModal : The simple jQuery Plugin for customizable modal windows." />
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="description" content="plainModal : The simple jQuery Plugin for customizable modal windows.">
 
     <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
     <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/sample.css">
@@ -154,7 +154,9 @@ var scaleS = '0.1,0.1', scaleD = '1,1',
 <ul>
 <li>The gorgeous plugins which has many functions and rich styles.</li>
 <li>The simple plugins which has small functions and customizable styles.</li>
-</ul><p>The many web sites use same functions almost. And these have different styles.<br>
+</ul>
+
+<p>The many web sites use same functions almost. And these have different styles.<br>
 plainModal has basic functions for showing modal windows. That's all. The styling it is your job. You can free style it to perfect match for your web site.</p>
 
 <!-- ======== sample -->
@@ -178,14 +180,16 @@ $('#sample-button2').click(function() {
 <li>Avoiding focusing outside elements of the modal window. (by pressing Tab key)</li>
 <li>Avoiding scrolling a page window.</li>
 <li>Hiding the modal window when Escape key is pressed.</li>
-</ul><div class="highlight highlight-js"><pre><span class="c1">// Show modal window. &lt;div id="modal"&gt; is styled via your CSS.</span>
+</ul>
+
+<div class="highlight highlight-js"><pre><span class="c1">// Show modal window. &lt;div id="modal"&gt; is styled via your CSS.</span>
 <span class="nx">$</span><span class="p">(</span><span class="s1">'#modal'</span><span class="p">).</span><span class="nx">plainModal</span><span class="p">(</span><span class="s1">'open'</span><span class="p">);</span>
 <span class="c1">// Hide modal window.</span>
 <span class="nx">$</span><span class="p">(</span><span class="s1">'#modal'</span><span class="p">).</span><span class="nx">plainModal</span><span class="p">(</span><span class="s1">'close'</span><span class="p">);</span>
 </pre></div>
 
 <h2>
-<a name="getting-started" class="anchor" href="#getting-started"><span class="octicon octicon-link"></span></a>Getting Started</h2>
+<a id="getting-started" class="anchor" href="#getting-started" aria-hidden="true"><span class="octicon octicon-link"></span></a>Getting Started</h2>
 
 <p>Load after jQuery.</p>
 
@@ -194,10 +198,10 @@ $('#sample-button2').click(function() {
 </pre></div>
 
 <h2>
-<a name="methods" class="anchor" href="#methods"><span class="octicon octicon-link"></span></a>Methods</h2>
+<a id="methods" class="anchor" href="#methods" aria-hidden="true"><span class="octicon octicon-link"></span></a>Methods</h2>
 
 <h3>
-<a name="open" class="anchor" href="#open"><span class="octicon octicon-link"></span></a><a name="open">Open</a>
+<a id="open" class="anchor" href="#open" aria-hidden="true"><span class="octicon octicon-link"></span></a><a name="open">Open</a>
 </h3>
 
 <div class="highlight highlight-js"><pre><span class="nx">element</span><span class="p">.</span><span class="nx">plainModal</span><span class="p">(</span><span class="s1">'open'</span><span class="p">[,</span> <span class="nx">options</span><span class="p">])</span>
@@ -208,7 +212,7 @@ If <code>options</code> (see <a href="#options">Options</a>) is specified, eleme
 An element can be initialized by new <code>options</code> any number of times.</p>
 
 <h3>
-<a name="close" class="anchor" href="#close"><span class="octicon octicon-link"></span></a><a name="close">Close</a>
+<a id="close" class="anchor" href="#close" aria-hidden="true"><span class="octicon octicon-link"></span></a><a name="close">Close</a>
 </h3>
 
 <div class="highlight highlight-js"><pre><span class="nx">element</span><span class="p">.</span><span class="nx">plainModal</span><span class="p">(</span><span class="s1">'close'</span><span class="p">)</span>
@@ -217,7 +221,7 @@ An element can be initialized by new <code>options</code> any number of times.</
 <p>Hide the modal window.</p>
 
 <h3>
-<a name="initialize" class="anchor" href="#initialize"><span class="octicon octicon-link"></span></a><a name="initialize">Initialize</a>
+<a id="initialize" class="anchor" href="#initialize" aria-hidden="true"><span class="octicon octicon-link"></span></a><a name="initialize">Initialize</a>
 </h3>
 
 <div class="highlight highlight-js"><pre><span class="nx">element</span><span class="p">.</span><span class="nx">plainModal</span><span class="p">([</span><span class="nx">options</span><span class="p">])</span>
@@ -255,13 +259,13 @@ If you don't customize <a href="#options">Options</a> (using default all), this 
 </pre></div>
 
 <h2>
-<a name="options" class="anchor" href="#options"><span class="octicon octicon-link"></span></a><a name="options">Options</a>
+<a id="options" class="anchor" href="#options" aria-hidden="true"><span class="octicon octicon-link"></span></a><a name="options">Options</a>
 </h2>
 
 <p>A <code>options</code> Object can be specified to <a href="#open">Open</a> method or <a href="#initialize">Initialize</a> method. This Object can have following properties.</p>
 
 <h3>
-<a name="offset" class="anchor" href="#offset"><span class="octicon octicon-link"></span></a><code>offset</code>
+<a id="offset" class="anchor" href="#offset" aria-hidden="true"><span class="octicon octicon-link"></span></a><code>offset</code>
 </h3>
 
 <p>Type: Object or Function<br>
@@ -328,7 +332,7 @@ var button = $('#sample-button8').click(function() {
 <!-- ======== /sample -->
 
 <h3>
-<a name="overlay" class="anchor" href="#overlay"><span class="octicon octicon-link"></span></a><code>overlay</code>
+<a id="overlay" class="anchor" href="#overlay" aria-hidden="true"><span class="octicon octicon-link"></span></a><code>overlay</code>
 </h3>
 
 <p>Type: Object<br>
@@ -377,7 +381,7 @@ $('#sample-button9').click(function() {
 <!-- ======== /sample -->
 
 <h3>
-<a name="closeclass" class="anchor" href="#closeclass"><span class="octicon octicon-link"></span></a><code>closeClass</code>
+<a id="closeclass" class="anchor" href="#closeclass" aria-hidden="true"><span class="octicon octicon-link"></span></a><code>closeClass</code>
 </h3>
 
 <p>Type: String<br>
@@ -405,7 +409,7 @@ $('#sample-button5').click(function() {
 <!-- ======== /sample -->
 
 <h3>
-<a name="duration" class="anchor" href="#duration"><span class="octicon octicon-link"></span></a><code>duration</code>
+<a id="duration" class="anchor" href="#duration" aria-hidden="true"><span class="octicon octicon-link"></span></a><code>duration</code>
 </h3>
 
 <p>Type: Number<br>
@@ -414,7 +418,7 @@ Default: <code>200</code></p>
 <p>A number determining how long (milliseconds) the effect animation for showing and hiding the modal window will run.</p>
 
 <h3>
-<a name="effect" class="anchor" href="#effect"><span class="octicon octicon-link"></span></a><code>effect</code>
+<a id="effect" class="anchor" href="#effect" aria-hidden="true"><span class="octicon octicon-link"></span></a><code>effect</code>
 </h3>
 
 <p>Type: Object<br>
@@ -550,7 +554,7 @@ $('#sample-button7').click(function() {
 <!-- ======== /sample -->
 
 <h3>
-<a name="zindex" class="anchor" href="#zindex"><span class="octicon octicon-link"></span></a><code>zIndex</code>
+<a id="zindex" class="anchor" href="#zindex" aria-hidden="true"><span class="octicon octicon-link"></span></a><code>zIndex</code>
 </h3>
 
 <p>Type: Number<br>
@@ -559,13 +563,14 @@ Default: <code>options.overlay.zIndex + 1</code></p>
 <p>A <code>z-index</code> CSS property of the modal window. This number have to be bigger than <code>options.overlay.zIndex</code>.</p>
 
 <h3>
-<a name="open-1" class="anchor" href="#open-1"><span class="octicon octicon-link"></span></a><code>open</code>
+<a id="open-close-beforeopen-beforeclose" class="anchor" href="#open-close-beforeopen-beforeclose" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<code>open</code>, <code>close</code>, <code>beforeopen</code>, <code>beforeclose</code>
 </h3>
 
 <p>Type: Function<br>
 Default: <code>undefined</code></p>
 
-<p>A <code>plainmodalopen</code> event handler. This is convenient way to do <code>on('plainmodalopen', handler)</code> method. (see <a href="#events">Events</a>)</p>
+<p>The <code>plainmodalopen</code>, <code>plainmodalclose</code>, <code>plainmodalbeforeopen</code> and <code>plainmodalbeforeclose</code> event handlers. This is convenient way to do <code>on(type, handler)</code> method. (see <a href="#events">Events</a>)</p>
 
 <div class="highlight highlight-js"><pre><span class="nx">$</span><span class="p">(</span><span class="s1">'#modal'</span><span class="p">).</span><span class="nx">plainModal</span><span class="p">({</span><span class="nx">open</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">event</span><span class="p">);</span> <span class="p">}</span> <span class="p">});</span>
 </pre></div>
@@ -588,26 +593,12 @@ For example: this code is OK.</p>
 <span class="p">});</span>
 </pre></div>
 
-<h3>
-<a name="close-1" class="anchor" href="#close-1"><span class="octicon octicon-link"></span></a><code>close</code>
-</h3>
-
-<p>Type: Function<br>
-Default: <code>undefined</code></p>
-
-<p>A <code>plainmodalclose</code> event handler. This is convenient way to do <code>on('plainmodalclose', handler)</code> method. (see <a href="#events">Events</a>)</p>
-
-<div class="highlight highlight-js"><pre><span class="nx">$</span><span class="p">(</span><span class="s1">'#modal'</span><span class="p">).</span><span class="nx">plainModal</span><span class="p">({</span><span class="nx">close</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">event</span><span class="p">);</span> <span class="p">}</span> <span class="p">});</span>
-</pre></div>
-
-<p><em>NOTE:</em> See "NOTE" in <code>open</code> option.</p>
-
 <h2>
-<a name="events" class="anchor" href="#events"><span class="octicon octicon-link"></span></a><a name="events">Events</a>
+<a id="events" class="anchor" href="#events" aria-hidden="true"><span class="octicon octicon-link"></span></a><a name="events">Events</a>
 </h2>
 
 <h3>
-<a name="plainmodalopen" class="anchor" href="#plainmodalopen"><span class="octicon octicon-link"></span></a><code>plainmodalopen</code>
+<a id="plainmodalopen" class="anchor" href="#plainmodalopen" aria-hidden="true"><span class="octicon octicon-link"></span></a><code>plainmodalopen</code>
 </h3>
 
 <p>Triggered when the modal window is opened. (after the <code>effect.open</code> took <code>duration</code> to complete.)<br>
@@ -619,7 +610,7 @@ An event handler can be attached when initializing too via <code>options.open</c
 </pre></div>
 
 <h3>
-<a name="plainmodalclose" class="anchor" href="#plainmodalclose"><span class="octicon octicon-link"></span></a><code>plainmodalclose</code>
+<a id="plainmodalclose" class="anchor" href="#plainmodalclose" aria-hidden="true"><span class="octicon octicon-link"></span></a><code>plainmodalclose</code>
 </h3>
 
 <p>Triggered when the modal window is closeed. (after the <code>effect.close</code> took <code>duration</code> to complete.)<br>
@@ -630,8 +621,37 @@ An event handler can be attached when initializing too via <code>options.close</
 <span class="p">});</span>
 </pre></div>
 
+<h3>
+<a id="plainmodalbeforeopen" class="anchor" href="#plainmodalbeforeopen" aria-hidden="true"><span class="octicon octicon-link"></span></a><code>plainmodalbeforeopen</code>
+</h3>
+
+<p>Triggered before the modal window is opened.<br>
+An event handler can be attached when initializing too via <code>options.beforeopen</code>. (see <a href="#options">Options</a>)<br>
+This event is cancelable by calling <code>event.preventDefault()</code> in an event handler.</p>
+
+<div class="highlight highlight-js"><pre><span class="nx">$</span><span class="p">(</span><span class="s1">'#modal'</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="s1">'plainmodalbeforeopen'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
+  <span class="pl-k">if</span> (<span class="pl-k">!</span>dataList.ready) {
+    <span class="pl-s3">event</span>.preventDefault(); <span class="c1">// Don't open yet.</span>
+  }
+});</pre></div>
+
+<h3>
+<a id="plainmodalbeforeclose" class="anchor" href="#plainmodalbeforeclose" aria-hidden="true"><span class="octicon octicon-link"></span></a><code>plainmodalbeforeclose</code>
+</h3>
+
+<p>Triggered before the modal window is closeed.<br>
+An event handler can be attached when initializing too via <code>options.beforeclose</code>. (see <a href="#options">Options</a>)<br>
+This event is cancelable by calling <code>event.preventDefault()</code> in an event handler.</p>
+
+<div class="highlight highlight-js"><pre><span class="nx">$</span><span class="p">(</span><span class="s1">'#modal'</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="s1">'plainmodalbeforeclose'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
+  <span class="pl-k">if</span> (elmUserName.val() <span class="pl-k">===</span> <span class="s1">''</span>) {
+    <span class="pl-s3">alert</span>(<span class="s1">'"User Name" is required.'</span>);
+    <span class="pl-s3">event</span>.preventDefault(); <span class="c1">// Stay opening.</span>
+  }
+});</pre></div>
+
 <h2>
-<a name="note" class="anchor" href="#note"><span class="octicon octicon-link"></span></a>Note</h2>
+<a id="note" class="anchor" href="#note" aria-hidden="true"><span class="octicon octicon-link"></span></a>Note</h2>
 
 <ul>
 <li>As everyone knows, IE8- has many problems. CSS <code>position:fixed</code> in HTML without <code>&lt;!DOCTYPE&gt;</code> is ignored.<br>
@@ -640,10 +660,9 @@ If your web site supports IE8- and it use <code>position:fixed</code>, HTML must
 </ul>
 
 <h2>
-<a name="see-also" class="anchor" href="#see-also"><span class="octicon octicon-link"></span></a>See Also</h2>
+<a id="see-also" class="anchor" href="#see-also" aria-hidden="true"><span class="octicon octicon-link"></span></a>See Also</h2>
 
 <p><a href="http://anseki.github.io/jquery-plainoverlay">plainOverlay</a> may be better, if you want the overlay that covers a page, elements or iframe-windows.</p>
-
       </section>
     </div>
 
