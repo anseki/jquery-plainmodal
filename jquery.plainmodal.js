@@ -13,6 +13,8 @@ var APP_NAME = 'plainModal',
     APP_PREFIX = APP_NAME.toLowerCase(),
     EVENT_TYPE_OPEN = APP_PREFIX + 'open',
     EVENT_TYPE_CLOSE = APP_PREFIX + 'close',
+    EVENT_TYPE_BEFOREOPEN = APP_PREFIX + 'beforeopen',
+    EVENT_TYPE_BEFORECLOSE = APP_PREFIX + 'beforeclose',
 
     jqOpened = null, // jqOpened === null : Not opened / jqOpened === 0 : Fading now
     jqWin, jqBody, jqOverlay, jqActive, jq1st,
@@ -77,24 +79,32 @@ function init(jq, options) {
     if (opt.closeClass) {
       that.find('.' + opt.closeClass).off('click', modalClose).click(modalClose);
     }
-    if (typeof opt.open === 'function')
-      { that.off(EVENT_TYPE_OPEN, opt.open).on(EVENT_TYPE_OPEN, opt.open); }
-    if (typeof opt.close === 'function')
-      { that.off(EVENT_TYPE_CLOSE, opt.close).on(EVENT_TYPE_CLOSE, opt.close); }
+    // events
+    $.each([['open', EVENT_TYPE_OPEN], ['close', EVENT_TYPE_CLOSE],
+        ['beforeopen', EVENT_TYPE_BEFOREOPEN], ['beforeclose', EVENT_TYPE_BEFORECLOSE]], function(i, elm) {
+      var optName = elm[0], type = elm[1];
+      if (typeof opt[optName] === 'function')
+        { that.off(type, opt[optName]).on(type, opt[optName]); }
+    });
     that.css(cssProp).data(APP_NAME, opt).appendTo(jqBody)
       .on('touchmove', function() { return false; }); // avoid scroll on touch devices
   });
 }
 
 function modalOpen(jq, options) {
-  var jqTarget, opt, inlineStyles, calMarginR, calMarginB, offset;
+  var jqTarget, opt, inlineStyles, calMarginR, calMarginB, offset, event;
   if (jqOpened === null && jq.length) {
     jqTarget = jq.eq(0); // only 1st
     if (options || !(opt = jqTarget.data(APP_NAME))) {
       opt = init(jqTarget, options).data(APP_NAME);
     }
-    inlineStyles = jqBody.get(0).style;
 
+    // Event: beforeopen
+    event = $.Event(EVENT_TYPE_BEFOREOPEN, {cancelable: true});
+    jqTarget.trigger(event);
+    if (event.isDefaultPrevented()) { return jq; } // canceled
+
+    inlineStyles = jqBody.get(0).style;
     orgOverflow = inlineStyles.overflow;
     calMarginR = jqBody.prop('clientWidth');
     calMarginB = jqBody.prop('clientHeight');
@@ -125,6 +135,7 @@ function modalOpen(jq, options) {
           return false;
         }
       });
+      // Event: open
       jqOpened = jqTarget.trigger(EVENT_TYPE_OPEN);
     });
     // Re-Style the overlay that is shared by all 'opt'.
@@ -136,24 +147,29 @@ function modalOpen(jq, options) {
 }
 
 function modalClose(jq) { // jq: target/event
-  var isEvent = jq instanceof $.Event, jqTarget, opt;
+  var isEvent = jq instanceof $.Event, jqTarget, opt, event;
   if (jqOpened) {
     jqTarget = isEvent ? jqOpened : (function() { // jqOpened in jq
       var index = jq.index(jqOpened);
       return index > -1 ? jq.eq(index) : undefined;
     })();
     if (jqTarget) {
-      opt = jqTarget.data(APP_NAME);
-      // If duration is 0, callback is called now.
-      opt.effect.close.call(jqTarget, opt.duration || 1, function() {
-        jqBody.css({overflow: orgOverflow, marginRight: orgMarginR, marginBottom: orgMarginB});
-        if (jqActive && jqActive.length) { jqActive.focus(); } // Restore activeElement
-        jqWin.off('scroll', avoidScroll).scrollLeft(winLeft).scrollTop(winTop);
-        jqTarget.trigger(EVENT_TYPE_CLOSE);
-        jqOpened = null;
-      });
-      jqOverlay.fadeOut(opt.duration);
-      jqOpened = 0;
+      // Event: beforeclose
+      event = $.Event(EVENT_TYPE_BEFORECLOSE, {cancelable: true});
+      jqTarget.trigger(event);
+      if (!event.isDefaultPrevented()) {
+        opt = jqTarget.data(APP_NAME);
+        // If duration is 0, callback is called now.
+        opt.effect.close.call(jqTarget, opt.duration || 1, function() {
+          jqBody.css({overflow: orgOverflow, marginRight: orgMarginR, marginBottom: orgMarginB});
+          if (jqActive && jqActive.length) { jqActive.focus(); } // Restore activeElement
+          jqWin.off('scroll', avoidScroll).scrollLeft(winLeft).scrollTop(winTop);
+          jqTarget.trigger(EVENT_TYPE_CLOSE);
+          jqOpened = null;
+        });
+        jqOverlay.fadeOut(opt.duration);
+        jqOpened = 0;
+      }
     }
   }
   if (isEvent) { jq.preventDefault(); return false; }

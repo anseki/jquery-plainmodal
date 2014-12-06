@@ -248,12 +248,12 @@ Default: `options.overlay.zIndex + 1`
 
 A `z-index` CSS property of the modal window. This number have to be bigger than `options.overlay.zIndex`.
 
-### `open`
+### `open`, `close`, `beforeopen`, `beforeclose`
 
 Type: Function  
 Default: `undefined`
 
-A `plainmodalopen` event handler. This is convenient way to do `on('plainmodalopen', handler)` method. (see [Events](#events))
+The `plainmodalopen`, `plainmodalclose`, `plainmodalbeforeopen` and `plainmodalbeforeclose` event handlers. This is convenient way to do `on(type, handler)` method. (see [Events](#events))
 
 ```js
 $('#modal').plainModal({open: function(event) { console.log(event); } });
@@ -279,19 +279,6 @@ $('#open-button').click(function() {
 });
 ```
 
-### `close`
-
-Type: Function  
-Default: `undefined`
-
-A `plainmodalclose` event handler. This is convenient way to do `on('plainmodalclose', handler)` method. (see [Events](#events))
-
-```js
-$('#modal').plainModal({close: function(event) { console.log(event); } });
-```
-
-*NOTE:* See "NOTE" in `open` option.
-
 ## <a name ="events">Events</a>
 
 ### `plainmodalopen`
@@ -316,6 +303,35 @@ $('#modal').on('plainmodalclose', function(event) {
 });
 ```
 
+### `plainmodalbeforeopen`
+
+Triggered before the modal window is opened.  
+An event handler can be attached when initializing too via `options.beforeopen`. (see [Options](#options))  
+This event is cancelable by calling `event.preventDefault()` in an event handler.
+
+```js
+$('#modal').on('plainmodalbeforeopen', function(event) {
+  if (!dataList.ready) {
+    event.preventDefault(); // Don't open yet.
+  }
+});
+```
+
+### `plainmodalbeforeclose`
+
+Triggered before the modal window is closeed.  
+An event handler can be attached when initializing too via `options.beforeclose`. (see [Options](#options))  
+This event is cancelable by calling `event.preventDefault()` in an event handler.
+
+```js
+$('#modal').on('plainmodalbeforeclose', function(event) {
+  if (elmUserName.val() === '') {
+    alert('"User Name" is required.');
+    event.preventDefault(); // Stay opening.
+  }
+});
+```
+
 ## Note
 
 - As everyone knows, IE8- has many problems. CSS `position:fixed` in HTML without `<!DOCTYPE>` is ignored.  
@@ -327,6 +343,7 @@ If your web site supports IE8- and it use `position:fixed`, HTML must include `<
 [plainOverlay](http://anseki.github.io/jquery-plainoverlay) may be better, if you want the overlay that covers a page, elements or iframe-windows.
 
 ## History
+ * 2014-12-06			v0.7.0			Add custom events `plainmodalbeforeopen` and `plainmodalbeforeclose`
  * 2014-11-02			v0.6.4			Fix: touch devices scroll the window.
  * 2014-09-15			v0.6.2			Fix: The event handler by initialize is registered repeatedly.
  * 2014-07-19			v0.6.0			Rename `options.overlay.color` to `options.overlay.fillColor`.
