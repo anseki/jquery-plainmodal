@@ -61,10 +61,6 @@
 .highlight .vi { color: #003333 } /* Name.Variable.Instance */
 .highlight .il { color: #FF6600 } /* Literal.Number.Integer.Long */
 
-.type-csharp .highlight .k { color: #0000FF }
-.type-csharp .highlight .kt { color: #0000FF }
-.type-csharp .highlight .nf { color: #000000; font-weight: normal }
-.type-csharp .highlight .nc { color: #2B91AF }
-.type-csharp .highlight .nn { color: #000000 }
-.type-csharp .highlight .s { color: #A31515 }
-.type-csharp .highlight .sc { color: #A31515 }
+.css .o,
+.css .o + .nt,
+.css .nt + .nt { color: #999; }

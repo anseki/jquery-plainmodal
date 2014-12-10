@@ -1,5 +1,5 @@
 
-.sample-window {
+.sample-modal {
   width: 350px;
   padding: 5px;
   border: 2px solid #186db4;
@@ -7,42 +7,29 @@
   display: none;
 }
 
+.sample-dark {
+  color: #fafafa;
+  background-color: #4d4f44
+}
+
 .plainmodal-close {
   cursor: pointer;
 }
 
-.sample-window .plainmodal-close, #sample-svg .plainmodal-close {
+.plainmodal-close.sample {
   display: inline-block;
   padding: 1px 3px;
   color: #fff;
   background-color: #224388;
 }
 
-.sample-window .plainmodal-close:hover, #sample-svg .plainmodal-close:hover {
+.plainmodal-close.sample:hover {
   background-color: #1f99e2;
 }
 
-.sample-button {
-  width: 240px;
-  margin: 5px;
-  padding: 3px 0;
-  -webkit-border-radius: 3px;
-  -moz-border-radius: 3px;
-  -ms-border-radius: 3px;
-  -o-border-radius: 3px;
-  border-radius: 3px;
-  color: #fff;
-  background-color: #224388;
-  font-weight: bold;
-  text-align: center;
-  cursor: pointer;
-}
+/* ==================================== sample-01 */
 
-.sample-button:hover {
-  background-color: #1f99e2;
-}
-
-#sample-style {
+#sample-01 {
   width: 450px;
   /*height: 400px;*/
   padding: 20px 40px;
@@ -57,42 +44,67 @@
   font-family: 'Georgia', serif;
 }
 
-#sample-style:after { /* clearfix */
+#sample-01:after { /* clearfix */
   content: "";
   clear: both;
   display: block;
 }
 
-#sample-style p {
+#sample-01 p {
   font-size: 18px;
 }
 
-#sample-style .sample-head {
+#sample-01 .sample-head {
   margin: 0 0 15px;
   font-size: 36px;
   font-weight: bold;
 }
 
-#sample-style img {
+#sample-01 img {
   float: left;
   margin-right: 10px;
-  box-shadow: none;
 }
 
-#sample-style .plainmodal-close {
+#sample-01 .plainmodal-close {
   position: absolute;
   width: 45px;
   height: 45px;
   right: -15px;
   top: -15px;
-  background: url('../images/plainmodal-close.png') no-repeat;
+  background: url('../img/plainmodal-close.png') no-repeat;
 }
 
-#sample-style .plainmodal-close:hover {
+#sample-01 .plainmodal-close:hover {
   background-position: -45px 0;
 }
 
-#sample-svg p {
+/* ==================================== sample-02a */
+
+#sample-02a {
+  background-color: #fff;
+  display: none;
+}
+
+/* ==================================== sample-02b */
+
+#sample-02b {
+  width: 400px;
+  height: 300px;
+}
+
+#sample-02b-bg {
+  stroke: #0e1bac;
+  stroke-width: 10px;
+  fill: #2069b9;
+}
+
+#sample-02b-bgline {
+  stroke: #bfd8fd;
+  stroke-width: 50px;
+  fill: none;
+}
+
+#sample-02b p {
   margin: 0;
   color: #fff;
   font-family: 'Georgia', serif;
@@ -100,12 +112,7 @@
   text-align: center;
 }
 
-#sample-nostyle {
-  background-color: #fff;
-  display: none;
+#sample-02b .sample-close {
+  text-align: right;
 }
 
-#sample4, #sample7 {
-  color: #fafafa;
-  background-color: #4d4f44
-}

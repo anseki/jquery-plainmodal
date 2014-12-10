@@ -1,153 +1,49 @@
 <!DOCTYPE html>
 <html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="description" content="The simple jQuery Plugin for customizable modal windows.">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/syntax.css">
+  <link rel="stylesheet" href="css/default.css">
+  <link rel="stylesheet" href="css/sample.css">
+  <!-- Libs for sample codes must be loaded in "head". -->
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+  <script src="js/jquery.plainmodal.min.js"></script>
 
-  <head>
-    <meta charset='utf-8'>
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <meta name="description" content="plainModal : The simple jQuery Plugin for customizable modal windows.">
-
-    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
-    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/sample.css">
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-    <script src="javascripts/jquery.plainmodal.min.js"></script>
-
-    <title>plainModal</title>
-  </head>
-
-  <body>
-
-    <!-- HEADER -->
-    <div id="header_wrap" class="outer">
-        <header class="inner">
-          <a id="forkme_banner" href="https://github.com/anseki/jquery-plainmodal">View on GitHub</a>
-
-          <h1 id="project_title">plainModal</h1>
-          <h2 id="project_tagline">The simple jQuery Plugin for customizable modal windows.</h2>
-
-            <section id="downloads">
-              <a class="zip_download_link" href="https://github.com/anseki/jquery-plainmodal/zipball/master">Download this project as a .zip file</a>
-              <a class="tar_download_link" href="https://github.com/anseki/jquery-plainmodal/tarball/master">Download this project as a tar.gz file</a>
-            </section>
-        </header>
-    </div>
-
-    <!-- MAIN CONTENT -->
-    <div id="main_content_wrap" class="outer">
-      <section id="main_content" class="inner">
+  <title>plainModal</title>
+</head>
+<body>
+  <div class="container">
+    <h1><a href="./">plainModal</a></h1>
+    <ul id="gh"><li><a href="https://github.com/anseki/jquery-plainmodal/tarball/master">Download TAR.GZ</a></li><li><a href="https://github.com/anseki/jquery-plainmodal/zipball/master">Download ZIP</a></li><li><a href="https://github.com/anseki/jquery-plainmodal">View on GitHub</a></li></ul>
+    <main>
 
 <p>The simple jQuery Plugin for customizable modal windows. plainModal has basic functions only, and it does nothing for styles. It has no image files and no CSS files. Just one small file (2KB minified).</p>
 
-<!-- ======== sample -->
-<div>
-<div class="sample-button" style="display: inline-block;" id="sample-button1">Open Sample</div>
-<div class="sample-button" style="display: inline-block;" id="sample-buttonA">Open Sample (SVG)</div>
-</div>
-<!-- ======== /sample -->
+<!-- include "sample_01.html" -->
+<!-- ================ sample -->
+<p><button id="sample-button-01">Open Sample</button></p>
 
-<!-- ======== sample -->
-<div id="sample-style">
-<div class="plainmodal-close"></div>
-<p class="sample-head">jQuery.plainModal</p>
-<p><img src="images/GitHub-Mark-120px-plus.png" width="120" height="120" alt="">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.</p>
+<div id="sample-01">
+  <div class="plainmodal-close"></div>
+  <p class="sample-head">jQuery.plainModal</p>
+  <p><img src="img/GitHub-Mark-120px-plus.png" width="120" height="120" alt="">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.</p>
 </div>
-<script>
-$('#sample-button1').click(function() {
-  $('#sample-style').plainModal('open');
-});
-</script>
-<!-- ======== /sample -->
 
-<!-- ======== sample -->
-<svg version="1.1" width="400" height="300" viewBox="0 0 400 300" id="sample-svg">
-  <defs>
-    <path d="M400,121.533c0-20.092-15.616-37.266-37.697-44.263c0.402-2.535,0.628-5.117,0.628-7.744
-      c0-32.351-31.332-58.577-69.984-58.577c-19.546,0-37.212,6.713-49.911,17.527C232.199,11.589,209.944,0,184.232,0
-      c-26.311,0-49.008,12.131-59.549,29.661c-3.772-0.418-7.623-0.646-11.543-0.646c-44.764,0-81.052,28.187-81.052,62.956
-      c0,6.107,1.142,12.003,3.229,17.585C13.914,118.418,0,132.738,0,148.905c0,18.575,18.358,34.718,45.357,42.939
-      c-7.651,8.127-12.163,18.051-12.163,28.776c0,27.515,29.6,49.817,66.114,49.817c9.918,0,19.317-1.657,27.76-4.605
-      C133.521,285.41,158.351,300,188.021,300c34.573,0,62.6-19.805,62.6-44.234c0-1.057-0.07-2.103-0.173-3.14
-      c12.123,5.738,26.391,9.053,41.667,9.053c44.002,0,79.669-27.451,79.669-61.313c0-12.388-4.789-23.91-12.999-33.553
-      C382.707,160.594,400,142.677,400,121.533z" id="base-path" />
-    <clipPath id="clip"><use xlink:href="#base-path" /></clipPath>
-  </defs>
-  <g clip-path="url(#clip)">
-    <use xlink:href="#base-path"
-      stroke="#0e1bac" stroke-width="10" stroke-dasharray="20.7432861328125,10" fill="#2069b9" id="bg" />
-    <path d="M-20,300 Q10,10 200,150 Q390,290 420,0"
-      stroke="#bfd8fd" stroke-width="50" fill="none" id="bgline" />
-    <foreignObject x="60" y="50" width="280" height="200">
-      <div style="text-align: right;"><span class="plainmodal-close">Close</span></div>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.</p>
-    </foreignObject>
-  </g>
-  <animateTransform xlink:href="#clip"
-    attributeName="transform" type="translate" from="200,150" to="200,150" additive="sum"
-    begin="indefinite" id="anim1" />
-  <animateTransform xlink:href="#clip"
-    attributeName="transform" type="scale" from="0.1,0.1" to="1,1" additive="sum"
-    begin="indefinite" dur="1s" fill="freeze" id="anim2" />
-  <animateTransform xlink:href="#clip"
-    attributeName="transform" type="translate" from="-200,-150" to="-200,-150" additive="sum"
-    begin="indefinite" id="anim3" />
-  <animate xlink:href="#bgline"
-    attributeName="d"
-    values="M-40,300 Q10,10 200,150 Q390,290 440,0;
-      M-40,300 Q10,10 200,150 Q390,290 440,0;
-      M-40,300 Q-40,300 200,150 Q440,0 440,0;
-      M-40,300 Q-80,-50 200,-60 Q480,-80 440,300"
-    keyTimes="0;0.2;0.5;1"
-    begin="indefinite" dur="3s" fill="freeze" id="anim4" />
-  <animate xlink:href="#bg"
-    attributeName="stroke-dashoffset" from="0" to="-30.7432861328125"
-    begin="indefinite" dur="2s" repeatCount="indefinite" id="anim5" />
-</svg>
 <script>
 $(function() {
-// webkit doesn't support smil (begin="anim1.begin" etc.)
-var scaleS = '0.1,0.1', scaleD = '1,1',
-  anim1 = document.getElementById('anim1'),
-  anim2 = document.getElementById('anim2'),
-  anim3 = document.getElementById('anim3'),
-  anim4 = document.getElementById('anim4'),
-  anim5 = document.getElementById('anim5'),
-  dlgSvg = $('#sample-svg').plainModal({duration: 1000, effect: {
-    open: function(duration, complete) {
-      var that = this;
-      that.get(0).setCurrentTime(0);
-      anim2.setAttribute('from', scaleS);
-      anim2.setAttribute('to', scaleD);
-      that.css('display', '');
-      anim1.beginElement();
-      anim2.beginElement();
-      anim3.beginElement();
-      anim4.beginElement();
-      anim5.beginElementAt(0.8);
-      setTimeout(function() { complete(); }, 3000);
-    },
-    close: function(duration, complete) {
-      var that = this;
-      anim2.setAttribute('from', scaleD);
-      anim2.setAttribute('to', scaleS);
-      anim1.beginElement();
-      anim2.beginElement();
-      anim3.beginElement();
-      setTimeout(function() {
-        anim1.endElement();
-        anim2.endElement();
-        anim3.endElement();
-        anim4.endElement();
-        anim5.endElement();
-        that.css('display', 'none');
-        complete();
-      }, 1000);
-    }
-  }});
-  $('#sample-buttonA').click(function() {
-    dlgSvg.plainModal('open');
+
+  $('#sample-button-01').click(function() {
+    $('#sample-01').plainModal('open');
   });
+
 });
 </script>
-<!-- ======== /sample -->
+<!-- ================ /sample -->
+<!-- /include "sample_01.html" -->
 
 <p>Many great plugins already exist.</p>
 
@@ -156,21 +52,128 @@ var scaleS = '0.1,0.1', scaleD = '1,1',
 <li>The simple plugins which has small functions and customizable styles.</li>
 </ul>
 
-<p>The many web sites use same functions almost. And these have different styles.<br>
-plainModal has basic functions for showing modal windows. That's all. The styling it is your job. You can free style it to perfect match for your web site.</p>
+<p>The many web sites use same functions almost. And these have different styles.<br>plainModal has basic functions for showing modal windows. That&#39;s all. The styling it is your job. You can free style it to perfect match for your web site.</p>
 
-<!-- ======== sample -->
-<div id="sample-nostyle">
-<p>This is non-styles except background-color.</p>
-<p>Click outside area of this window, or press Escape key to close this window.</p>
+<!-- include "sample_02.html" -->
+<!-- ================ sample -->
+<div class="cols2">
+  <div class="col">
+    <button id="sample-button-02a">Open Sample (Non-Styles)</button>
+    <p>plainModal doesn't style anything.</p>
+  </div>
+  <div class="col">
+    <button id="sample-button-02b">Open Sample (SVG)</button>
+    <p>The styling it is your job. </p>
+  </div>
 </div>
-<div class="sample-button" id="sample-button2">Open Sample (Non-Styles)</div>
+
+<div id="sample-02a">
+  <p>This is non-styles except background-color.</p>
+  <p>Click outside area of this window, or press Escape key to close this window.</p>
+</div>
+
 <script>
-$('#sample-button2').click(function() {
-  $('#sample-nostyle').plainModal('open');
+$(function() {
+
+  $('#sample-button-02a').click(function() {
+    $('#sample-02a').plainModal('open');
+  });
+
 });
 </script>
-<!-- ======== /sample -->
+
+<svg version="1.1" viewBox="0 0 400 300" id="sample-02b">
+  <defs>
+    <path d="M400,121.533c0-20.092-15.616-37.266-37.697-44.263c0.402-2.535,0.628-5.117,0.628-7.744
+      c0-32.351-31.332-58.577-69.984-58.577c-19.546,0-37.212,6.713-49.911,17.527C232.199,11.589,209.944,0,184.232,0
+      c-26.311,0-49.008,12.131-59.549,29.661c-3.772-0.418-7.623-0.646-11.543-0.646c-44.764,0-81.052,28.187-81.052,62.956
+      c0,6.107,1.142,12.003,3.229,17.585C13.914,118.418,0,132.738,0,148.905c0,18.575,18.358,34.718,45.357,42.939
+      c-7.651,8.127-12.163,18.051-12.163,28.776c0,27.515,29.6,49.817,66.114,49.817c9.918,0,19.317-1.657,27.76-4.605
+      C133.521,285.41,158.351,300,188.021,300c34.573,0,62.6-19.805,62.6-44.234c0-1.057-0.07-2.103-0.173-3.14
+      c12.123,5.738,26.391,9.053,41.667,9.053c44.002,0,79.669-27.451,79.669-61.313c0-12.388-4.789-23.91-12.999-33.553
+      C382.707,160.594,400,142.677,400,121.533z" id="sample-02b-base-path" />
+    <clipPath id="sample-02b-clip"><use xlink:href="#sample-02b-base-path" /></clipPath>
+  </defs>
+  <g clip-path="url(#sample-02b-clip)">
+    <use xlink:href="#sample-02b-base-path" stroke-dasharray="20.7432861328125,10" id="sample-02b-bg" />
+    <path d="M-20,300 Q10,10 200,150 Q390,290 420,0" id="sample-02b-bgline" />
+    <foreignObject x="60" y="50" width="280" height="200">
+      <div class="sample-close"><span class="plainmodal-close sample">Close</span></div>
+      <p>This stupid design is showing to you that it's the perfect customizability. I really hope that you understand a purpose of this. Anyway, you can do anything you want to those.</p>
+    </foreignObject>
+  </g>
+  <animateTransform xlink:href="#sample-02b-clip"
+    attributeName="transform" type="translate" from="200,150" to="200,150" additive="sum"
+    begin="indefinite" id="sample-02b-anim1" />
+  <animateTransform xlink:href="#sample-02b-clip"
+    attributeName="transform" type="scale" from="0.1,0.1" to="1,1" additive="sum"
+    begin="indefinite" dur="1s" fill="freeze" id="sample-02b-anim2" />
+  <animateTransform xlink:href="#sample-02b-clip"
+    attributeName="transform" type="translate" from="-200,-150" to="-200,-150" additive="sum"
+    begin="indefinite" id="sample-02b-anim3" />
+  <animate xlink:href="#sample-02b-bgline"
+    attributeName="d"
+    values="M-40,300 Q10,10 200,150 Q390,290 440,0;
+      M-40,300 Q10,10 200,150 Q390,290 440,0;
+      M-40,300 Q-40,300 200,150 Q440,0 440,0;
+      M-40,300 Q-80,-50 200,-60 Q480,-80 440,300"
+    keyTimes="0;0.2;0.5;1"
+    begin="indefinite" dur="3s" fill="freeze" id="sample-02b-anim4" />
+  <animate xlink:href="#sample-02b-bg"
+    attributeName="stroke-dashoffset" from="0" to="-30.7432861328125"
+    begin="indefinite" dur="2s" repeatCount="indefinite" id="sample-02b-anim5" />
+</svg>
+
+<script>
+$(function() {
+
+  // webkit doesn't support smil (begin="anim1.begin" etc.)
+  var scaleS = '0.1,0.1', scaleD = '1,1',
+    anim1 = document.getElementById('sample-02b-anim1'),
+    anim2 = document.getElementById('sample-02b-anim2'),
+    anim3 = document.getElementById('sample-02b-anim3'),
+    anim4 = document.getElementById('sample-02b-anim4'),
+    anim5 = document.getElementById('sample-02b-anim5'),
+    modal = $('#sample-02b').plainModal({duration: 1000, effect: {
+      open: function(duration, complete) {
+        var that = this;
+        that.get(0).setCurrentTime(0);
+        anim2.setAttribute('from', scaleS);
+        anim2.setAttribute('to', scaleD);
+        that.css('display', '');
+        anim1.beginElement();
+        anim2.beginElement();
+        anim3.beginElement();
+        anim4.beginElement();
+        anim5.beginElementAt(0.8);
+        setTimeout(function() { complete(); }, 3000);
+      },
+      close: function(duration, complete) {
+        var that = this;
+        anim2.setAttribute('from', scaleD);
+        anim2.setAttribute('to', scaleS);
+        anim1.beginElement();
+        anim2.beginElement();
+        anim3.beginElement();
+        setTimeout(function() {
+          anim1.endElement();
+          anim2.endElement();
+          anim3.endElement();
+          anim4.endElement();
+          anim5.endElement();
+          that.css('display', 'none');
+          complete();
+        }, 1000);
+      }
+    }});
+  $('#sample-button-02b').click(function() {
+    modal.plainModal('open');
+  });
+
+});
+</script>
+<!-- ================ /sample -->
+<!-- /include "sample_02.html" -->
 
 <p>plainModal do:</p>
 
@@ -181,265 +184,251 @@ $('#sample-button2').click(function() {
 <li>Avoiding scrolling a page window.</li>
 <li>Hiding the modal window when Escape key is pressed.</li>
 </ul>
-
-<div class="highlight highlight-js"><pre><span class="c1">// Show modal window. &lt;div id="modal"&gt; is styled via your CSS.</span>
-<span class="nx">$</span><span class="p">(</span><span class="s1">'#modal'</span><span class="p">).</span><span class="nx">plainModal</span><span class="p">(</span><span class="s1">'open'</span><span class="p">);</span>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="c1">// Show modal window. &lt;div id=&quot;modal&quot;&gt; is styled via your CSS.</span>
+<span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#modal&#39;</span><span class="p">).</span><span class="nx">plainModal</span><span class="p">(</span><span class="s1">&#39;open&#39;</span><span class="p">);</span>
 <span class="c1">// Hide modal window.</span>
-<span class="nx">$</span><span class="p">(</span><span class="s1">'#modal'</span><span class="p">).</span><span class="nx">plainModal</span><span class="p">(</span><span class="s1">'close'</span><span class="p">);</span>
-</pre></div>
-
-<h2>
-<a id="getting-started" class="anchor" href="#getting-started" aria-hidden="true"><span class="octicon octicon-link"></span></a>Getting Started</h2>
+<span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#modal&#39;</span><span class="p">).</span><span class="nx">plainModal</span><span class="p">(</span><span class="s1">&#39;close&#39;</span><span class="p">);</span>
+</code></pre></div>
+<h2 id="getting-started">Getting Started</h2>
 
 <p>Load after jQuery.</p>
+<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;jquery-1.11.0.min.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;jquery.plainmodal.min.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+</code></pre></div>
+<h2 id="methods">Methods</h2>
 
-<div class="highlight highlight-html"><pre><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"jquery-1.11.0.min.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
-<span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"jquery.plainmodal.min.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
-</pre></div>
+<h3 id="open">Open</h3>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">element</span><span class="p">.</span><span class="nx">plainModal</span><span class="p">(</span><span class="s1">&#39;open&#39;</span><span class="p">[,</span> <span class="nx">options</span><span class="p">])</span>
+</code></pre></div>
+<p>Show specified element as modal window.<br>If <code>options</code> (see <a href="#options">Options</a>) is specified, element is initialized with specified <code>options</code> before it is shown. If element is not initialized yet, element is initialized even if <code>options</code> is not specified.<br>An element can be initialized by new <code>options</code> any number of times.</p>
 
-<h2>
-<a id="methods" class="anchor" href="#methods" aria-hidden="true"><span class="octicon octicon-link"></span></a>Methods</h2>
-
-<h3>
-<a id="open" class="anchor" href="#open" aria-hidden="true"><span class="octicon octicon-link"></span></a><a name="open">Open</a>
-</h3>
-
-<div class="highlight highlight-js"><pre><span class="nx">element</span><span class="p">.</span><span class="nx">plainModal</span><span class="p">(</span><span class="s1">'open'</span><span class="p">[,</span> <span class="nx">options</span><span class="p">])</span>
-</pre></div>
-
-<p>Show specified element as modal window.<br>
-If <code>options</code> (see <a href="#options">Options</a>) is specified, element is initialized with specified <code>options</code> before it is shown. If element is not initialized yet, element is initialized even if <code>options</code> is not specified.<br>
-An element can be initialized by new <code>options</code> any number of times.</p>
-
-<h3>
-<a id="close" class="anchor" href="#close" aria-hidden="true"><span class="octicon octicon-link"></span></a><a name="close">Close</a>
-</h3>
-
-<div class="highlight highlight-js"><pre><span class="nx">element</span><span class="p">.</span><span class="nx">plainModal</span><span class="p">(</span><span class="s1">'close'</span><span class="p">)</span>
-</pre></div>
-
+<h3 id="close">Close</h3>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">element</span><span class="p">.</span><span class="nx">plainModal</span><span class="p">(</span><span class="s1">&#39;close&#39;</span><span class="p">)</span>
+</code></pre></div>
 <p>Hide the modal window.</p>
 
-<h3>
-<a id="initialize" class="anchor" href="#initialize" aria-hidden="true"><span class="octicon octicon-link"></span></a><a name="initialize">Initialize</a>
-</h3>
-
-<div class="highlight highlight-js"><pre><span class="nx">element</span><span class="p">.</span><span class="nx">plainModal</span><span class="p">([</span><span class="nx">options</span><span class="p">])</span>
-</pre></div>
-
-<p>Initialize specified element as modal window.<br>
-The <a href="#open">Open</a> method can initialize too. This is used to initialize without showing the modal window at voluntary time.<br>
-You can specify <code>options</code> to every <a href="#open">Open</a> method. But, if <code>options</code> of an element isn't changed, re-initializing it isn't needed. Then, you specify <code>options</code> to only first <a href="#open">Open</a> method, or use this method for initializing it only once.<br>
-If you don't customize <a href="#options">Options</a> (using default all), this method isn't needed because <code>options</code> isn't specified to <a href="#open">Open</a> method, and element is initialized at only first time.</p>
+<h3 id="initialize">Initialize</h3>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">element</span><span class="p">.</span><span class="nx">plainModal</span><span class="p">([</span><span class="nx">options</span><span class="p">])</span>
+</code></pre></div>
+<p>Initialize specified element as modal window.<br>The <a href="#open">Open</a> method can initialize too. This is used to initialize without showing the modal window at voluntary time.<br>You can specify <code>options</code> to every <a href="#open">Open</a> method. But, if <code>options</code> of an element isn&#39;t changed, re-initializing it isn&#39;t needed. Then, you specify <code>options</code> to only first <a href="#open">Open</a> method, or use this method for initializing it only once.<br>If you don&#39;t customize <a href="#options">Options</a> (using default all), this method isn&#39;t needed because <code>options</code> isn&#39;t specified to <a href="#open">Open</a> method, and element is initialized at only first time.</p>
 
 <p>In this code, unneeded initializing is done again, again, and again.</p>
-
-<div class="highlight highlight-js"><pre><span class="nx">$</span><span class="p">(</span><span class="s1">'#open-button'</span><span class="p">).</span><span class="nx">click</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#open-button&#39;</span><span class="p">).</span><span class="nx">click</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
   <span class="c1">// Same initializing per every showing</span>
-  <span class="nx">$</span><span class="p">(</span><span class="s1">'#modal'</span><span class="p">).</span><span class="nx">plainModal</span><span class="p">(</span><span class="s1">'open'</span><span class="p">,</span> <span class="p">{</span><span class="nx">duration</span><span class="o">:</span> <span class="mi">500</span><span class="p">});</span>
+  <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#modal&#39;</span><span class="p">).</span><span class="nx">plainModal</span><span class="p">(</span><span class="s1">&#39;open&#39;</span><span class="p">,</span> <span class="p">{</span><span class="nx">duration</span><span class="o">:</span> <span class="mi">500</span><span class="p">});</span>
 <span class="p">});</span>
-</pre></div>
-
+</code></pre></div>
 <p>In this code, initializing is done at once.</p>
-
-<div class="highlight highlight-js"><pre><span class="c1">// Initialize without showing</span>
-<span class="kd">var</span> <span class="nx">modal</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">'#modal'</span><span class="p">).</span><span class="nx">plainModal</span><span class="p">({</span><span class="nx">duration</span><span class="o">:</span> <span class="mi">500</span><span class="p">});</span>
-<span class="nx">$</span><span class="p">(</span><span class="s1">'#open-button'</span><span class="p">).</span><span class="nx">click</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="c1">// Initialize without showing</span>
+<span class="kd">var</span> <span class="nx">modal</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#modal&#39;</span><span class="p">).</span><span class="nx">plainModal</span><span class="p">({</span><span class="nx">duration</span><span class="o">:</span> <span class="mi">500</span><span class="p">});</span>
+<span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#open-button&#39;</span><span class="p">).</span><span class="nx">click</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
   <span class="c1">// Show without initializing</span>
-  <span class="nx">modal</span><span class="p">.</span><span class="nx">plainModal</span><span class="p">(</span><span class="s1">'open'</span><span class="p">);</span>
+  <span class="nx">modal</span><span class="p">.</span><span class="nx">plainModal</span><span class="p">(</span><span class="s1">&#39;open&#39;</span><span class="p">);</span>
 <span class="p">});</span>
-</pre></div>
-
+</code></pre></div>
 <p>In this code, initializing is done at once.</p>
-
-<div class="highlight highlight-js"><pre><span class="nx">$</span><span class="p">(</span><span class="s1">'#open-button'</span><span class="p">).</span><span class="nx">click</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#open-button&#39;</span><span class="p">).</span><span class="nx">click</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
   <span class="c1">// Initializing is done at only first time</span>
-  <span class="nx">modal</span><span class="p">.</span><span class="nx">plainModal</span><span class="p">(</span><span class="s1">'open'</span><span class="p">);</span>
+  <span class="nx">modal</span><span class="p">.</span><span class="nx">plainModal</span><span class="p">(</span><span class="s1">&#39;open&#39;</span><span class="p">);</span>
 <span class="p">});</span>
-</pre></div>
-
-<h2>
-<a id="options" class="anchor" href="#options" aria-hidden="true"><span class="octicon octicon-link"></span></a><a name="options">Options</a>
-</h2>
+</code></pre></div>
+<h2 id="options">Options</h2>
 
 <p>A <code>options</code> Object can be specified to <a href="#open">Open</a> method or <a href="#initialize">Initialize</a> method. This Object can have following properties.</p>
 
-<h3>
-<a id="offset" class="anchor" href="#offset" aria-hidden="true"><span class="octicon octicon-link"></span></a><code>offset</code>
-</h3>
+<h3 id="offset"><code>offset</code></h3>
 
-<p>Type: Object or Function<br>
-Default: Calculated center position</p>
+<p>Type: Object or Function<br>Default: Calculated center position</p>
 
 <p>A Object that has <code>left</code> and <code>top</code>, relative to the view area.</p>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#modal&#39;</span><span class="p">).</span><span class="nx">plainModal</span><span class="p">({</span><span class="nx">offset</span><span class="o">:</span> <span class="p">{</span><span class="nx">left</span><span class="o">:</span> <span class="mi">100</span><span class="p">,</span> <span class="nx">top</span><span class="o">:</span> <span class="mi">50</span><span class="p">}});</span>
+</code></pre></div>
+<!-- include "sample_03.html" -->
+<!-- ================ sample -->
+<p><button id="sample-button-03">Open Sample</button></p>
 
-<div class="highlight highlight-js"><pre><span class="nx">$</span><span class="p">(</span><span class="s1">'#modal'</span><span class="p">).</span><span class="nx">plainModal</span><span class="p">({</span><span class="nx">offset</span><span class="o">:</span> <span class="p">{</span><span class="nx">left</span><span class="o">:</span> <span class="mi">100</span><span class="p">,</span> <span class="nx">top</span><span class="o">:</span> <span class="mi">50</span><span class="p">}});</span>
-</pre></div>
-
-<!-- ======== sample -->
-<div id="sample3" class="sample-window">
-<p>Click outside area of this window, or press Escape key to close this window.</p>
+<div id="sample-03" class="sample-modal">
+  <p>Click outside area of this window, or press Escape key to close this window.</p>
 </div>
-<div class="sample-button" id="sample-button3">Open Sample</div>
+
 <script>
-$('#sample-button3').click(function() {
-  $('#sample3').plainModal('open', {offset: {left: 100, top: 50}});
+$(function() {
+
+  $('#sample-button-03').click(function() {
+    $('#sample-03').plainModal('open', {offset: {left: 100, top: 50}});
+  });
+
 });
 </script>
-<!-- ======== /sample -->
+<!-- ================ /sample -->
+<!-- /include "sample_03.html" -->
 
 <p>Or, a Function that returns above Object. This Function is called by <a href="#open">Open</a> method, not <a href="#initialize">Initialize</a> method. Therefore position be able to change according to the situation.</p>
-
-<div class="highlight highlight-js"><pre><span class="kd">var</span> <span class="nx">button</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">'#open-button'</span><span class="p">).</span><span class="nx">click</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-      <span class="nx">modal</span><span class="p">.</span><span class="nx">plainModal</span><span class="p">(</span><span class="s1">'open'</span><span class="p">);</span>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">button</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#open-button&#39;</span><span class="p">).</span><span class="nx">click</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+      <span class="nx">modal</span><span class="p">.</span><span class="nx">plainModal</span><span class="p">(</span><span class="s1">&#39;open&#39;</span><span class="p">);</span>
     <span class="p">}),</span>
-    <span class="nx">modal</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">'#modal'</span><span class="p">).</span><span class="nx">plainModal</span><span class="p">({</span>
+    <span class="nx">modal</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#modal&#39;</span><span class="p">).</span><span class="nx">plainModal</span><span class="p">({</span>
       <span class="nx">offset</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
         <span class="c1">// Fit the position to a button.</span>
         <span class="kd">var</span> <span class="nx">btnOffset</span> <span class="o">=</span> <span class="nx">button</span><span class="p">.</span><span class="nx">offset</span><span class="p">(),</span> <span class="nx">win</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="nb">window</span><span class="p">);</span>
         <span class="k">return</span> <span class="p">{</span>
           <span class="nx">left</span><span class="o">:</span>   <span class="nx">btnOffset</span><span class="p">.</span><span class="nx">left</span> <span class="o">-</span> <span class="nx">win</span><span class="p">.</span><span class="nx">scrollLeft</span><span class="p">()</span>
-                    <span class="o">+</span> <span class="nb">parseInt</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">css</span><span class="p">(</span><span class="s1">'borderLeftWidth'</span><span class="p">),</span> <span class="mi">10</span><span class="p">),</span>
+                    <span class="o">+</span> <span class="nb">parseInt</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">css</span><span class="p">(</span><span class="s1">&#39;borderLeftWidth&#39;</span><span class="p">),</span> <span class="mi">10</span><span class="p">),</span>
           <span class="nx">top</span><span class="o">:</span>    <span class="nx">btnOffset</span><span class="p">.</span><span class="nx">top</span> <span class="o">-</span> <span class="nx">win</span><span class="p">.</span><span class="nx">scrollTop</span><span class="p">()</span>
-                    <span class="o">+</span> <span class="nb">parseInt</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">css</span><span class="p">(</span><span class="s1">'borderTopWidth'</span><span class="p">),</span> <span class="mi">10</span><span class="p">)</span>
+                    <span class="o">+</span> <span class="nb">parseInt</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">css</span><span class="p">(</span><span class="s1">&#39;borderTopWidth&#39;</span><span class="p">),</span> <span class="mi">10</span><span class="p">)</span>
         <span class="p">};</span>
       <span class="p">}</span>
     <span class="p">});</span>
-</pre></div>
+</code></pre></div>
+<!-- include "sample_04.html" -->
+<!-- ================ sample -->
+<p><button id="sample-button-04">Open Sample</button></p>
 
-<!-- ======== sample -->
-<div id="sample8" class="sample-window">
-<p>Click outside area of this window, or press Escape key to close this window.</p>
+<div id="sample-04" class="sample-modal">
+  <p>Click outside area of this window, or press Escape key to close this window.</p>
 </div>
-<div class="sample-button" id="sample-button8">Open Sample</div>
+
 <script>
-var button = $('#sample-button8').click(function() {
-      modal8.plainModal('open');
-    }),
-    modal8 = $('#sample8').plainModal({
-      offset: function() {
-        // Fit the position to a button.
-        var btnOffset = button.offset(), win = $(window);
-        return {
-          left:   btnOffset.left - win.scrollLeft()
-                    + parseInt(this.css('borderLeftWidth'), 10),
-          top:    btnOffset.top - win.scrollTop()
-                    + parseInt(this.css('borderTopWidth'), 10)
-        };
-      }
-    });
-</script>
-<!-- ======== /sample -->
+$(function() {
 
-<h3>
-<a id="overlay" class="anchor" href="#overlay" aria-hidden="true"><span class="octicon octicon-link"></span></a><code>overlay</code>
-</h3>
+  var button = $('#sample-button-04').click(function() {
+        modal.plainModal('open');
+      }),
+      modal = $('#sample-04').plainModal({
+        offset: function() {
+          // Fit the position to a button.
+          var btnOffset = button.offset(), win = $(window);
+          return {
+            left:   btnOffset.left - win.scrollLeft()
+                      + parseInt(this.css('borderLeftWidth'), 10),
+            top:    btnOffset.top - win.scrollTop()
+                      + parseInt(this.css('borderTopWidth'), 10)
+          };
+        }
+      });
 
-<p>Type: Object<br>
-Default: <code>{fillColor: '#888', opacity: 0.6, zIndex: 9000}</code></p>
-
-<p>A Object that can have <code>fillColor</code> (fill-color), <code>opacity</code> and <code>zIndex</code> of overlay.</p>
-
-<div class="highlight highlight-js"><pre><span class="nx">$</span><span class="p">(</span><span class="s1">'#modal'</span><span class="p">).</span><span class="nx">plainModal</span><span class="p">({</span><span class="nx">overlay</span><span class="o">:</span> <span class="p">{</span><span class="nx">fillColor</span><span class="o">:</span> <span class="s1">'#fff'</span><span class="p">,</span> <span class="nx">opacity</span><span class="o">:</span> <span class="mf">0.5</span><span class="p">}});</span>
-</pre></div>
-
-<!-- ======== sample -->
-<div id="sample4" class="sample-window">
-<p>Click outside area of this window, or press Escape key to close this window.</p>
-</div>
-<div class="sample-button" id="sample-button4">Open Sample</div>
-<script>
-$('#sample-button4').click(function() {
-  $('#sample4').plainModal('open', {overlay: {fillColor: '#fff', opacity: 0.5}});
 });
 </script>
-<!-- ======== /sample -->
+<!-- ================ /sample -->
+<!-- /include "sample_04.html" -->
+
+<h3 id="overlay"><code>overlay</code></h3>
+
+<p>Type: Object<br>Default: <code>{fillColor: &#39;#888&#39;, opacity: 0.6, zIndex: 9000}</code></p>
+
+<p>A Object that can have <code>fillColor</code> (fill-color), <code>opacity</code> and <code>zIndex</code> of overlay.</p>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#modal&#39;</span><span class="p">).</span><span class="nx">plainModal</span><span class="p">({</span><span class="nx">overlay</span><span class="o">:</span> <span class="p">{</span><span class="nx">fillColor</span><span class="o">:</span> <span class="s1">&#39;#fff&#39;</span><span class="p">,</span> <span class="nx">opacity</span><span class="o">:</span> <span class="mf">0.5</span><span class="p">}});</span>
+</code></pre></div>
+<!-- include "sample_05.html" -->
+<!-- ================ sample -->
+<p><button id="sample-button-05">Open Sample</button></p>
+
+<div id="sample-05" class="sample-modal sample-dark">
+  <p>Click outside area of this window, or press Escape key to close this window.</p>
+</div>
+
+<script>
+$(function() {
+
+  $('#sample-button-05').click(function() {
+    $('#sample-05').plainModal('open', {overlay: {fillColor: '#fff', opacity: 0.5}});
+  });
+
+});
+</script>
+<!-- ================ /sample -->
+<!-- /include "sample_05.html" -->
 
 <p><code>color</code> is an alias for <code>fillColor</code>.</p>
 
 <p>If you want to style the overlay more, add style to <code>plainmodal-overlay</code> class.</p>
-
-<div class="highlight highlight-css"><pre><span class="nc">.plainmodal-overlay</span> <span class="p">{</span>
-  <span class="k">background-image</span><span class="o">:</span> <span class="sx">url('bg.png')</span><span class="p">;</span>
+<div class="highlight"><pre><code class="language-css" data-lang="css"><span class="nc">.plainmodal-overlay</span> <span class="p">{</span>
+  <span class="k">background-image</span><span class="o">:</span> <span class="sx">url(&#39;bg.png&#39;)</span><span class="p">;</span>
 <span class="p">}</span>
-</pre></div>
+</code></pre></div>
+<!-- include "sample_06.html" -->
+<!-- ================ sample -->
+<p><button id="sample-button-06">Open Sample</button></p>
 
-<!-- ======== sample -->
-<div id="sample9" class="sample-window">
-<p>Click outside area of this window, or press Escape key to close this window.</p>
+<div id="sample-06" class="sample-modal">
+  <p>Click outside area of this window, or press Escape key to close this window.</p>
 </div>
-<div class="sample-button" id="sample-button9">Open Sample</div>
+
+<!-- preload -->
+<img src="img/bg.png" alt="" style="width: 1px; height: 1px; position: absolute; left: -1px; top: -1px;">
+
 <script>
-var modal9 = $('#sample9').plainModal({
-      open: function() { $('.plainmodal-overlay').css('backgroundImage', 'url("images/bg.png")'); },
-      close: function() { $('.plainmodal-overlay').css('backgroundImage', 'none'); }
-    });
-$('#sample-button9').click(function() {
-  modal9.plainModal('open');
+$(function() {
+
+  var modal = $('#sample-06').plainModal({
+        beforeopen: function() {
+          $('.plainmodal-overlay').css('backgroundImage', 'url("img/bg.png")');
+        },
+        close: function() {
+          $('.plainmodal-overlay').css('backgroundImage', 'none');
+        }
+      });
+  $('#sample-button-06').click(function() {
+    modal.plainModal('open');
+  });
+
 });
 </script>
-<!-- ======== /sample -->
+<!-- ================ /sample -->
+<!-- /include "sample_06.html" -->
 
-<h3>
-<a id="closeclass" class="anchor" href="#closeclass" aria-hidden="true"><span class="octicon octicon-link"></span></a><code>closeClass</code>
-</h3>
+<h3 id="closeclass"><code>closeClass</code></h3>
 
-<p>Type: String<br>
-Default: <code>'plainmodal-close'</code></p>
+<p>Type: String<br>Default: <code>&#39;plainmodal-close&#39;</code></p>
 
 <p>If the element that has this class name is found, the <a href="#close">Close</a> method is attached to <code>click</code> event of it.</p>
-
-<div class="highlight highlight-html"><pre><span class="nt">&lt;div&gt;</span>
+<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;div&gt;</span>
 <span class="nt">&lt;p&gt;</span>Lorem ipsum dolor ...<span class="nt">&lt;/p&gt;</span>
-<span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"plainmodal-close"</span><span class="nt">&gt;</span>Close<span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;plainmodal-close&quot;</span><span class="nt">&gt;</span>Close<span class="nt">&lt;/div&gt;</span>
 <span class="nt">&lt;/div&gt;</span>
-</pre></div>
+</code></pre></div>
+<!-- include "sample_07.html" -->
+<!-- ================ sample -->
+<p><button id="sample-button-07">Open Sample</button></p>
 
-<!-- ======== sample -->
-<div id="sample5" class="sample-window">
-<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-<div class="plainmodal-close">Close</div>
+<div id="sample-07" class="sample-modal">
+  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+  <div class="plainmodal-close sample">Close</div>
 </div>
-<div class="sample-button" id="sample-button5">Open Sample</div>
+
 <script>
-$('#sample-button5').click(function() {
-  $('#sample5').plainModal('open');
+$(function() {
+
+  $('#sample-button-07').click(function() {
+    $('#sample-07').plainModal('open');
+  });
+
 });
 </script>
-<!-- ======== /sample -->
+<!-- ================ /sample -->
+<!-- /include "sample_07.html" -->
 
-<h3>
-<a id="duration" class="anchor" href="#duration" aria-hidden="true"><span class="octicon octicon-link"></span></a><code>duration</code>
-</h3>
+<h3 id="duration"><code>duration</code></h3>
 
-<p>Type: Number<br>
-Default: <code>200</code></p>
+<p>Type: Number<br>Default: <code>200</code></p>
 
 <p>A number determining how long (milliseconds) the effect animation for showing and hiding the modal window will run.</p>
 
-<h3>
-<a id="effect" class="anchor" href="#effect" aria-hidden="true"><span class="octicon octicon-link"></span></a><code>effect</code>
-</h3>
+<h3 id="effect"><code>effect</code></h3>
 
-<p>Type: Object<br>
-Default: <code>{open: jQuery.fn.fadeIn, close: jQuery.fn.fadeOut}</code></p>
+<p>Type: Object<br>Default: <code>{open: jQuery.fn.fadeIn, close: jQuery.fn.fadeOut}</code></p>
 
-<p>A Object that can have <code>open</code> and <code>close</code> Functions for showing and hiding the modal window.<br>
-These Functions are called with <code>duration</code> Number (see above) and <code>complete</code> Function.<br>
-It's same to standard effect methods of jQuery (slideDown(), slideUp(), animate(), etc.). Therefore, those methods can be specified.</p>
-
-<div class="highlight highlight-js"><pre><span class="nx">$</span><span class="p">(</span><span class="s1">'#modal'</span><span class="p">).</span><span class="nx">plainModal</span><span class="p">({</span><span class="nx">effect</span><span class="o">:</span> <span class="p">{</span><span class="nx">open</span><span class="o">:</span> <span class="nx">$</span><span class="p">.</span><span class="nx">fn</span><span class="p">.</span><span class="nx">slideDown</span><span class="p">,</span> <span class="nx">close</span><span class="o">:</span> <span class="nx">$</span><span class="p">.</span><span class="nx">fn</span><span class="p">.</span><span class="nx">slideUp</span><span class="p">}});</span>
-</pre></div>
-
+<p>A Object that can have <code>open</code> and <code>close</code> Functions for showing and hiding the modal window.<br>These Functions are called with <code>duration</code> Number (see above) and <code>complete</code> Function.<br>It&#39;s same to standard effect methods of jQuery (slideDown(), slideUp(), animate(), etc.). Therefore, those methods can be specified.</p>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#modal&#39;</span><span class="p">).</span><span class="nx">plainModal</span><span class="p">({</span><span class="nx">effect</span><span class="o">:</span> <span class="p">{</span><span class="nx">open</span><span class="o">:</span> <span class="nx">$</span><span class="p">.</span><span class="nx">fn</span><span class="p">.</span><span class="nx">slideDown</span><span class="p">,</span> <span class="nx">close</span><span class="o">:</span> <span class="nx">$</span><span class="p">.</span><span class="nx">fn</span><span class="p">.</span><span class="nx">slideUp</span><span class="p">}});</span>
+</code></pre></div>
 <p>Custom animation:</p>
-
-<div class="highlight highlight-js"><pre><span class="nx">$</span><span class="p">(</span><span class="s1">'#modal'</span><span class="p">).</span><span class="nx">plainModal</span><span class="p">({</span>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#modal&#39;</span><span class="p">).</span><span class="nx">plainModal</span><span class="p">({</span>
   <span class="nx">offset</span><span class="o">:</span> <span class="p">{</span><span class="nx">left</span><span class="o">:</span> <span class="mi">300</span><span class="p">,</span> <span class="nx">top</span><span class="o">:</span> <span class="mi">100</span><span class="p">},</span>
   <span class="nx">duration</span><span class="o">:</span> <span class="mi">500</span><span class="p">,</span>
   <span class="nx">effect</span><span class="o">:</span> <span class="p">{</span>
     <span class="nx">open</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">duration</span><span class="p">,</span> <span class="nx">complete</span><span class="p">)</span> <span class="p">{</span>
       <span class="k">this</span><span class="p">.</span><span class="nx">css</span><span class="p">({</span>
-        <span class="nx">display</span><span class="o">:</span>          <span class="s1">'block'</span><span class="p">,</span>
+        <span class="nx">display</span><span class="o">:</span>          <span class="s1">&#39;block&#39;</span><span class="p">,</span>
         <span class="nx">marginTop</span><span class="o">:</span>        <span class="o">-</span><span class="mi">100</span> <span class="o">-</span> <span class="k">this</span><span class="p">.</span><span class="nx">outerHeight</span><span class="p">()</span>
       <span class="p">})</span>
       <span class="p">.</span><span class="nx">animate</span><span class="p">({</span><span class="nx">marginTop</span><span class="o">:</span> <span class="mi">0</span><span class="p">},</span> <span class="nx">duration</span><span class="p">,</span> <span class="nx">complete</span><span class="p">);</span>
@@ -448,233 +437,199 @@ It's same to standard effect methods of jQuery (slideDown(), slideUp(), animate(
       <span class="k">this</span><span class="p">.</span><span class="nx">animate</span><span class="p">({</span>
         <span class="nx">marginTop</span><span class="o">:</span>        <span class="o">-</span><span class="mi">100</span> <span class="o">-</span> <span class="k">this</span><span class="p">.</span><span class="nx">outerHeight</span><span class="p">()</span>
       <span class="p">},</span> <span class="nx">duration</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-        <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">css</span><span class="p">({</span><span class="nx">display</span><span class="o">:</span> <span class="s1">'none'</span><span class="p">});</span>
+        <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">css</span><span class="p">({</span><span class="nx">display</span><span class="o">:</span> <span class="s1">&#39;none&#39;</span><span class="p">});</span>
         <span class="nx">complete</span><span class="p">();</span>
       <span class="p">});</span>
     <span class="p">}</span>
   <span class="p">}</span>
 <span class="p">});</span>
-</pre></div>
+</code></pre></div>
+<!-- include "sample_08.html" -->
+<!-- ================ sample -->
+<p><button id="sample-button-08">Open Sample</button></p>
 
-<!-- ======== sample -->
-<div id="sample6" class="sample-window">
-<p>Click outside area of this window, or press Escape key to close this window.</p>
+<div id="sample-08" class="sample-modal">
+  <p>Click outside area of this window, or press Escape key to close this window.</p>
 </div>
-<div class="sample-button" id="sample-button6">Open Sample</div>
+
 <script>
-$('#sample-button6').click(function() {
-  $('#sample6').plainModal('open', {
-    offset: {left: 300, top: 100},
-    duration: 500,
-    effect: {
-      open: function(duration, complete) {
-        this.css({
-          display:          'block',
-          marginTop:        -100 - this.outerHeight()
-        })
-        .animate({marginTop: 0}, duration, complete);
-      },
-      close: function(duration, complete) {
-        this.animate({
-          marginTop:        -100 - this.outerHeight()
-        }, duration, function() {
-          $(this).css({display: 'none'});
-          complete();
-        });
+$(function() {
+
+  $('#sample-button-08').click(function() {
+    $('#sample-08').plainModal('open', {
+      offset: {left: 300, top: 100},
+      duration: 500,
+      effect: {
+        open: function(duration, complete) {
+          this.css({
+            display:          'block',
+            marginTop:        -100 - this.outerHeight()
+          })
+          .animate({marginTop: 0}, duration, complete);
+        },
+        close: function(duration, complete) {
+          this.animate({
+            marginTop:        -100 - this.outerHeight()
+          }, duration, function() {
+            $(this).css({display: 'none'});
+            complete();
+          });
+        }
       }
-    }
+    });
   });
+
 });
 </script>
-<!-- ======== /sample -->
+<!-- ================ /sample -->
+<!-- /include "sample_08.html" -->
 
 <p>These Functions can ignore <code>duration</code>, but it must call <code>complete</code>, when the effect was finished.</p>
-
-<div class="highlight highlight-js"><pre><span class="nx">$</span><span class="p">(</span><span class="s1">'#modal'</span><span class="p">).</span><span class="nx">plainModal</span><span class="p">({</span>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#modal&#39;</span><span class="p">).</span><span class="nx">plainModal</span><span class="p">({</span>
   <span class="nx">effect</span><span class="o">:</span> <span class="p">{</span>
     <span class="nx">open</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">duration</span><span class="p">,</span> <span class="nx">complete</span><span class="p">)</span> <span class="p">{</span>
       <span class="kd">var</span> <span class="nx">that</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">css</span><span class="p">({</span>
-        <span class="nx">display</span><span class="o">:</span>          <span class="s1">'block'</span><span class="p">,</span>
-        <span class="nx">color</span><span class="o">:</span>            <span class="s1">'#fff'</span><span class="p">,</span>
-        <span class="nx">backgroundColor</span><span class="o">:</span>  <span class="s1">'#f1e470'</span>
+        <span class="nx">display</span><span class="o">:</span>          <span class="s1">&#39;block&#39;</span><span class="p">,</span>
+        <span class="nx">color</span><span class="o">:</span>            <span class="s1">&#39;#fff&#39;</span><span class="p">,</span>
+        <span class="nx">backgroundColor</span><span class="o">:</span>  <span class="s1">&#39;#f1e470&#39;</span>
       <span class="p">});</span>
       <span class="nx">setTimeout</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-        <span class="nx">that</span><span class="p">.</span><span class="nx">css</span><span class="p">({</span><span class="nx">color</span><span class="o">:</span> <span class="s1">''</span><span class="p">,</span> <span class="nx">backgroundColor</span><span class="o">:</span> <span class="s1">''</span><span class="p">});</span>
+        <span class="nx">that</span><span class="p">.</span><span class="nx">css</span><span class="p">({</span><span class="nx">color</span><span class="o">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="nx">backgroundColor</span><span class="o">:</span> <span class="s1">&#39;&#39;</span><span class="p">});</span>
         <span class="nx">complete</span><span class="p">();</span>
       <span class="p">},</span> <span class="mi">500</span><span class="p">);</span>
     <span class="p">},</span>
     <span class="nx">close</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">duration</span><span class="p">,</span> <span class="nx">complete</span><span class="p">)</span> <span class="p">{</span>
       <span class="kd">var</span> <span class="nx">that</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">css</span><span class="p">({</span>
-        <span class="nx">color</span><span class="o">:</span>            <span class="s1">'#fff'</span><span class="p">,</span>
-        <span class="nx">backgroundColor</span><span class="o">:</span>  <span class="s1">'#f1e470'</span>
+        <span class="nx">color</span><span class="o">:</span>            <span class="s1">&#39;#fff&#39;</span><span class="p">,</span>
+        <span class="nx">backgroundColor</span><span class="o">:</span>  <span class="s1">&#39;#f1e470&#39;</span>
       <span class="p">});</span>
       <span class="nx">setTimeout</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-        <span class="nx">that</span><span class="p">.</span><span class="nx">css</span><span class="p">({</span><span class="nx">display</span><span class="o">:</span> <span class="s1">'none'</span><span class="p">});</span>
+        <span class="nx">that</span><span class="p">.</span><span class="nx">css</span><span class="p">({</span><span class="nx">display</span><span class="o">:</span> <span class="s1">&#39;none&#39;</span><span class="p">});</span>
         <span class="nx">complete</span><span class="p">();</span>
       <span class="p">},</span> <span class="mi">500</span><span class="p">);</span>
     <span class="p">}</span>
   <span class="p">}</span>
 <span class="p">});</span>
-</pre></div>
+</code></pre></div>
+<!-- include "sample_09.html" -->
+<!-- ================ sample -->
+<p><button id="sample-button-09">Open Sample</button></p>
 
-<!-- ======== sample -->
-<div id="sample7" class="sample-window">
-<p>Click outside area of this window, or press Escape key to close this window.</p>
+<div id="sample-09" class="sample-modal sample-dark">
+  <p>Click outside area of this window, or press Escape key to close this window.</p>
 </div>
-<div class="sample-button" id="sample-button7">Open Sample</div>
+
 <script>
-$('#sample-button7').click(function() {
-  $('#sample7').plainModal('open', {
-    effect: {
-      open: function(duration, complete) {
-        var that = this.css({
-          display:          'block',
-          color:            '#fff',
-          backgroundColor:  '#f1e470'
-        });
-        setTimeout(function() {
-          that.css({color: '', backgroundColor: ''});
-          complete();
-        }, 500);
-      },
-      close: function(duration, complete) {
-        var that = this.css({
-          color:            '#fff',
-          backgroundColor:  '#f1e470'
-        });
-        setTimeout(function() {
-          that.css({display: 'none'});
-          complete();
-        }, 500);
+$(function() {
+
+  $('#sample-button-09').click(function() {
+    $('#sample-09').plainModal('open', {
+      effect: {
+        open: function(duration, complete) {
+          var that = this.css({
+            display:          'block',
+            color:            '#fff',
+            backgroundColor:  '#f1e470'
+          });
+          setTimeout(function() {
+            that.css({color: '', backgroundColor: ''});
+            complete();
+          }, 500);
+        },
+        close: function(duration, complete) {
+          var that = this.css({
+            color:            '#fff',
+            backgroundColor:  '#f1e470'
+          });
+          setTimeout(function() {
+            that.css({display: 'none'});
+            complete();
+          }, 500);
+        }
       }
-    }
+    });
   });
+
 });
 </script>
-<!-- ======== /sample -->
+<!-- ================ /sample -->
+<!-- /include "sample_09.html" -->
 
-<h3>
-<a id="zindex" class="anchor" href="#zindex" aria-hidden="true"><span class="octicon octicon-link"></span></a><code>zIndex</code>
-</h3>
+<h3 id="zindex"><code>zIndex</code></h3>
 
-<p>Type: Number<br>
-Default: <code>options.overlay.zIndex + 1</code></p>
+<p>Type: Number<br>Default: <code>options.overlay.zIndex + 1</code></p>
 
 <p>A <code>z-index</code> CSS property of the modal window. This number have to be bigger than <code>options.overlay.zIndex</code>.</p>
 
-<h3>
-<a id="open-close-beforeopen-beforeclose" class="anchor" href="#open-close-beforeopen-beforeclose" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-<code>open</code>, <code>close</code>, <code>beforeopen</code>, <code>beforeclose</code>
-</h3>
+<h3 id="open,-close,-beforeopen,-beforeclose"><code>open</code>, <code>close</code>, <code>beforeopen</code>, <code>beforeclose</code></h3>
 
-<p>Type: Function<br>
-Default: <code>undefined</code></p>
+<p>Type: Function<br>Default: <code>undefined</code></p>
 
 <p>The <code>plainmodalopen</code>, <code>plainmodalclose</code>, <code>plainmodalbeforeopen</code> and <code>plainmodalbeforeclose</code> event handlers. This is convenient way to do <code>on(type, handler)</code> method. (see <a href="#events">Events</a>)</p>
-
-<div class="highlight highlight-js"><pre><span class="nx">$</span><span class="p">(</span><span class="s1">'#modal'</span><span class="p">).</span><span class="nx">plainModal</span><span class="p">({</span><span class="nx">open</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">event</span><span class="p">);</span> <span class="p">}</span> <span class="p">});</span>
-</pre></div>
-
-<p><em>NOTE:</em> If this option is specified in the <a href="#open">Open</a> method, declared Function or the variable the Function is assigned should be specified (Don't specify the function expression). Because the <a href="#open">Open</a> method may be called again, and the <em>function expression</em> generates the new Function every time.<br>
-The <em>"function statement"</em> and the <em>"function operator"</em> are different.<br>
-See <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions#Defining_functions">https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions#Defining_functions</a><br>
-For example: this code is OK.</p>
-
-<div class="highlight highlight-js"><pre><span class="kd">function</span> <span class="nx">handler</span><span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">event</span><span class="p">);</span> <span class="p">}</span>
-<span class="nx">$</span><span class="p">(</span><span class="s1">'#open-button'</span><span class="p">).</span><span class="nx">click</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-  <span class="nx">$</span><span class="p">(</span><span class="s1">'#modal'</span><span class="p">).</span><span class="nx">plainModal</span><span class="p">(</span><span class="s1">'open'</span><span class="p">,</span> <span class="p">{</span><span class="nx">open</span><span class="o">:</span> <span class="nx">handler</span><span class="p">});</span>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#modal&#39;</span><span class="p">).</span><span class="nx">plainModal</span><span class="p">({</span><span class="nx">open</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">event</span><span class="p">);</span> <span class="p">}</span> <span class="p">});</span>
+</code></pre></div>
+<p><em>NOTE:</em> If this option is specified in the <a href="#open">Open</a> method, declared Function or the variable the Function is assigned should be specified (Don&#39;t specify the function expression). Because the <a href="#open">Open</a> method may be called again, and the <em>function expression</em> generates the new Function every time.<br>The <em>&quot;function statement&quot;</em> and the <em>&quot;function operator&quot;</em> are different.<br>See <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions#Defining_functions">https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions#Defining_functions</a><br>For example: this code is OK.</p>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">function</span> <span class="nx">handler</span><span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">event</span><span class="p">);</span> <span class="p">}</span>
+<span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#open-button&#39;</span><span class="p">).</span><span class="nx">click</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#modal&#39;</span><span class="p">).</span><span class="nx">plainModal</span><span class="p">(</span><span class="s1">&#39;open&#39;</span><span class="p">,</span> <span class="p">{</span><span class="nx">open</span><span class="o">:</span> <span class="nx">handler</span><span class="p">});</span>
 <span class="p">});</span>
-</pre></div>
-
+</code></pre></div>
 <p>This code registers event handler repeatedly when the <a href="#open">Open</a> method is called.</p>
-
-<div class="highlight highlight-js"><pre><span class="nx">$</span><span class="p">(</span><span class="s1">'#open-button'</span><span class="p">).</span><span class="nx">click</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-  <span class="nx">$</span><span class="p">(</span><span class="s1">'#modal'</span><span class="p">).</span><span class="nx">plainModal</span><span class="p">(</span><span class="s1">'open'</span><span class="p">,</span> <span class="p">{</span><span class="nx">open</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">event</span><span class="p">);</span> <span class="p">}</span> <span class="p">});</span>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#open-button&#39;</span><span class="p">).</span><span class="nx">click</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#modal&#39;</span><span class="p">).</span><span class="nx">plainModal</span><span class="p">(</span><span class="s1">&#39;open&#39;</span><span class="p">,</span> <span class="p">{</span><span class="nx">open</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">event</span><span class="p">);</span> <span class="p">}</span> <span class="p">});</span>
 <span class="p">});</span>
-</pre></div>
+</code></pre></div>
+<h2 id="events">Events</h2>
 
-<h2>
-<a id="events" class="anchor" href="#events" aria-hidden="true"><span class="octicon octicon-link"></span></a><a name="events">Events</a>
-</h2>
+<h3 id="plainmodalopen"><code>plainmodalopen</code></h3>
 
-<h3>
-<a id="plainmodalopen" class="anchor" href="#plainmodalopen" aria-hidden="true"><span class="octicon octicon-link"></span></a><code>plainmodalopen</code>
-</h3>
-
-<p>Triggered when the modal window is opened. (after the <code>effect.open</code> took <code>duration</code> to complete.)<br>
-An event handler can be attached when initializing too via <code>options.open</code>. (see <a href="#options">Options</a>)</p>
-
-<div class="highlight highlight-js"><pre><span class="nx">$</span><span class="p">(</span><span class="s1">'#modal'</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="s1">'plainmodalopen'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
-  <span class="nx">$</span><span class="p">(</span><span class="s1">'textarea'</span><span class="p">,</span> <span class="nx">event</span><span class="p">.</span><span class="nx">target</span><span class="p">).</span><span class="nx">addClass</span><span class="p">(</span><span class="s1">'highlight'</span><span class="p">);</span>
+<p>Triggered when the modal window is opened. (after the <code>effect.open</code> took <code>duration</code> to complete.)<br>An event handler can be attached when initializing too via <code>options.open</code>. (see <a href="#options">Options</a>)</p>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#modal&#39;</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;plainmodalopen&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;textarea&#39;</span><span class="p">,</span> <span class="nx">event</span><span class="p">.</span><span class="nx">target</span><span class="p">).</span><span class="nx">addClass</span><span class="p">(</span><span class="s1">&#39;highlight&#39;</span><span class="p">);</span>
 <span class="p">});</span>
-</pre></div>
+</code></pre></div>
+<h3 id="plainmodalclose"><code>plainmodalclose</code></h3>
 
-<h3>
-<a id="plainmodalclose" class="anchor" href="#plainmodalclose" aria-hidden="true"><span class="octicon octicon-link"></span></a><code>plainmodalclose</code>
-</h3>
-
-<p>Triggered when the modal window is closeed. (after the <code>effect.close</code> took <code>duration</code> to complete.)<br>
-An event handler can be attached when initializing too via <code>options.close</code>. (see <a href="#options">Options</a>)</p>
-
-<div class="highlight highlight-js"><pre><span class="nx">$</span><span class="p">(</span><span class="s1">'#modal'</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="s1">'plainmodalclose'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
-  <span class="nx">$</span><span class="p">(</span><span class="s1">'#screen'</span><span class="p">).</span><span class="nx">show</span><span class="p">();</span>
+<p>Triggered when the modal window is closeed. (after the <code>effect.close</code> took <code>duration</code> to complete.)<br>An event handler can be attached when initializing too via <code>options.close</code>. (see <a href="#options">Options</a>)</p>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#modal&#39;</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;plainmodalclose&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#screen&#39;</span><span class="p">).</span><span class="nx">show</span><span class="p">();</span>
 <span class="p">});</span>
-</pre></div>
+</code></pre></div>
+<h3 id="plainmodalbeforeopen"><code>plainmodalbeforeopen</code></h3>
 
-<h3>
-<a id="plainmodalbeforeopen" class="anchor" href="#plainmodalbeforeopen" aria-hidden="true"><span class="octicon octicon-link"></span></a><code>plainmodalbeforeopen</code>
-</h3>
+<p>Triggered before the modal window is opened.<br>An event handler can be attached when initializing too via <code>options.beforeopen</code>. (see <a href="#options">Options</a>)<br>This event is cancelable by calling <code>event.preventDefault()</code> in an event handler.</p>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#modal&#39;</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;plainmodalbeforeopen&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">dataList</span><span class="p">.</span><span class="nx">ready</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">event</span><span class="p">.</span><span class="nx">preventDefault</span><span class="p">();</span> <span class="c1">// Don&#39;t open yet.</span>
+  <span class="p">}</span>
+<span class="p">});</span>
+</code></pre></div>
+<h3 id="plainmodalbeforeclose"><code>plainmodalbeforeclose</code></h3>
 
-<p>Triggered before the modal window is opened.<br>
-An event handler can be attached when initializing too via <code>options.beforeopen</code>. (see <a href="#options">Options</a>)<br>
-This event is cancelable by calling <code>event.preventDefault()</code> in an event handler.</p>
-
-<div class="highlight highlight-js"><pre><span class="nx">$</span><span class="p">(</span><span class="s1">'#modal'</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="s1">'plainmodalbeforeopen'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
-  <span class="pl-k">if</span> (<span class="pl-k">!</span>dataList.ready) {
-    <span class="pl-s3">event</span>.preventDefault(); <span class="c1">// Don't open yet.</span>
-  }
-});</pre></div>
-
-<h3>
-<a id="plainmodalbeforeclose" class="anchor" href="#plainmodalbeforeclose" aria-hidden="true"><span class="octicon octicon-link"></span></a><code>plainmodalbeforeclose</code>
-</h3>
-
-<p>Triggered before the modal window is closeed.<br>
-An event handler can be attached when initializing too via <code>options.beforeclose</code>. (see <a href="#options">Options</a>)<br>
-This event is cancelable by calling <code>event.preventDefault()</code> in an event handler.</p>
-
-<div class="highlight highlight-js"><pre><span class="nx">$</span><span class="p">(</span><span class="s1">'#modal'</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="s1">'plainmodalbeforeclose'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
-  <span class="pl-k">if</span> (elmUserName.val() <span class="pl-k">===</span> <span class="s1">''</span>) {
-    <span class="pl-s3">alert</span>(<span class="s1">'"User Name" is required.'</span>);
-    <span class="pl-s3">event</span>.preventDefault(); <span class="c1">// Stay opening.</span>
-  }
-});</pre></div>
-
-<h2>
-<a id="note" class="anchor" href="#note" aria-hidden="true"><span class="octicon octicon-link"></span></a>Note</h2>
+<p>Triggered before the modal window is closeed.<br>An event handler can be attached when initializing too via <code>options.beforeclose</code>. (see <a href="#options">Options</a>)<br>This event is cancelable by calling <code>event.preventDefault()</code> in an event handler.</p>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#modal&#39;</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;plainmodalbeforeclose&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">elmUserName</span><span class="p">.</span><span class="nx">val</span><span class="p">()</span> <span class="o">===</span> <span class="s1">&#39;&#39;</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">alert</span><span class="p">(</span><span class="s1">&#39;&quot;User Name&quot; is required.&#39;</span><span class="p">);</span>
+    <span class="nx">event</span><span class="p">.</span><span class="nx">preventDefault</span><span class="p">();</span> <span class="c1">// Stay opening.</span>
+  <span class="p">}</span>
+<span class="p">});</span>
+</code></pre></div>
+<h2 id="note">Note</h2>
 
 <ul>
-<li>As everyone knows, IE8- has many problems. CSS <code>position:fixed</code> in HTML without <code>&lt;!DOCTYPE&gt;</code> is ignored.<br>
-If your web site supports IE8- and it use <code>position:fixed</code>, HTML must include <code>&lt;!DOCTYPE&gt;</code> even if plainModal is not used. And plainModal uses <code>position:fixed</code>.</li>
+<li>As everyone knows, IE8- has many problems. CSS <code>position:fixed</code> in HTML without <code>&lt;!DOCTYPE&gt;</code> is ignored.<br>If your web site supports IE8- and it use <code>position:fixed</code>, HTML must include <code>&lt;!DOCTYPE&gt;</code> even if plainModal is not used. And plainModal uses <code>position:fixed</code>.</li>
 <li>The <a href="#initialize">Initialize</a> method set <code>display:none</code> to specified element. You can hide the element before Initialize method, by your stylesheet.</li>
 </ul>
 
-<h2>
-<a id="see-also" class="anchor" href="#see-also" aria-hidden="true"><span class="octicon octicon-link"></span></a>See Also</h2>
+<h2 id="see-also">See Also</h2>
 
 <p><a href="http://anseki.github.io/jquery-plainoverlay">plainOverlay</a> may be better, if you want the overlay that covers a page, elements or iframe-windows.</p>
-      </section>
-    </div>
 
-    <!-- FOOTER  -->
-    <div id="footer_wrap" class="outer">
-      <footer class="inner">
-        <p class="copyright">plainModal maintained by <a href="https://github.com/anseki">anseki</a></p>
-        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
-      </footer>
-    </div>
+    </main>
+    <footer>
+      <p class="copyright">plainModal maintained by <a href="https://github.com/anseki">anseki</a></p>
+    </footer>
+  </div>
 
-    
-
-  </body>
+</body>
 </html>
