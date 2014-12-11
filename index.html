@@ -37,8 +37,15 @@
 <script>
 $(function() {
 
+  var modal = $('#sample-01');
   $('#sample-01-button').click(function() {
-    $('#sample-01').plainModal('open');
+    modal.plainModal('open');
+  });
+  $(window).resize(function() {
+    modal.css({
+      marginLeft: '-' + (modal.outerWidth() / 2) + 'px',
+      marginTop: '-' + (modal.outerHeight() / 2) + 'px'
+    });
   });
 
 });
