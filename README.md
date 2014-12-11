@@ -10,7 +10,7 @@ Many great plugins already exist.
 - The simple plugins which has small functions and customizable styles.
 
 The many web sites use same functions almost. And these have different styles.  
-plainModal has basic functions for showing modal windows. That's all. The styling it is your job. You can free style it to perfect match for your web site.
+plainModal has basic functions for showing modal windows. That's all. The styling it is your job. You can free style it to perfect match for your web site. Of course it can be responsive web design.
 
 plainModal do:
 
@@ -37,7 +37,7 @@ Load after jQuery.
 
 ## Methods
 
-### <a name ="open">Open</a>
+### `open`
 
 ```js
 element.plainModal('open'[, options])
@@ -47,7 +47,7 @@ Show specified element as modal window.
 If `options` (see [Options](#options)) is specified, element is initialized with specified `options` before it is shown. If element is not initialized yet, element is initialized even if `options` is not specified.  
 An element can be initialized by new `options` any number of times.
 
-### <a name ="close">Close</a>
+### `close`
 
 ```js
 element.plainModal('close')
@@ -62,9 +62,9 @@ element.plainModal([options])
 ```
 
 Initialize specified element as modal window.  
-The [Open](#open) method can initialize too. This is used to initialize without showing the modal window at voluntary time.  
-You can specify `options` to every [Open](#open) method. But, if `options` of an element isn't changed, re-initializing it isn't needed. Then, you specify `options` to only first [Open](#open) method, or use this method for initializing it only once.  
-If you don't customize [Options](#options) (using default all), this method isn't needed because `options` isn't specified to [Open](#open) method, and element is initialized at only first time.
+The `open` method can initialize too. This is used to initialize without showing the modal window at voluntary time.  
+You can specify `options` to every `open` method. But, if `options` of an element isn't changed, re-initializing it isn't needed. Then, you specify `options` to only first `open` method, or use this method for initializing it only once.  
+If you don't customize any options (using default all), this method isn't needed because `options` isn't specified to `open` method, and element is initialized at only first time.
 
 In this code, unneeded initializing is done again, again, and again.
 
@@ -97,7 +97,7 @@ $('#open-button').click(function() {
 
 ## <a name ="options">Options</a>
 
-A `options` Object can be specified to [Open](#open) method or [Initialize](#initialize) method. This Object can have following properties.
+A `options` Object can be specified to `open` method or [Initialize](#initialize) method. This Object can have following properties.
 
 ### `offset`
 
@@ -110,7 +110,7 @@ A Object that has `left` and `top`, relative to the view area.
 $('#modal').plainModal({offset: {left: 100, top: 50}});
 ```
 
-Or, a Function that returns above Object. This Function is called by [Open](#open) method, not [Initialize](#initialize) method. Therefore position be able to change according to the situation.
+Or, a Function that returns above Object. This Function is called per every calling `open` method. Therefore position be able to change according to the situation.
 
 ```js
 var button = $('#open-button').click(function() {
@@ -156,7 +156,7 @@ If you want to style the overlay more, add style to `plainmodal-overlay` class.
 Type: String  
 Default: `'plainmodal-close'`
 
-If the element that has this class name is found, the [Close](#close) method is attached to `click` event of it.
+If the element that has this class name is found, the `close` method is attached to `click` event of it.
 
 ```html
 <div>
@@ -179,7 +179,7 @@ Default: `{open: jQuery.fn.fadeIn, close: jQuery.fn.fadeOut}`
 
 A Object that can have `open` and `close` Functions for showing and hiding the modal window.  
 These Functions are called with `duration` Number (see above) and `complete` Function.  
-It's same to standard effect methods of jQuery (slideDown(), slideUp(), animate(), etc.). Therefore, those methods can be specified.
+It's same to standard effect methods of jQuery (`slideDown`, `slideUp`, `animate`, etc.). Therefore, those methods can be specified.
 
 ```js
 $('#modal').plainModal({effect: {open: $.fn.slideDown, close: $.fn.slideUp}});
@@ -259,7 +259,7 @@ The `plainmodalopen`, `plainmodalclose`, `plainmodalbeforeopen` and `plainmodalb
 $('#modal').plainModal({open: function(event) { console.log(event); } });
 ```
 
-*NOTE:* If this option is specified in the [Open](#open) method, declared Function or the variable the Function is assigned should be specified (Don't specify the function expression). Because the [Open](#open) method may be called again, and the *function expression* generates the new Function every time.  
+*NOTE:* If this option is specified in the `open` method, declared Function or the variable the Function is assigned should be specified (Don't specify the function expression). Because the `open` method may be called again, and the *function expression* generates the new Function every time.  
 The *"function statement"* and the *"function operator"* are different.  
 See [https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions#Defining_functions](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions#Defining_functions)  
 For example: this code is OK.
@@ -271,7 +271,7 @@ $('#open-button').click(function() {
 });
 ```
 
-This code registers event handler repeatedly when the [Open](#open) method is called.
+This code registers event handler repeatedly when the `open` method is called.
 
 ```js
 $('#open-button').click(function() {
