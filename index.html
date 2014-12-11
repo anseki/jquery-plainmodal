@@ -25,7 +25,7 @@
 
 <!-- include "sample_01.html" -->
 <!-- ================ sample -->
-<p><button id="sample-button-01">Open Sample</button></p>
+<p><button id="sample-01-button">Open Sample</button></p>
 
 <div id="sample-01">
   <div class="plainmodal-close"></div>
@@ -37,7 +37,7 @@
 <script>
 $(function() {
 
-  $('#sample-button-01').click(function() {
+  $('#sample-01-button').click(function() {
     $('#sample-01').plainModal('open');
   });
 
@@ -59,11 +59,11 @@ $(function() {
 <!-- ================ sample -->
 <div class="cols2">
   <div class="col">
-    <button id="sample-button-02a">Open Sample (Non-Styles)</button>
+    <button id="sample-02a-button">Open Sample (Non-Styles)</button>
     <p>plainModal doesn't style anything.</p>
   </div>
   <div class="col">
-    <button id="sample-button-02b">Open Sample (SVG)</button>
+    <button id="sample-02b-button">Open Sample (SVG)</button>
     <p>The styling it is your job. </p>
   </div>
 </div>
@@ -76,7 +76,7 @@ $(function() {
 <script>
 $(function() {
 
-  $('#sample-button-02a').click(function() {
+  $('#sample-02a-button').click(function() {
     $('#sample-02a').plainModal('open');
   });
 
@@ -99,7 +99,7 @@ $(function() {
     <use xlink:href="#sample-02b-base-path" stroke-dasharray="20.7432861328125,10" id="sample-02b-bg" />
     <path d="M-20,300 Q10,10 200,150 Q390,290 420,0" id="sample-02b-bgline" />
     <foreignObject x="60" y="50" width="280" height="200">
-      <div class="sample-close"><span class="plainmodal-close sample">Close</span></div>
+      <div class="sample-close"><span class="plainmodal-close sample-close">Close</span></div>
       <p>This stupid design is showing to you that it's the perfect customizability. I really hope that you understand a purpose of this. Anyway, you can do anything you want to those.</p>
     </foreignObject>
   </g>
@@ -167,7 +167,7 @@ $(function() {
         }, 1000);
       }
     }});
-  $('#sample-button-02b').click(function() {
+  $('#sample-02b-button').click(function() {
     modal.plainModal('open');
   });
 
@@ -246,7 +246,7 @@ $(function() {
 </code></pre></div>
 <!-- include "sample_03.html" -->
 <!-- ================ sample -->
-<p><button id="sample-button-03">Open Sample</button></p>
+<p><button id="sample-03-button">Open Sample</button></p>
 
 <div id="sample-03" class="sample-modal">
   <p>Click outside area of this window, or press Escape key to close this window.</p>
@@ -255,7 +255,7 @@ $(function() {
 <script>
 $(function() {
 
-  $('#sample-button-03').click(function() {
+  $('#sample-03-button').click(function() {
     $('#sample-03').plainModal('open', {offset: {left: 100, top: 50}});
   });
 
@@ -283,7 +283,7 @@ $(function() {
 </code></pre></div>
 <!-- include "sample_04.html" -->
 <!-- ================ sample -->
-<p><button id="sample-button-04">Open Sample</button></p>
+<p><button id="sample-04-button">Open Sample</button></p>
 
 <div id="sample-04" class="sample-modal">
   <p>Click outside area of this window, or press Escape key to close this window.</p>
@@ -292,7 +292,7 @@ $(function() {
 <script>
 $(function() {
 
-  var button = $('#sample-button-04').click(function() {
+  var button = $('#sample-04-button').click(function() {
         modal.plainModal('open');
       }),
       modal = $('#sample-04').plainModal({
@@ -322,7 +322,7 @@ $(function() {
 </code></pre></div>
 <!-- include "sample_05.html" -->
 <!-- ================ sample -->
-<p><button id="sample-button-05">Open Sample</button></p>
+<p><button id="sample-05-button">Open Sample</button></p>
 
 <div id="sample-05" class="sample-modal sample-dark">
   <p>Click outside area of this window, or press Escape key to close this window.</p>
@@ -331,7 +331,7 @@ $(function() {
 <script>
 $(function() {
 
-  $('#sample-button-05').click(function() {
+  $('#sample-05-button').click(function() {
     $('#sample-05').plainModal('open', {overlay: {fillColor: '#fff', opacity: 0.5}});
   });
 
@@ -349,14 +349,14 @@ $(function() {
 </code></pre></div>
 <!-- include "sample_06.html" -->
 <!-- ================ sample -->
-<p><button id="sample-button-06">Open Sample</button></p>
+<p><button id="sample-06-button">Open Sample</button></p>
 
 <div id="sample-06" class="sample-modal">
   <p>Click outside area of this window, or press Escape key to close this window.</p>
 </div>
 
 <!-- preload -->
-<img src="img/bg.png" alt="" style="width: 1px; height: 1px; position: absolute; left: -1px; top: -1px;">
+<img src="img/bg.png" alt="" class="preload">
 
 <script>
 $(function() {
@@ -369,7 +369,7 @@ $(function() {
           $('.plainmodal-overlay').css('backgroundImage', 'none');
         }
       });
-  $('#sample-button-06').click(function() {
+  $('#sample-06-button').click(function() {
     modal.plainModal('open');
   });
 
@@ -390,17 +390,17 @@ $(function() {
 </code></pre></div>
 <!-- include "sample_07.html" -->
 <!-- ================ sample -->
-<p><button id="sample-button-07">Open Sample</button></p>
+<p><button id="sample-07-button">Open Sample</button></p>
 
 <div id="sample-07" class="sample-modal">
   <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-  <div class="plainmodal-close sample">Close</div>
+  <div class="plainmodal-close sample-close">Close</div>
 </div>
 
 <script>
 $(function() {
 
-  $('#sample-button-07').click(function() {
+  $('#sample-07-button').click(function() {
     $('#sample-07').plainModal('open');
   });
 
@@ -447,7 +447,7 @@ $(function() {
 </code></pre></div>
 <!-- include "sample_08.html" -->
 <!-- ================ sample -->
-<p><button id="sample-button-08">Open Sample</button></p>
+<p><button id="sample-08-button">Open Sample</button></p>
 
 <div id="sample-08" class="sample-modal">
   <p>Click outside area of this window, or press Escape key to close this window.</p>
@@ -456,7 +456,7 @@ $(function() {
 <script>
 $(function() {
 
-  $('#sample-button-08').click(function() {
+  $('#sample-08-button').click(function() {
     $('#sample-08').plainModal('open', {
       offset: {left: 300, top: 100},
       duration: 500,
@@ -514,7 +514,7 @@ $(function() {
 </code></pre></div>
 <!-- include "sample_09.html" -->
 <!-- ================ sample -->
-<p><button id="sample-button-09">Open Sample</button></p>
+<p><button id="sample-09-button">Open Sample</button></p>
 
 <div id="sample-09" class="sample-modal sample-dark">
   <p>Click outside area of this window, or press Escape key to close this window.</p>
@@ -523,7 +523,7 @@ $(function() {
 <script>
 $(function() {
 
-  $('#sample-button-09').click(function() {
+  $('#sample-09-button').click(function() {
     $('#sample-09').plainModal('open', {
       effect: {
         open: function(duration, complete) {

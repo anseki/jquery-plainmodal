@@ -1,4 +1,12 @@
 
+img.preload {
+  width: 1px;
+  height: 1px;
+  position: absolute;
+  left: -1px;
+  top: -1px;
+}
+
 .sample-modal {
   width: 350px;
   padding: 5px;
@@ -16,14 +24,14 @@
   cursor: pointer;
 }
 
-.plainmodal-close.sample {
+.plainmodal-close.sample-close {
   display: inline-block;
   padding: 1px 3px;
   color: #fff;
   background-color: #224388;
 }
 
-.plainmodal-close.sample:hover {
+.plainmodal-close.sample-close:hover {
   background-color: #1f99e2;
 }
 
