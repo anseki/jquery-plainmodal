@@ -29,8 +29,9 @@
 
 <div id="sample-01">
   <div class="plainmodal-close"></div>
-  <p class="sample-head">jQuery.plainModal</p>
-  <p><img src="img/GitHub-Mark-120px-plus.png" width="120" height="120" alt="">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.</p>
+  <h2>jQuery.plainModal</h2>
+  <h3>Not Gorgeous, But Free customizing</h3>
+  <p><img src="img/GitHub-Mark-120px-plus.png" width="120" height="120" alt="">This window is styled as a responsive web design. plainModal doesn't restrict any DOM structure and styles. It's not concerned about those.</p>
 </div>
 
 <script>
@@ -52,7 +53,7 @@ $(function() {
 <li>The simple plugins which has small functions and customizable styles.</li>
 </ul>
 
-<p>The many web sites use same functions almost. And these have different styles.<br>plainModal has basic functions for showing modal windows. That&#39;s all. The styling it is your job. You can free style it to perfect match for your web site.</p>
+<p>The many web sites use same functions almost. And these have different styles.<br>plainModal has basic functions for showing modal windows. That&#39;s all. The styling it is your job. You can free style it to perfect match for your web site. Of course it can be responsive web design.</p>
 
 <!-- include "sample_02.html" -->
 <!-- ================ sample -->
@@ -197,12 +198,12 @@ $(function() {
 </code></pre></div>
 <h2 id="methods">Methods</h2>
 
-<h3 id="open">Open</h3>
+<h3 id="open"><code>open</code></h3>
 <div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">element</span><span class="p">.</span><span class="nx">plainModal</span><span class="p">(</span><span class="s1">&#39;open&#39;</span><span class="p">[,</span> <span class="nx">options</span><span class="p">])</span>
 </code></pre></div>
 <p>Show specified element as modal window.<br>If <code>options</code> (see <a href="#options">Options</a>) is specified, element is initialized with specified <code>options</code> before it is shown. If element is not initialized yet, element is initialized even if <code>options</code> is not specified.<br>An element can be initialized by new <code>options</code> any number of times.</p>
 
-<h3 id="close">Close</h3>
+<h3 id="close"><code>close</code></h3>
 <div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">element</span><span class="p">.</span><span class="nx">plainModal</span><span class="p">(</span><span class="s1">&#39;close&#39;</span><span class="p">)</span>
 </code></pre></div>
 <p>Hide the modal window.</p>
@@ -210,7 +211,7 @@ $(function() {
 <h3 id="initialize">Initialize</h3>
 <div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">element</span><span class="p">.</span><span class="nx">plainModal</span><span class="p">([</span><span class="nx">options</span><span class="p">])</span>
 </code></pre></div>
-<p>Initialize specified element as modal window.<br>The <a href="#open">Open</a> method can initialize too. This is used to initialize without showing the modal window at voluntary time.<br>You can specify <code>options</code> to every <a href="#open">Open</a> method. But, if <code>options</code> of an element isn&#39;t changed, re-initializing it isn&#39;t needed. Then, you specify <code>options</code> to only first <a href="#open">Open</a> method, or use this method for initializing it only once.<br>If you don&#39;t customize <a href="#options">Options</a> (using default all), this method isn&#39;t needed because <code>options</code> isn&#39;t specified to <a href="#open">Open</a> method, and element is initialized at only first time.</p>
+<p>Initialize specified element as modal window.<br>The <code>open</code> method can initialize too. This is used to initialize without showing the modal window at voluntary time.<br>You can specify <code>options</code> to every <code>open</code> method. But, if <code>options</code> of an element isn&#39;t changed, re-initializing it isn&#39;t needed. Then, you specify <code>options</code> to only first <code>open</code> method, or use this method for initializing it only once.<br>If you don&#39;t customize any options (using default all), this method isn&#39;t needed because <code>options</code> isn&#39;t specified to <code>open</code> method, and element is initialized at only first time.</p>
 
 <p>In this code, unneeded initializing is done again, again, and again.</p>
 <div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#open-button&#39;</span><span class="p">).</span><span class="nx">click</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
@@ -234,7 +235,7 @@ $(function() {
 </code></pre></div>
 <h2 id="options">Options</h2>
 
-<p>A <code>options</code> Object can be specified to <a href="#open">Open</a> method or <a href="#initialize">Initialize</a> method. This Object can have following properties.</p>
+<p>A <code>options</code> Object can be specified to <code>open</code> method or <a href="#initialize">Initialize</a> method. This Object can have following properties.</p>
 
 <h3 id="offset"><code>offset</code></h3>
 
@@ -263,7 +264,7 @@ $(function() {
 <!-- ================ /sample -->
 <!-- /include "sample_03.html" -->
 
-<p>Or, a Function that returns above Object. This Function is called by <a href="#open">Open</a> method, not <a href="#initialize">Initialize</a> method. Therefore position be able to change according to the situation.</p>
+<p>Or, a Function that returns above Object. This Function is called per every calling <code>open</code> method. Therefore position be able to change according to the situation.</p>
 <div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">button</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#open-button&#39;</span><span class="p">).</span><span class="nx">click</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
       <span class="nx">modal</span><span class="p">.</span><span class="nx">plainModal</span><span class="p">(</span><span class="s1">&#39;open&#39;</span><span class="p">);</span>
     <span class="p">}),</span>
@@ -381,7 +382,7 @@ $(function() {
 
 <p>Type: String<br>Default: <code>&#39;plainmodal-close&#39;</code></p>
 
-<p>If the element that has this class name is found, the <a href="#close">Close</a> method is attached to <code>click</code> event of it.</p>
+<p>If the element that has this class name is found, the <code>close</code> method is attached to <code>click</code> event of it.</p>
 <div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;div&gt;</span>
 <span class="nt">&lt;p&gt;</span>Lorem ipsum dolor ...<span class="nt">&lt;/p&gt;</span>
 <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;plainmodal-close&quot;</span><span class="nt">&gt;</span>Close<span class="nt">&lt;/div&gt;</span>
@@ -418,7 +419,7 @@ $(function() {
 
 <p>Type: Object<br>Default: <code>{open: jQuery.fn.fadeIn, close: jQuery.fn.fadeOut}</code></p>
 
-<p>A Object that can have <code>open</code> and <code>close</code> Functions for showing and hiding the modal window.<br>These Functions are called with <code>duration</code> Number (see above) and <code>complete</code> Function.<br>It&#39;s same to standard effect methods of jQuery (slideDown(), slideUp(), animate(), etc.). Therefore, those methods can be specified.</p>
+<p>A Object that can have <code>open</code> and <code>close</code> Functions for showing and hiding the modal window.<br>These Functions are called with <code>duration</code> Number (see above) and <code>complete</code> Function.<br>It&#39;s same to standard effect methods of jQuery (<code>slideDown</code>, <code>slideUp</code>, <code>animate</code>, etc.). Therefore, those methods can be specified.</p>
 <div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#modal&#39;</span><span class="p">).</span><span class="nx">plainModal</span><span class="p">({</span><span class="nx">effect</span><span class="o">:</span> <span class="p">{</span><span class="nx">open</span><span class="o">:</span> <span class="nx">$</span><span class="p">.</span><span class="nx">fn</span><span class="p">.</span><span class="nx">slideDown</span><span class="p">,</span> <span class="nx">close</span><span class="o">:</span> <span class="nx">$</span><span class="p">.</span><span class="nx">fn</span><span class="p">.</span><span class="nx">slideUp</span><span class="p">}});</span>
 </code></pre></div>
 <p>Custom animation:</p>
@@ -568,13 +569,13 @@ $(function() {
 <p>The <code>plainmodalopen</code>, <code>plainmodalclose</code>, <code>plainmodalbeforeopen</code> and <code>plainmodalbeforeclose</code> event handlers. This is convenient way to do <code>on(type, handler)</code> method. (see <a href="#events">Events</a>)</p>
 <div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#modal&#39;</span><span class="p">).</span><span class="nx">plainModal</span><span class="p">({</span><span class="nx">open</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">event</span><span class="p">);</span> <span class="p">}</span> <span class="p">});</span>
 </code></pre></div>
-<p><em>NOTE:</em> If this option is specified in the <a href="#open">Open</a> method, declared Function or the variable the Function is assigned should be specified (Don&#39;t specify the function expression). Because the <a href="#open">Open</a> method may be called again, and the <em>function expression</em> generates the new Function every time.<br>The <em>&quot;function statement&quot;</em> and the <em>&quot;function operator&quot;</em> are different.<br>See <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions#Defining_functions">https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions#Defining_functions</a><br>For example: this code is OK.</p>
+<p><em>NOTE:</em> If this option is specified in the <code>open</code> method, declared Function or the variable the Function is assigned should be specified (Don&#39;t specify the function expression). Because the <code>open</code> method may be called again, and the <em>function expression</em> generates the new Function every time.<br>The <em>&quot;function statement&quot;</em> and the <em>&quot;function operator&quot;</em> are different.<br>See <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions#Defining_functions">https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions#Defining_functions</a><br>For example: this code is OK.</p>
 <div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">function</span> <span class="nx">handler</span><span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">event</span><span class="p">);</span> <span class="p">}</span>
 <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#open-button&#39;</span><span class="p">).</span><span class="nx">click</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
   <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#modal&#39;</span><span class="p">).</span><span class="nx">plainModal</span><span class="p">(</span><span class="s1">&#39;open&#39;</span><span class="p">,</span> <span class="p">{</span><span class="nx">open</span><span class="o">:</span> <span class="nx">handler</span><span class="p">});</span>
 <span class="p">});</span>
 </code></pre></div>
-<p>This code registers event handler repeatedly when the <a href="#open">Open</a> method is called.</p>
+<p>This code registers event handler repeatedly when the <code>open</code> method is called.</p>
 <div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#open-button&#39;</span><span class="p">).</span><span class="nx">click</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
   <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#modal&#39;</span><span class="p">).</span><span class="nx">plainModal</span><span class="p">(</span><span class="s1">&#39;open&#39;</span><span class="p">,</span> <span class="p">{</span><span class="nx">open</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">event</span><span class="p">);</span> <span class="p">}</span> <span class="p">});</span>
 <span class="p">});</span>

@@ -30,10 +30,9 @@
 /* ==================================== sample-01 */
 
 #sample-01 {
-  width: 450px;
-  /*height: 400px;*/
-  padding: 20px 40px;
-  color: #fff;
+  width: 270px;
+  /*margin-right: 25px;*/ /* for close-button */
+  padding: 10px;
   background-color: #00aa6a;
   -webkit-border-radius: 10px;
   -moz-border-radius: 10px;
@@ -41,28 +40,36 @@
   -o-border-radius: 10px;
   border-radius: 10px;
   display: none;
+}
+
+#sample-01 h2, #sample-01 h3 {
+  color: #000;
+  font-weight: bold;
   font-family: 'Georgia', serif;
 }
 
-#sample-01:after { /* clearfix */
-  content: "";
-  clear: both;
-  display: block;
+#sample-01 h2 {
+  margin: 0;
+  font-size: 24px;
+}
+
+#sample-01 h3 {
+  margin: 5px 0;
+  font-size: 18px;
+  text-align: right;
 }
 
 #sample-01 p {
-  font-size: 18px;
-}
-
-#sample-01 .sample-head {
-  margin: 0 0 15px;
-  font-size: 36px;
-  font-weight: bold;
+  color: #fff;
+  font-size: 16px;
+  font-family: 'Georgia', serif;
 }
 
 #sample-01 img {
-  float: left;
-  margin-right: 10px;
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: 5px auto;
 }
 
 #sample-01 .plainmodal-close {
@@ -76,6 +83,35 @@
 
 #sample-01 .plainmodal-close:hover {
   background-position: -45px 0;
+}
+
+@media only screen and (min-width: 768px) {
+  #sample-01 {
+    width: 450px;
+    /*margin-right: 0;*/
+    /*height: 400px;*/
+    padding: 20px 40px;
+  }
+  #sample-01:after { /* clearfix */
+    content: "";
+    clear: both;
+    display: block;
+  }
+  #sample-01 h2 {
+    font-size: 36px;
+  }
+  #sample-01 h3 {
+    margin: 10px 0 15px;
+    font-size: 20px;
+  }
+  #sample-01 p {
+    font-size: 18px;
+  }
+  #sample-01 img {
+    display: inline;
+    float: left;
+    margin: 0 10px 0 0;
+  }
 }
 
 /* ==================================== sample-02a */
