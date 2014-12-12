@@ -362,11 +362,11 @@ $(function() {
   <p>Click outside area of this window, or press Escape key to close this window.</p>
 </div>
 
-<!-- preload -->
-<img src="img/bg.png" alt="" class="preload">
-
 <script>
 $(function() {
+
+  // preload
+  (new Image()).src = 'img/bg.png';
 
   var modal = $('#sample-06').plainModal({
         beforeopen: function() {
