@@ -104,13 +104,13 @@ A `options` Object can be specified to `open` method or [Initialize](#initialize
 Type: Object or Function  
 Default: Calculated center position
 
-A Object that has `left` and `top`, relative to the view area.
+An Object that has `left` and `top`, relative to the view area.
 
 ```js
 $('#modal').plainModal({offset: {left: 100, top: 50}});
 ```
 
-Or, a Function that returns above Object. This Function is called when the `open` method is called and the window is resized. Therefore the position be able to change according to the situation.
+Or, a Function that returns above Object. This Function is called when the modal window is opened and the window is resized. Therefore the position be able to change according to the situation.
 
 ```js
 var button = $('#open-button').click(function() {
@@ -130,8 +130,8 @@ var button = $('#open-button').click(function() {
     });
 ```
 
-Or, if the Function returns nothing, the position isn't changed. In this case, that Function will change the position. For example, this is used to positioning by `margin` instead of `left`/`top`.  
-Or, a `center` that is given to the Function is Function that positions modal window to center. For example, your Function do something that changes a size of the modal window, and it calls `center`.
+If the Function returns nothing, the position isn't changed. In this case, that Function will change the position. For example, positioning by `margin` instead of `left`/`top`.  
+A `center` Function that moves the modal window to center of the window is given to the Function. For example, your Function does something that changes a size of the modal window, and it calls a `center` to move the modal window to center of window.
 
 ```js
 $('#modal').plainModal({
@@ -157,7 +157,7 @@ $('#modal').plainModal({
 Type: Object  
 Default: `{fillColor: '#888', opacity: 0.6, zIndex: 9000}`
 
-A Object that can have `fillColor` (fill-color), `opacity` and `zIndex` of overlay.
+An Object that can have `fillColor` (fill-color), `opacity` and `zIndex` of overlay.
 
 ```js
 $('#modal').plainModal({overlay: {fillColor: '#fff', opacity: 0.5}});
@@ -199,7 +199,7 @@ A number determining how long (milliseconds) the effect animation for showing an
 Type: Object  
 Default: `{open: jQuery.fn.fadeIn, close: jQuery.fn.fadeOut}`
 
-A Object that can have `open` and `close` Functions for showing and hiding the modal window.  
+An Object that can have `open` and `close` Functions for showing and hiding the modal window.  
 These Functions are called with `duration` Number (see above) and `complete` Function.  
 It's same to standard effect methods of jQuery (`slideDown`, `slideUp`, `animate`, etc.). Therefore, those methods can be specified.
 
