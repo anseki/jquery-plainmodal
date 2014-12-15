@@ -38,15 +38,8 @@
 <script>
 $(function() {
 
-  var modal = $('#sample-01');
   $('#sample-01-button').click(function() {
-    modal.plainModal('open');
-  });
-  $(window).resize(function() {
-    modal.css({
-      marginLeft: '-' + (modal.outerWidth() / 2) + 'px',
-      marginTop: '-' + (modal.outerHeight() / 2) + 'px'
-    });
+    $('#sample-01').plainModal('open');
   });
 
 });
@@ -324,11 +317,57 @@ $(function() {
 <p>Or, if the Function returns nothing, the position isn&#39;t changed. In this case, that Function will change the position. For example, this is used to positioning by <code>margin</code> instead of <code>left</code>/<code>top</code>.<br>Or, a <code>center</code> that is given to the Function is Function that positions modal window to center. For example, your Function do something that changes a size of the modal window, and it calls <code>center</code>.</p>
 <div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#modal&#39;</span><span class="p">).</span><span class="nx">plainModal</span><span class="p">({</span>
   <span class="nx">offset</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">center</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">this</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="s1">&#39;#message&#39;</span><span class="p">).</span><span class="nx">text</span><span class="p">(</span><span class="nx">getMessage</span><span class="p">());</span> <span class="c1">// A size may be changed.</span>
+    <span class="c1">// sizing by view port, step by 100px</span>
+    <span class="kd">var</span> <span class="nx">jqHtml</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;html&#39;</span><span class="p">),</span>
+      <span class="nx">width</span> <span class="o">=</span> <span class="nx">jqHtml</span><span class="p">.</span><span class="nx">prop</span><span class="p">(</span><span class="s1">&#39;clientWidth&#39;</span><span class="p">),</span>
+      <span class="nx">height</span> <span class="o">=</span> <span class="nx">jqHtml</span><span class="p">.</span><span class="nx">prop</span><span class="p">(</span><span class="s1">&#39;clientHeight&#39;</span><span class="p">);</span>
+    <span class="nx">width</span> <span class="o">=</span> <span class="nx">width</span> <span class="o">*</span> <span class="mf">0.5</span><span class="p">;</span>
+    <span class="nx">height</span> <span class="o">=</span> <span class="nx">height</span> <span class="o">*</span> <span class="mf">0.5</span><span class="p">;</span>
+    <span class="nx">width</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">round</span><span class="p">(</span><span class="nx">width</span> <span class="o">/</span> <span class="mi">100</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span><span class="p">;</span>
+    <span class="nx">height</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">round</span><span class="p">(</span><span class="nx">height</span> <span class="o">/</span> <span class="mi">100</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">width</span> <span class="o">&lt;</span> <span class="mi">100</span><span class="p">)</span> <span class="p">{</span> <span class="nx">width</span> <span class="o">=</span> <span class="mi">100</span><span class="p">;</span> <span class="p">}</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">height</span> <span class="o">&lt;</span> <span class="mi">100</span><span class="p">)</span> <span class="p">{</span> <span class="nx">height</span> <span class="o">=</span> <span class="mi">100</span><span class="p">;</span> <span class="p">}</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">width</span><span class="p">(</span><span class="nx">width</span><span class="p">).</span><span class="nx">height</span><span class="p">(</span><span class="nx">height</span><span class="p">);</span>
     <span class="nx">center</span><span class="p">();</span> <span class="c1">// position to center.</span>
   <span class="p">}</span>
 <span class="p">});</span>
 </code></pre></div>
+<!-- include "sample_10.html" -->
+<!-- ================ sample -->
+<p><button id="sample-10-button">Open Sample</button> Click this button, and resize a window.</p>
+
+<div id="sample-10" class="sample-modal">
+  <p>Click outside area of this window, or press Escape key to close this window.</p>
+</div>
+
+<script>
+$(function() {
+
+  var button = $('#sample-10-button').click(function() {
+        modal.plainModal('open');
+      }),
+      modal = $('#sample-10').plainModal({
+        offset: function(center) {
+          // sizing by view port, step by 100px
+          var jqHtml = $('html'),
+            width = jqHtml.prop('clientWidth'),
+            height = jqHtml.prop('clientHeight');
+          width = width * 0.5;
+          height = height * 0.5;
+          width = Math.round(width / 100) * 100;
+          height = Math.round(height / 100) * 100;
+          if (width < 100) { width = 100; }
+          if (height < 100) { height = 100; }
+          this.width(width).height(height);
+          center(); // position to center.
+        }
+      });
+
+});
+</script>
+<!-- ================ /sample -->
+<!-- /include "sample_10.html" -->
+
 <h3 id="overlay"><code>overlay</code></h3>
 
 <p>Type: Object<br>Default: <code>{fillColor: &#39;#888&#39;, opacity: 0.6, zIndex: 9000}</code></p>
