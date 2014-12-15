@@ -31,7 +31,7 @@
 <div id="sample-01">
   <div class="plainmodal-close"></div>
   <h2>jQuery.plainModal</h2>
-  <h3>Not Gorgeous, But Free customizing</h3>
+  <h3>Not Gorgeous, but Free Customizing</h3>
   <p><img src="img/GitHub-Mark-120px-plus.png" width="120" height="120" alt="">This window is styled as a responsive web design. plainModal doesn't restrict any HTML structure and styles. It's not concerned about those.</p>
 </div>
 
@@ -242,7 +242,7 @@ $(function() {
 
 <p>Type: Object or Function<br>Default: Calculated center position</p>
 
-<p>A Object that has <code>left</code> and <code>top</code>, relative to the view area.</p>
+<p>An Object that has <code>left</code> and <code>top</code>, relative to the view area.</p>
 <div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#modal&#39;</span><span class="p">).</span><span class="nx">plainModal</span><span class="p">({</span><span class="nx">offset</span><span class="o">:</span> <span class="p">{</span><span class="nx">left</span><span class="o">:</span> <span class="mi">100</span><span class="p">,</span> <span class="nx">top</span><span class="o">:</span> <span class="mi">50</span><span class="p">}});</span>
 </code></pre></div>
 <!-- include "sample_03.html" -->
@@ -265,7 +265,7 @@ $(function() {
 <!-- ================ /sample -->
 <!-- /include "sample_03.html" -->
 
-<p>Or, a Function that returns above Object. This Function is called when the <code>open</code> method is called and the window is resized. Therefore the position be able to change according to the situation.</p>
+<p>Or, a Function that returns above Object. This Function is called when the modal window is opened and the window is resized. Therefore the position be able to change according to the situation.</p>
 <div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">button</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#open-button&#39;</span><span class="p">).</span><span class="nx">click</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
       <span class="nx">modal</span><span class="p">.</span><span class="nx">plainModal</span><span class="p">(</span><span class="s1">&#39;open&#39;</span><span class="p">);</span>
     <span class="p">}),</span>
@@ -314,7 +314,7 @@ $(function() {
 <!-- ================ /sample -->
 <!-- /include "sample_04.html" -->
 
-<p>Or, if the Function returns nothing, the position isn&#39;t changed. In this case, that Function will change the position. For example, this is used to positioning by <code>margin</code> instead of <code>left</code>/<code>top</code>.<br>Or, a <code>center</code> that is given to the Function is Function that positions modal window to center. For example, your Function do something that changes a size of the modal window, and it calls <code>center</code>.</p>
+<p>If the Function returns nothing, the position isn&#39;t changed. In this case, that Function will change the position. For example, positioning by <code>margin</code> instead of <code>left</code>/<code>top</code>.<br>A <code>center</code> Function that moves the modal window to center of the window is given to the Function. For example, your Function does something that changes a size of the modal window, and it calls a <code>center</code> to move the modal window to center of window.</p>
 <div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#modal&#39;</span><span class="p">).</span><span class="nx">plainModal</span><span class="p">({</span>
   <span class="nx">offset</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">center</span><span class="p">)</span> <span class="p">{</span>
     <span class="c1">// sizing by view port, step by 100px</span>
@@ -372,7 +372,7 @@ $(function() {
 
 <p>Type: Object<br>Default: <code>{fillColor: &#39;#888&#39;, opacity: 0.6, zIndex: 9000}</code></p>
 
-<p>A Object that can have <code>fillColor</code> (fill-color), <code>opacity</code> and <code>zIndex</code> of overlay.</p>
+<p>An Object that can have <code>fillColor</code> (fill-color), <code>opacity</code> and <code>zIndex</code> of overlay.</p>
 <div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#modal&#39;</span><span class="p">).</span><span class="nx">plainModal</span><span class="p">({</span><span class="nx">overlay</span><span class="o">:</span> <span class="p">{</span><span class="nx">fillColor</span><span class="o">:</span> <span class="s1">&#39;#fff&#39;</span><span class="p">,</span> <span class="nx">opacity</span><span class="o">:</span> <span class="mf">0.5</span><span class="p">}});</span>
 </code></pre></div>
 <!-- include "sample_05.html" -->
@@ -474,7 +474,7 @@ $(function() {
 
 <p>Type: Object<br>Default: <code>{open: jQuery.fn.fadeIn, close: jQuery.fn.fadeOut}</code></p>
 
-<p>A Object that can have <code>open</code> and <code>close</code> Functions for showing and hiding the modal window.<br>These Functions are called with <code>duration</code> Number (see above) and <code>complete</code> Function.<br>It&#39;s same to standard effect methods of jQuery (<code>slideDown</code>, <code>slideUp</code>, <code>animate</code>, etc.). Therefore, those methods can be specified.</p>
+<p>An Object that can have <code>open</code> and <code>close</code> Functions for showing and hiding the modal window.<br>These Functions are called with <code>duration</code> Number (see above) and <code>complete</code> Function.<br>It&#39;s same to standard effect methods of jQuery (<code>slideDown</code>, <code>slideUp</code>, <code>animate</code>, etc.). Therefore, those methods can be specified.</p>
 <div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#modal&#39;</span><span class="p">).</span><span class="nx">plainModal</span><span class="p">({</span><span class="nx">effect</span><span class="o">:</span> <span class="p">{</span><span class="nx">open</span><span class="o">:</span> <span class="nx">$</span><span class="p">.</span><span class="nx">fn</span><span class="p">.</span><span class="nx">slideDown</span><span class="p">,</span> <span class="nx">close</span><span class="o">:</span> <span class="nx">$</span><span class="p">.</span><span class="nx">fn</span><span class="p">.</span><span class="nx">slideUp</span><span class="p">}});</span>
 </code></pre></div>
 <p>Custom animation:</p>
