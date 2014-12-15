@@ -110,7 +110,7 @@ A Object that has `left` and `top`, relative to the view area.
 $('#modal').plainModal({offset: {left: 100, top: 50}});
 ```
 
-Or, a Function that returns above Object. This Function is called per every calling `open` method. Therefore position be able to change according to the situation.
+Or, a Function that returns above Object. This Function is called when the `open` method is called and the window is resized. Therefore the position be able to change according to the situation.
 
 ```js
 var button = $('#open-button').click(function() {
@@ -128,6 +128,18 @@ var button = $('#open-button').click(function() {
         };
       }
     });
+```
+
+Or, if the Function returns nothing, the position isn't changed. In this case, that Function will change the position. For example, this is used to positioning by `margin` instead of `left`/`top`.  
+Or, a `center` that is given to the Function is Function that positions modal window to center. For example, your Function do something that changes a size of the modal window, and it calls `center`.
+
+```js
+$('#modal').plainModal({
+  offset: function(center) {
+    this.find('#message').text(getMessage()); // A size may be changed.
+    center(); // position to center.
+  }
+});
 ```
 
 ### `overlay`
@@ -343,6 +355,7 @@ If your web site supports IE8- and it use `position:fixed`, HTML must include `<
 [plainOverlay](http://anseki.github.io/jquery-plainoverlay) may be better, if you want the overlay that covers a page, elements or iframe-windows.
 
 ## History
+ * 2014-12-15			v0.8.0			Call `options.offset` Function when window is resized. And add args and return value.
  * 2014-12-06			v0.7.0			Add custom events `plainmodalbeforeopen` and `plainmodalbeforeclose`
  * 2014-11-02			v0.6.4			Fix: touch devices scroll the window.
  * 2014-09-15			v0.6.2			Fix: The event handler by initialize is registered repeatedly.

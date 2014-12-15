@@ -41,7 +41,7 @@ function init(jq, options) {
       left:           0,
       top:            0,
       width:          '100%',
-      height:         '150%', // for Address Bar of Firefox for Android
+      height:         '150%', // for address bar of touch devices
       display:        'none'
     }).appendTo(jqBody = $('body')).click(modalClose)
       .on('touchmove', function() { return false; }); // avoid scroll on touch devices
@@ -65,17 +65,25 @@ function init(jq, options) {
           display:        'none',
           zIndex:         opt.zIndex
         };
+
     if (opt.offset) {
-      if (typeof opt.offset !== 'function') {
+      if (typeof opt.offset === 'function') {
+        opt.offset = (function(org) { // wrap with setCenter
+          return function() {
+            var that = this; // specified by caller.
+            return org.call(that, function() { setCenter.call(that); });
+          };
+        })(opt.offset);
+      } else { // static
         cssProp.left = opt.offset.left;
         cssProp.top = opt.offset.top;
       }
-      cssProp.marginLeft = cssProp.marginTop = ''; // for change
+      // cssProp.marginLeft = cssProp.marginTop = ''; // for change
+      // See setCenter()
     } else {
-      cssProp.left = cssProp.top = '50%';
-      cssProp.marginLeft = '-' + (that.outerWidth() / 2) + 'px';
-      cssProp.marginTop = '-' + (that.outerHeight() / 2) + 'px';
+      opt.offset = setCenter;
     }
+
     if (opt.closeClass) {
       that.find('.' + opt.closeClass).off('click', modalClose).click(modalClose);
     }
@@ -92,7 +100,7 @@ function init(jq, options) {
 }
 
 function modalOpen(jq, options) {
-  var jqTarget, opt, inlineStyles, calMarginR, calMarginB, offset, event;
+  var jqTarget, opt, inlineStyles, calMarginR, calMarginB, event;
   if (jqOpened === null && jq.length) {
     jqTarget = jq.eq(0); // only 1st
     if (options || !(opt = jqTarget.data(APP_NAME))) {
@@ -122,10 +130,7 @@ function modalOpen(jq, options) {
     winTop = jqWin.scrollTop();
     jqWin.scroll(avoidScroll);
 
-    if (typeof opt.offset === 'function') {
-      offset = opt.offset.call(jqTarget);
-      jqTarget.css({left: offset.left, top: offset.top});
-    }
+    callOffset(jqTarget, opt);
     // If duration is 0, callback is called now.
     opt.effect.open.call(jqTarget, opt.duration || 1, function() {
       jqTarget.find('a,input,select,textarea,button,object,area,img,map').each(function() {
@@ -176,11 +181,51 @@ function modalClose(jq) { // jq: target/event
   return jq;
 }
 
+function callOffset(jq, options) {
+  var offset;
+  options = options || jq.data(APP_NAME);
+  if (typeof options.offset === 'function' &&
+      (offset = options.offset.call(jq))) {
+    jq.css({left: offset.left, top: offset.top/*, marginLeft: '', marginTop: ''*/});
+    // See setCenter()
+  }
+}
+
+function setCenter() {
+/* jshint validthis:true */
+  var cssProp = {},
+    cur = this.data(APP_NAME + '-cur') || {}, // .data(APP_NAME) is shared
+    lastWidth = cur.width,
+    lastHeight = cur.height,
+    width = this.outerWidth(),
+    height = this.outerHeight();
+/* jshint validthis:false */
+  if (width === lastWidth && height === lastHeight) { return; }
+  if (lastWidth === undefined || lastHeight === undefined) { // first time
+    cssProp.left = cssProp.top = '50%';
+    /*
+      Now, I don't think changing offset option.
+      If I support it, setCenter() has to change `left`/`top` and margins every time.
+    */
+  }
+  cssProp.marginLeft = '-' + (width / 2) + 'px';
+  cssProp.marginTop = '-' + (height / 2) + 'px';
+/* jshint validthis:true */
+  this.css(cssProp).data(APP_NAME + '-cur', {width: width, height: height});
+/* jshint validthis:false */
+}
+
 function avoidScroll(e) {
   jqWin.scrollLeft(winLeft).scrollTop(winTop);
   e.preventDefault();
   return false;
 }
+
+$(function() {
+  $(window).resize(function() {
+    if (jqOpened) { callOffset(jqOpened); }
+  });
+});
 
 $.fn[APP_NAME] = function(action, options) {
   return (
