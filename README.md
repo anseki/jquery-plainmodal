@@ -136,7 +136,17 @@ Or, a `center` that is given to the Function is Function that positions modal wi
 ```js
 $('#modal').plainModal({
   offset: function(center) {
-    this.find('#message').text(getMessage()); // A size may be changed.
+    // sizing by view port, step by 100px
+    var jqHtml = $('html'),
+      width = jqHtml.prop('clientWidth'),
+      height = jqHtml.prop('clientHeight');
+    width = width * 0.5;
+    height = height * 0.5;
+    width = Math.round(width / 100) * 100;
+    height = Math.round(height / 100) * 100;
+    if (width < 100) { width = 100; }
+    if (height < 100) { height = 100; }
+    this.width(width).height(height);
     center(); // position to center.
   }
 });
