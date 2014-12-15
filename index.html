@@ -272,7 +272,7 @@ $(function() {
 <!-- ================ /sample -->
 <!-- /include "sample_03.html" -->
 
-<p>Or, a Function that returns above Object. This Function is called per every calling <code>open</code> method. Therefore position be able to change according to the situation.</p>
+<p>Or, a Function that returns above Object. This Function is called when the <code>open</code> method is called and the window is resized. Therefore the position be able to change according to the situation.</p>
 <div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">button</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#open-button&#39;</span><span class="p">).</span><span class="nx">click</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
       <span class="nx">modal</span><span class="p">.</span><span class="nx">plainModal</span><span class="p">(</span><span class="s1">&#39;open&#39;</span><span class="p">);</span>
     <span class="p">}),</span>
@@ -321,6 +321,14 @@ $(function() {
 <!-- ================ /sample -->
 <!-- /include "sample_04.html" -->
 
+<p>Or, if the Function returns nothing, the position isn&#39;t changed. In this case, that Function will change the position. For example, this is used to positioning by <code>margin</code> instead of <code>left</code>/<code>top</code>.<br>Or, a <code>center</code> that is given to the Function is Function that positions modal window to center. For example, your Function do something that changes a size of the modal window, and it calls <code>center</code>.</p>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#modal&#39;</span><span class="p">).</span><span class="nx">plainModal</span><span class="p">({</span>
+  <span class="nx">offset</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">center</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="s1">&#39;#message&#39;</span><span class="p">).</span><span class="nx">text</span><span class="p">(</span><span class="nx">getMessage</span><span class="p">());</span> <span class="c1">// A size may be changed.</span>
+    <span class="nx">center</span><span class="p">();</span> <span class="c1">// position to center.</span>
+  <span class="p">}</span>
+<span class="p">});</span>
+</code></pre></div>
 <h3 id="overlay"><code>overlay</code></h3>
 
 <p>Type: Object<br>Default: <code>{fillColor: &#39;#888&#39;, opacity: 0.6, zIndex: 9000}</code></p>
