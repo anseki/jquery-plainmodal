@@ -15,7 +15,7 @@ plainModal has basic functions for showing modal windows. That's all. The stylin
 plainModal do:
 
 - Showing specified element as modal window, and hiding it.
-- Covering a page with a overlay.
+- Covering a page with an overlay.
 - Avoiding focusing outside elements of the modal window. (by pressing Tab key)
 - Avoiding scrolling a page window.
 - Hiding the modal window when Escape key is pressed.
@@ -97,7 +97,7 @@ $('#open-button').click(function() {
 
 ## <a name ="options">Options</a>
 
-A `options` Object can be specified to `open` method or [Initialize](#initialize) method. This Object can have following properties.
+An `options` Object can be specified to `open` method or [Initialize](#initialize) method. This Object can have following properties.
 
 ### `offset`
 
@@ -270,6 +270,14 @@ Default: `options.overlay.zIndex + 1`
 
 A `z-index` CSS property of the modal window. This number have to be bigger than `options.overlay.zIndex`.
 
+### `force`
+
+Type: Boolean  
+Default: `false`
+
+The only one modal window can open in the one window. Therefore the `open` method is ignored when another modal window is already opened.  
+If the `open` method of the modal window that is set `true` to `force` is called when another modal window is already opened, another modal window is closed immediately, and the target modal window is opened.
+
 ### `open`, `close`, `beforeopen`, `beforeclose`
 
 Type: Function  
@@ -365,6 +373,7 @@ If your web site supports IE8- and it use `position:fixed`, HTML must include `<
 [plainOverlay](http://anseki.github.io/jquery-plainoverlay) may be better, if you want the overlay that covers a page, elements or iframe-windows.
 
 ## History
+ * 2014-12-16			v0.9.0			Add `options.force`
  * 2014-12-15			v0.8.0			Call `options.offset` Function when window is resized. And add args and return value.
  * 2014-12-06			v0.7.0			Add custom events `plainmodalbeforeopen` and `plainmodalbeforeclose`
  * 2014-11-02			v0.6.4			Fix: touch devices scroll the window.

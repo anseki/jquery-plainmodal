@@ -11,12 +11,19 @@
 
 var APP_NAME = 'plainModal',
     APP_PREFIX = APP_NAME.toLowerCase(),
-    EVENT_TYPE_OPEN = APP_PREFIX + 'open',
-    EVENT_TYPE_CLOSE = APP_PREFIX + 'close',
-    EVENT_TYPE_BEFOREOPEN = APP_PREFIX + 'beforeopen',
-    EVENT_TYPE_BEFORECLOSE = APP_PREFIX + 'beforeclose',
 
-    jqOpened = null, // jqOpened === null : Not opened / jqOpened === 0 : Fading now
+    EVENT_TYPE_OPEN         = APP_PREFIX + 'open',
+    EVENT_TYPE_CLOSE        = APP_PREFIX + 'close',
+    EVENT_TYPE_BEFOREOPEN   = APP_PREFIX + 'beforeopen',
+    EVENT_TYPE_BEFORECLOSE  = APP_PREFIX + 'beforeclose',
+
+    /*
+      jqOpened === null : Not opened
+      jqOpened === 0    : Fading now
+    */
+    jqOpened = null,
+
+    lockAction, jqNextOpen, jqFading,
     jqWin, jqBody, jqOverlay, jqActive, jq1st,
     orgOverflow, orgMarginR, orgMarginB,
     winLeft, winTop;
@@ -77,9 +84,8 @@ function init(jq, options) {
       } else { // static
         cssProp.left = opt.offset.left;
         cssProp.top = opt.offset.top;
+        cssProp.marginLeft = cssProp.marginTop = ''; // for change
       }
-      // cssProp.marginLeft = cssProp.marginTop = ''; // for change
-      // See setCenter()
     } else {
       opt.offset = setCenter;
     }
@@ -88,8 +94,10 @@ function init(jq, options) {
       that.find('.' + opt.closeClass).off('click', modalClose).click(modalClose);
     }
     // events
-    $.each([['open', EVENT_TYPE_OPEN], ['close', EVENT_TYPE_CLOSE],
-        ['beforeopen', EVENT_TYPE_BEFOREOPEN], ['beforeclose', EVENT_TYPE_BEFORECLOSE]], function(i, elm) {
+    $.each([['open', EVENT_TYPE_OPEN],
+        ['close', EVENT_TYPE_CLOSE],
+        ['beforeopen', EVENT_TYPE_BEFOREOPEN],
+        ['beforeclose', EVENT_TYPE_BEFORECLOSE]], function(i, elm) {
       var optName = elm[0], type = elm[1];
       if (typeof opt[optName] === 'function')
         { that.off(type, opt[optName]).on(type, opt[optName]); }
@@ -100,60 +108,76 @@ function init(jq, options) {
 }
 
 function modalOpen(jq, options) {
-  var jqTarget, opt, inlineStyles, calMarginR, calMarginB, event;
-  if (jqOpened === null && jq.length) {
-    jqTarget = jq.eq(0); // only 1st
-    if (options || !(opt = jqTarget.data(APP_NAME))) {
-      opt = init(jqTarget, options).data(APP_NAME);
-    }
+  var jqTarget = jq.length ? jq.eq(0) : undefined, // only 1st
+    opt, inlineStyles, calMarginR, calMarginB, event;
+  if (lockAction || !jqTarget) { return jq; }
 
+  if (options || !(opt = jqTarget.data(APP_NAME))) {
+    opt = init(jqTarget, options).data(APP_NAME);
+  }
+
+  if (!jqNextOpen && opt.force && jqFading && jqFading.get(0) !== jqTarget.get(0)) {
+    // Fix status immediately
+    jqFading.stop(true, true);
+    jqOverlay.stop(true, true);
+  }
+
+  if (!jqNextOpen && opt.force && jqOpened && jqOpened.get(0) !== jqTarget.get(0)) {
+    jqNextOpen = jqTarget; // options is saved to .data().
+    modalClose(jqOpened);
+  } else if (jqOpened === null) {
+    lockAction = true;
     // Event: beforeopen
     event = $.Event(EVENT_TYPE_BEFOREOPEN, {cancelable: true});
     jqTarget.trigger(event);
-    if (event.isDefaultPrevented()) { return jq; } // canceled
+    if (!event.isDefaultPrevented()) {
+      inlineStyles = jqBody.get(0).style;
+      orgOverflow = inlineStyles.overflow;
+      calMarginR = jqBody.prop('clientWidth');
+      calMarginB = jqBody.prop('clientHeight');
+      jqBody.css('overflow', 'hidden');
+      calMarginR -= jqBody.prop('clientWidth');
+      calMarginB -= jqBody.prop('clientHeight');
+      orgMarginR = inlineStyles.marginRight;
+      orgMarginB = inlineStyles.marginBottom;
+      if (calMarginR < 0) { jqBody.css('marginRight', '+=' + (-calMarginR)); }
+      if (calMarginB < 0) { jqBody.css('marginBottom', '+=' + (-calMarginB)); }
 
-    inlineStyles = jqBody.get(0).style;
-    orgOverflow = inlineStyles.overflow;
-    calMarginR = jqBody.prop('clientWidth');
-    calMarginB = jqBody.prop('clientHeight');
-    jqBody.css('overflow', 'hidden');
-    calMarginR -= jqBody.prop('clientWidth');
-    calMarginB -= jqBody.prop('clientHeight');
-    orgMarginR = inlineStyles.marginRight;
-    orgMarginB = inlineStyles.marginBottom;
-    if (calMarginR < 0) { jqBody.css('marginRight', '+=' + (-calMarginR)); }
-    if (calMarginB < 0) { jqBody.css('marginBottom', '+=' + (-calMarginB)); }
+      jqActive = $(document.activeElement).blur(); // Save activeElement
+      jq1st = null;
+      winLeft = jqWin.scrollLeft();
+      winTop = jqWin.scrollTop();
+      jqWin.scroll(avoidScroll);
 
-    jqActive = $(document.activeElement).blur(); // Save activeElement
-    jq1st = null;
-    winLeft = jqWin.scrollLeft();
-    winTop = jqWin.scrollTop();
-    jqWin.scroll(avoidScroll);
-
-    callOffset(jqTarget, opt);
-    // If duration is 0, callback is called now.
-    opt.effect.open.call(jqTarget, opt.duration || 1, function() {
-      jqTarget.find('a,input,select,textarea,button,object,area,img,map').each(function() {
-        var that = $(this);
-        if (that.focus().get(0) === document.activeElement) { // Can focus
-          jq1st = that;
-          return false;
-        }
+      callOffset(jqTarget, opt);
+      // If duration is 0, callback is called now.
+      opt.effect.open.call((jqFading = jqTarget), opt.duration || 1, function() {
+        jqFading = undefined;
+        jqTarget.find('a,input,select,textarea,button,object,area,img,map').each(function() {
+          var that = $(this);
+          if (that.focus().get(0) === document.activeElement) { // Can focus
+            jq1st = that;
+            return false;
+          }
+        });
+        jqOpened = jqTarget; // set before trigger()
+        // Event: open
+        jqTarget.trigger(EVENT_TYPE_OPEN);
       });
-      // Event: open
-      jqOpened = jqTarget.trigger(EVENT_TYPE_OPEN);
-    });
-    // Re-Style the overlay that is shared by all 'opt'.
-    jqOverlay.css({backgroundColor: opt.overlay.fillColor, zIndex: opt.overlay.zIndex})
-      .fadeTo(opt.duration, opt.overlay.opacity);
-    jqOpened = 0;
+      // Re-Style the overlay that is shared by all 'opt'.
+      jqOverlay.css({backgroundColor: opt.overlay.fillColor, zIndex: opt.overlay.zIndex})
+        .fadeTo(opt.duration, opt.overlay.opacity);
+      jqOpened = 0;
+    }
+    lockAction = false;
   }
   return jq;
 }
 
 function modalClose(jq) { // jq: target/event
-  var isEvent = jq instanceof $.Event, jqTarget, opt, event;
-  if (jqOpened) {
+  var isEvent = jq instanceof $.Event, jqTarget, opt, event, duration;
+  if (!lockAction && jqOpened) {
+    lockAction = true;
     jqTarget = isEvent ? jqOpened : (function() { // jqOpened in jq
       var index = jq.index(jqOpened);
       return index > -1 ? jq.eq(index) : undefined;
@@ -165,17 +189,30 @@ function modalClose(jq) { // jq: target/event
       if (!event.isDefaultPrevented()) {
         opt = jqTarget.data(APP_NAME);
         // If duration is 0, callback is called now.
-        opt.effect.close.call(jqTarget, opt.duration || 1, function() {
-          jqBody.css({overflow: orgOverflow, marginRight: orgMarginR, marginBottom: orgMarginB});
+        duration = jqNextOpen ? 1 : (opt.duration || 1);
+        opt.effect.close.call((jqFading = jqTarget), duration, function() {
+          jqFading = undefined;
+          jqBody.css({overflow: orgOverflow,
+            marginRight: orgMarginR, marginBottom: orgMarginB});
           if (jqActive && jqActive.length) { jqActive.focus(); } // Restore activeElement
           jqWin.off('scroll', avoidScroll).scrollLeft(winLeft).scrollTop(winTop);
+          jqOpened = null; // set before trigger()
+          // Event: close
           jqTarget.trigger(EVENT_TYPE_CLOSE);
-          jqOpened = null;
+          if (jqNextOpen) {
+            window.setTimeout(function() {
+              modalOpen(jqNextOpen);
+              jqNextOpen = undefined;
+            }, 0);
+          }
         });
-        jqOverlay.fadeOut(opt.duration);
+        jqOverlay.fadeOut(duration);
         jqOpened = 0;
+      } else {
+        jqNextOpen = undefined;
       }
     }
+    lockAction = false;
   }
   if (isEvent) { jq.preventDefault(); return false; }
   return jq;
@@ -186,32 +223,40 @@ function callOffset(jq, options) {
   options = options || jq.data(APP_NAME);
   if (typeof options.offset === 'function' &&
       (offset = options.offset.call(jq))) {
-    jq.css({left: offset.left, top: offset.top/*, marginLeft: '', marginTop: ''*/});
-    // See setCenter()
+    jq.css({left: offset.left, top: offset.top, marginLeft: '', marginTop: ''});
   }
 }
 
 function setCenter() {
-/* jshint validthis:true */
-  var cssProp = {},
+    /*
+  var
+    cssProp = {},
     cur = this.data(APP_NAME + '-cur') || {}, // .data(APP_NAME) is shared
     lastWidth = cur.width,
     lastHeight = cur.height,
     width = this.outerWidth(),
     height = this.outerHeight();
-/* jshint validthis:false */
   if (width === lastWidth && height === lastHeight) { return; }
   if (lastWidth === undefined || lastHeight === undefined) { // first time
     cssProp.left = cssProp.top = '50%';
-    /*
-      Now, I don't think changing offset option.
-      If I support it, setCenter() has to change `left`/`top` and margins every time.
-    */
   }
   cssProp.marginLeft = '-' + (width / 2) + 'px';
   cssProp.marginTop = '-' + (height / 2) + 'px';
-/* jshint validthis:true */
   this.css(cssProp).data(APP_NAME + '-cur', {width: width, height: height});
+  */
+
+  /*
+    The way of the positioning may be changed always.
+    Then set CSS properties everytime.
+  */
+
+/* jshint validthis:true */
+  this.css({
+    left: '50%',
+    top: '50%',
+    marginLeft: '-' + (this.outerWidth() / 2) + 'px',
+    marginTop: '-' + (this.outerHeight() / 2) + 'px'
+  });
 /* jshint validthis:false */
 }
 
