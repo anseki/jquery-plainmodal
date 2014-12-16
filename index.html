@@ -181,22 +181,16 @@ $(function() {
 
 <ul>
 <li>Showing specified element as modal window, and hiding it.</li>
-<li>Covering a page with a overlay.</li>
+<li>Covering a page with an overlay.</li>
 <li>Avoiding focusing outside elements of the modal window. (by pressing Tab key)</li>
 <li>Avoiding scrolling a page window.</li>
 <li>Hiding the modal window when Escape key is pressed.</li>
 </ul>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="c1">// Show modal window. &lt;div id=&quot;modal&quot;&gt; is styled via your CSS.</span>
-<span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#modal&#39;</span><span class="p">).</span><span class="nx">plainModal</span><span class="p">(</span><span class="s1">&#39;open&#39;</span><span class="p">);</span>
-<span class="c1">// Hide modal window.</span>
-<span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#modal&#39;</span><span class="p">).</span><span class="nx">plainModal</span><span class="p">(</span><span class="s1">&#39;close&#39;</span><span class="p">);</span>
-</code></pre></div>
+
 <h2 id="getting-started">Getting Started</h2>
 
 <p>Load after jQuery.</p>
-<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;jquery-1.11.0.min.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
-<span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;jquery.plainmodal.min.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
-</code></pre></div>
+
 <h2 id="methods">Methods</h2>
 
 <h3 id="open"><code>open</code></h3>
@@ -236,7 +230,7 @@ $(function() {
 </code></pre></div>
 <h2 id="options">Options</h2>
 
-<p>A <code>options</code> Object can be specified to <code>open</code> method or <a href="#initialize">Initialize</a> method. This Object can have following properties.</p>
+<p>An <code>options</code> Object can be specified to <code>open</code> method or <a href="#initialize">Initialize</a> method. This Object can have following properties.</p>
 
 <h3 id="offset"><code>offset</code></h3>
 
@@ -616,6 +610,12 @@ $(function() {
 <p>Type: Number<br>Default: <code>options.overlay.zIndex + 1</code></p>
 
 <p>A <code>z-index</code> CSS property of the modal window. This number have to be bigger than <code>options.overlay.zIndex</code>.</p>
+
+<h3 id="force"><code>force</code></h3>
+
+<p>Type: Boolean<br>Default: <code>false</code></p>
+
+<p>The only one modal window can open in the one window. Therefore the <code>open</code> method is ignored when another modal window is already opened.<br>If the <code>open</code> method of the modal window that is set <code>true</code> to <code>force</code> is called when another modal window is already opened, another modal window is closed immediately, and the target modal window is opened.</p>
 
 <h3 id="open,-close,-beforeopen,-beforeclose"><code>open</code>, <code>close</code>, <code>beforeopen</code>, <code>beforeclose</code></h3>
 
