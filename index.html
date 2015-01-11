@@ -186,11 +186,17 @@ $(function() {
 <li>Avoiding scrolling a page window.</li>
 <li>Hiding the modal window when Escape key is pressed.</li>
 </ul>
-
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="c1">// Show modal window. &lt;div id=&quot;modal&quot;&gt; is styled via your CSS.</span>
+<span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#modal&#39;</span><span class="p">).</span><span class="nx">plainModal</span><span class="p">(</span><span class="s1">&#39;open&#39;</span><span class="p">);</span>
+<span class="c1">// Hide modal window.</span>
+<span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#modal&#39;</span><span class="p">).</span><span class="nx">plainModal</span><span class="p">(</span><span class="s1">&#39;close&#39;</span><span class="p">);</span>
+</code></pre></div>
 <h2 id="getting-started">Getting Started</h2>
 
 <p>Load after jQuery.</p>
-
+<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;jquery-1.11.0.min.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;jquery.plainmodal.min.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+</code></pre></div>
 <h2 id="methods">Methods</h2>
 
 <h3 id="open"><code>open</code></h3>
