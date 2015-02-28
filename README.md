@@ -37,7 +37,7 @@ Load after jQuery.
 
 ## Methods
 
-### `open`
+### open
 
 ```js
 element.plainModal('open'[, options])
@@ -47,7 +47,7 @@ Show specified element as modal window.
 If `options` (see [Options](#options)) is specified, element is initialized with specified `options` before it is shown. If element is not initialized yet, element is initialized even if `options` is not specified.  
 An element can be initialized by new `options` any number of times.
 
-### `close`
+### close
 
 ```js
 element.plainModal('close')
@@ -99,7 +99,7 @@ $('#open-button').click(function() {
 
 An `options` Object can be specified to `open` method or [Initialize](#initialize) method. This Object can have following properties.
 
-### `offset`
+### offset
 
 Type: Object or Function  
 Default: Calculated center position
@@ -152,7 +152,7 @@ $('#modal').plainModal({
 });
 ```
 
-### `overlay`
+### overlay
 
 Type: Object  
 Default: `{fillColor: '#888', opacity: 0.6, zIndex: 9000}`
@@ -173,7 +173,7 @@ If you want to style the overlay more, add style to `plainmodal-overlay` class.
 }
 ```
 
-### `closeClass`
+### closeClass
 
 Type: String  
 Default: `'plainmodal-close'`
@@ -187,14 +187,14 @@ If the element that has this class name is found, the `close` method is attached
 </div>
 ```
 
-### `duration`
+### duration
 
 Type: Number  
 Default: `200`
 
 A number determining how long (milliseconds) the effect animation for showing and hiding the modal window will run.
 
-### `effect`
+### effect
 
 Type: Object  
 Default: `{open: jQuery.fn.fadeIn, close: jQuery.fn.fadeOut}`
@@ -263,14 +263,14 @@ $('#modal').plainModal({
 });
 ```
 
-### `zIndex`
+### zIndex
 
 Type: Number  
 Default: `options.overlay.zIndex + 1`
 
 A `z-index` CSS property of the modal window. This number have to be bigger than `options.overlay.zIndex`.
 
-### `force`
+### force
 
 Type: Boolean  
 Default: `false`
@@ -278,7 +278,7 @@ Default: `false`
 The only one modal window can open in the one window. Therefore the `open` method is ignored when another modal window is already opened.  
 If the `open` method of the modal window that is set `true` to `force` is called when another modal window is already opened, another modal window is closed immediately, and the target modal window is opened.
 
-### `open`, `close`, `beforeopen`, `beforeclose`
+### open, close, beforeopen, beforeclose
 
 Type: Function  
 Default: `undefined`
@@ -311,7 +311,7 @@ $('#open-button').click(function() {
 
 ## <a name ="events">Events</a>
 
-### `plainmodalopen`
+### plainmodalopen
 
 Triggered when the modal window is opened. (after the `effect.open` took `duration` to complete.)  
 An event handler can be attached when initializing too via `options.open`. (see [Options](#options))
@@ -322,7 +322,7 @@ $('#modal').on('plainmodalopen', function(event) {
 });
 ```
 
-### `plainmodalclose`
+### plainmodalclose
 
 Triggered when the modal window is closeed. (after the `effect.close` took `duration` to complete.)  
 An event handler can be attached when initializing too via `options.close`. (see [Options](#options))
@@ -333,7 +333,7 @@ $('#modal').on('plainmodalclose', function(event) {
 });
 ```
 
-### `plainmodalbeforeopen`
+### plainmodalbeforeopen
 
 Triggered before the modal window is opened.  
 An event handler can be attached when initializing too via `options.beforeopen`. (see [Options](#options))  
@@ -347,7 +347,7 @@ $('#modal').on('plainmodalbeforeopen', function(event) {
 });
 ```
 
-### `plainmodalbeforeclose`
+### plainmodalbeforeclose
 
 Triggered before the modal window is closeed.  
 An event handler can be attached when initializing too via `options.beforeclose`. (see [Options](#options))  
