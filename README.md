@@ -1,6 +1,6 @@
 # plainModal
 
-The simple jQuery Plugin for customizable modal windows. plainModal has basic functions only, and it does nothing for styles. It has no image files and no CSS files. Just one small file (2KB minified).
+The simple jQuery Plugin for customizable modal windows. plainModal has basic functions only, and it does nothing for styles. It has no image files and no CSS files. Just one small file.
 
 **See <a href="http://anseki.github.io/jquery-plainmodal">DEMO</a>**
 
@@ -380,9 +380,9 @@ var
     effect: {open: $.fn.fadeIn, close: specialFade}
   })
 
-  .on('plainmodalbeforeclose', function(e) {
+  .on('plainmodalbeforeclose', function(event) {
     var from, offset;
-    if (!(from = e.from)) { return; }
+    if (!(from = event.from)) { return; }
 
     if (from.type === 'keydown') {
       // If the user pushed the Escape key, (s)he is in a hurry.
@@ -398,7 +398,7 @@ var
           from.clientX <= offset.left + modal1.outerWidth() + 20 &&
           from.clientY >= offset.top -20 &&
           from.clientY <= offset.top + modal1.outerHeight() + 20) {
-        e.preventDefault(); // Stay opening.
+        event.preventDefault(); // Stay opening.
       }
 
     } else if (from.jquery) { // This is jQuery object. i.e. another modal.
