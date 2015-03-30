@@ -199,12 +199,12 @@ $(function() {
 </code></pre></div>
 <h2 id="methods">Methods</h2>
 
-<h3 id="open"><code>open</code></h3>
+<h3 id="open">open</h3>
 <div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">element</span><span class="p">.</span><span class="nx">plainModal</span><span class="p">(</span><span class="s1">&#39;open&#39;</span><span class="p">[,</span> <span class="nx">options</span><span class="p">])</span>
 </code></pre></div>
 <p>Show specified element as modal window.<br>If <code>options</code> (see <a href="#options">Options</a>) is specified, element is initialized with specified <code>options</code> before it is shown. If element is not initialized yet, element is initialized even if <code>options</code> is not specified.<br>An element can be initialized by new <code>options</code> any number of times.</p>
 
-<h3 id="close"><code>close</code></h3>
+<h3 id="close">close</h3>
 <div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">element</span><span class="p">.</span><span class="nx">plainModal</span><span class="p">(</span><span class="s1">&#39;close&#39;</span><span class="p">)</span>
 </code></pre></div>
 <p>Hide the modal window.</p>
@@ -238,7 +238,7 @@ $(function() {
 
 <p>An <code>options</code> Object can be specified to <code>open</code> method or <a href="#initialize">Initialize</a> method. This Object can have following properties.</p>
 
-<h3 id="offset"><code>offset</code></h3>
+<h3 id="offset">offset</h3>
 
 <p>Type: Object or Function<br>Default: Calculated center position</p>
 
@@ -368,7 +368,7 @@ $(function() {
 <!-- ================ /sample -->
 <!-- /include "sample_10.html" -->
 
-<h3 id="overlay"><code>overlay</code></h3>
+<h3 id="overlay">overlay</h3>
 
 <p>Type: Object<br>Default: <code>{fillColor: &#39;#888&#39;, opacity: 0.6, zIndex: 9000}</code></p>
 
@@ -433,7 +433,7 @@ $(function() {
 <!-- ================ /sample -->
 <!-- /include "sample_06.html" -->
 
-<h3 id="closeclass"><code>closeClass</code></h3>
+<h3 id="closeclass">closeClass</h3>
 
 <p>Type: String<br>Default: <code>&#39;plainmodal-close&#39;</code></p>
 
@@ -464,13 +464,13 @@ $(function() {
 <!-- ================ /sample -->
 <!-- /include "sample_07.html" -->
 
-<h3 id="duration"><code>duration</code></h3>
+<h3 id="duration">duration</h3>
 
 <p>Type: Number<br>Default: <code>200</code></p>
 
 <p>A number determining how long (milliseconds) the effect animation for showing and hiding the modal window will run.</p>
 
-<h3 id="effect"><code>effect</code></h3>
+<h3 id="effect">effect</h3>
 
 <p>Type: Object<br>Default: <code>{open: jQuery.fn.fadeIn, close: jQuery.fn.fadeOut}</code></p>
 
@@ -611,19 +611,19 @@ $(function() {
 <!-- ================ /sample -->
 <!-- /include "sample_09.html" -->
 
-<h3 id="zindex"><code>zIndex</code></h3>
+<h3 id="zindex">zIndex</h3>
 
 <p>Type: Number<br>Default: <code>options.overlay.zIndex + 1</code></p>
 
 <p>A <code>z-index</code> CSS property of the modal window. This number have to be bigger than <code>options.overlay.zIndex</code>.</p>
 
-<h3 id="force"><code>force</code></h3>
+<h3 id="force">force</h3>
 
 <p>Type: Boolean<br>Default: <code>false</code></p>
 
 <p>The only one modal window can open in the one window. Therefore the <code>open</code> method is ignored when another modal window is already opened.<br>If the <code>open</code> method of the modal window that is set <code>true</code> to <code>force</code> is called when another modal window is already opened, another modal window is closed immediately, and the target modal window is opened.</p>
 
-<h3 id="open,-close,-beforeopen,-beforeclose"><code>open</code>, <code>close</code>, <code>beforeopen</code>, <code>beforeclose</code></h3>
+<h3 id="open,-close,-beforeopen,-beforeclose">open, close, beforeopen, beforeclose</h3>
 
 <p>Type: Function<br>Default: <code>undefined</code></p>
 
@@ -643,21 +643,23 @@ $(function() {
 </code></pre></div>
 <h2 id="events">Events</h2>
 
-<h3 id="plainmodalopen"><code>plainmodalopen</code></h3>
+<h3 id="plainmodalopen">plainmodalopen</h3>
 
 <p>Triggered when the modal window is opened. (after the <code>effect.open</code> took <code>duration</code> to complete.)<br>An event handler can be attached when initializing too via <code>options.open</code>. (see <a href="#options">Options</a>)</p>
 <div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#modal&#39;</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;plainmodalopen&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
   <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;textarea&#39;</span><span class="p">,</span> <span class="nx">event</span><span class="p">.</span><span class="nx">target</span><span class="p">).</span><span class="nx">addClass</span><span class="p">(</span><span class="s1">&#39;highlight&#39;</span><span class="p">);</span>
 <span class="p">});</span>
 </code></pre></div>
-<h3 id="plainmodalclose"><code>plainmodalclose</code></h3>
+<h3 id="plainmodalclose">plainmodalclose</h3>
 
 <p>Triggered when the modal window is closeed. (after the <code>effect.close</code> took <code>duration</code> to complete.)<br>An event handler can be attached when initializing too via <code>options.close</code>. (see <a href="#options">Options</a>)</p>
 <div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#modal&#39;</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;plainmodalclose&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
   <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#screen&#39;</span><span class="p">).</span><span class="nx">show</span><span class="p">();</span>
 <span class="p">});</span>
 </code></pre></div>
-<h3 id="plainmodalbeforeopen"><code>plainmodalbeforeopen</code></h3>
+<p>In some cases, the Event object that is passed to the event handler has the <code>from</code> property. (see <code>plainmodalbeforeclose</code>)</p>
+
+<h3 id="plainmodalbeforeopen">plainmodalbeforeopen</h3>
 
 <p>Triggered before the modal window is opened.<br>An event handler can be attached when initializing too via <code>options.beforeopen</code>. (see <a href="#options">Options</a>)<br>This event is cancelable by calling <code>event.preventDefault()</code> in an event handler.</p>
 <div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#modal&#39;</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;plainmodalbeforeopen&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
@@ -666,7 +668,7 @@ $(function() {
   <span class="p">}</span>
 <span class="p">});</span>
 </code></pre></div>
-<h3 id="plainmodalbeforeclose"><code>plainmodalbeforeclose</code></h3>
+<h3 id="plainmodalbeforeclose">plainmodalbeforeclose</h3>
 
 <p>Triggered before the modal window is closeed.<br>An event handler can be attached when initializing too via <code>options.beforeclose</code>. (see <a href="#options">Options</a>)<br>This event is cancelable by calling <code>event.preventDefault()</code> in an event handler.</p>
 <div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#modal&#39;</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;plainmodalbeforeclose&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
@@ -675,6 +677,46 @@ $(function() {
     <span class="nx">event</span><span class="p">.</span><span class="nx">preventDefault</span><span class="p">();</span> <span class="c1">// Stay opening.</span>
   <span class="p">}</span>
 <span class="p">});</span>
+</code></pre></div>
+<p>When the event is fired by another event, the Event object that is passed to the event handler has the <code>from</code> property that is the Event object of another event. For example, when the modal window is closed by clicking the button that is specified <code>options.closeClass</code>, <code>from</code> property of Event object that is passed to <code>plainmodalbeforeclose</code> and <code>plainmodalclose</code> event handler is the Event object of that <code>click</code> event.<br>Or, when the modal window is closed by opening another modal window that <code>true</code> is specified to <code>options.force</code>, <code>from</code> property of Event object that is passed to <code>plainmodalbeforeclose</code> and <code>plainmodalclose</code> event handler is the another modal window.</p>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span>
+  <span class="nx">fastFade</span> <span class="o">=</span> <span class="kc">false</span><span class="p">,</span>
+  <span class="nx">specialFade</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">duration</span><span class="p">,</span> <span class="nx">cb</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">$</span><span class="p">.</span><span class="nx">fn</span><span class="p">.</span><span class="nx">fadeOut</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="nx">fastFade</span> <span class="o">?</span> <span class="mi">1</span> <span class="o">:</span> <span class="nx">duration</span><span class="p">,</span> <span class="nx">cb</span><span class="p">);</span>
+    <span class="nx">fastFade</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span> <span class="c1">// Reset</span>
+  <span class="p">},</span>
+
+  <span class="nx">modal1</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#modal1&#39;</span><span class="p">).</span><span class="nx">plainModal</span><span class="p">({</span>
+    <span class="nx">duration</span><span class="o">:</span> <span class="mi">500</span><span class="p">,</span>
+    <span class="nx">effect</span><span class="o">:</span> <span class="p">{</span><span class="nx">open</span><span class="o">:</span> <span class="nx">$</span><span class="p">.</span><span class="nx">fn</span><span class="p">.</span><span class="nx">fadeIn</span><span class="p">,</span> <span class="nx">close</span><span class="o">:</span> <span class="nx">specialFade</span><span class="p">}</span>
+  <span class="p">})</span>
+
+  <span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;plainmodalbeforeclose&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">from</span><span class="p">,</span> <span class="nx">offset</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="p">(</span><span class="nx">from</span> <span class="o">=</span> <span class="nx">e</span><span class="p">.</span><span class="nx">from</span><span class="p">))</span> <span class="p">{</span> <span class="k">return</span><span class="p">;</span> <span class="p">}</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="nx">from</span><span class="p">.</span><span class="nx">type</span> <span class="o">===</span> <span class="s1">&#39;keydown&#39;</span><span class="p">)</span> <span class="p">{</span>
+      <span class="c1">// If the user pushed the Escape key, (s)he is in a hurry.</span>
+      <span class="nx">fastFade</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+
+    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">from</span><span class="p">.</span><span class="nx">type</span> <span class="o">===</span> <span class="s1">&#39;click&#39;</span> <span class="o">&amp;&amp;</span>
+        <span class="nx">from</span><span class="p">.</span><span class="nx">currentTarget</span><span class="p">.</span><span class="nx">className</span> <span class="o">===</span> <span class="s1">&#39;plainmodal-overlay&#39;</span><span class="p">)</span> <span class="p">{</span>
+      <span class="c1">// If the user clicked the overlay that is too short</span>
+      <span class="c1">// distance from this small modal, (s)he might have mistaken.</span>
+      <span class="c1">// And ignore clicking.</span>
+      <span class="nx">offset</span> <span class="o">=</span> <span class="nx">modal1</span><span class="p">.</span><span class="nx">offset</span><span class="p">();</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">from</span><span class="p">.</span><span class="nx">clientX</span> <span class="o">&gt;=</span> <span class="nx">offset</span><span class="p">.</span><span class="nx">left</span> <span class="o">-</span> <span class="mi">20</span> <span class="o">&amp;&amp;</span>
+          <span class="nx">from</span><span class="p">.</span><span class="nx">clientX</span> <span class="o">&lt;=</span> <span class="nx">offset</span><span class="p">.</span><span class="nx">left</span> <span class="o">+</span> <span class="nx">modal1</span><span class="p">.</span><span class="nx">outerWidth</span><span class="p">()</span> <span class="o">+</span> <span class="mi">20</span> <span class="o">&amp;&amp;</span>
+          <span class="nx">from</span><span class="p">.</span><span class="nx">clientY</span> <span class="o">&gt;=</span> <span class="nx">offset</span><span class="p">.</span><span class="nx">top</span> <span class="o">-</span><span class="mi">20</span> <span class="o">&amp;&amp;</span>
+          <span class="nx">from</span><span class="p">.</span><span class="nx">clientY</span> <span class="o">&lt;=</span> <span class="nx">offset</span><span class="p">.</span><span class="nx">top</span> <span class="o">+</span> <span class="nx">modal1</span><span class="p">.</span><span class="nx">outerHeight</span><span class="p">()</span> <span class="o">+</span> <span class="mi">20</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">e</span><span class="p">.</span><span class="nx">preventDefault</span><span class="p">();</span> <span class="c1">// Stay opening.</span>
+      <span class="p">}</span>
+
+    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">from</span><span class="p">.</span><span class="nx">jquery</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// This is jQuery object. i.e. another modal.</span>
+      <span class="c1">// The another modal takes over this message.</span>
+      <span class="nx">from</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="s1">&#39;.warning-message&#39;</span><span class="p">).</span><span class="nx">text</span><span class="p">(</span><span class="nx">modal1</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="s1">&#39;.warning-message&#39;</span><span class="p">).</span><span class="nx">text</span><span class="p">());</span>
+    <span class="p">}</span>
+  <span class="p">});</span>
 </code></pre></div>
 <h2 id="note">Note</h2>
 
