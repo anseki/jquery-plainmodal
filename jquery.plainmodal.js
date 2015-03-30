@@ -2,7 +2,7 @@
  * jQuery.plainModal
  * https://github.com/anseki/jquery-plainmodal
  *
- * Copyright (c) 2014 anseki
+ * Copyright (c) 2015 anseki
  * Licensed under the MIT license.
  */
 
@@ -185,12 +185,15 @@ function modalClose(jq) { // jq: target/event
     if (jqTarget) {
       // Event: beforeclose
       event = $.Event(EVENT_TYPE_BEFORECLOSE, {cancelable: true});
+      if (isEvent) { event.from = jq; }
+      else if (jqNextOpen) { event.from = jqNextOpen; }
       jqTarget.trigger(event);
       if (!event.isDefaultPrevented()) {
         opt = jqTarget.data(APP_NAME);
         // If duration is 0, callback is called now.
         duration = jqNextOpen ? 1 : (opt.duration || 1);
         opt.effect.close.call((jqFading = jqTarget), duration, function() {
+          var event;
           jqFading = undefined;
           jqBody.css({overflow: orgOverflow,
             marginRight: orgMarginR, marginBottom: orgMarginB});
@@ -198,7 +201,10 @@ function modalClose(jq) { // jq: target/event
           jqWin.off('scroll', avoidScroll).scrollLeft(winLeft).scrollTop(winTop);
           jqOpened = null; // set before trigger()
           // Event: close
-          jqTarget.trigger(EVENT_TYPE_CLOSE);
+          event = $.Event(EVENT_TYPE_CLOSE);
+          if (isEvent) { event.from = jq; }
+          else if (jqNextOpen) { event.from = jqNextOpen; }
+          jqTarget.trigger(event);
           if (jqNextOpen) {
             window.setTimeout(function() {
               modalOpen(jqNextOpen);

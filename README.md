@@ -55,7 +55,7 @@ element.plainModal('close')
 
 Hide the modal window.
 
-### <a name ="initialize">Initialize</a>
+### Initialize
 
 ```js
 element.plainModal([options])
@@ -95,7 +95,7 @@ $('#open-button').click(function() {
 });
 ```
 
-## <a name ="options">Options</a>
+## Options
 
 An `options` Object can be specified to `open` method or [Initialize](#initialize) method. This Object can have following properties.
 
@@ -309,7 +309,7 @@ $('#open-button').click(function() {
 });
 ```
 
-## <a name ="events">Events</a>
+## Events
 
 ### plainmodalopen
 
@@ -332,6 +332,8 @@ $('#modal').on('plainmodalclose', function(event) {
   $('#screen').show();
 });
 ```
+
+In some cases, the Event object that is passed to the event handler has the `from` property. (see `plainmodalbeforeclose`)
 
 ### plainmodalbeforeopen
 
@@ -362,6 +364,50 @@ $('#modal').on('plainmodalbeforeclose', function(event) {
 });
 ```
 
+When the event is fired by another event, the Event object that is passed to the event handler has the `from` property that is the Event object of another event. For example, when the modal window is closed by clicking the button that is specified `options.closeClass`, `from` property of Event object that is passed to `plainmodalbeforeclose` and `plainmodalclose` event handler is the Event object of that `click` event.  
+Or, when the modal window is closed by opening another modal window that `true` is specified to `options.force`, `from` property of Event object that is passed to `plainmodalbeforeclose` and `plainmodalclose` event handler is the another modal window.
+
+```js
+var
+  fastFade = false,
+  specialFade = function (duration, cb) {
+    $.fn.fadeOut.call(this, fastFade ? 1 : duration, cb);
+    fastFade = false; // Reset
+  },
+
+  modal1 = $('#modal1').plainModal({
+    duration: 500,
+    effect: {open: $.fn.fadeIn, close: specialFade}
+  })
+
+  .on('plainmodalbeforeclose', function(e) {
+    var from, offset;
+    if (!(from = e.from)) { return; }
+
+    if (from.type === 'keydown') {
+      // If the user pushed the Escape key, (s)he is in a hurry.
+      fastFade = true;
+
+    } else if (from.type === 'click' &&
+        from.currentTarget.className === 'plainmodal-overlay') {
+      // If the user clicked the overlay that is too short
+      // distance from this small modal, (s)he might have mistaken.
+      // And ignore clicking.
+      offset = modal1.offset();
+      if (from.clientX >= offset.left - 20 &&
+          from.clientX <= offset.left + modal1.outerWidth() + 20 &&
+          from.clientY >= offset.top -20 &&
+          from.clientY <= offset.top + modal1.outerHeight() + 20) {
+        e.preventDefault(); // Stay opening.
+      }
+
+    } else if (from.jquery) { // This is jQuery object. i.e. another modal.
+      // The another modal takes over this message.
+      from.find('.warning-message').text(modal1.find('.warning-message').text());
+    }
+  });
+```
+
 ## Note
 
 - As everyone knows, IE8- has many problems. CSS `position:fixed` in HTML without `<!DOCTYPE>` is ignored.  
@@ -373,17 +419,13 @@ If your web site supports IE8- and it use `position:fixed`, HTML must include `<
 [plainOverlay](http://anseki.github.io/jquery-plainoverlay) may be better, if you want the overlay that covers a page, elements or iframe-windows.
 
 ## History
- * 2014-12-16			v0.9.0			Add `options.force`
- * 2014-12-15			v0.8.0			Call `options.offset` Function when window is resized. And add args and return value.
- * 2014-12-06			v0.7.0			Add custom events `plainmodalbeforeopen` and `plainmodalbeforeclose`
- * 2014-11-02			v0.6.4			Fix: touch devices scroll the window.
- * 2014-09-15			v0.6.2			Fix: The event handler by initialize is registered repeatedly.
- * 2014-07-19			v0.6.0			Rename `options.overlay.color` to `options.overlay.fillColor`.
- * 2014-06-30			v0.5.0			Add `plainmodal-overlay` class.
- * 2014-05-06			v0.4.1			Fix: If `options.duration` is 0, the status become invalid.
- * 2014-04-23			v0.4.0			Add custom events `plainmodalopen` and `plainmodalclose`
- * 2014-04-08			v0.3.2			Thicken overlay as default. (color, opacity)
- * 2014-03-10			v0.3.0			Add `options.zIndex` and `options.overlay.zIndex`
- * 2014-02-14			v0.2.0			`options.offset` accept Function
- * 2013-12-22			v0.1.1			Fix: scroll control
- * 2013-12-21			v0.1.0			Initial release.
+ * 2015-03-30           v0.10.0         Add `from` property.
+ * 2014-12-16           v0.9.0          Add `options.force`
+ * 2014-12-15           v0.8.0          Call `options.offset` Function when window is resized. And add args and return value.
+ * 2014-12-06           v0.7.0          Add custom events `plainmodalbeforeopen` and `plainmodalbeforeclose`
+ * 2014-07-19           v0.6.0          Rename `options.overlay.color` to `options.overlay.fillColor`.
+ * 2014-06-30           v0.5.0          Add `plainmodal-overlay` class.
+ * 2014-04-23           v0.4.0          Add custom events `plainmodalopen` and `plainmodalclose`
+ * 2014-03-10           v0.3.0          Add `options.zIndex` and `options.overlay.zIndex`
+ * 2014-02-14           v0.2.0          `options.offset` accept Function
+ * 2013-12-21           v0.1.0          Initial release.
