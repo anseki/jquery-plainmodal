@@ -22,7 +22,7 @@
   </header>
   <main>
 
-<p>The simple jQuery Plugin for customizable modal windows. plainModal has basic functions only, and it does nothing for styles. It has no image files and no CSS files. Just one small file (2KB minified).</p>
+<p>The simple jQuery Plugin for customizable modal windows. plainModal has basic functions only, and it does nothing for styles. It has no image files and no CSS files. Just one small file.</p>
 
 <!-- include "sample_01.html" -->
 <!-- ================ sample -->
@@ -691,9 +691,9 @@ $(function() {
     <span class="nx">effect</span><span class="o">:</span> <span class="p">{</span><span class="nx">open</span><span class="o">:</span> <span class="nx">$</span><span class="p">.</span><span class="nx">fn</span><span class="p">.</span><span class="nx">fadeIn</span><span class="p">,</span> <span class="nx">close</span><span class="o">:</span> <span class="nx">specialFade</span><span class="p">}</span>
   <span class="p">})</span>
 
-  <span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;plainmodalbeforeclose&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+  <span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;plainmodalbeforeclose&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
     <span class="kd">var</span> <span class="nx">from</span><span class="p">,</span> <span class="nx">offset</span><span class="p">;</span>
-    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="p">(</span><span class="nx">from</span> <span class="o">=</span> <span class="nx">e</span><span class="p">.</span><span class="nx">from</span><span class="p">))</span> <span class="p">{</span> <span class="k">return</span><span class="p">;</span> <span class="p">}</span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="p">(</span><span class="nx">from</span> <span class="o">=</span> <span class="nx">event</span><span class="p">.</span><span class="nx">from</span><span class="p">))</span> <span class="p">{</span> <span class="k">return</span><span class="p">;</span> <span class="p">}</span>
 
     <span class="k">if</span> <span class="p">(</span><span class="nx">from</span><span class="p">.</span><span class="nx">type</span> <span class="o">===</span> <span class="s1">&#39;keydown&#39;</span><span class="p">)</span> <span class="p">{</span>
       <span class="c1">// If the user pushed the Escape key, (s)he is in a hurry.</span>
@@ -709,7 +709,7 @@ $(function() {
           <span class="nx">from</span><span class="p">.</span><span class="nx">clientX</span> <span class="o">&lt;=</span> <span class="nx">offset</span><span class="p">.</span><span class="nx">left</span> <span class="o">+</span> <span class="nx">modal1</span><span class="p">.</span><span class="nx">outerWidth</span><span class="p">()</span> <span class="o">+</span> <span class="mi">20</span> <span class="o">&amp;&amp;</span>
           <span class="nx">from</span><span class="p">.</span><span class="nx">clientY</span> <span class="o">&gt;=</span> <span class="nx">offset</span><span class="p">.</span><span class="nx">top</span> <span class="o">-</span><span class="mi">20</span> <span class="o">&amp;&amp;</span>
           <span class="nx">from</span><span class="p">.</span><span class="nx">clientY</span> <span class="o">&lt;=</span> <span class="nx">offset</span><span class="p">.</span><span class="nx">top</span> <span class="o">+</span> <span class="nx">modal1</span><span class="p">.</span><span class="nx">outerHeight</span><span class="p">()</span> <span class="o">+</span> <span class="mi">20</span><span class="p">)</span> <span class="p">{</span>
-        <span class="nx">e</span><span class="p">.</span><span class="nx">preventDefault</span><span class="p">();</span> <span class="c1">// Stay opening.</span>
+        <span class="nx">event</span><span class="p">.</span><span class="nx">preventDefault</span><span class="p">();</span> <span class="c1">// Stay opening.</span>
       <span class="p">}</span>
 
     <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">from</span><span class="p">.</span><span class="nx">jquery</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// This is jQuery object. i.e. another modal.</span>
