@@ -12,7 +12,7 @@ Many great plugins already exist.
 The many web sites use same functions almost. And these have different styles.  
 plainModal has basic functions for showing modal windows. That's all. The styling it is your job. You can free style it to perfect match for your web site. Of course it can be responsive web design.
 
-plainModal do:
+plainModal does:
 
 - Showing specified element as modal window, and hiding it.
 - Covering a page with an overlay.
@@ -62,7 +62,7 @@ element.plainModal([options])
 ```
 
 Initialize specified element as modal window.  
-The `open` method can initialize too. This is used to initialize without showing the modal window at voluntary time.  
+The `open` method too, can initialize. This is used to initialize without showing the modal window at voluntary time.  
 You can specify `options` to every `open` method. But, if `options` of an element isn't changed, re-initializing it isn't needed. Then, you specify `options` to only first `open` method, or use this method for initializing it only once.  
 If you don't customize any options (using default all), this method isn't needed because `options` isn't specified to `open` method, and element is initialized at only first time.
 
@@ -314,7 +314,7 @@ $('#open-button').click(function() {
 ### plainmodalopen
 
 Triggered when the modal window is opened. (after the `effect.open` took `duration` to complete.)  
-An event handler can be attached when initializing too via `options.open`. (see [Options](#options))
+An event handler can be attached when initializing via `options.open` as well. (see [Options](#options))
 
 ```js
 $('#modal').on('plainmodalopen', function(event) {
@@ -325,7 +325,7 @@ $('#modal').on('plainmodalopen', function(event) {
 ### plainmodalclose
 
 Triggered when the modal window is closeed. (after the `effect.close` took `duration` to complete.)  
-An event handler can be attached when initializing too via `options.close`. (see [Options](#options))
+An event handler can be attached when initializing via `options.close` as well. (see [Options](#options))
 
 ```js
 $('#modal').on('plainmodalclose', function(event) {
@@ -338,7 +338,7 @@ In some cases, the Event object that is passed to the event handler has the `fro
 ### plainmodalbeforeopen
 
 Triggered before the modal window is opened.  
-An event handler can be attached when initializing too via `options.beforeopen`. (see [Options](#options))  
+An event handler can be attached when initializing via `options.beforeopen` as well. (see [Options](#options))  
 This event is cancelable by calling `event.preventDefault()` in an event handler.
 
 ```js
@@ -352,7 +352,7 @@ $('#modal').on('plainmodalbeforeopen', function(event) {
 ### plainmodalbeforeclose
 
 Triggered before the modal window is closeed.  
-An event handler can be attached when initializing too via `options.beforeclose`. (see [Options](#options))  
+An event handler can be attached when initializing via `options.beforeclose` as well. (see [Options](#options))  
 This event is cancelable by calling `event.preventDefault()` in an event handler.
 
 ```js
