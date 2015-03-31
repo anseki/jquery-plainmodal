@@ -177,7 +177,7 @@ $(function() {
 <!-- ================ /sample -->
 <!-- /include "sample_02.html" -->
 
-<p>plainModal do:</p>
+<p>plainModal does:</p>
 
 <ul>
 <li>Showing specified element as modal window, and hiding it.</li>
@@ -212,7 +212,7 @@ $(function() {
 <h3 id="initialize">Initialize</h3>
 <div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">element</span><span class="p">.</span><span class="nx">plainModal</span><span class="p">([</span><span class="nx">options</span><span class="p">])</span>
 </code></pre></div>
-<p>Initialize specified element as modal window.<br>The <code>open</code> method can initialize too. This is used to initialize without showing the modal window at voluntary time.<br>You can specify <code>options</code> to every <code>open</code> method. But, if <code>options</code> of an element isn&#39;t changed, re-initializing it isn&#39;t needed. Then, you specify <code>options</code> to only first <code>open</code> method, or use this method for initializing it only once.<br>If you don&#39;t customize any options (using default all), this method isn&#39;t needed because <code>options</code> isn&#39;t specified to <code>open</code> method, and element is initialized at only first time.</p>
+<p>Initialize specified element as modal window.<br>The <code>open</code> method too, can initialize. This is used to initialize without showing the modal window at voluntary time.<br>You can specify <code>options</code> to every <code>open</code> method. But, if <code>options</code> of an element isn&#39;t changed, re-initializing it isn&#39;t needed. Then, you specify <code>options</code> to only first <code>open</code> method, or use this method for initializing it only once.<br>If you don&#39;t customize any options (using default all), this method isn&#39;t needed because <code>options</code> isn&#39;t specified to <code>open</code> method, and element is initialized at only first time.</p>
 
 <p>In this code, unneeded initializing is done again, again, and again.</p>
 <div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#open-button&#39;</span><span class="p">).</span><span class="nx">click</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
@@ -645,14 +645,14 @@ $(function() {
 
 <h3 id="plainmodalopen">plainmodalopen</h3>
 
-<p>Triggered when the modal window is opened. (after the <code>effect.open</code> took <code>duration</code> to complete.)<br>An event handler can be attached when initializing too via <code>options.open</code>. (see <a href="#options">Options</a>)</p>
+<p>Triggered when the modal window is opened. (after the <code>effect.open</code> took <code>duration</code> to complete.)<br>An event handler can be attached when initializing via <code>options.open</code> as well. (see <a href="#options">Options</a>)</p>
 <div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#modal&#39;</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;plainmodalopen&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
   <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;textarea&#39;</span><span class="p">,</span> <span class="nx">event</span><span class="p">.</span><span class="nx">target</span><span class="p">).</span><span class="nx">addClass</span><span class="p">(</span><span class="s1">&#39;highlight&#39;</span><span class="p">);</span>
 <span class="p">});</span>
 </code></pre></div>
 <h3 id="plainmodalclose">plainmodalclose</h3>
 
-<p>Triggered when the modal window is closeed. (after the <code>effect.close</code> took <code>duration</code> to complete.)<br>An event handler can be attached when initializing too via <code>options.close</code>. (see <a href="#options">Options</a>)</p>
+<p>Triggered when the modal window is closeed. (after the <code>effect.close</code> took <code>duration</code> to complete.)<br>An event handler can be attached when initializing via <code>options.close</code> as well. (see <a href="#options">Options</a>)</p>
 <div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#modal&#39;</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;plainmodalclose&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
   <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#screen&#39;</span><span class="p">).</span><span class="nx">show</span><span class="p">();</span>
 <span class="p">});</span>
@@ -661,7 +661,7 @@ $(function() {
 
 <h3 id="plainmodalbeforeopen">plainmodalbeforeopen</h3>
 
-<p>Triggered before the modal window is opened.<br>An event handler can be attached when initializing too via <code>options.beforeopen</code>. (see <a href="#options">Options</a>)<br>This event is cancelable by calling <code>event.preventDefault()</code> in an event handler.</p>
+<p>Triggered before the modal window is opened.<br>An event handler can be attached when initializing via <code>options.beforeopen</code> as well. (see <a href="#options">Options</a>)<br>This event is cancelable by calling <code>event.preventDefault()</code> in an event handler.</p>
 <div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#modal&#39;</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;plainmodalbeforeopen&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
   <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">dataList</span><span class="p">.</span><span class="nx">ready</span><span class="p">)</span> <span class="p">{</span>
     <span class="nx">event</span><span class="p">.</span><span class="nx">preventDefault</span><span class="p">();</span> <span class="c1">// Don&#39;t open yet.</span>
@@ -670,7 +670,7 @@ $(function() {
 </code></pre></div>
 <h3 id="plainmodalbeforeclose">plainmodalbeforeclose</h3>
 
-<p>Triggered before the modal window is closeed.<br>An event handler can be attached when initializing too via <code>options.beforeclose</code>. (see <a href="#options">Options</a>)<br>This event is cancelable by calling <code>event.preventDefault()</code> in an event handler.</p>
+<p>Triggered before the modal window is closeed.<br>An event handler can be attached when initializing via <code>options.beforeclose</code> as well. (see <a href="#options">Options</a>)<br>This event is cancelable by calling <code>event.preventDefault()</code> in an event handler.</p>
 <div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#modal&#39;</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;plainmodalbeforeclose&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
   <span class="k">if</span> <span class="p">(</span><span class="nx">elmUserName</span><span class="p">.</span><span class="nx">val</span><span class="p">()</span> <span class="o">===</span> <span class="s1">&#39;&#39;</span><span class="p">)</span> <span class="p">{</span>
     <span class="nx">alert</span><span class="p">(</span><span class="s1">&#39;&quot;User Name&quot; is required.&#39;</span><span class="p">);</span>
