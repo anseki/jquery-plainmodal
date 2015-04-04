@@ -95,6 +95,14 @@ $('#open-button').click(function() {
 });
 ```
 
+### option
+
+```js
+currentValue = element.plainModal('option', optionName[, newValue])
+```
+
+Return the current option value (see [Options](#options)) as `optionName`. If `newValue` is specified, it is set before returning.
+
 ## Options
 
 An `options` Object can be specified to `open` method or [Initialize](#initialize) method. This Object can have following properties.
@@ -369,24 +377,19 @@ Or, when the modal window is closed by opening another modal window that `true` 
 
 ```js
 var
-  fastFade = false,
-  specialFade = function (duration, cb) {
-    $.fn.fadeOut.call(this, fastFade ? 1 : duration, cb);
-    fastFade = false; // Reset
-  },
-
-  modal1 = $('#modal1').plainModal({
-    duration: 500,
-    effect: {open: $.fn.fadeIn, close: specialFade}
-  })
+  modal1 = $('#modal1').plainModal({duration: 500})
 
   .on('plainmodalbeforeclose', function(event) {
-    var from, offset;
-    if (!(from = event.from)) { return; }
+    var from = event.from, orgDuration, offset;
+    if (!from) { return; }
 
     if (from.type === 'keydown') {
       // If the user pushed the Escape key, (s)he is in a hurry.
-      fastFade = true;
+      orgDuration = modal1.plainModal('option', 'duration');
+      modal1.one('plainmodalclose', function() {
+          modal1.plainModal('option', 'duration', orgDuration); // Restore
+        })
+        .plainModal('option', 'duration', 1); // Set to fast closing
 
     } else if (from.type === 'click' &&
         from.currentTarget.className === 'plainmodal-overlay') {
@@ -417,15 +420,3 @@ If your web site supports IE8- and it use `position:fixed`, HTML must include `<
 ## See Also
 
 [plainOverlay](http://anseki.github.io/jquery-plainoverlay) may be better, if you want the overlay that covers a page, elements or iframe-windows.
-
-## History
- * 2015-03-30           v0.10.0         Add `from` property.
- * 2014-12-16           v0.9.0          Add `options.force`
- * 2014-12-15           v0.8.0          Call `options.offset` Function when window is resized. And add args and return value.
- * 2014-12-06           v0.7.0          Add custom events `plainmodalbeforeopen` and `plainmodalbeforeclose`
- * 2014-07-19           v0.6.0          Rename `options.overlay.color` to `options.overlay.fillColor`.
- * 2014-06-30           v0.5.0          Add `plainmodal-overlay` class.
- * 2014-04-23           v0.4.0          Add custom events `plainmodalopen` and `plainmodalclose`
- * 2014-03-10           v0.3.0          Add `options.zIndex` and `options.overlay.zIndex`
- * 2014-02-14           v0.2.0          `options.offset` accept Function
- * 2013-12-21           v0.1.0          Initial release.

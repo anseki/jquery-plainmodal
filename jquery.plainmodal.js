@@ -272,17 +272,30 @@ function avoidScroll(e) {
   return false;
 }
 
+function setOption(jq, name, newValue) {
+  var jqTarget = jq.length ? jq.eq(0) : undefined, // only 1st
+    opt;
+  if (!jqTarget) { return; }
+  opt = jqTarget.data(APP_NAME) || init(jqTarget).data(APP_NAME);
+  if (!opt.hasOwnProperty(name)) { return; }
+/* jshint eqnull:true */
+  if (newValue != null) { opt[name] = newValue; }
+/* jshint eqnull:false */
+  return opt[name];
+}
+
 $(function() {
   $(window).resize(function() {
     if (jqOpened) { callOffset(jqOpened); }
   });
 });
 
-$.fn[APP_NAME] = function(action, options) {
+$.fn[APP_NAME] = function(action, arg1, arg2) {
   return (
-    action === 'open' ?   modalOpen(this, options) :
+    action === 'open' ?   modalOpen(this, arg1) :
     action === 'close' ?  modalClose(this) :
-                          init(this, action)); // options.
+    action === 'option' ? setOption(this, arg1, arg2) :
+                          init(this, action)); // action = options.
 };
 
 })(jQuery);
