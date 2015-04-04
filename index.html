@@ -234,6 +234,11 @@ $(function() {
   <span class="nx">modal</span><span class="p">.</span><span class="nx">plainModal</span><span class="p">(</span><span class="s1">&#39;open&#39;</span><span class="p">);</span>
 <span class="p">});</span>
 </code></pre></div>
+<h3 id="option">option</h3>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">currentValue</span> <span class="o">=</span> <span class="nx">element</span><span class="p">.</span><span class="nx">plainModal</span><span class="p">(</span><span class="s1">&#39;option&#39;</span><span class="p">,</span> <span class="nx">optionName</span><span class="p">[,</span> <span class="nx">newValue</span><span class="p">])</span>
+</code></pre></div>
+<p>Return the current option value (see <a href="#options">Options</a>) as <code>optionName</code>. If <code>newValue</code> is specified, it is set before returning.</p>
+
 <h2 id="options">Options</h2>
 
 <p>An <code>options</code> Object can be specified to <code>open</code> method or <a href="#initialize">Initialize</a> method. This Object can have following properties.</p>
@@ -680,24 +685,19 @@ $(function() {
 </code></pre></div>
 <p>When the event is fired by another event, the Event object that is passed to the event handler has the <code>from</code> property that is the Event object of another event. For example, when the modal window is closed by clicking the button that is specified <code>options.closeClass</code>, <code>from</code> property of Event object that is passed to <code>plainmodalbeforeclose</code> and <code>plainmodalclose</code> event handler is the Event object of that <code>click</code> event.<br>Or, when the modal window is closed by opening another modal window that <code>true</code> is specified to <code>options.force</code>, <code>from</code> property of Event object that is passed to <code>plainmodalbeforeclose</code> and <code>plainmodalclose</code> event handler is the another modal window.</p>
 <div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span>
-  <span class="nx">fastFade</span> <span class="o">=</span> <span class="kc">false</span><span class="p">,</span>
-  <span class="nx">specialFade</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">duration</span><span class="p">,</span> <span class="nx">cb</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nx">$</span><span class="p">.</span><span class="nx">fn</span><span class="p">.</span><span class="nx">fadeOut</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="nx">fastFade</span> <span class="o">?</span> <span class="mi">1</span> <span class="o">:</span> <span class="nx">duration</span><span class="p">,</span> <span class="nx">cb</span><span class="p">);</span>
-    <span class="nx">fastFade</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span> <span class="c1">// Reset</span>
-  <span class="p">},</span>
-
-  <span class="nx">modal1</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#modal1&#39;</span><span class="p">).</span><span class="nx">plainModal</span><span class="p">({</span>
-    <span class="nx">duration</span><span class="o">:</span> <span class="mi">500</span><span class="p">,</span>
-    <span class="nx">effect</span><span class="o">:</span> <span class="p">{</span><span class="nx">open</span><span class="o">:</span> <span class="nx">$</span><span class="p">.</span><span class="nx">fn</span><span class="p">.</span><span class="nx">fadeIn</span><span class="p">,</span> <span class="nx">close</span><span class="o">:</span> <span class="nx">specialFade</span><span class="p">}</span>
-  <span class="p">})</span>
+  <span class="nx">modal1</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#modal1&#39;</span><span class="p">).</span><span class="nx">plainModal</span><span class="p">({</span><span class="nx">duration</span><span class="o">:</span> <span class="mi">500</span><span class="p">})</span>
 
   <span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;plainmodalbeforeclose&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
-    <span class="kd">var</span> <span class="nx">from</span><span class="p">,</span> <span class="nx">offset</span><span class="p">;</span>
-    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="p">(</span><span class="nx">from</span> <span class="o">=</span> <span class="nx">event</span><span class="p">.</span><span class="nx">from</span><span class="p">))</span> <span class="p">{</span> <span class="k">return</span><span class="p">;</span> <span class="p">}</span>
+    <span class="kd">var</span> <span class="nx">from</span> <span class="o">=</span> <span class="nx">event</span><span class="p">.</span><span class="nx">from</span><span class="p">,</span> <span class="nx">orgDuration</span><span class="p">,</span> <span class="nx">offset</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">from</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span><span class="p">;</span> <span class="p">}</span>
 
     <span class="k">if</span> <span class="p">(</span><span class="nx">from</span><span class="p">.</span><span class="nx">type</span> <span class="o">===</span> <span class="s1">&#39;keydown&#39;</span><span class="p">)</span> <span class="p">{</span>
       <span class="c1">// If the user pushed the Escape key, (s)he is in a hurry.</span>
-      <span class="nx">fastFade</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+      <span class="nx">orgDuration</span> <span class="o">=</span> <span class="nx">modal1</span><span class="p">.</span><span class="nx">plainModal</span><span class="p">(</span><span class="s1">&#39;option&#39;</span><span class="p">,</span> <span class="s1">&#39;duration&#39;</span><span class="p">);</span>
+      <span class="nx">modal1</span><span class="p">.</span><span class="nx">one</span><span class="p">(</span><span class="s1">&#39;plainmodalclose&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+          <span class="nx">modal1</span><span class="p">.</span><span class="nx">plainModal</span><span class="p">(</span><span class="s1">&#39;option&#39;</span><span class="p">,</span> <span class="s1">&#39;duration&#39;</span><span class="p">,</span> <span class="nx">orgDuration</span><span class="p">);</span> <span class="c1">// Restore</span>
+        <span class="p">})</span>
+        <span class="p">.</span><span class="nx">plainModal</span><span class="p">(</span><span class="s1">&#39;option&#39;</span><span class="p">,</span> <span class="s1">&#39;duration&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span> <span class="c1">// Set to fast closing</span>
 
     <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">from</span><span class="p">.</span><span class="nx">type</span> <span class="o">===</span> <span class="s1">&#39;click&#39;</span> <span class="o">&amp;&amp;</span>
         <span class="nx">from</span><span class="p">.</span><span class="nx">currentTarget</span><span class="p">.</span><span class="nx">className</span> <span class="o">===</span> <span class="s1">&#39;plainmodal-overlay&#39;</span><span class="p">)</span> <span class="p">{</span>
