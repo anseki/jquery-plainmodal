@@ -103,6 +103,8 @@ currentValue = element.plainModal('option', optionName[, newValue])
 
 Return the current option value (see [Options](#options)) as `optionName`. If `newValue` is specified, it is set before returning.
 
+*NOTE:* The current version of the plainModal can change option value of `overlay`, `duration`, `effect` and `force`. Use [Initialize](#initialize) method to update option value of others.
+
 ## Options
 
 An `options` Object can be specified to `open` method or [Initialize](#initialize) method. This Object can have following properties.
@@ -341,7 +343,7 @@ $('#modal').on('plainmodalclose', function(event) {
 });
 ```
 
-In some cases, the Event object that is passed to the event handler has the `from` property. (see `plainmodalbeforeclose`)
+In some cases, the Event object that is passed to the event handler has the `from` property. (see [plainmodalbeforeclose](#plainmodalbeforeclose))
 
 ### plainmodalbeforeopen
 
