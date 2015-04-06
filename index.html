@@ -239,6 +239,8 @@ $(function() {
 </code></pre></div>
 <p>Return the current option value (see <a href="#options">Options</a>) as <code>optionName</code>. If <code>newValue</code> is specified, it is set before returning.</p>
 
+<p><em>NOTE:</em> The current version of the plainModal can change option value of <code>overlay</code>, <code>duration</code>, <code>effect</code> and <code>force</code>. Use <a href="#initialize">Initialize</a> method to update option value of others.</p>
+
 <h2 id="options">Options</h2>
 
 <p>An <code>options</code> Object can be specified to <code>open</code> method or <a href="#initialize">Initialize</a> method. This Object can have following properties.</p>
@@ -662,7 +664,7 @@ $(function() {
   <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#screen&#39;</span><span class="p">).</span><span class="nx">show</span><span class="p">();</span>
 <span class="p">});</span>
 </code></pre></div>
-<p>In some cases, the Event object that is passed to the event handler has the <code>from</code> property. (see <code>plainmodalbeforeclose</code>)</p>
+<p>In some cases, the Event object that is passed to the event handler has the <code>from</code> property. (see <a href="#plainmodalbeforeclose">plainmodalbeforeclose</a>)</p>
 
 <h3 id="plainmodalbeforeopen">plainmodalbeforeopen</h3>
 
