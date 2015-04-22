@@ -37,7 +37,7 @@ Load after jQuery.
 
 ## Methods
 
-### open
+### `open`
 
 ```js
 element.plainModal('open'[, options])
@@ -47,7 +47,7 @@ Show specified element as modal window.
 If `options` (see [Options](#options)) is specified, element is initialized with specified `options` before it is shown. If element is not initialized yet, element is initialized even if `options` is not specified.  
 An element can be initialized by new `options` any number of times.
 
-### close
+### `close`
 
 ```js
 element.plainModal('close')
@@ -62,9 +62,9 @@ element.plainModal([options])
 ```
 
 Initialize specified element as modal window.  
-The `open` method too, can initialize. This is used to initialize without showing the modal window at voluntary time.  
-You can specify `options` to every `open` method. But, if `options` of an element isn't changed, re-initializing it isn't needed. Then, you specify `options` to only first `open` method, or use this method for initializing it only once.  
-If you don't customize any options (using default all), this method isn't needed because `options` isn't specified to `open` method, and element is initialized at only first time.
+The [`open`](#open) method too, can initialize. This is used to initialize without showing the modal window at voluntary time.  
+You can specify `options` to every [`open`](#open) method. But, if `options` of an element isn't changed, re-initializing it isn't needed. Then, you specify `options` to only first [`open`](#open) method, or use this method for initializing it only once.  
+If you don't customize any options (using default all), this method isn't needed because `options` isn't specified to [`open`](#open) method, and element is initialized at only first time.
 
 In this code, unneeded initializing is done again, again, and again.
 
@@ -95,7 +95,7 @@ $('#open-button').click(function() {
 });
 ```
 
-### option
+### `option`
 
 ```js
 currentValue = element.plainModal('option', optionName[, newValue])
@@ -103,13 +103,13 @@ currentValue = element.plainModal('option', optionName[, newValue])
 
 Return the current option value (see [Options](#options)) as `optionName`. If `newValue` is specified, it is set before returning.
 
-*NOTE:* The current version of the plainModal can change option value of `overlay`, `duration`, `effect` and `force`. Use [Initialize](#initialize) method to update option value of others.
+*NOTE:* The current version of the plainModal can change option value of [`overlay`](#overlay), [`duration`](#duration), [`effect`](#effect) and [`force`](#force) options. Use [Initialize](#initialize) method to update option value of others.
 
 ## Options
 
-An `options` Object can be specified to `open` method or [Initialize](#initialize) method. This Object can have following properties.
+An `options` Object can be specified to [`open`](#open) method or [Initialize](#initialize) method. This Object can have following properties.
 
-### offset
+### `offset`
 
 Type: Object or Function  
 Default: Calculated center position
@@ -162,7 +162,7 @@ $('#modal').plainModal({
 });
 ```
 
-### overlay
+### `overlay`
 
 Type: Object  
 Default: `{fillColor: '#888', opacity: 0.6, zIndex: 9000}`
@@ -183,12 +183,12 @@ If you want to style the overlay more, add style to `plainmodal-overlay` class.
 }
 ```
 
-### closeClass
+### `closeClass`
 
 Type: String  
 Default: `'plainmodal-close'`
 
-If the element that has this class name is found, the `close` method is attached to `click` event of it.
+If the element that has this class name is found, the [`close`](#close) method is attached to `click` event of it.
 
 ```html
 <div>
@@ -197,20 +197,20 @@ If the element that has this class name is found, the `close` method is attached
 </div>
 ```
 
-### duration
+### `duration`
 
 Type: Number  
 Default: `200`
 
 A number determining how long (milliseconds) the effect animation for showing and hiding the modal window will run.
 
-### effect
+### `effect`
 
 Type: Object  
 Default: `{open: jQuery.fn.fadeIn, close: jQuery.fn.fadeOut}`
 
 An Object that can have `open` and `close` Functions for showing and hiding the modal window.  
-These Functions are called with `duration` Number (see above) and `complete` Function.  
+These Functions are called with [`options.duration`](#duration) Number (see above) and `complete` Function.  
 It's same to standard effect methods of jQuery (`slideDown`, `slideUp`, `animate`, etc.). Therefore, those methods can be specified.
 
 ```js
@@ -273,33 +273,33 @@ $('#modal').plainModal({
 });
 ```
 
-### zIndex
+### `zIndex`
 
 Type: Number  
 Default: `options.overlay.zIndex + 1`
 
-A `z-index` CSS property of the modal window. This number have to be bigger than `options.overlay.zIndex`.
+A `z-index` CSS property of the modal window. This number have to be bigger than `zIndex` of [`options.overlay`](#overlay).
 
-### force
+### `force`
 
 Type: Boolean  
 Default: `false`
 
-The only one modal window can open in the one window. Therefore the `open` method is ignored when another modal window is already opened.  
-If the `open` method of the modal window that is set `true` to `force` is called when another modal window is already opened, another modal window is closed immediately, and the target modal window is opened.
+The only one modal window can open in the one window. Therefore the [`open`](#open) method is ignored when another modal window is already opened.  
+If the [`open`](#open) method of the modal window that is set `true` to `force` is called when another modal window is already opened, another modal window is closed immediately, and the target modal window is opened.
 
-### open, close, beforeopen, beforeclose
+### `open`, `close`, `beforeopen`, `beforeclose`
 
 Type: Function  
 Default: `undefined`
 
-The `plainmodalopen`, `plainmodalclose`, `plainmodalbeforeopen` and `plainmodalbeforeclose` event handlers. This is convenient way to do `on(type, handler)` method. (see [Events](#events))
+The [`plainmodalopen`](#plainmodalopen), [`plainmodalclose`](#plainmodalclose), [`plainmodalbeforeopen`](#plainmodalbeforeopen) and [`plainmodalbeforeclose`](#plainmodalbeforeclose) event handlers. This is convenient way to do `on(type, handler)` method. (see [Events](#events))
 
 ```js
 $('#modal').plainModal({open: function(event) { console.log(event); } });
 ```
 
-*NOTE:* If this option is specified in the `open` method, declared Function or the variable the Function is assigned should be specified (Don't specify the function expression). Because the `open` method may be called again, and the *function expression* generates the new Function every time.  
+*NOTE:* If this option is specified in the [`open`](#open) method, declared Function or the variable the Function is assigned should be specified (Don't specify the function expression). Because the [`open`](#open) method may be called again, and the *function expression* generates the new Function every time.  
 The *"function statement"* and the *"function operator"* are different.  
 See [https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions#Defining_functions](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions#Defining_functions)  
 For example: this code is OK.
@@ -311,7 +311,7 @@ $('#open-button').click(function() {
 });
 ```
 
-This code registers event handler repeatedly when the `open` method is called.
+This code registers event handler repeatedly when the [`open`](#open) method is called.
 
 ```js
 $('#open-button').click(function() {
@@ -321,10 +321,10 @@ $('#open-button').click(function() {
 
 ## Events
 
-### plainmodalopen
+### `plainmodalopen`
 
-Triggered when the modal window is opened. (after the `effect.open` took `duration` to complete.)  
-An event handler can be attached when initializing via `options.open` as well. (see [Options](#options))
+Triggered when the modal window is opened. (after the `open` of [`options.effect`](#effect) took [`options.duration`](#duration) to complete.)  
+An event handler can be attached when initializing via [`options.open`](#open-close-beforeopen-beforeclose) as well.
 
 ```js
 $('#modal').on('plainmodalopen', function(event) {
@@ -332,10 +332,10 @@ $('#modal').on('plainmodalopen', function(event) {
 });
 ```
 
-### plainmodalclose
+### `plainmodalclose`
 
-Triggered when the modal window is closeed. (after the `effect.close` took `duration` to complete.)  
-An event handler can be attached when initializing via `options.close` as well. (see [Options](#options))
+Triggered when the modal window is closeed. (after the `close` of [`options.effect`](#effect) took [`options.duration`](#duration) to complete.)  
+An event handler can be attached when initializing via [`options.close`](#open-close-beforeopen-beforeclose) as well.
 
 ```js
 $('#modal').on('plainmodalclose', function(event) {
@@ -343,12 +343,12 @@ $('#modal').on('plainmodalclose', function(event) {
 });
 ```
 
-In some cases, the Event object that is passed to the event handler has the `from` property. (see [plainmodalbeforeclose](#plainmodalbeforeclose))
+In some cases, the Event object that is passed to the event handler has the `from` property. (see [plainmodalbeforeclose](#plainmodalbeforeclose) event)
 
-### plainmodalbeforeopen
+### `plainmodalbeforeopen`
 
 Triggered before the modal window is opened.  
-An event handler can be attached when initializing via `options.beforeopen` as well. (see [Options](#options))  
+An event handler can be attached when initializing via [`options.beforeopen`](#open-close-beforeopen-beforeclose) as well.  
 This event is cancelable by calling `event.preventDefault()` in an event handler.
 
 ```js
@@ -359,10 +359,10 @@ $('#modal').on('plainmodalbeforeopen', function(event) {
 });
 ```
 
-### plainmodalbeforeclose
+### `plainmodalbeforeclose`
 
 Triggered before the modal window is closeed.  
-An event handler can be attached when initializing via `options.beforeclose` as well. (see [Options](#options))  
+An event handler can be attached when initializing via [`options.beforeclose`](#open-close-beforeopen-beforeclose) as well.  
 This event is cancelable by calling `event.preventDefault()` in an event handler.
 
 ```js
@@ -374,8 +374,8 @@ $('#modal').on('plainmodalbeforeclose', function(event) {
 });
 ```
 
-When the event is fired by another event, the Event object that is passed to the event handler has the `from` property that is the Event object of another event. For example, when the modal window is closed by clicking the button that is specified `options.closeClass`, `from` property of Event object that is passed to `plainmodalbeforeclose` and `plainmodalclose` event handler is the Event object of that `click` event.  
-Or, when the modal window is closed by opening another modal window that `true` is specified to `options.force`, `from` property of Event object that is passed to `plainmodalbeforeclose` and `plainmodalclose` event handler is the another modal window.
+When the event is fired by another event, the Event object that is passed to the event handler has the `from` property that is the Event object of another event. For example, when the modal window is closed by clicking the button that is specified [`options.closeClass`](#closeclass), `from` property of Event object that is passed to `plainmodalbeforeclose` and [`plainmodalclose`](#plainmodalclose) event handler is the Event object of that `click` event.  
+Or, when the modal window is closed by opening another modal window that `true` is specified to [`options.force`](#force), `from` property of Event object that is passed to `plainmodalbeforeclose` and [`plainmodalclose`](#plainmodalclose) event handler is the another modal window.
 
 ```js
 var
