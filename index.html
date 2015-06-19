@@ -54,7 +54,7 @@ $(function() {
 <li>The simple plugins which has small functions and customizable styles.</li>
 </ul>
 
-<p>The many web sites use same functions almost. And these have different styles.<br>plainModal has basic functions for showing modal windows. That&#39;s all. The styling it is your job. You can free style it to perfect match for your web site. Of course it can be responsive web design.</p>
+<p>The many web sites use same functions almost. And these have different styles.<br>plainModal has basic functions for showing the modal windows. That&#39;s all. The styling it is your job. You can free style it to perfect match for your web site. Of course it can be responsive web design.</p>
 
 <!-- include "sample_02.html" -->
 <!-- ================ sample -->
@@ -65,7 +65,7 @@ $(function() {
   </div>
   <div class="col">
     <button id="sample-02b-button">Open Sample (SVG)</button>
-    <p>The styling it is your job. </p>
+    <p>The styling it is your job.</p>
   </div>
 </div>
 
@@ -177,10 +177,82 @@ $(function() {
 <!-- ================ /sample -->
 <!-- /include "sample_02.html" -->
 
+<!-- include "sample_13.html" -->
+<!-- ================ sample -->
+<p>Give to the modal window your favorite dress.</p>
+<div class="cols2">
+  <div class="col">
+    <button id="sample-13a-button">Open Sample</button>
+    <p>The style like <a href="http://getbootstrap.com/">Bootstrap</a>.</p>
+  </div>
+  <div class="col">
+    <button id="sample-13b-button">Open Sample</button>
+    <p>The style like <a href="http://foundation.zurb.com/">Foundation</a>.</p>
+  </div>
+</div>
+
+<div id="sample-13a">
+  <div class="modal-header">
+    <div class="plainmodal-close">&#215;</div>
+    <h4 class="modal-title">Modal title</h4>
+  </div>
+  <div class="modal-body">
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+  </div>
+  <div class="modal-footer">
+    <button class="plainmodal-close">Close</button>
+    <button class="plainmodal-close btn-primary">Save changes</button>
+  </div>
+</div>
+
+<div id="sample-13b">
+  <h4 class="modal-title">This is a modal.</h4>
+  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+  <div class="plainmodal-close">&#215;</div>
+</div>
+
+<script>
+$(function() {
+
+  var effect = {
+        open: function(duration, complete) {
+          this.css({
+            display:          'block',
+            opacity:          0,
+            top:              -50 - this.outerHeight(),
+            marginTop:        0
+          })
+          .animate({opacity: 1, top: 100}, duration, complete);
+        },
+        close: function(duration, complete) {
+          this.animate({
+            opacity:          0,
+            top:              -50 - this.outerHeight()
+          }, duration, function() {
+            $(this).css({display: 'none'});
+            complete();
+          });
+        }
+      },
+    modalA = $('#sample-13a').plainModal({effect: effect, duration: 500}),
+    modalB = $('#sample-13b').plainModal({effect: effect, duration: 300});
+
+  $('#sample-13a-button').click(function() { modalA.plainModal('open'); });
+  $('#sample-13b-button').click(function() { modalB.plainModal('open'); });
+
+});
+</script>
+<!-- ================ /sample -->
+<!-- /include "sample_13.html" -->
+
 <p>plainModal does:</p>
 
 <ul>
-<li>Showing specified element as modal window, and hiding it.</li>
+<li>Showing specified element as the modal window, and hiding it.</li>
 <li>Covering a page with an overlay.</li>
 <li>Avoiding focusing outside elements of the modal window. (by pressing Tab key)</li>
 <li>Avoiding scrolling a page window.</li>
@@ -202,7 +274,7 @@ $(function() {
 <h3 id="open"><code>open</code></h3>
 <div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">element</span><span class="p">.</span><span class="nx">plainModal</span><span class="p">(</span><span class="s1">&#39;open&#39;</span><span class="p">[,</span> <span class="nx">options</span><span class="p">])</span>
 </code></pre></div>
-<p>Show specified element as modal window.<br>If <code>options</code> (see <a href="#options">Options</a>) is specified, element is initialized with specified <code>options</code> before it is shown. If element is not initialized yet, element is initialized even if <code>options</code> is not specified.<br>An element can be initialized by new <code>options</code> any number of times.</p>
+<p>Show specified element as the modal window.<br>If <code>options</code> (see <a href="#options">Options</a>) is specified, element is initialized with specified <code>options</code> before it is shown. If element is not initialized yet, element is initialized even if <code>options</code> is not specified.<br>An element can be initialized by new <code>options</code> any number of times.</p>
 
 <h3 id="close"><code>close</code></h3>
 <div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">element</span><span class="p">.</span><span class="nx">plainModal</span><span class="p">(</span><span class="s1">&#39;close&#39;</span><span class="p">)</span>
@@ -212,7 +284,7 @@ $(function() {
 <h3 id="initialize">Initialize</h3>
 <div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">element</span><span class="p">.</span><span class="nx">plainModal</span><span class="p">([</span><span class="nx">options</span><span class="p">])</span>
 </code></pre></div>
-<p>Initialize specified element as modal window.<br>The <a href="#open"><code>open</code></a> method too, can initialize. This is used to initialize without showing the modal window at voluntary time.<br>You can specify <code>options</code> to every <a href="#open"><code>open</code></a> method. But, if <code>options</code> of an element isn&#39;t changed, re-initializing it isn&#39;t needed. Then, you specify <code>options</code> to only first <a href="#open"><code>open</code></a> method, or use this method for initializing it only once.<br>If you don&#39;t customize any options (using default all), this method isn&#39;t needed because <code>options</code> isn&#39;t specified to <a href="#open"><code>open</code></a> method, and element is initialized at only first time.</p>
+<p>Initialize specified element as the modal window.<br>The <a href="#open"><code>open</code></a> method too, can initialize. This is used to initialize without showing the modal window at voluntary time.<br>You can specify <code>options</code> to every <a href="#open"><code>open</code></a> method. But, if <code>options</code> of an element isn&#39;t changed, re-initializing it isn&#39;t needed. Then, you specify <code>options</code> to only first <a href="#open"><code>open</code></a> method, or use this method for initializing it only once.<br>If you don&#39;t customize any options (using default all), this method isn&#39;t needed because <code>options</code> isn&#39;t specified to <a href="#open"><code>open</code></a> method, and element is initialized at only first time.</p>
 
 <p>In this code, unneeded initializing is done again, again, and again.</p>
 <div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#open-button&#39;</span><span class="p">).</span><span class="nx">click</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
@@ -239,7 +311,7 @@ $(function() {
 </code></pre></div>
 <p>Return the current option value (see <a href="#options">Options</a>) as <code>optionName</code>. If <code>newValue</code> is specified, it is set before returning.</p>
 
-<p><em>NOTE:</em> The current version of the plainModal can change option value of <a href="#overlay"><code>overlay</code></a>, <a href="#duration"><code>duration</code></a>, <a href="#effect"><code>effect</code></a> and <a href="#force"><code>force</code></a> options. Use <a href="#initialize">Initialize</a> method to update option value of others.</p>
+<p><em>NOTE:</em> The current version of the plainModal can change option value of <a href="#overlay"><code>overlay</code></a>, <a href="#duration"><code>duration</code></a>, <a href="#effect"><code>effect</code></a>, <a href="#force"><code>force</code></a> and <a href="#fixoverlay"><code>fixOverlay</code></a> options. Use <a href="#initialize">Initialize</a> method to update option value of others.</p>
 
 <h2 id="options">Options</h2>
 
@@ -379,7 +451,7 @@ $(function() {
 
 <p>Type: Object<br>Default: <code>{fillColor: &#39;#888&#39;, opacity: 0.6, zIndex: 9000}</code></p>
 
-<p>An Object that can have <code>fillColor</code> (fill-color), <code>opacity</code> and <code>zIndex</code> of overlay.</p>
+<p>An Object that can have <code>fillColor</code> (fill-color), <code>opacity</code> and <code>zIndex</code> of the overlay.</p>
 <div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#modal&#39;</span><span class="p">).</span><span class="nx">plainModal</span><span class="p">({</span><span class="nx">overlay</span><span class="o">:</span> <span class="p">{</span><span class="nx">fillColor</span><span class="o">:</span> <span class="s1">&#39;#fff&#39;</span><span class="p">,</span> <span class="nx">opacity</span><span class="o">:</span> <span class="mf">0.5</span><span class="p">}});</span>
 </code></pre></div>
 <!-- include "sample_05.html" -->
@@ -456,7 +528,7 @@ $(function() {
 
 <div id="sample-07" class="sample-modal">
   <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-  <div class="plainmodal-close sample-close">Close</div>
+  <div class="sample-close"><span class="plainmodal-close sample-close">Close</span></div>
 </div>
 
 <script>
@@ -628,7 +700,134 @@ $(function() {
 
 <p>Type: Boolean<br>Default: <code>false</code></p>
 
-<p>The only one modal window can open in the one window. Therefore the <a href="#open"><code>open</code></a> method is ignored when another modal window is already opened.<br>If the <a href="#open"><code>open</code></a> method of the modal window that is set <code>true</code> to <code>force</code> is called when another modal window is already opened, another modal window is closed immediately, and the target modal window is opened.</p>
+<p>The only one modal window can open in the one window. Therefore the <a href="#open"><code>open</code></a> method is ignored when another modal window is already opened.<br>If the <a href="#open"><code>open</code></a> method of the modal window that is set <code>true</code> to <code>force</code> is called when another modal window is already opened, another modal window is closed immediately, and the target modal window is opened.<br>For example, a parent modal window is opened, and then a child modal window is opened. Now, a child modal window is active. When a child modal window is closed, a parent modal window is active again.</p>
+
+<!-- include "sample_11.html" -->
+<!-- ================ sample -->
+<p><button id="sample-11a-button">Open Sample</button></p>
+
+<div id="sample-11a" class="sample-modal">
+  <p>I am a parent modal window like e.g. the dialog box.</p>
+  <p><button id="sample-11b-button">Open Child</button></p>
+  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+  <div class="sample-close"><span class="plainmodal-close sample-close">Close</span></div>
+</div>
+
+<div id="sample-11b" class="sample-modal">
+  <p>I am a child modal window like e.g. the <code>alert</code> message.</p>
+  <div class="sample-close"><button class="plainmodal-close">OK</button></div>
+</div>
+
+<script>
+$(function() {
+
+  var parent = $('#sample-11a').plainModal()
+      .on('plainmodalclose', function(e) {
+        if (e.from && e.from.jquery && e.from.get(0) === child.get(0)) {
+          // child is opened
+          child.one('plainmodalclose', function() { // return to parent
+            setTimeout(function() { parent.plainModal('open'); }, 0);
+          });
+        }
+      }),
+    child = $('#sample-11b').plainModal({force: true});
+
+  $('#sample-11a-button').click(function() { parent.plainModal('open'); });
+  $('#sample-11b-button').click(function() { child.plainModal('open'); });
+
+});
+</script>
+<!-- ================ /sample -->
+<!-- /include "sample_11.html" -->
+
+<!-- include "sample_12.html" -->
+<!-- ================ sample -->
+<p>If you want to let a parent modal window stay while a child modal window is shown, use [`options.effect`](#effect).</p>
+<p><button id="sample-12a-button">Open Sample</button></p>
+
+<div id="sample-12a" class="sample-modal">
+  <p>I am a parent modal window like e.g. the dialog box.</p>
+  <p><button id="sample-12b-button">Open Child</button></p>
+  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+  <div class="sample-close"><span class="plainmodal-close sample-close">Close</span></div>
+</div>
+
+<div id="sample-12b" class="sample-modal">
+  <p>I am a child modal window like e.g. the <code>alert</code> message.</p>
+  <div class="sample-close"><button class="plainmodal-close">OK</button></div>
+</div>
+
+<script>
+$(function() {
+
+  var overlay, parentOverlay, parentEffectSave, childEffectSave,
+    parent = $('#sample-12a').plainModal()
+      .on('plainmodalbeforeclose', function(e) {
+        if (e.from && e.from.jquery && e.from.get(0) === child.get(0)) {
+          // child is opened
+          parentEffectSave = parent.plainModal('option', 'effect');
+          parent.plainModal('option', 'effect',
+            {open: avoidEffect, close: avoidEffect});
+          parent.plainModal('option', 'fixOverlay', true);
+
+          childEffectSave = child.plainModal('option', 'effect');
+          child.plainModal('option', 'effect',
+            {open: childOpen, close: childClose});
+          child.plainModal('option', 'fixOverlay', true);
+
+          child.one('plainmodalclose', function() { // return to parent
+            var parentDurationSave = parent.plainModal('option', 'duration');
+            parent.plainModal('option', 'duration', 1);
+            parent.one('plainmodalopen', function() { // Restore
+              parent.plainModal('option', 'effect', parentEffectSave);
+              parent.plainModal('option', 'fixOverlay', false);
+              parent.plainModal('option', 'duration', parentDurationSave);
+              child.plainModal('option', 'effect', childEffectSave);
+              child.plainModal('option', 'fixOverlay', false);
+            })
+            .plainModal('open');
+          });
+        }
+      }),
+    child = $('#sample-12b').plainModal({force: true});
+
+  function avoidEffect(duration, complete) { setTimeout(complete, 0); }
+
+  function childOpen(duration, complete) {
+    overlay = overlay || $('.plainmodal-overlay');
+    (parentOverlay = parentOverlay || overlay.clone(true)
+      .css({
+        backgroundColor: parent.plainModal('option', 'overlay').fillColor,
+        zIndex: parent.plainModal('option', 'zIndex')
+      })
+      .insertAfter(parent))
+    .css('display', 'none')
+    .fadeTo(duration, parent.plainModal('option', 'overlay').opacity);
+    overlay.fadeOut(duration);
+    childEffectSave.open.call(child, duration, complete);
+  }
+
+  function childClose(duration, complete) {
+    overlay.fadeTo(duration, parent.plainModal('option', 'overlay').opacity);
+    parentOverlay.fadeOut(duration);
+    childEffectSave.close.call(child, duration, complete);
+  }
+
+  $('#sample-12a-button').click(function() { parent.plainModal('open'); });
+  $('#sample-12b-button').click(function() { child.plainModal('open'); });
+
+});
+</script>
+<!-- ================ /sample -->
+<!-- /include "sample_12.html" -->
+
+<h3 id="fixoverlay"><code>fixOverlay</code></h3>
+
+<p>Type: Boolean<br>Default: <code>false</code></p>
+
+<p>If <code>true</code> is specified, the effects for showing and hiding the overlay are avoided.<br>For example, this is used to close a modal window and open another modal window, without a screen flickering. Note that the overlay stays when the modal window is closed before this option is reset to <code>false</code>.</p>
 
 <h3 id="open,-close,-beforeopen,-beforeclose"><code>open</code>, <code>close</code>, <code>beforeopen</code>, <code>beforeclose</code></h3>
 
@@ -637,13 +836,13 @@ $(function() {
 <p>The <a href="#plainmodalopen"><code>plainmodalopen</code></a>, <a href="#plainmodalclose"><code>plainmodalclose</code></a>, <a href="#plainmodalbeforeopen"><code>plainmodalbeforeopen</code></a> and <a href="#plainmodalbeforeclose"><code>plainmodalbeforeclose</code></a> event handlers. This is convenient way to do <code>on(type, handler)</code> method. (see <a href="#events">Events</a>)</p>
 <div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#modal&#39;</span><span class="p">).</span><span class="nx">plainModal</span><span class="p">({</span><span class="nx">open</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">event</span><span class="p">);</span> <span class="p">}</span> <span class="p">});</span>
 </code></pre></div>
-<p><em>NOTE:</em> If this option is specified in the <a href="#open"><code>open</code></a> method, declared Function or the variable the Function is assigned should be specified (Don&#39;t specify the function expression). Because the <a href="#open"><code>open</code></a> method may be called again, and the <em>function expression</em> generates the new Function every time.<br>The <em>&quot;function statement&quot;</em> and the <em>&quot;function operator&quot;</em> are different.<br>See <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions#Defining_functions">https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions#Defining_functions</a><br>For example: this code is OK.</p>
+<p><em>NOTE:</em> If this option is specified in the <a href="#open"><code>open</code></a> method, declared Function or the variable the Function is assigned should be specified (Don&#39;t specify the function expression). Because the <a href="#open"><code>open</code></a> method may be called again, and the <em>function expression</em> generates the new Function every time.<br>The <em>&quot;function statement&quot;</em> and the <em>&quot;function operator&quot;</em> are different.<br>See <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions#Defining_functions">https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions#Defining_functions</a><br>For example: this code is OK:</p>
 <div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">function</span> <span class="nx">handler</span><span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">event</span><span class="p">);</span> <span class="p">}</span>
 <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#open-button&#39;</span><span class="p">).</span><span class="nx">click</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
   <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#modal&#39;</span><span class="p">).</span><span class="nx">plainModal</span><span class="p">(</span><span class="s1">&#39;open&#39;</span><span class="p">,</span> <span class="p">{</span><span class="nx">open</span><span class="o">:</span> <span class="nx">handler</span><span class="p">});</span>
 <span class="p">});</span>
 </code></pre></div>
-<p>This code registers event handler repeatedly when the <a href="#open"><code>open</code></a> method is called.</p>
+<p>This code registers event handler repeatedly when the <a href="#open"><code>open</code></a> method is called:</p>
 <div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#open-button&#39;</span><span class="p">).</span><span class="nx">click</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
   <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#modal&#39;</span><span class="p">).</span><span class="nx">plainModal</span><span class="p">(</span><span class="s1">&#39;open&#39;</span><span class="p">,</span> <span class="p">{</span><span class="nx">open</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">event</span><span class="p">);</span> <span class="p">}</span> <span class="p">});</span>
 <span class="p">});</span>
