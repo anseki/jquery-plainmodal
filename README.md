@@ -10,11 +10,11 @@ Many great plugins already exist.
 - The simple plugins which has small functions and customizable styles.
 
 The many web sites use same functions almost. And these have different styles.  
-plainModal has basic functions for showing modal windows. That's all. The styling it is your job. You can free style it to perfect match for your web site. Of course it can be responsive web design.
+plainModal has basic functions for showing the modal windows. That's all. The styling it is your job. You can free style it to perfect match for your web site. Of course it can be responsive web design.
 
 plainModal does:
 
-- Showing specified element as modal window, and hiding it.
+- Showing specified element as the modal window, and hiding it.
 - Covering a page with an overlay.
 - Avoiding focusing outside elements of the modal window. (by pressing Tab key)
 - Avoiding scrolling a page window.
@@ -43,7 +43,7 @@ Load after jQuery.
 element.plainModal('open'[, options])
 ```
 
-Show specified element as modal window.  
+Show specified element as the modal window.  
 If `options` (see [Options](#options)) is specified, element is initialized with specified `options` before it is shown. If element is not initialized yet, element is initialized even if `options` is not specified.  
 An element can be initialized by new `options` any number of times.
 
@@ -61,7 +61,7 @@ Hide the modal window.
 element.plainModal([options])
 ```
 
-Initialize specified element as modal window.  
+Initialize specified element as the modal window.  
 The [`open`](#open) method too, can initialize. This is used to initialize without showing the modal window at voluntary time.  
 You can specify `options` to every [`open`](#open) method. But, if `options` of an element isn't changed, re-initializing it isn't needed. Then, you specify `options` to only first [`open`](#open) method, or use this method for initializing it only once.  
 If you don't customize any options (using default all), this method isn't needed because `options` isn't specified to [`open`](#open) method, and element is initialized at only first time.
@@ -103,7 +103,7 @@ currentValue = element.plainModal('option', optionName[, newValue])
 
 Return the current option value (see [Options](#options)) as `optionName`. If `newValue` is specified, it is set before returning.
 
-*NOTE:* The current version of the plainModal can change option value of [`overlay`](#overlay), [`duration`](#duration), [`effect`](#effect) and [`force`](#force) options. Use [Initialize](#initialize) method to update option value of others.
+*NOTE:* The current version of the plainModal can change option value of [`overlay`](#overlay), [`duration`](#duration), [`effect`](#effect), [`force`](#force) and [`fixOverlay`](#fixoverlay) options. Use [Initialize](#initialize) method to update option value of others.
 
 ## Options
 
@@ -167,7 +167,7 @@ $('#modal').plainModal({
 Type: Object  
 Default: `{fillColor: '#888', opacity: 0.6, zIndex: 9000}`
 
-An Object that can have `fillColor` (fill-color), `opacity` and `zIndex` of overlay.
+An Object that can have `fillColor` (fill-color), `opacity` and `zIndex` of the overlay.
 
 ```js
 $('#modal').plainModal({overlay: {fillColor: '#fff', opacity: 0.5}});
@@ -286,7 +286,16 @@ Type: Boolean
 Default: `false`
 
 The only one modal window can open in the one window. Therefore the [`open`](#open) method is ignored when another modal window is already opened.  
-If the [`open`](#open) method of the modal window that is set `true` to `force` is called when another modal window is already opened, another modal window is closed immediately, and the target modal window is opened.
+If the [`open`](#open) method of the modal window that is set `true` to `force` is called when another modal window is already opened, another modal window is closed immediately, and the target modal window is opened.  
+For example, a parent modal window is opened, and then a child modal window is opened. Now, a child modal window is active. When a child modal window is closed, a parent modal window is active again.
+
+### `fixOverlay`
+
+Type: Boolean  
+Default: `false`
+
+If `true` is specified, the effects for showing and hiding the overlay are avoided.  
+For example, this is used to close a modal window and open another modal window, without a screen flickering. Note that the overlay stays when the modal window is closed before this option is reset to `false`.
 
 ### `open`, `close`, `beforeopen`, `beforeclose`
 
@@ -302,7 +311,7 @@ $('#modal').plainModal({open: function(event) { console.log(event); } });
 *NOTE:* If this option is specified in the [`open`](#open) method, declared Function or the variable the Function is assigned should be specified (Don't specify the function expression). Because the [`open`](#open) method may be called again, and the *function expression* generates the new Function every time.  
 The *"function statement"* and the *"function operator"* are different.  
 See [https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions#Defining_functions](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions#Defining_functions)  
-For example: this code is OK.
+For example: this code is OK:
 
 ```js
 function handler(event) { console.log(event); }
@@ -311,7 +320,7 @@ $('#open-button').click(function() {
 });
 ```
 
-This code registers event handler repeatedly when the [`open`](#open) method is called.
+This code registers event handler repeatedly when the [`open`](#open) method is called:
 
 ```js
 $('#open-button').click(function() {

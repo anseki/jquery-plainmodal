@@ -35,6 +35,7 @@ function init(jq, options) {
         duration:       200,
         effect:         {open: $.fn.fadeIn, close: $.fn.fadeOut},
         overlay:        {opacity: 0.6, zIndex: 9000},
+        fixOverlay:     false,
         closeClass:     APP_PREFIX + '-close'
         // Optional: offset, open, close
       }, options);
@@ -117,9 +118,9 @@ function modalOpen(jq, options) {
   }
 
   if (!jqNextOpen && opt.force && jqFading && jqFading.get(0) !== jqTarget.get(0)) {
-    // Fix status immediately
+    // Another is fading now (open/close). Fix status immediately.
     jqFading.stop(true, true);
-    jqOverlay.stop(true, true);
+    jqOverlay.stop(true, !!opt.fixOverlay);
   }
 
   if (!jqNextOpen && opt.force && jqOpened && jqOpened.get(0) !== jqTarget.get(0)) {
@@ -164,9 +165,11 @@ function modalOpen(jq, options) {
         // Event: open
         jqTarget.trigger(EVENT_TYPE_OPEN);
       });
-      // Re-Style the overlay that is shared by all 'opt'.
-      jqOverlay.css({backgroundColor: opt.overlay.fillColor, zIndex: opt.overlay.zIndex})
-        .fadeTo(opt.duration, opt.overlay.opacity);
+      if (!opt.fixOverlay) {
+        // Re-Style the overlay that is shared by all 'opt'.
+        jqOverlay.css({backgroundColor: opt.overlay.fillColor, zIndex: opt.overlay.zIndex})
+          .fadeTo(opt.duration, opt.overlay.opacity);
+      }
       jqOpened = 0;
     }
     lockAction = false;
@@ -212,7 +215,7 @@ function modalClose(jq) { // jq: target/event
             }, 0);
           }
         });
-        jqOverlay.fadeOut(duration);
+        if (!jqNextOpen && !opt.fixOverlay) { jqOverlay.fadeOut(duration); }
         jqOpened = 0;
       } else {
         jqNextOpen = undefined;
