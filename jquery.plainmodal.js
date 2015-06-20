@@ -23,10 +23,9 @@ var APP_NAME = 'plainModal',
     */
     jqOpened = null,
 
-    lockAction, jqNextOpen, jqFading,
+    lockAction, jqNextOpen, jqInEffect,
     jqWin, jqBody, jqOverlay, jqActive, jq1st,
-    orgOverflow, orgMarginR, orgMarginB,
-    winLeft, winTop;
+    bodyStyleSave, winLeft, winTop;
 
 function init(jq, options) {
   // The options object is shared by all elements in jq.
@@ -117,9 +116,9 @@ function modalOpen(jq, options) {
     opt = init(jqTarget, options).data(APP_NAME);
   }
 
-  if (!jqNextOpen && opt.force && jqFading && jqFading.get(0) !== jqTarget.get(0)) {
+  if (!jqNextOpen && opt.force && jqInEffect && jqInEffect.get(0) !== jqTarget.get(0)) {
     // Another is fading now (open/close). Fix status immediately.
-    jqFading.stop(true, true);
+    jqInEffect.stop(true, true);
     jqOverlay.stop(true, !!opt.fixOverlay);
   }
 
@@ -132,39 +131,46 @@ function modalOpen(jq, options) {
     event = $.Event(EVENT_TYPE_BEFOREOPEN, {cancelable: true});
     jqTarget.trigger(event);
     if (!event.isDefaultPrevented()) {
-      inlineStyles = jqBody.get(0).style;
-      orgOverflow = inlineStyles.overflow;
-      calMarginR = jqBody.prop('clientWidth');
-      calMarginB = jqBody.prop('clientHeight');
-      jqBody.css('overflow', 'hidden');
-      calMarginR -= jqBody.prop('clientWidth');
-      calMarginB -= jqBody.prop('clientHeight');
-      orgMarginR = inlineStyles.marginRight;
-      orgMarginB = inlineStyles.marginBottom;
-      if (calMarginR < 0) { jqBody.css('marginRight', '+=' + (-calMarginR)); }
-      if (calMarginB < 0) { jqBody.css('marginBottom', '+=' + (-calMarginB)); }
+      if (!opt.fixOverlay && !bodyStyleSave) {
+        inlineStyles = jqBody.get(0).style;
+        bodyStyleSave = {overflow: inlineStyles.overflow};
+        calMarginR = jqBody.prop('clientWidth');
+        calMarginB = jqBody.prop('clientHeight');
+        jqBody.css('overflow', 'hidden');
+        calMarginR -= jqBody.prop('clientWidth');
+        calMarginB -= jqBody.prop('clientHeight');
+        bodyStyleSave.marginRight = inlineStyles.marginRight;
+        bodyStyleSave.marginBottom = inlineStyles.marginBottom;
+        if (calMarginR < 0) { jqBody.css('marginRight', '+=' + (-calMarginR)); }
+        if (calMarginB < 0) { jqBody.css('marginBottom', '+=' + (-calMarginB)); }
+      }
 
       jqActive = $(document.activeElement).blur(); // Save activeElement
       jq1st = null;
-      winLeft = jqWin.scrollLeft();
-      winTop = jqWin.scrollTop();
-      jqWin.scroll(avoidScroll);
+
+      if (!opt.fixOverlay && winLeft === undefined) {
+        winLeft = jqWin.scrollLeft();
+        winTop = jqWin.scrollTop();
+        jqWin.scroll(avoidScroll);
+      }
 
       callOffset(jqTarget, opt);
-      // If duration is 0, callback is called now.
-      opt.effect.open.call((jqFading = jqTarget), opt.duration || 1, function() {
-        jqFading = undefined;
-        jqTarget.find('a,input,select,textarea,button,object,area,img,map').each(function() {
-          var that = $(this);
-          if (that.focus().get(0) === document.activeElement) { // Can focus
-            jq1st = that;
-            return false;
-          }
+      // Add callback to the queue absolutely without depending on the effect.
+      window.setTimeout(function() {
+        opt.effect.open.call((jqInEffect = jqTarget), opt.duration, function() {
+          jqInEffect = undefined;
+          jqTarget.find('a,input,select,textarea,button,object,area,img,map').each(function() {
+            var that = $(this);
+            if (that.focus().get(0) === document.activeElement) { // Can focus
+              jq1st = that;
+              return false;
+            }
+          });
+          jqOpened = jqTarget; // set before trigger()
+          // Event: open
+          jqTarget.trigger(EVENT_TYPE_OPEN);
         });
-        jqOpened = jqTarget; // set before trigger()
-        // Event: open
-        jqTarget.trigger(EVENT_TYPE_OPEN);
-      });
+      }, 0);
       if (!opt.fixOverlay) {
         // Re-Style the overlay that is shared by all 'opt'.
         jqOverlay.css({backgroundColor: opt.overlay.fillColor, zIndex: opt.overlay.zIndex})
@@ -193,29 +199,38 @@ function modalClose(jq) { // jq: target/event
       jqTarget.trigger(event);
       if (!event.isDefaultPrevented()) {
         opt = jqTarget.data(APP_NAME);
-        // If duration is 0, callback is called now.
-        duration = jqNextOpen ? 1 : (opt.duration || 1);
-        opt.effect.close.call((jqFading = jqTarget), duration, function() {
-          var event;
-          jqFading = undefined;
-          jqBody.css({overflow: orgOverflow,
-            marginRight: orgMarginR, marginBottom: orgMarginB});
-          if (jqActive && jqActive.length) { jqActive.focus(); } // Restore activeElement
-          jqWin.off('scroll', avoidScroll).scrollLeft(winLeft).scrollTop(winTop);
-          jqOpened = null; // set before trigger()
-          // Event: close
-          event = $.Event(EVENT_TYPE_CLOSE);
-          if (isEvent) { event.from = jq; }
-          else if (jqNextOpen) { event.from = jqNextOpen; }
-          jqTarget.trigger(event);
-          if (jqNextOpen) {
-            window.setTimeout(function() {
+        duration = jqNextOpen ? 1 : opt.duration;
+        // Add callback to the queue absolutely without depending on the effect.
+        window.setTimeout(function() {
+          opt.effect.close.call((jqInEffect = jqTarget), duration, function() {
+            var event;
+            jqInEffect = undefined;
+            if (!opt.fixOverlay && bodyStyleSave && !jqNextOpen) {
+              jqBody.css(bodyStyleSave);
+              bodyStyleSave = undefined;
+            }
+
+            if (jqActive && jqActive.length) { jqActive.focus(); } // Restore activeElement
+
+            if (!opt.fixOverlay && winLeft !== undefined && !jqNextOpen) {
+              jqWin.off('scroll', avoidScroll).scrollLeft(winLeft).scrollTop(winTop);
+              winLeft = undefined;
+            }
+
+            jqOpened = null; // set before trigger()
+            // Event: close
+            event = $.Event(EVENT_TYPE_CLOSE);
+            if (isEvent) { event.from = jq; }
+            else if (jqNextOpen) { event.from = jqNextOpen; }
+            jqTarget.trigger(event);
+
+            if (jqNextOpen) {
               modalOpen(jqNextOpen);
               jqNextOpen = undefined;
-            }, 0);
-          }
-        });
-        if (!jqNextOpen && !opt.fixOverlay) { jqOverlay.fadeOut(duration); }
+            }
+          });
+        }, 0);
+        if (!opt.fixOverlay && !jqNextOpen) { jqOverlay.fadeOut(duration); }
         jqOpened = 0;
       } else {
         jqNextOpen = undefined;
