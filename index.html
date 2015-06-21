@@ -281,6 +281,15 @@ $(function() {
 </code></pre></div>
 <p>Hide the modal window.</p>
 
+<h3 id="blur"><code>blur</code></h3>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">element</span><span class="p">.</span><span class="nx">plainModal</span><span class="p">(</span><span class="s1">&#39;blur&#39;</span><span class="p">[,</span> <span class="nx">on</span><span class="p">[,</span> <span class="nx">duration</span><span class="p">[,</span> <span class="nx">complete</span><span class="p">]]])</span>
+</code></pre></div>
+<p>Let the modal window go under the overlay. If <code>false</code> is specified to <code>on</code> argument, restore the modal window. The default is <code>true</code>.<br>Note that this method works without depending on the current status of the modal window and it doesn&#39;t change the status. Therefore, you must restore it after. <em>If you want to let a parent modal window stay while a child modal window is shown, you should consider <a href="#child"><code>options.child</code></a> option.</em></p>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#modal&#39;</span><span class="p">).</span><span class="nx">plainModal</span><span class="p">({</span><span class="nx">effect</span><span class="o">:</span> <span class="p">{</span>
+  <span class="nx">open</span><span class="o">:</span> <span class="nx">$</span><span class="p">.</span><span class="nx">fn</span><span class="p">.</span><span class="nx">slideDown</span><span class="p">,</span>
+  <span class="nx">close</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span> <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">plainModal</span><span class="p">(</span><span class="s1">&#39;blur&#39;</span><span class="p">);</span> <span class="p">}</span>
+<span class="p">}});</span>
+</code></pre></div>
 <h3 id="initialize">Initialize</h3>
 <div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">element</span><span class="p">.</span><span class="nx">plainModal</span><span class="p">([</span><span class="nx">options</span><span class="p">])</span>
 </code></pre></div>
@@ -696,11 +705,54 @@ $(function() {
 
 <p>A <code>z-index</code> CSS property of the modal window. This number have to be bigger than <code>zIndex</code> of <a href="#overlay"><code>options.overlay</code></a>.</p>
 
+<h3 id="child"><code>child</code></h3>
+
+<p>Type: jQuery object<br>Default: <code>undefined</code></p>
+
+<p>A child modal window or multiple child modal windows.<br>A parent modal window is opened, and then a child modal window is opened. Now, a child modal window is active and a parent modal window is blurred. And when a child modal window is closed, a parent modal window is active again.</p>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">child</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#child&#39;</span><span class="p">).</span><span class="nx">plainModal</span><span class="p">(),</span>
+  <span class="nx">parent</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#parent&#39;</span><span class="p">).</span><span class="nx">plainModal</span><span class="p">({</span><span class="nx">child</span><span class="o">:</span> <span class="nx">child</span><span class="p">});</span>
+
+<span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#main-button&#39;</span><span class="p">).</span><span class="nx">click</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span> <span class="nx">parent</span><span class="p">.</span><span class="nx">plainModal</span><span class="p">(</span><span class="s1">&#39;open&#39;</span><span class="p">);</span> <span class="p">});</span>
+<span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#button-in-parent&#39;</span><span class="p">).</span><span class="nx">click</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span> <span class="nx">child</span><span class="p">.</span><span class="nx">plainModal</span><span class="p">(</span><span class="s1">&#39;open&#39;</span><span class="p">);</span> <span class="p">});</span>
+</code></pre></div>
+<!-- include "sample_12.html" -->
+<!-- ================ sample -->
+<p><button id="sample-12a-button">Open Sample</button></p>
+
+<div id="sample-12a" class="sample-modal">
+  <p>I am a parent modal window like e.g. the dialog box.</p>
+  <p><input type="text" value="Lorem ipsum dolor sit amet, consectetur"></p>
+  <p><button id="sample-12b-button">Open Child</button></p>
+  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+  <div class="sample-close"><span class="plainmodal-close sample-close">Close</span></div>
+</div>
+
+<div id="sample-12b" class="sample-modal">
+  <p>I am a child modal window like e.g. the <code>alert</code> message.</p>
+  <div class="sample-close"><button class="plainmodal-close">OK</button></div>
+</div>
+
+<script>
+$(function() {
+
+  var child = $('#sample-12b').plainModal({duration: 500}),
+    parent = $('#sample-12a').plainModal({child: child});
+
+  $('#sample-12a-button').click(function() { parent.plainModal('open'); });
+  $('#sample-12b-button').click(function() { child.plainModal('open'); });
+
+});
+</script>
+<!-- ================ /sample -->
+<!-- /include "sample_12.html" -->
+
 <h3 id="force"><code>force</code></h3>
 
 <p>Type: Boolean<br>Default: <code>false</code></p>
 
-<p>The only one modal window can open in the one window. Therefore the <a href="#open"><code>open</code></a> method is ignored when another modal window is already opened.<br>If the <a href="#open"><code>open</code></a> method of the modal window that is set <code>true</code> to <code>force</code> is called when another modal window is already opened, another modal window is closed immediately, and the target modal window is opened.<br>For example, a parent modal window is opened, and then a child modal window is opened. Now, a child modal window is active. When a child modal window is closed, a parent modal window is active again.</p>
+<p>The only one modal window can open in the one window. Therefore the <a href="#open"><code>open</code></a> method is ignored when another modal window is already opened.<br>If the <a href="#open"><code>open</code></a> method of the modal window that is set <code>true</code> to <code>force</code> is called when another modal window is already opened, another modal window is closed immediately, and the target modal window is opened.<br><em>If you want to let a child modal window open when a parent modal window is opened, you should consider <a href="#child"><code>options.child</code></a> option.</em></p>
 
 <!-- include "sample_11.html" -->
 <!-- ================ sample -->
@@ -741,89 +793,6 @@ $(function() {
 </script>
 <!-- ================ /sample -->
 <!-- /include "sample_11.html" -->
-
-<!-- include "sample_12.html" -->
-<!-- ================ sample -->
-<p>If you want to let a parent modal window stay while a child modal window is shown, use <a href="#effect"><code>options.effect</code></a>.</p>
-<p><button id="sample-12a-button">Open Sample</button></p>
-
-<div id="sample-12a" class="sample-modal">
-  <p>I am a parent modal window like e.g. the dialog box.</p>
-  <p><input type="text" value="Lorem ipsum dolor sit amet, consectetur"></p>
-  <p><button id="sample-12b-button">Open Child</button></p>
-  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-  <div class="sample-close"><span class="plainmodal-close sample-close">Close</span></div>
-</div>
-
-<div id="sample-12b" class="sample-modal">
-  <p>I am a child modal window like e.g. the <code>alert</code> message.</p>
-  <div class="sample-close"><button class="plainmodal-close">OK</button></div>
-</div>
-
-<script>
-$(function() {
-
-  var overlay, parentOverlay, parentEffectSave, childEffectSave,
-    parent = $('#sample-12a').plainModal()
-      .on('plainmodalbeforeclose', function(e) {
-        if (e.from && e.from.jquery && e.from.get(0) === child.get(0)) {
-          // child is opened
-          parentEffectSave = parent.plainModal('option', 'effect');
-          parent.plainModal('option', 'effect',
-            {open: avoidEffect, close: avoidEffect});
-          parent.plainModal('option', 'fixOverlay', true);
-
-          childEffectSave = child.plainModal('option', 'effect');
-          child.plainModal('option', 'effect',
-            {open: childOpen, close: childClose});
-          child.plainModal('option', 'fixOverlay', true);
-
-          child.one('plainmodalclose', function() { // return to parent
-            var parentDurationSave = parent.plainModal('option', 'duration');
-            parent.plainModal('option', 'duration', 1);
-            parent.one('plainmodalopen', function() { // Restore
-              parent.plainModal('option', 'effect', parentEffectSave);
-              parent.plainModal('option', 'fixOverlay', false);
-              parent.plainModal('option', 'duration', parentDurationSave);
-              child.plainModal('option', 'effect', childEffectSave);
-              child.plainModal('option', 'fixOverlay', false);
-            })
-            .plainModal('open');
-          });
-        }
-      }),
-    child = $('#sample-12b').plainModal({force: true});
-
-  function avoidEffect(duration, complete) { setTimeout(complete, 0); }
-
-  function childOpen(duration, complete) {
-    overlay = overlay || $('.plainmodal-overlay');
-    (parentOverlay = parentOverlay || overlay.clone(true)
-      .css({
-        backgroundColor: parent.plainModal('option', 'overlay').fillColor,
-        zIndex: parent.plainModal('option', 'zIndex')
-      })
-      .insertAfter(parent))
-    .css('display', 'none')
-    .fadeTo(duration, parent.plainModal('option', 'overlay').opacity);
-    overlay.fadeOut(duration);
-    childEffectSave.open.call(child, duration, complete);
-  }
-
-  function childClose(duration, complete) {
-    overlay.fadeTo(duration, parent.plainModal('option', 'overlay').opacity);
-    parentOverlay.fadeOut(duration);
-    childEffectSave.close.call(child, duration, complete);
-  }
-
-  $('#sample-12a-button').click(function() { parent.plainModal('open'); });
-  $('#sample-12b-button').click(function() { child.plainModal('open'); });
-
-});
-</script>
-<!-- ================ /sample -->
-<!-- /include "sample_12.html" -->
 
 <h3 id="fixoverlay"><code>fixOverlay</code></h3>
 
