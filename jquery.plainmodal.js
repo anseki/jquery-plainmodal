@@ -19,13 +19,13 @@ var APP_NAME = 'plainModal',
 
     /*
       jqOpened === null : Not opened
-      jqOpened === 0    : Fading now
+      jqOpened === 0    : In effect
     */
     jqOpened = null,
 
     lockAction, jqNextOpen, jqInEffect,
-    jqWin, jqBody, jqOverlay, jqActive, jq1st,
-    bodyStyleSave, winLeft, winTop;
+    jqWin, jqBody, jqOverlay, jqOverlayBlur, jqActive, jq1st,
+    bodyStyleSave, winLeft, winTop, blurSync;
 
 function init(jq, options) {
   // The options object is shared by all elements in jq.
@@ -36,7 +36,7 @@ function init(jq, options) {
         overlay:        {opacity: 0.6, zIndex: 9000},
         fixOverlay:     false,
         closeClass:     APP_PREFIX + '-close'
-        // Optional: offset, open, close
+        // Optional: offset, open, close, child
       }, options);
   opt.overlay.fillColor = opt.overlay.fillColor || opt.overlay.color /* alias */ || '#888';
   opt.zIndex = opt.zIndex || opt.overlay.zIndex + 1;
@@ -107,22 +107,58 @@ function init(jq, options) {
   });
 }
 
-function modalOpen(jq, options) {
-  var jqTarget = jq.length ? jq.eq(0) : undefined, // only 1st
-    opt, inlineStyles, calMarginR, calMarginB, event;
+function modalOpen(jq, options) { // only 1st in jq
+  var jqTarget = jq.length ? jq.eq(0) : undefined, opt, event, isParent, isChild, fixWin,
+    anotherIsOpened, inlineStyles, calMarginR, calMarginB;
+
+  function isMyParent(jq) {
+    var opt = jq.data(APP_NAME);
+    return opt.child && opt.child.index(jqTarget) > -1;
+  }
+
+  function complete() {
+    jqInEffect = undefined;
+    jqTarget.find('a,input,select,textarea,button,object,area,img,map').each(function() {
+      var that = $(this);
+      if (that.focus().get(0) === document.activeElement) { // Can focus
+        jq1st = that;
+        return false;
+      }
+    });
+
+    if (isParent) { // It was returned to parent.
+      if (blurSync.jqActive && blurSync.jqActive.length) { blurSync.jqActive.focus(); }
+      blurSync = undefined;
+    }
+
+    jqOpened = jqTarget; // set before trigger()
+    // Event: open
+    jqTarget.trigger(EVENT_TYPE_OPEN);
+  }
+
   if (lockAction || !jqTarget) { return jq; }
 
   if (options || !(opt = jqTarget.data(APP_NAME))) {
     opt = init(jqTarget, options).data(APP_NAME);
   }
 
-  if (!jqNextOpen && opt.force && jqInEffect && jqInEffect.get(0) !== jqTarget.get(0)) {
-    // Another is fading now (open/close). Fix status immediately.
+  if (!jqNextOpen && jqInEffect && jqInEffect.get(0) !== jqTarget.get(0) &&
+      (opt.force || isMyParent(jqInEffect))) {
+    // Another in effect now (open/close). Fix status immediately.
     jqInEffect.stop(true, true);
-    jqOverlay.stop(true, !!opt.fixOverlay);
+    jqOverlay.stop(true, true);
+  }
+  anotherIsOpened = jqOpened && jqOpened.get(0) !== jqTarget.get(0);
+
+  if (!blurSync && !jqNextOpen && anotherIsOpened && isMyParent(jqOpened)) {
+    blurSync = {
+      parent: jqOpened,
+      child: jqTarget.insertAfter(jqOpened),
+      jqActive: $(document.activeElement).blur() // Save to return to parent.
+    };
   }
 
-  if (!jqNextOpen && opt.force && jqOpened && jqOpened.get(0) !== jqTarget.get(0)) {
+  if (!jqNextOpen && anotherIsOpened && (opt.force || blurSync)) { // blurSync is new.
     jqNextOpen = jqTarget; // options is saved to .data().
     modalClose(jqOpened);
   } else if (jqOpened === null) {
@@ -131,50 +167,51 @@ function modalOpen(jq, options) {
     event = $.Event(EVENT_TYPE_BEFOREOPEN, {cancelable: true});
     jqTarget.trigger(event);
     if (!event.isDefaultPrevented()) {
-      if (!opt.fixOverlay && !bodyStyleSave) {
-        inlineStyles = jqBody.get(0).style;
-        bodyStyleSave = {overflow: inlineStyles.overflow};
-        calMarginR = jqBody.prop('clientWidth');
-        calMarginB = jqBody.prop('clientHeight');
-        jqBody.css('overflow', 'hidden');
-        calMarginR -= jqBody.prop('clientWidth');
-        calMarginB -= jqBody.prop('clientHeight');
-        bodyStyleSave.marginRight = inlineStyles.marginRight;
-        bodyStyleSave.marginBottom = inlineStyles.marginBottom;
-        if (calMarginR < 0) { jqBody.css('marginRight', '+=' + (-calMarginR)); }
-        if (calMarginB < 0) { jqBody.css('marginBottom', '+=' + (-calMarginB)); }
+      fixWin = !jqNextOpen && !blurSync && !opt.fixOverlay;
+
+      if (blurSync) {
+        isParent = jqTarget.get(0) === blurSync.parent.get(0);
+        isChild = jqTarget.get(0) === blurSync.child.get(0);
       }
 
-      jqActive = $(document.activeElement).blur(); // Save activeElement
+      if (fixWin) {
+        if (!bodyStyleSave) {
+          inlineStyles = jqBody.get(0).style;
+          bodyStyleSave = {overflow: inlineStyles.overflow};
+          calMarginR = jqBody.prop('clientWidth');
+          calMarginB = jqBody.prop('clientHeight');
+          jqBody.css('overflow', 'hidden');
+          calMarginR -= jqBody.prop('clientWidth');
+          calMarginB -= jqBody.prop('clientHeight');
+          bodyStyleSave.marginRight = inlineStyles.marginRight;
+          bodyStyleSave.marginBottom = inlineStyles.marginBottom;
+          if (calMarginR < 0) { jqBody.css('marginRight', '+=' + (-calMarginR)); }
+          if (calMarginB < 0) { jqBody.css('marginBottom', '+=' + (-calMarginB)); }
+        }
+        jqActive = $(document.activeElement).blur();
+        if (winLeft === undefined) {
+          winLeft = jqWin.scrollLeft();
+          winTop = jqWin.scrollTop();
+          jqWin.scroll(avoidScroll);
+        }
+      }
       jq1st = null;
-
-      if (!opt.fixOverlay && winLeft === undefined) {
-        winLeft = jqWin.scrollLeft();
-        winTop = jqWin.scrollTop();
-        jqWin.scroll(avoidScroll);
-      }
 
       callOffset(jqTarget, opt);
       // Add callback to the queue absolutely without depending on the effect.
       window.setTimeout(function() {
-        opt.effect.open.call((jqInEffect = jqTarget), opt.duration, function() {
-          jqInEffect = undefined;
-          jqTarget.find('a,input,select,textarea,button,object,area,img,map').each(function() {
-            var that = $(this);
-            if (that.focus().get(0) === document.activeElement) { // Can focus
-              jq1st = that;
-              return false;
-            }
-          });
-          jqOpened = jqTarget; // set before trigger()
-          // Event: open
-          jqTarget.trigger(EVENT_TYPE_OPEN);
-        });
+        if (isParent) { complete(); } // skip effect
+        else {
+          opt.effect.open.call((jqInEffect = jqTarget), opt.duration, complete);
+          if (isChild) { modalBlur(blurSync.parent, true, opt.duration); }
+        }
       }, 0);
-      if (!opt.fixOverlay) {
-        // Re-Style the overlay that is shared by all 'opt'.
-        jqOverlay.css({backgroundColor: opt.overlay.fillColor, zIndex: opt.overlay.zIndex})
-          .fadeTo(opt.duration, opt.overlay.opacity);
+      // Check blurSync for re-open parent.
+      if (fixWin) {
+        jqOverlay.css({ // Re-Style the overlay that is shared by all 'opt'.
+          backgroundColor:    opt.overlay.fillColor,
+          zIndex:             opt.overlay.zIndex
+        }).fadeTo(opt.duration, opt.overlay.opacity);
       }
       jqOpened = 0;
     }
@@ -184,13 +221,42 @@ function modalOpen(jq, options) {
 }
 
 function modalClose(jq) { // jq: target/event
-  var isEvent = jq instanceof $.Event, jqTarget, opt, event, duration;
+  var jqTarget, opt, event, isParent, isChild, fixWin,
+    isEvent = jq instanceof $.Event, duration;
+
+  function complete() {
+    var event;
+    jqInEffect = undefined;
+    if (fixWin) {
+      if (bodyStyleSave) {
+        jqBody.css(bodyStyleSave);
+        bodyStyleSave = undefined;
+      }
+      if (jqActive && jqActive.length) { jqActive.focus(); } // before scroll
+      if (winLeft !== undefined) {
+        jqWin.off('scroll', avoidScroll).scrollLeft(winLeft).scrollTop(winTop);
+        winLeft = undefined;
+      }
+    }
+
+    jqOpened = null; // set before trigger()
+    // Event: close
+    event = $.Event(EVENT_TYPE_CLOSE);
+    if (isEvent) { event.from = jq; }
+    else if (jqNextOpen) { event.from = jqNextOpen; }
+    jqTarget.trigger(event);
+
+    if (jqNextOpen) {
+      modalOpen(jqNextOpen);
+      jqNextOpen = undefined;
+    } else if (isChild) {
+      modalOpen(blurSync.parent);
+    }
+  }
+
   if (!lockAction && jqOpened) {
     lockAction = true;
-    jqTarget = isEvent ? jqOpened : (function() { // jqOpened in jq
-      var index = jq.index(jqOpened);
-      return index > -1 ? jq.eq(index) : undefined;
-    })();
+    jqTarget = isEvent || jq.index(jqOpened) > -1 ? jqOpened : undefined; // jqOpened in jq
     if (jqTarget) {
       // Event: beforeclose
       event = $.Event(EVENT_TYPE_BEFORECLOSE, {cancelable: true});
@@ -199,38 +265,24 @@ function modalClose(jq) { // jq: target/event
       jqTarget.trigger(event);
       if (!event.isDefaultPrevented()) {
         opt = jqTarget.data(APP_NAME);
-        duration = jqNextOpen ? 1 : opt.duration;
+        fixWin = !jqNextOpen && !blurSync && !opt.fixOverlay;
+
+        if (blurSync) {
+          isParent = jqTarget.get(0) === blurSync.parent.get(0);
+          isChild = jqTarget.get(0) === blurSync.child.get(0);
+        }
+
+        duration = jqNextOpen ? 0 : opt.duration;
         // Add callback to the queue absolutely without depending on the effect.
         window.setTimeout(function() {
-          opt.effect.close.call((jqInEffect = jqTarget), duration, function() {
-            var event;
-            jqInEffect = undefined;
-            if (!opt.fixOverlay && bodyStyleSave && !jqNextOpen) {
-              jqBody.css(bodyStyleSave);
-              bodyStyleSave = undefined;
-            }
-
-            if (jqActive && jqActive.length) { jqActive.focus(); } // Restore activeElement
-
-            if (!opt.fixOverlay && winLeft !== undefined && !jqNextOpen) {
-              jqWin.off('scroll', avoidScroll).scrollLeft(winLeft).scrollTop(winTop);
-              winLeft = undefined;
-            }
-
-            jqOpened = null; // set before trigger()
-            // Event: close
-            event = $.Event(EVENT_TYPE_CLOSE);
-            if (isEvent) { event.from = jq; }
-            else if (jqNextOpen) { event.from = jqNextOpen; }
-            jqTarget.trigger(event);
-
-            if (jqNextOpen) {
-              modalOpen(jqNextOpen);
-              jqNextOpen = undefined;
-            }
-          });
+          if (isParent) { complete(); } // skip effect
+          else {
+            opt.effect.close.call((jqInEffect = jqTarget), duration, complete);
+            if (isChild) { modalBlur(blurSync.parent, false, opt.duration); }
+          }
         }, 0);
-        if (!opt.fixOverlay && !jqNextOpen) { jqOverlay.fadeOut(duration); }
+        // Check blurSync for closing child.
+        if (fixWin) { jqOverlay.fadeOut(duration); }
         jqOpened = 0;
       } else {
         jqNextOpen = undefined;
@@ -240,6 +292,63 @@ function modalClose(jq) { // jq: target/event
   }
   if (isEvent) { jq.preventDefault(); return false; }
   return jq;
+}
+
+function modalBlur(jq, on, duration, complete) {
+  var jqTarget = jq.length ? jq.eq(0) : undefined, // only 1st
+    opt;
+
+  function blendOpacity(val) {
+    jqOverlay.css('opacity', (1 - opt.overlay.opacity) / (1 - val) * -1 + 1);
+  }
+
+  if (!jqTarget || !(opt = jqTarget.data(APP_NAME))) { return; }
+  if (on === undefined) { on = true; }
+  duration = duration || opt.duration;
+  jqOverlayBlur = jqOverlayBlur || jqOverlay.clone(true).appendTo(jqBody);
+
+  jqOverlay.stop(true).css({
+    backgroundColor:    opt.overlay.fillColor,
+    zIndex:             opt.overlay.zIndex
+  });
+  jqOverlayBlur.stop(true).css({
+    backgroundColor:    opt.overlay.fillColor,
+    zIndex:             opt.zIndex
+  }).insertAfter(jqTarget);
+
+  if (on) {
+    jqOverlay.css({
+      opacity:            opt.overlay.opacity,
+      display:            'block'
+    });
+    jqOverlayBlur.css({
+      opacity:            0,
+      display:            'block'
+    }).animate({opacity: opt.overlay.opacity}, {
+      duration: duration,
+      step: blendOpacity,
+      complete: function() {
+        jqOverlay.css('display', 'none');
+        if (complete) { complete(); }
+      }
+    });
+  } else {
+    jqOverlay.css({
+      opacity:            0,
+      display:            'block'
+    });
+    jqOverlayBlur.css({
+      opacity:            opt.overlay.opacity,
+      display:            'block'
+    }).animate({opacity: 0}, {
+      duration: duration,
+      step: blendOpacity,
+      complete: function() {
+        jqOverlayBlur.css('display', 'none');
+        if (complete) { complete(); }
+      }
+    });
+  }
 }
 
 function callOffset(jq, options) {
@@ -252,7 +361,7 @@ function callOffset(jq, options) {
 }
 
 function setCenter() {
-    /*
+  /*
   var
     cssProp = {},
     cur = this.data(APP_NAME + '-cur') || {}, // .data(APP_NAME) is shared
@@ -274,14 +383,14 @@ function setCenter() {
     Then set CSS properties everytime.
   */
 
-/* jshint validthis:true */
+  /* jshint validthis:true */
   this.css({
     left: '50%',
     top: '50%',
     marginLeft: '-' + (this.outerWidth() / 2) + 'px',
     marginTop: '-' + (this.outerHeight() / 2) + 'px'
   });
-/* jshint validthis:false */
+  /* jshint validthis:false */
 }
 
 function avoidScroll(e) {
@@ -296,9 +405,9 @@ function setOption(jq, name, newValue) {
   if (!jqTarget) { return; }
   opt = jqTarget.data(APP_NAME) || init(jqTarget).data(APP_NAME);
   if (!opt.hasOwnProperty(name)) { return; }
-/* jshint eqnull:true */
+  /* jshint eqnull:true */
   if (newValue != null) { opt[name] = newValue; }
-/* jshint eqnull:false */
+  /* jshint eqnull:false */
   return opt[name];
 }
 
@@ -308,10 +417,11 @@ $(function() {
   });
 });
 
-$.fn[APP_NAME] = function(action, arg1, arg2) {
+$.fn[APP_NAME] = function(action, arg1, arg2, arg3) {
   return (
     action === 'open' ?   modalOpen(this, arg1) :
     action === 'close' ?  modalClose(this) :
+    action === 'blur' ?   modalBlur(this, arg1, arg2, arg3) :
     action === 'option' ? setOption(this, arg1, arg2) :
                           init(this, action)); // action = options.
 };

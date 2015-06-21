@@ -55,6 +55,22 @@ element.plainModal('close')
 
 Hide the modal window.
 
+### `blur`
+
+```js
+element.plainModal('blur'[, on[, duration[, complete]]])
+```
+
+Let the modal window go under the overlay. If `false` is specified to `on` argument, restore the modal window. The default is `true`.  
+Note that this method works without depending on the current status of the modal window and it doesn't change the status. Therefore, you must restore it after. *If you want to let a parent modal window stay while a child modal window is shown, you should consider [`options.child`](#child) option.*
+
+```js
+$('#modal').plainModal({effect: {
+  open: $.fn.slideDown,
+  close: function() { $(this).plainModal('blur'); }
+}});
+```
+
 ### Initialize
 
 ```js
@@ -280,6 +296,22 @@ Default: `options.overlay.zIndex + 1`
 
 A `z-index` CSS property of the modal window. This number have to be bigger than `zIndex` of [`options.overlay`](#overlay).
 
+### `child`
+
+Type: jQuery object  
+Default: `undefined`
+
+A child modal window or multiple child modal windows.  
+A parent modal window is opened, and then a child modal window is opened. Now, a child modal window is active and a parent modal window is blurred. And when a child modal window is closed, a parent modal window is active again.
+
+```js
+var child = $('#child').plainModal(),
+  parent = $('#parent').plainModal({child: child});
+
+$('#main-button').click(function() { parent.plainModal('open'); });
+$('#button-in-parent').click(function() { child.plainModal('open'); });
+```
+
 ### `force`
 
 Type: Boolean  
@@ -287,7 +319,7 @@ Default: `false`
 
 The only one modal window can open in the one window. Therefore the [`open`](#open) method is ignored when another modal window is already opened.  
 If the [`open`](#open) method of the modal window that is set `true` to `force` is called when another modal window is already opened, another modal window is closed immediately, and the target modal window is opened.  
-For example, a parent modal window is opened, and then a child modal window is opened. Now, a child modal window is active. When a child modal window is closed, a parent modal window is active again.
+*If you want to let a child modal window open when a parent modal window is opened, you should consider [`options.child`](#child) option.*
 
 ### `fixOverlay`
 
