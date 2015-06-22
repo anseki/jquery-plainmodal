@@ -17,32 +17,30 @@ var APP_NAME = 'plainModal',
     EVENT_TYPE_BEFOREOPEN   = APP_PREFIX + 'beforeopen',
     EVENT_TYPE_BEFORECLOSE  = APP_PREFIX + 'beforeclose',
 
-    /*
-      jqOpened === null : Not opened
-      jqOpened === 0    : In effect
-    */
-    jqOpened = null,
-
+    jqOpened = null, // null: Not opened, 0: In effect
     lockAction, jqNextOpen, jqInEffect,
     jqWin, jqBody, jqOverlay, jqOverlayBlur, jqActive, jq1st,
-    bodyStyleSave, winLeft, winTop, blurSync;
+    bodyStyles, winLeft, winTop, blurSync;
 
 function init(jq, options) {
-  // The options object is shared by all elements in jq.
-  // Therefore, don't change properties later. (Replace options object for new object.)
   var opt = $.extend(true, {
         duration:       200,
         effect:         {open: $.fn.fadeIn, close: $.fn.fadeOut},
         overlay:        {opacity: 0.6, zIndex: 9000},
         fixOverlay:     false,
-        closeClass:     APP_PREFIX + '-close'
-        // Optional: offset, open, close, child
+        offset:         undefined,
+        zIndex:         0, // set, after
+        closeClass:     APP_PREFIX + '-close',
+        force:          false,
+        child:          undefined
+        // Optional: open, close, beforeopen, beforeclose
       }, options);
   opt.overlay.fillColor = opt.overlay.fillColor || opt.overlay.color /* alias */ || '#888';
   opt.zIndex = opt.zIndex || opt.overlay.zIndex + 1;
+  set_offset(opt.offset, undefined, opt);
 
   if (!jqWin) { // page init
-    jqWin = $(window);
+    jqWin = $(window).resize(function() { if (jqOpened) { callOffset(jqOpened); } });
     jqOverlay = $('<div class="' + APP_PREFIX + '-overlay" />').css({
       position:       'fixed',
       left:           0,
@@ -72,27 +70,8 @@ function init(jq, options) {
           display:        'none',
           zIndex:         opt.zIndex
         };
-
-    if (opt.offset) {
-      if (typeof opt.offset === 'function') {
-        opt.offset = (function(org) { // wrap with setCenter
-          return function() {
-            var that = this; // specified by caller.
-            return org.call(that, function() { setCenter.call(that); });
-          };
-        })(opt.offset);
-      } else { // static
-        cssProp.left = opt.offset.left;
-        cssProp.top = opt.offset.top;
-        cssProp.marginLeft = cssProp.marginTop = ''; // for change
-      }
-    } else {
-      opt.offset = setCenter;
-    }
-
-    if (opt.closeClass) {
-      that.find('.' + opt.closeClass).off('click', modalClose).click(modalClose);
-    }
+    set_offset(opt.offset, cssProp);
+    set_closeClass(opt.closeClass, that);
     // events
     $.each([['open', EVENT_TYPE_OPEN],
         ['close', EVENT_TYPE_CLOSE],
@@ -102,7 +81,7 @@ function init(jq, options) {
       if (typeof opt[optName] === 'function')
         { that.off(type, opt[optName]).on(type, opt[optName]); }
     });
-    that.css(cssProp).data(APP_NAME, opt).appendTo(jqBody)
+    that.css(cssProp).data(APP_NAME, $.extend(true, {}, opt)).appendTo(jqBody)
       .on('touchmove', function() { return false; }); // avoid scroll on touch devices
   });
 }
@@ -175,16 +154,16 @@ function modalOpen(jq, options) { // only 1st in jq
       }
 
       if (fixWin) {
-        if (!bodyStyleSave) {
+        if (!bodyStyles) {
           inlineStyles = jqBody.get(0).style;
-          bodyStyleSave = {overflow: inlineStyles.overflow};
+          bodyStyles = {overflow: inlineStyles.overflow};
           calMarginR = jqBody.prop('clientWidth');
           calMarginB = jqBody.prop('clientHeight');
           jqBody.css('overflow', 'hidden');
           calMarginR -= jqBody.prop('clientWidth');
           calMarginB -= jqBody.prop('clientHeight');
-          bodyStyleSave.marginRight = inlineStyles.marginRight;
-          bodyStyleSave.marginBottom = inlineStyles.marginBottom;
+          bodyStyles.marginRight = inlineStyles.marginRight;
+          bodyStyles.marginBottom = inlineStyles.marginBottom;
           if (calMarginR < 0) { jqBody.css('marginRight', '+=' + (-calMarginR)); }
           if (calMarginB < 0) { jqBody.css('marginBottom', '+=' + (-calMarginB)); }
         }
@@ -228,9 +207,9 @@ function modalClose(jq) { // jq: target/event
     var event;
     jqInEffect = undefined;
     if (fixWin) {
-      if (bodyStyleSave) {
-        jqBody.css(bodyStyleSave);
-        bodyStyleSave = undefined;
+      if (bodyStyles) {
+        jqBody.css(bodyStyles);
+        bodyStyles = undefined;
       }
       if (jqActive && jqActive.length) { jqActive.focus(); } // before scroll
       if (winLeft !== undefined) {
@@ -313,7 +292,7 @@ function modalBlur(jq, on, duration, complete) {
   });
   jqOverlayBlur.stop(true).css({
     backgroundColor:    opt.overlay.fillColor,
-    zIndex:             opt.zIndex
+    zIndex:             opt.zIndex // same as modal
   }).insertAfter(jqTarget);
 
   if (on) {
@@ -400,29 +379,82 @@ function avoidScroll(e) {
 }
 
 function setOption(jq, name, newValue) {
-  var jqTarget = jq.length ? jq.eq(0) : undefined, // only 1st
-    opt;
-  if (!jqTarget) { return; }
-  opt = jqTarget.data(APP_NAME) || init(jqTarget).data(APP_NAME);
-  if (!opt.hasOwnProperty(name)) { return; }
-  /* jshint eqnull:true */
-  if (newValue != null) { opt[name] = newValue; }
-  /* jshint eqnull:false */
-  return opt[name];
+
+  function _setOption(jq, name, newValue) {
+    var opt = jq.data(APP_NAME) || init(jq).data(APP_NAME);
+    if (!opt.hasOwnProperty(name)) { return; }
+    if (arguments.length === 3) {
+      switch (name) {
+        case 'offset':      set_offset(newValue, jq, opt); break;
+        case 'zIndex':      set_zIndex(newValue, jq, opt); break;
+        case 'closeClass':  set_closeClass(newValue, jq, opt); break;
+        default: opt[name] = newValue;
+      }
+    }
+    return opt[name];
+  }
+
+  return arguments.length === 2 && typeof name === 'string' ?
+      (jq.length ? _setOption(jq.eq(0), name) : undefined) : // Get
+    jq.each(typeof name === 'string' ?
+      function() { _setOption($(this), name, newValue); } : // one prop
+      function() { // multiple props
+        var that = $(this);
+        $.each(name, function(name, newValue) { _setOption(that, name, newValue); });
+      });
 }
 
-$(function() {
-  $(window).resize(function() {
-    if (jqOpened) { callOffset(jqOpened); }
-  });
-});
+function set_offset(newValue, jq, options) {
+  var props;
+  if (!newValue) {
+    newValue = setCenter;
+  } else if (typeof newValue === 'function') {
+    newValue = (function(org) { // wrap with setCenter
+      return function() {
+        var that = this; // specified by caller.
+        return org.call(that, function() { setCenter.call(that); });
+      };
+    })(newValue);
+  }
+  if (jq && typeof newValue !== 'function' &&
+    (!options || typeof options.offset === 'function' ||
+      options.offset.left !== newValue.left || options.offset.top !== newValue.top)) {
+    props = jq.jquery ? {} : jq; // for init
+    props.left = newValue.left;
+    props.top = newValue.top;
+    props.marginLeft = props.marginTop = ''; // for change
+    if (jq.jquery) { jq.css(props); }
+  }
+  if (options) {
+    options.offset = newValue;
+    if (jq && jqOpened && jq.get(0) === jqOpened.get(0)) { callOffset(jq, options); }
+  }
+}
+
+function set_zIndex(newValue, jq, options) {
+  if (jq && (!options || options.zIndex !== newValue)) {
+    jq.css('zIndex', newValue);
+  }
+  if (options) { options.zIndex = newValue; }
+}
+
+function set_closeClass(newValue, jq, options) {
+  if (jq && options && options.closeClass && options.closeClass !== newValue) {
+    jq.find('.' + options.closeClass).off('click', modalClose);
+  }
+  if (jq && newValue && (!options || options.closeClass !== newValue)) {
+    jq.find('.' + newValue).off('click', modalClose).click(modalClose);
+  }
+  if (options) { options.closeClass = newValue; }
+}
 
 $.fn[APP_NAME] = function(action, arg1, arg2, arg3) {
   return (
     action === 'open' ?   modalOpen(this, arg1) :
     action === 'close' ?  modalClose(this) :
     action === 'blur' ?   modalBlur(this, arg1, arg2, arg3) :
-    action === 'option' ? setOption(this, arg1, arg2) :
+    action === 'option' ? (arguments.length <= 2 ?  setOption(this, arg1) :
+                                                    setOption(this, arg1, arg2)) :
                           init(this, action)); // action = options.
 };
 

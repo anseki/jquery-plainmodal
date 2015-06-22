@@ -114,12 +114,23 @@ $('#open-button').click(function() {
 ### `option`
 
 ```js
-currentValue = element.plainModal('option', optionName[, newValue])
+currentValue = element.plainModal('option', optionName)
 ```
 
-Return the current option value (see [Options](#options)) as `optionName`. If `newValue` is specified, it is set before returning.
+```js
+element = element.plainModal('option', optionName, newValue)
+```
 
-*NOTE:* The current version of the plainModal can change option value of [`overlay`](#overlay), [`duration`](#duration), [`effect`](#effect), [`force`](#force) and [`fixOverlay`](#fixoverlay) options. Use [Initialize](#initialize) method to update option value of others.
+```js
+element = element.plainModal('option', {
+  optionName1: newValue1,
+  optionName2: newValue2 ... 
+})
+```
+
+Get the current option value (see [Options](#options)), or set the new value.
+
+*NOTE:* If you want to change the event handlers (see [Events](#events)), use `on(type, handler)` or `off` method.
 
 ## Options
 
