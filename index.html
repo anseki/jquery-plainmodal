@@ -316,11 +316,16 @@ $(function() {
 <span class="p">});</span>
 </code></pre></div>
 <h3 id="option"><code>option</code></h3>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">currentValue</span> <span class="o">=</span> <span class="nx">element</span><span class="p">.</span><span class="nx">plainModal</span><span class="p">(</span><span class="s1">&#39;option&#39;</span><span class="p">,</span> <span class="nx">optionName</span><span class="p">[,</span> <span class="nx">newValue</span><span class="p">])</span>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">currentValue</span> <span class="o">=</span> <span class="nx">element</span><span class="p">.</span><span class="nx">plainModal</span><span class="p">(</span><span class="s1">&#39;option&#39;</span><span class="p">,</span> <span class="nx">optionName</span><span class="p">)</span>
+</code></pre></div><div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">element</span> <span class="o">=</span> <span class="nx">element</span><span class="p">.</span><span class="nx">plainModal</span><span class="p">(</span><span class="s1">&#39;option&#39;</span><span class="p">,</span> <span class="nx">optionName</span><span class="p">,</span> <span class="nx">newValue</span><span class="p">)</span>
+</code></pre></div><div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">element</span> <span class="o">=</span> <span class="nx">element</span><span class="p">.</span><span class="nx">plainModal</span><span class="p">(</span><span class="s1">&#39;option&#39;</span><span class="p">,</span> <span class="p">{</span>
+  <span class="nx">optionName1</span><span class="o">:</span> <span class="nx">newValue1</span><span class="p">,</span>
+  <span class="nx">optionName2</span><span class="o">:</span> <span class="nx">newValue2</span> <span class="p">...</span> 
+<span class="p">})</span>
 </code></pre></div>
-<p>Return the current option value (see <a href="#options">Options</a>) as <code>optionName</code>. If <code>newValue</code> is specified, it is set before returning.</p>
+<p>Get the current option value (see <a href="#options">Options</a>), or set the new value.</p>
 
-<p><em>NOTE:</em> The current version of the plainModal can change option value of <a href="#overlay"><code>overlay</code></a>, <a href="#duration"><code>duration</code></a>, <a href="#effect"><code>effect</code></a>, <a href="#force"><code>force</code></a> and <a href="#fixoverlay"><code>fixOverlay</code></a> options. Use <a href="#initialize">Initialize</a> method to update option value of others.</p>
+<p><em>NOTE:</em> If you want to change the event handlers (see <a href="#events">Events</a>), use <code>on(type, handler)</code> or <code>off</code> method.</p>
 
 <h2 id="options">Options</h2>
 
