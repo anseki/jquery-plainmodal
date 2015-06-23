@@ -328,6 +328,7 @@ function modalBlur(jq, on, duration, complete) {
       }
     });
   }
+  return jq;
 }
 
 function callOffset(jq, options) {

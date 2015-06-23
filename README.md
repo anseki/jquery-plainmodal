@@ -40,7 +40,7 @@ Load after jQuery.
 ### `open`
 
 ```js
-element.plainModal('open'[, options])
+element = element.plainModal('open'[, options])
 ```
 
 Show specified element as the modal window.  
@@ -50,31 +50,15 @@ An element can be initialized by new `options` any number of times.
 ### `close`
 
 ```js
-element.plainModal('close')
+element = element.plainModal('close')
 ```
 
 Hide the modal window.
 
-### `blur`
-
-```js
-element.plainModal('blur'[, on[, duration[, complete]]])
-```
-
-Let the modal window go under the overlay. If `false` is specified to `on` argument, restore the modal window. The default is `true`.  
-Note that this method works without depending on the current status of the modal window and it doesn't change the status. Therefore, you must restore it after. *If you want to let a parent modal window stay while a child modal window is shown, you should consider [`options.child`](#child) option.*
-
-```js
-$('#modal').plainModal({effect: {
-  open: $.fn.slideDown,
-  close: function() { $(this).plainModal('blur'); }
-}});
-```
-
 ### Initialize
 
 ```js
-element.plainModal([options])
+element = element.plainModal([options])
 ```
 
 Initialize specified element as the modal window.  
@@ -82,7 +66,7 @@ The [`open`](#open) method too, can initialize. This is used to initialize witho
 You can specify `options` to every [`open`](#open) method. But, if `options` of an element isn't changed, re-initializing it isn't needed. Then, you specify `options` to only first [`open`](#open) method, or use this method for initializing it only once.  
 If you don't customize any options (using default all), this method isn't needed because `options` isn't specified to [`open`](#open) method, and element is initialized at only first time.
 
-In this code, unneeded initializing is done again, again, and again.
+In this code, unneeded initializing is done again, again, and again:
 
 ```js
 $('#open-button').click(function() {
@@ -91,7 +75,7 @@ $('#open-button').click(function() {
 });
 ```
 
-In this code, initializing is done at once.
+In this code, initializing is done at once:
 
 ```js
 // Initialize without showing
@@ -102,7 +86,7 @@ $('#open-button').click(function() {
 });
 ```
 
-In this code, initializing is done at once.
+In this code, initializing is done at once:
 
 ```js
 $('#open-button').click(function() {
@@ -131,6 +115,22 @@ element = element.plainModal('option', {
 Get the current option value (see [Options](#options)), or set the new value.
 
 *NOTE:* If you want to change the event handlers (see [Events](#events)), use `on(type, handler)` or `off` method.
+
+### `blur`
+
+```js
+element = element.plainModal('blur'[, on[, duration[, complete]]])
+```
+
+Let the modal window go under the overlay. If `false` is specified to `on` argument, restore the modal window. The default is `true`.  
+Note that this method works without depending on the current status of the modal window and it doesn't change the status. Therefore, you must restore it after. *If you want to let a parent modal window stay while a child modal window is shown, you should consider [`options.child`](#child) option.*
+
+```js
+$('#modal').plainModal({effect: {
+  open: $.fn.slideDown,
+  close: function() { $(this).plainModal('blur'); }
+}});
+```
 
 ## Options
 
@@ -354,7 +354,7 @@ $('#modal').plainModal({open: function(event) { console.log(event); } });
 *NOTE:* If this option is specified in the [`open`](#open) method, declared Function or the variable the Function is assigned should be specified (Don't specify the function expression). Because the [`open`](#open) method may be called again, and the *function expression* generates the new Function every time.  
 The *"function statement"* and the *"function operator"* are different.  
 See [https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions#Defining_functions](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions#Defining_functions)  
-For example: this code is OK:
+For example, this code is OK:
 
 ```js
 function handler(event) { console.log(event); }
