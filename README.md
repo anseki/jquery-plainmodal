@@ -1,6 +1,6 @@
 # plainModal
 
-The simple jQuery Plugin for customizable modal windows. plainModal has basic functions only, and it does nothing for styles. It has no image files and no CSS files. Just one small file.
+The simple jQuery Plugin for fully customizable modal windows. plainModal has basic functions only, and it does not style. It has no image files and no CSS files. Just one small file.
 
 **See <a href="http://anseki.github.io/jquery-plainmodal">DEMO</a>**
 
@@ -9,14 +9,13 @@ Many great plugins already exist.
 - The gorgeous plugins which has many functions and rich styles.
 - The simple plugins which has small functions and customizable styles.
 
-The many web sites use same functions almost. And these have different styles.  
-plainModal has basic functions for showing the modal windows. That's all. The styling it is your job. You can free style it to perfect match for your web site. Of course it can be responsive web design.
+plainModal has necessary functions for the modal windows. That's all. You can free style it to perfect match for your web site. Of course it can be responsive web design.
 
 plainModal does:
 
-- Showing specified element as the modal window, and hiding it.
+- Showing the specified element as the modal window, and hiding it.
 - Covering a page with an overlay.
-- Avoiding focusing outside elements of the modal window. (by pressing Tab key)
+- Avoiding focusing the outside elements of the modal window. (by pressing Tab key)
 - Avoiding scrolling a page window.
 - Hiding the modal window when Escape key is pressed.
 
@@ -43,9 +42,9 @@ Load after jQuery.
 element = element.plainModal('open'[, options])
 ```
 
-Show specified element as the modal window.  
-If `options` (see [Options](#options)) is specified, element is initialized with specified `options` before it is shown. If element is not initialized yet, element is initialized even if `options` is not specified.  
-An element can be initialized by new `options` any number of times.
+Show the specified element as the modal window.  
+If `options` (see [Options](#options)) is specified, the element is initialized with specified `options` before it is shown. If the element is not initialized yet, the element is initialized even if `options` is not specified (with the default options).  
+The element can be initialized by new `options` any number of times.
 
 ### `close`
 
@@ -53,7 +52,7 @@ An element can be initialized by new `options` any number of times.
 element = element.plainModal('close')
 ```
 
-Hide the modal window.
+Hide the shown modal window.
 
 ### Initialize
 
@@ -61,12 +60,12 @@ Hide the modal window.
 element = element.plainModal([options])
 ```
 
-Initialize specified element as the modal window.  
+Initialize the specified element as the modal window.  
 The [`open`](#open) method too, can initialize. This is used to initialize without showing the modal window at voluntary time.  
 You can specify `options` to every [`open`](#open) method. But, if `options` of an element isn't changed, re-initializing it isn't needed. Then, you specify `options` to only first [`open`](#open) method, or use this method for initializing it only once.  
-If you don't customize any options (using default all), this method isn't needed because `options` isn't specified to [`open`](#open) method, and element is initialized at only first time.
+If you don't customize any options (using default all), this method isn't needed because `options` isn't specified to [`open`](#open) method, and the element is initialized at only first time.
 
-In this code, unneeded initializing is done again, again, and again:
+In this code, it is initialized meaninglessly again, again, and again:
 
 ```js
 $('#open-button').click(function() {
@@ -75,7 +74,7 @@ $('#open-button').click(function() {
 });
 ```
 
-In this code, initializing is done at once:
+In this code, it is initialized at once:
 
 ```js
 // Initialize without showing
@@ -86,11 +85,11 @@ $('#open-button').click(function() {
 });
 ```
 
-In this code, initializing is done at once:
+In this code, it is initialized at once:
 
 ```js
 $('#open-button').click(function() {
-  // Initializing is done at only first time
+  // Initialize at only first time
   modal.plainModal('open');
 });
 ```
@@ -112,9 +111,9 @@ element = element.plainModal('option', {
 })
 ```
 
-Get the current option value (see [Options](#options)), or set the new value.
+Get the current option value (see [Options](#options)) of the modal window, or set the new value to the modal windows.
 
-*NOTE:* If you want to change the event handlers (see [Events](#events)), use `on(type, handler)` or `off` method.
+*NOTE:* If you want to change the event handlers (see [Events](#events)), use `on` or `off` method.
 
 ### `blur`
 
@@ -123,7 +122,7 @@ element = element.plainModal('blur'[, on[, duration[, complete]]])
 ```
 
 Let the modal window go under the overlay. If `false` is specified to `on` argument, restore the modal window. The default is `true`.  
-Note that this method works without depending on the current status of the modal window and it doesn't change the status. Therefore, you must restore it after. *If you want to let a parent modal window stay while a child modal window is shown, you should consider [`options.child`](#child) option.*
+This method is used to just effect. Note that it works without depending on the current status of the modal window and it doesn't change the status. Therefore, you must restore it after. *If you want to let a parent modal window stay while a child modal window is shown, you should consider [`options.child`](#child) option.*
 
 ```js
 $('#modal').plainModal({effect: {
@@ -134,7 +133,7 @@ $('#modal').plainModal({effect: {
 
 ## Options
 
-An `options` Object can be specified to [`open`](#open) method or [Initialize](#initialize) method. This Object can have following properties.
+An `options` Object can be specified to [`open`](#open) or [Initialize](#initialize) method. It can have following properties.
 
 ### `offset`
 
@@ -147,7 +146,7 @@ An Object that has `left` and `top`, relative to the view area.
 $('#modal').plainModal({offset: {left: 100, top: 50}});
 ```
 
-Or, a Function that returns above Object. This Function is called when the modal window is opened and the window is resized. Therefore the position be able to change according to the situation.
+Or, a Function that returns the above Object. This Function is called when the modal window is opened and the browser window is resized. Therefore the position be able to change according to the situation.
 
 ```js
 var button = $('#open-button').click(function() {
@@ -168,7 +167,7 @@ var button = $('#open-button').click(function() {
 ```
 
 If the Function returns nothing, the position isn't changed. In this case, that Function will change the position. For example, positioning by `margin` instead of `left`/`top`.  
-A `center` Function that moves the modal window to center of the window is given to the Function. For example, your Function does something that changes a size of the modal window, and it calls a `center` to move the modal window to center of window.
+A `center` argument is given to the Function. It is a Function that moves the modal window to the center of the window. For example, your Function does something that changes a size of the modal window, and it calls a `center` to adjust a position.
 
 ```js
 $('#modal').plainModal({
@@ -194,7 +193,7 @@ $('#modal').plainModal({
 Type: Object  
 Default: `{fillColor: '#888', opacity: 0.6, zIndex: 9000}`
 
-An Object that can have `fillColor` (fill-color), `opacity` and `zIndex` of the overlay.
+An Object that can have `fillColor`, `opacity` and `zIndex` of the overlay.
 
 ```js
 $('#modal').plainModal({overlay: {fillColor: '#fff', opacity: 0.5}});
@@ -215,12 +214,12 @@ If you want to style the overlay more, add style to `plainmodal-overlay` class.
 Type: String  
 Default: `'plainmodal-close'`
 
-If the element that has this class name is found, the [`close`](#close) method is attached to `click` event of it.
+If the element that has this class name is found in the modal window, the [`close`](#close) method is attached to `click` event of it.
 
 ```html
 <div>
-<p>Lorem ipsum dolor ...</p>
-<div class="plainmodal-close">Close</div>
+  <p>Lorem ipsum dolor ...</p>
+  <div class="plainmodal-close">Close</div>
 </div>
 ```
 
