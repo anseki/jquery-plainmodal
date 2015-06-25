@@ -6,18 +6,18 @@ The simple jQuery Plugin for fully customizable modal windows. plainModal has ba
 
 Many great plugins already exist.
 
-- The gorgeous plugins which has many functions and rich styles.
-- The simple plugins which has small functions and customizable styles.
+* The gorgeous plugins which has many functions and rich styles.
+* The simple plugins which has small functions and customizable styles.
 
 plainModal has necessary functions for the modal windows. That's all. You can free style it to perfect match for your web site. Of course it can be responsive web design.
 
 plainModal does:
 
-- Showing the specified element as the modal window, and hiding it.
-- Covering a page with an overlay.
-- Avoiding focusing the outside elements of the modal window. (by pressing Tab key)
-- Avoiding scrolling a page window.
-- Hiding the modal window when Escape key is pressed.
+* Showing the specified element as the modal window, and hiding it.
+* Covering a page with an overlay.
+* Avoiding focusing the outside elements of the modal window. (by pressing Tab key)
+* Avoiding scrolling a page window.
+* Hiding the modal window when Escape key is pressed.
 
 ```js
 // Show modal window. <div id="modal"> is styled via your CSS.
@@ -122,14 +122,8 @@ element = element.plainModal('blur'[, on[, duration[, complete]]])
 ```
 
 Let the modal window go under the overlay. If `false` is specified to `on` argument, restore the modal window. The default is `true`.  
-This method is used to just effect. Note that it works without depending on the current status of the modal window and it doesn't change the status. Therefore, you must restore it after. *If you want to let a parent modal window stay while a child modal window is shown, you should consider [`options.child`](#child) option.*
-
-```js
-$('#modal').plainModal({effect: {
-  open: $.fn.slideDown,
-  close: function() { $(this).plainModal('blur'); }
-}});
-```
+This method is used to just effect. Note that it works without depending on the current status of the modal window and it doesn't change the status. Therefore, you must restore it after.  
+For example, you want to show something to the user while the modal window is shown, you let it blur temporarily and show something, and then you restore it after something.
 
 ## Options
 
@@ -214,7 +208,8 @@ If you want to style the overlay more, add style to `plainmodal-overlay` class.
 Type: String  
 Default: `'plainmodal-close'`
 
-If the element that has this class name is found in the modal window, the [`close`](#close) method is attached to `click` event of it.
+If the element that has this class name is found in the modal window, the [`close`](#close) method is attached to `click` event of it.  
+You can know that the element was clicked, via [`event.from`](#from-property).
 
 ```html
 <div>
@@ -312,7 +307,8 @@ Type: jQuery object
 Default: `undefined`
 
 A child modal window or multiple child modal windows.  
-A parent modal window is opened, and then a child modal window is opened. Now, a child modal window is active and a parent modal window is blurred. And when a child modal window is closed, a parent modal window is active again.
+A parent modal window is already opened, and then a child modal window is opened. Now, a child modal window is activated and a parent modal window is blurred (status is "closed" but it is not hidden). And when a child modal window is closed, a parent modal window is activated again (re-opened).  
+You can trace or control those behavior via [`event.from`](#from-property).
 
 ```js
 var child = $('#child').plainModal(),
@@ -329,7 +325,13 @@ Default: `false`
 
 The only one modal window can open in the one window. Therefore the [`open`](#open) method is ignored when another modal window is already opened.  
 If the [`open`](#open) method of the modal window that is set `true` to `force` is called when another modal window is already opened, another modal window is closed immediately, and the target modal window is opened.  
-*If you want to let a child modal window open when a parent modal window is opened, you should consider [`options.child`](#child) option.*
+You can trace or control those behavior via [`event.from`](#from-property).
+*If you want to let the modal windows behave like the parent and child, you should consider [`options.child`](#child).*
+
+```js
+var modal1 = $('#modal1').plainModal(),
+  modal2 = $('#modal2').plainModal({force: true});
+```
 
 ### `fixOverlay`
 
@@ -375,7 +377,8 @@ $('#open-button').click(function() {
 ### `plainmodalopen`
 
 Triggered when the modal window is opened. (after the `open` of [`options.effect`](#effect) took [`options.duration`](#duration) to complete.)  
-An event handler can be attached when initializing via [`options.open`](#open-close-beforeopen-beforeclose) as well.
+An event handler can be attached when initializing via [`options.open`](#open-close-beforeopen-beforeclose) as well.  
+The Event object that is passed to the event handler might have a [`from`](#from-property) property.
 
 ```js
 $('#modal').on('plainmodalopen', function(event) {
@@ -386,7 +389,8 @@ $('#modal').on('plainmodalopen', function(event) {
 ### `plainmodalclose`
 
 Triggered when the modal window is closeed. (after the `close` of [`options.effect`](#effect) took [`options.duration`](#duration) to complete.)  
-An event handler can be attached when initializing via [`options.close`](#open-close-beforeopen-beforeclose) as well.
+An event handler can be attached when initializing via [`options.close`](#open-close-beforeopen-beforeclose) as well.  
+The Event object that is passed to the event handler might have a [`from`](#from-property) property.
 
 ```js
 $('#modal').on('plainmodalclose', function(event) {
@@ -394,13 +398,14 @@ $('#modal').on('plainmodalclose', function(event) {
 });
 ```
 
-In some cases, the Event object that is passed to the event handler has the `from` property. (see [plainmodalbeforeclose](#plainmodalbeforeclose) event)
-
 ### `plainmodalbeforeopen`
 
 Triggered before the modal window is opened.  
 An event handler can be attached when initializing via [`options.beforeopen`](#open-close-beforeopen-beforeclose) as well.  
-This event is cancelable by calling `event.preventDefault()` in an event handler.
+The Event object that is passed to the event handler might have a [`from`](#from-property) property.
+
+This event might be cancelable by calling `event.preventDefault()` in an event handler. The `plainmodalbeforeopen` event of the second modal window by [`options.child`](#child) or [`options.force`](#force) is not cancelable. Call `event.preventDefault()` in [`plainmodalbeforeclose`](#plainmodalbeforeclose) event of the first (i.e. parent) modal window to cancel that action.  
+You can know whether or not it is cancelable, via whether or not `event.cancelable` is `true`.
 
 ```js
 $('#modal').on('plainmodalbeforeopen', function(event) {
@@ -414,6 +419,8 @@ $('#modal').on('plainmodalbeforeopen', function(event) {
 
 Triggered before the modal window is closeed.  
 An event handler can be attached when initializing via [`options.beforeclose`](#open-close-beforeopen-beforeclose) as well.  
+The Event object that is passed to the event handler might have a [`from`](#from-property) property.
+
 This event is cancelable by calling `event.preventDefault()` in an event handler.
 
 ```js
@@ -425,8 +432,15 @@ $('#modal').on('plainmodalbeforeclose', function(event) {
 });
 ```
 
-When the event is fired by another event, the Event object that is passed to the event handler has the `from` property that is the Event object of another event. For example, when the modal window is closed by clicking the button that is specified [`options.closeClass`](#closeclass), `from` property of Event object that is passed to `plainmodalbeforeclose` and [`plainmodalclose`](#plainmodalclose) event handler is the Event object of that `click` event.  
-Or, when the modal window is closed by opening another modal window that `true` is specified to [`options.force`](#force), `from` property of Event object that is passed to `plainmodalbeforeclose` and [`plainmodalclose`](#plainmodalclose) event handler is the another modal window.
+### `from` Property
+
+In some cases, the modal window is opened or closed without you calling [`open`](#open) method or [`close`](#close) method. For example, when the overlay or the button which is specified [`options.closeClass`](#closeclass) is clicked. Or the parent modal window is closed when the child modal window is closed. (See [`options.child`](#child))  
+In those cases, the Event object that is passed to the event handler has the `from` property. It refers to:
+
+* The Event object of another event, when the overlay or the button that is specified [`options.closeClass`](#closeclass) is clicked (`click` event), or Escape key is pressed (`keydown` event). In the [`plainmodalclose`](#plainmodalclose) or [`plainmodalbeforeclose`](#plainmodalbeforeclose) event handler.
+* The child modal window, when it is opened. In the [`plainmodalclose`](#plainmodalclose) or [`plainmodalbeforeclose`](#plainmodalbeforeclose) event handler of the parent modal window.
+* The child modal window, when it is closed. In the [`plainmodalopen`](#plainmodalopen) or [`plainmodalbeforeopen`](#plainmodalbeforeopen) event handler of the parent modal window.
+* The another modal window that `true` is specified to [`options.force`](#force), when it is opened. In the [`plainmodalclose`](#plainmodalclose) or [`plainmodalbeforeclose`](#plainmodalbeforeclose) event handler of the modal window that is closed by that action.
 
 ```js
 var
@@ -466,9 +480,9 @@ var
 
 ## Note
 
-- As everyone knows, IE8- has many problems. CSS `position:fixed` in HTML without `<!DOCTYPE>` is ignored.  
+* As everyone knows, IE8- has many problems. CSS `position:fixed` in HTML without `<!DOCTYPE>` is ignored.  
 If your web site supports IE8- and it use `position:fixed`, HTML must include `<!DOCTYPE>` even if plainModal is not used. And plainModal uses `position:fixed`.
-- The [Initialize](#initialize) method set `display:none` to specified element. You can hide the element before Initialize method, by your stylesheet.
+* The [Initialize](#initialize) method set `display:none` to specified element. You can hide the element before Initialize method, by your stylesheet.
 
 ## See Also
 
