@@ -2,7 +2,7 @@
   "name": "jquery-plainmodal",
   "version": "0.14.0",
   "title": "plainModal",
-  "description": "The simple jQuery Plugin for customizable modal windows.",
+  "description": "The simple jQuery Plugin for fully customizable modal windows.",
   "keywords": [
     "jquery-plugin",
     "ecosystem:jquery",

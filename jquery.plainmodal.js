@@ -20,7 +20,7 @@ var APP_NAME = 'plainModal',
     jqOpened = null, // null: Not opened, 0: In effect
     lockAction, jqNextOpen, jqInEffect,
     jqWin, jqBody, jqOverlay, jqOverlayBlur, jqActive, jq1st,
-    bodyStyles, winLeft, winTop, blurSync;
+    bodyStyles, winScroll, blurSync;
 
 function init(jq, options) {
   var opt = $.extend(true, {
@@ -168,9 +168,8 @@ function modalOpen(jq, options) { // only 1st in jq
           if (calMarginB < 0) { jqBody.css('marginBottom', '+=' + (-calMarginB)); }
         }
         jqActive = $(document.activeElement).blur();
-        if (winLeft === undefined) {
-          winLeft = jqWin.scrollLeft();
-          winTop = jqWin.scrollTop();
+        if (winScroll === undefined) {
+          winScroll = {left: jqWin.scrollLeft(), top: jqWin.scrollTop()};
           jqWin.scroll(avoidScroll);
         }
       }
@@ -212,9 +211,10 @@ function modalClose(jq) { // jq: target/event
         bodyStyles = undefined;
       }
       if (jqActive && jqActive.length) { jqActive.focus(); } // before scroll
-      if (winLeft !== undefined) {
-        jqWin.off('scroll', avoidScroll).scrollLeft(winLeft).scrollTop(winTop);
-        winLeft = undefined;
+      if (winScroll !== undefined) {
+        jqWin.off('scroll', avoidScroll)
+          .scrollLeft(winScroll.left).scrollTop(winScroll.top);
+        winScroll = undefined;
       }
     }
 
@@ -374,7 +374,8 @@ function setCenter() {
 }
 
 function avoidScroll(e) {
-  jqWin.scrollLeft(winLeft).scrollTop(winTop);
+  if (winScroll !== undefined)
+    { jqWin.scrollLeft(winScroll.left).scrollTop(winScroll.top); }
   e.preventDefault();
   return false;
 }
