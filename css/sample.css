@@ -146,12 +146,6 @@ div.sample-close {
 #sample-11b {
   width: 300px;
 }
-#sample-11b .sample-close {
-  text-align: center;
-}
-#sample-11b button {
-  padding: 3px 30px;
-}
 
 /* ==================================== sample-12 */
 #sample-12a,
@@ -175,6 +169,16 @@ div.sample-close {
 }
 #sample-12b button {
   padding: 3px 30px;
+}
+
+#sample-12b-value {
+  height: 1em;
+  padding: 2px 3px;
+  border: 1px solid #0c3ebe;
+}
+
+#sample-12b-text {
+  width: 80%;
 }
 
 /* ==================================== sample-13a */
