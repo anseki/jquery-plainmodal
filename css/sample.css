@@ -172,7 +172,7 @@ div.sample-close {
 }
 
 #sample-12b-value {
-  height: 1em;
+  min-height: 1em;
   padding: 2px 3px;
   border: 1px solid #0c3ebe;
   line-height: 1;
