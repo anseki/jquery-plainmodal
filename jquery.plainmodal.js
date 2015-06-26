@@ -17,24 +17,26 @@ var APP_NAME = 'plainModal',
     EVENT_TYPE_BEFOREOPEN   = APP_PREFIX + 'beforeopen',
     EVENT_TYPE_BEFORECLOSE  = APP_PREFIX + 'beforeclose',
 
+    DEFAULT_OPTIONS = {
+      duration:       200,
+      effect:         {open: $.fn.fadeIn, close: $.fn.fadeOut},
+      overlay:        {opacity: 0.6, zIndex: 9000},
+      fixOverlay:     false,
+      offset:         undefined,
+      zIndex:         0, // set, after
+      closeClass:     APP_PREFIX + '-close',
+      force:          false,
+      child:          undefined
+      // Optional: open, close, beforeopen, beforeclose
+    },
+
     jqOpened = null, // null: Not opened, 0: In effect
     lockAction, jqNextOpen, jqInEffect,
     jqWin, jqBody, jqOverlay, jqOverlayBlur, jqActive, jq1st,
     bodyStyles, winScroll, blurSync;
 
 function init(jq, options) {
-  var opt = $.extend(true, {
-        duration:       200,
-        effect:         {open: $.fn.fadeIn, close: $.fn.fadeOut},
-        overlay:        {opacity: 0.6, zIndex: 9000},
-        fixOverlay:     false,
-        offset:         undefined,
-        zIndex:         0, // set, after
-        closeClass:     APP_PREFIX + '-close',
-        force:          false,
-        child:          undefined
-        // Optional: open, close, beforeopen, beforeclose
-      }, options);
+  var opt = $.extend(true, {}, DEFAULT_OPTIONS, options);
   opt.overlay.fillColor = opt.overlay.fillColor || opt.overlay.color /* alias */ || '#888';
   opt.zIndex = opt.zIndex || opt.overlay.zIndex + 1;
   set_offset(opt.offset, undefined, opt);
@@ -395,7 +397,7 @@ function setOption(jq, name, newValue) {
 
   function _setOption(jq, name, newValue) {
     var opt = jq.data(APP_NAME) || init(jq).data(APP_NAME);
-    if (!opt.hasOwnProperty(name)) { return; }
+    if (!DEFAULT_OPTIONS.hasOwnProperty(name)) { return; }
     if (arguments.length === 3) {
       switch (name) {
         case 'offset':      set_offset(newValue, jq, opt); break;
