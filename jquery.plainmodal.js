@@ -42,7 +42,14 @@ function init(jq, options) {
   set_offset(opt.offset, undefined, opt);
 
   if (!jqWin) { // page init
-    jqWin = $(window).resize(function() { if (jqOpened) { callOffset(jqOpened); } });
+    jqWin = $(window).resize(function() {
+      if (jqInEffect) { jqInEffect.stop(true, true); }
+      jqOverlay.stop(true, true);
+      if (jqOverlayBlur) { jqOverlayBlur.stop(true, true); }
+      if (jqOpened) { callOffset(jqOpened); }
+      if (blurSync) { callOffset(blurSync.parent); }
+    });
+
     jqOverlay = $('<div class="' + APP_PREFIX + '-overlay" />').css({
       position:       'fixed',
       left:           0,
@@ -52,13 +59,13 @@ function init(jq, options) {
       display:        'none'
     }).appendTo(jqBody = $('body')).click(modalClose)
       .on('touchmove', function() { return false; }); // avoid scroll on touch devices
+
     $(document).focusin(function(e) {
       if (jqOpened && !jqOpened.has(e.target).length) {
         if (jq1st) { jq1st.focus(); }
         else { $(document.activeElement).blur(); }
       }
-    })
-    .keydown(function(e) {
+    }).keydown(function(e) {
       if (jqOpened && e.keyCode === 27) { // Escape key
         return modalClose(e);
       }
