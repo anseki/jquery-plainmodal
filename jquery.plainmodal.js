@@ -31,7 +31,7 @@ var APP_NAME = 'plainModal',
     },
 
     jqOpened = null, // null: Not opened, 0: In effect
-    lockAction, jqNextOpen, jqInEffect,
+    lockAction, jqNextOpen, jqInEffect, inOpenEffect,
     jqWin, jqBody, jqOverlay, jqOverlayBlur, jqActive, jq1st,
     bodyStyles, winScroll, blurSync;
 
@@ -95,19 +95,13 @@ function init(jq, options) {
   });
 }
 
-function modalOpen(jq, options) { // only 1st in jq
+function modalOpen(jq, options, forceAction) { // only 1st in jq
   var jqTarget = jq.length ? jq.eq(0) : undefined,
     opt, event, cancelable, isParent, isChild, fixWin,
     startNextOpen, inlineStyles, calMarginR, calMarginB;
 
-  function isMyParent(jq) {
-    var opt = jq.data(APP_NAME);
-    return opt.child && opt.child.index(jqTarget) > -1;
-  }
-
   function complete() {
     var event;
-    jqInEffect = undefined;
     jqTarget.find('a,input,select,textarea,button,object,area,img,map').each(function() {
       var that = $(this);
       if (that.focus().get(0) === document.activeElement) { // Can focus
@@ -115,103 +109,117 @@ function modalOpen(jq, options) { // only 1st in jq
         return false;
       }
     });
-
     if (isParent && blurSync.jqActive && blurSync.jqActive.length)
       { blurSync.jqActive.focus(); }
 
-    jqOpened = jqTarget; // set before trigger()
+    jqInEffect = undefined;
+    jqOpened = jqTarget;
+    lockAction = false;
+
     // Event: open
     event = $.Event(EVENT_TYPE_OPEN);
-    if (isParent) { event.from = blurSync.child; }
+    if (isParent) {
+      event.from = blurSync.child;
+      blurSync = undefined; // set before trigger()
+    }
     jqTarget.trigger(event);
-
-    if (isParent) { blurSync = undefined; }
   }
 
-  if (lockAction || !jqTarget) { return jq; }
-
-  if (options || !(opt = jqTarget.data(APP_NAME))) {
-    opt = init(jqTarget, options).data(APP_NAME);
+  function isMyParent(jq) {
+    var opt = jq.data(APP_NAME);
+    return opt.child && opt.child.index(jqTarget) > -1;
   }
 
-  if (!jqNextOpen && jqInEffect && jqInEffect.get(0) !== jqTarget.get(0) &&
-      (opt.force || isMyParent(jqInEffect))) {
-    // Another in effect now (open/close). Fix status immediately.
-    jqInEffect.stop(true, true);
-    jqOverlay.stop(true, true);
-  }
-
-  if (!jqNextOpen && !blurSync && jqOpened && jqOpened.get(0) !== jqTarget.get(0)) {
-    if (opt.force) { startNextOpen = true; }
-    else if (isMyParent(jqOpened)) {
-      blurSync = {
-        parent: jqOpened,
-        child: jqTarget.insertAfter(jqOpened),
-        jqActive: $(document.activeElement).blur() // Save to return to parent.
-      };
-      startNextOpen = true;
-    }
-  }
-
-  if (startNextOpen) {
-    jqNextOpen = jqTarget; // options is saved to .data().
-    modalClose(jqOpened);
-  } else if (jqOpened === null) {
-    lockAction = true;
-    if (blurSync) {
-      isParent = jqTarget.get(0) === blurSync.parent.get(0);
-      isChild = jqTarget.get(0) === blurSync.child.get(0);
+  if (jqTarget) {
+    if (options || !(opt = jqTarget.data(APP_NAME))) {
+      opt = init(jqTarget, options).data(APP_NAME);
     }
 
-    // Event: beforeopen
-    cancelable = !jqNextOpen && !blurSync;
-    event = $.Event(EVENT_TYPE_BEFOREOPEN, {cancelable: cancelable});
-    if (isParent) { event.from = blurSync.child; }
-    jqTarget.trigger(event);
-    // jQuery doesn't support `cancelable`
-    if (!cancelable || !event.isDefaultPrevented()) {
-      fixWin = !jqNextOpen && !blurSync && !opt.fixOverlay;
-      if (fixWin) {
-        if (!bodyStyles) {
-          inlineStyles = jqBody.get(0).style;
-          bodyStyles = {overflow: inlineStyles.overflow};
-          calMarginR = jqBody.prop('clientWidth');
-          calMarginB = jqBody.prop('clientHeight');
-          jqBody.css('overflow', 'hidden');
-          calMarginR -= jqBody.prop('clientWidth');
-          calMarginB -= jqBody.prop('clientHeight');
-          bodyStyles.marginRight = inlineStyles.marginRight;
-          bodyStyles.marginBottom = inlineStyles.marginBottom;
-          if (calMarginR < 0) { jqBody.css('marginRight', '+=' + (-calMarginR)); }
-          if (calMarginB < 0) { jqBody.css('marginBottom', '+=' + (-calMarginB)); }
-        }
-        jqActive = $(document.activeElement).blur();
-        if (winScroll === undefined) {
-          winScroll = {left: jqWin.scrollLeft(), top: jqWin.scrollTop()};
-          jqWin.scroll(avoidScroll);
-        }
+    if (!jqNextOpen && !blurSync && jqInEffect &&
+        (!inOpenEffect || jqInEffect.get(0) !== jqTarget.get(0)) &&
+        (opt.force/* || isMyParent(jqInEffect)*/)) {
+      // Another in effect now (open/close). Fix status immediately.
+      jqInEffect.stop(true, true);
+      jqOverlay.stop(true, true);
+    }
+    if (lockAction && !forceAction) { return jq; }
+
+    if (!jqNextOpen && !blurSync && jqOpened && jqOpened.get(0) !== jqTarget.get(0)) {
+      if (opt.force) { startNextOpen = true; }
+      else if (isMyParent(jqOpened)) {
+        blurSync = {
+          parent: jqOpened,
+          child: jqTarget.insertAfter(jqOpened),
+          jqActive: $(document.activeElement).blur() // Save to return to parent.
+        };
+        startNextOpen = true;
       }
-      jq1st = null;
-
-      callOffset(jqTarget, opt);
-      // Add callback to the queue absolutely without depending on the effect.
-      window.setTimeout(function() {
-        if (isParent) { complete(); } // skip effect
-        else {
-          opt.effect.open.call((jqInEffect = jqTarget), opt.duration, complete);
-          if (isChild) { modalBlur(blurSync.parent, true, opt.duration); }
-        }
-      }, 0);
-      // Check blurSync for re-open parent.
-      if (fixWin) {
-        jqOverlay.css({ // Re-Style the overlay that is shared by all 'opt'.
-          backgroundColor:    opt.overlay.fillColor,
-          zIndex:             opt.overlay.zIndex
-        }).fadeTo(opt.duration, opt.overlay.opacity);
+      if (startNextOpen) {
+        jqNextOpen = jqTarget;
+        modalClose(jqOpened);
+        return jq;
       }
-      jqOpened = 0;
     }
-    lockAction = false;
+
+    if (jqOpened === null) {
+      lockAction = true;
+      if (blurSync) {
+        isParent = jqTarget.get(0) === blurSync.parent.get(0);
+        isChild = jqTarget.get(0) === blurSync.child.get(0);
+      }
+
+      // Event: beforeopen
+      cancelable = !jqNextOpen && !blurSync;
+      event = $.Event(EVENT_TYPE_BEFOREOPEN, {cancelable: cancelable});
+      if (isParent) { event.from = blurSync.child; }
+      jqTarget.trigger(event);
+      // jQuery doesn't support `cancelable`.
+      if (!cancelable || !event.isDefaultPrevented()) {
+        fixWin = !jqNextOpen && !blurSync && !opt.fixOverlay;
+        if (fixWin) {
+          if (!bodyStyles) {
+            inlineStyles = jqBody.get(0).style;
+            bodyStyles = {overflow: inlineStyles.overflow};
+            calMarginR = jqBody.prop('clientWidth');
+            calMarginB = jqBody.prop('clientHeight');
+            jqBody.css('overflow', 'hidden');
+            calMarginR -= jqBody.prop('clientWidth');
+            calMarginB -= jqBody.prop('clientHeight');
+            bodyStyles.marginRight = inlineStyles.marginRight;
+            bodyStyles.marginBottom = inlineStyles.marginBottom;
+            if (calMarginR < 0) { jqBody.css('marginRight', '+=' + (-calMarginR)); }
+            if (calMarginB < 0) { jqBody.css('marginBottom', '+=' + (-calMarginB)); }
+          }
+          jqActive = $(document.activeElement).blur();
+          if (winScroll === undefined) {
+            winScroll = {left: jqWin.scrollLeft(), top: jqWin.scrollTop()};
+            jqWin.scroll(avoidScroll);
+          }
+        }
+        jq1st = null;
+
+        callOffset(jqTarget, opt);
+        // Add callback to the queue absolutely without depending on the effect.
+        window.setTimeout(function() {
+          if (isParent) { complete(); } // skip effect
+          else {
+            inOpenEffect = true;
+            opt.effect.open.call((jqInEffect = jqTarget), opt.duration, complete);
+            if (isChild) { modalBlur(blurSync.parent, true, opt.duration); }
+          }
+        }, 0);
+        // Check blurSync for re-open parent.
+        if (fixWin) {
+          jqOverlay.css({ // Re-Style the overlay that is shared by all 'opt'.
+            backgroundColor:    opt.overlay.fillColor,
+            zIndex:             opt.overlay.zIndex
+          }).fadeTo(opt.duration, opt.overlay.opacity);
+        }
+        jqOpened = 0;
+      } else {
+        lockAction = false;
+      }
+    }
   }
   return jq;
 }
@@ -222,7 +230,6 @@ function modalClose(jq) { // jq: target/event
 
   function complete() {
     var event;
-    jqInEffect = undefined;
     if (fixWin) {
       if (bodyStyles) {
         jqBody.css(bodyStyles);
@@ -236,7 +243,10 @@ function modalClose(jq) { // jq: target/event
       }
     }
 
-    jqOpened = null; // set before trigger()
+    jqInEffect = undefined;
+    jqOpened = null;
+    if (!jqNextOpen && !isChild) { lockAction = false; }
+
     // Event: close
     event = $.Event(EVENT_TYPE_CLOSE);
     if (isEvent) { event.from = jq; }
@@ -244,17 +254,18 @@ function modalClose(jq) { // jq: target/event
     jqTarget.trigger(event);
 
     if (jqNextOpen) {
-      modalOpen(jqNextOpen);
+      modalOpen(jqNextOpen, undefined, true);
+      // reset before open#complete
       jqNextOpen = undefined;
     } else if (isChild) {
-      modalOpen(blurSync.parent);
+      modalOpen(blurSync.parent, undefined, true);
     }
   }
 
   if (!lockAction && jqOpened) {
-    lockAction = true;
     jqTarget = isEvent || jq.index(jqOpened) > -1 ? jqOpened : undefined; // jqOpened in jq
     if (jqTarget) {
+      lockAction = true;
       if (blurSync) {
         isParent = jqTarget.get(0) === blurSync.parent.get(0);
         isChild = jqTarget.get(0) === blurSync.child.get(0);
@@ -266,15 +277,17 @@ function modalClose(jq) { // jq: target/event
       if (isEvent) { event.from = jq; }
       else if (jqNextOpen) { event.from = jqNextOpen; }
       jqTarget.trigger(event);
-      // jQuery doesn't support `cancelable`
+      // jQuery doesn't support `cancelable`.
       if (!cancelable || !event.isDefaultPrevented()) {
         opt = jqTarget.data(APP_NAME);
         fixWin = !jqNextOpen && !blurSync && !opt.fixOverlay;
         duration = jqNextOpen ? 0 : opt.duration;
+
         // Add callback to the queue absolutely without depending on the effect.
         window.setTimeout(function() {
           if (isParent) { complete(); } // skip effect
           else {
+            inOpenEffect = false;
             opt.effect.close.call((jqInEffect = jqTarget), duration, complete);
             if (isChild) { modalBlur(blurSync.parent, false, opt.duration); }
           }
@@ -283,11 +296,11 @@ function modalClose(jq) { // jq: target/event
         if (fixWin) { jqOverlay.fadeOut(duration); }
         jqOpened = 0;
       } else { // Cancel
+        lockAction = false;
         jqNextOpen = undefined;
         if (isParent) { blurSync = undefined; }
       }
     }
-    lockAction = false;
   }
   if (isEvent) { jq.preventDefault(); return false; }
   return jq;
