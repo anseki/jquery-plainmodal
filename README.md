@@ -43,7 +43,7 @@ element = element.plainModal('open'[, options])
 ```
 
 Show the specified element as the modal window.  
-If `options` (see [Options](#options)) is specified, the element is initialized with specified `options` before it is shown. If the element is not initialized yet, the element is initialized even if `options` is not specified (with the default options).  
+If `options` (see [Options](#options)) is specified, the element is initialized with specified `options` before it is shown. If the element is not initialized yet, it is initialized even if `options` is not specified (with the default options).  
 The element can be initialized by new `options` any number of times.
 
 ### `close`
