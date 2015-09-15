@@ -209,7 +209,7 @@ Type: String
 Default: `'plainmodal-close'`
 
 If the element that has this class name is found in the modal window, the [`close`](#close) method is attached to `click` event of it.  
-You can know that the element was clicked, via [`event.from`](#from-property).
+You can know that the element was clicked, via [`event.from`](#from).
 
 ```html
 <div>
@@ -308,7 +308,7 @@ Default: `undefined`
 
 A child modal window or multiple child modal windows.  
 A parent modal window is already opened, and then a child modal window is opened. Now, a child modal window is activated and a parent modal window is blurred (status is "closed" but it is not hidden). And when a child modal window is closed, a parent modal window is activated again (re-opened).  
-You can trace or control those behavior via [`event.from`](#from-property).
+You can trace or control those behavior via [`event.from`](#from).
 
 ```js
 var child = $('#child').plainModal(),
@@ -325,7 +325,7 @@ Default: `false`
 
 The only one modal window can open in the one window. Therefore the [`open`](#open) method is ignored when another modal window is already opened.  
 If the [`open`](#open) method of the modal window that is set `true` to `force` is called when another modal window is already opened, another modal window is closed immediately, and the target modal window is opened.  
-You can trace or control those behavior via [`event.from`](#from-property).
+You can trace or control those behavior via [`event.from`](#from).
 *If you want to let the modal windows behave like the parent and child, you should consider [`options.child`](#child).*
 
 ```js
@@ -378,7 +378,7 @@ $('#open-button').click(function() {
 
 Triggered when the modal window is opened. (after the `open` of [`options.effect`](#effect) took [`options.duration`](#duration) to complete.)  
 An event handler can be attached when initializing via [`options.open`](#open-close-beforeopen-beforeclose) as well.  
-The Event object that is passed to the event handler might have a [`from`](#from-property) property.
+The Event object that is passed to the event handler might have a [`from`](#from) property.
 
 ```js
 $('#modal').on('plainmodalopen', function(event) {
@@ -390,7 +390,7 @@ $('#modal').on('plainmodalopen', function(event) {
 
 Triggered when the modal window is closeed. (after the `close` of [`options.effect`](#effect) took [`options.duration`](#duration) to complete.)  
 An event handler can be attached when initializing via [`options.close`](#open-close-beforeopen-beforeclose) as well.  
-The Event object that is passed to the event handler might have a [`from`](#from-property) property.
+The Event object that is passed to the event handler might have a [`from`](#from) property.
 
 ```js
 $('#modal').on('plainmodalclose', function(event) {
@@ -402,7 +402,7 @@ $('#modal').on('plainmodalclose', function(event) {
 
 Triggered before the modal window is opened.  
 An event handler can be attached when initializing via [`options.beforeopen`](#open-close-beforeopen-beforeclose) as well.  
-The Event object that is passed to the event handler might have a [`from`](#from-property) property.
+The Event object that is passed to the event handler might have a [`from`](#from) property.
 
 This event might be cancelable by calling `event.preventDefault()` in an event handler. The `plainmodalbeforeopen` event of the second modal window by [`options.child`](#child) or [`options.force`](#force) is not cancelable. Call `event.preventDefault()` in [`plainmodalbeforeclose`](#plainmodalbeforeclose) event of the first (i.e. parent) modal window to cancel that action.  
 You can know whether or not it is cancelable, via whether or not `event.cancelable` is `true`.
@@ -419,7 +419,7 @@ $('#modal').on('plainmodalbeforeopen', function(event) {
 
 Triggered before the modal window is closeed.  
 An event handler can be attached when initializing via [`options.beforeclose`](#open-close-beforeopen-beforeclose) as well.  
-The Event object that is passed to the event handler might have a [`from`](#from-property) property.
+The Event object that is passed to the event handler might have a [`from`](#from) property.
 
 This event is cancelable by calling `event.preventDefault()` in an event handler.
 
@@ -432,7 +432,11 @@ $('#modal').on('plainmodalbeforeclose', function(event) {
 });
 ```
 
-### `from` Property
+### Properties
+
+The Event object that is passed to the event handler might have additional properties.
+
+#### `from`
 
 In some cases, the modal window is opened or closed without you calling [`open`](#open) method or [`close`](#close) method. For example, when the overlay or the button which is specified [`options.closeClass`](#closeclass) is clicked. Or the parent modal window is closed when the child modal window is closed. (See [`options.child`](#child))  
 In those cases, the Event object that is passed to the event handler has the `from` property. It refers to:
@@ -477,6 +481,10 @@ var
     }
   });
 ```
+
+#### `isChild`
+
+A `true` is set, when a current modal window is handled as the child modal window.
 
 ## Note
 

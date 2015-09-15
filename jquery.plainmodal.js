@@ -121,6 +121,8 @@ function modalOpen(jq, options, forceAction) { // only 1st in jq
     if (isParent) {
       event.from = blurSync.child;
       blurSync = undefined; // set before trigger()
+    } else if (isChild) {
+      event.isChild = true;
     }
     jqTarget.trigger(event);
   }
@@ -172,6 +174,7 @@ function modalOpen(jq, options, forceAction) { // only 1st in jq
       cancelable = !jqNextOpen && !blurSync;
       event = $.Event(EVENT_TYPE_BEFOREOPEN, {cancelable: cancelable});
       if (isParent) { event.from = blurSync.child; }
+      else if (isChild) { event.isChild = true; }
       jqTarget.trigger(event);
       // jQuery doesn't support `cancelable`.
       if (!cancelable || !event.isDefaultPrevented()) {
@@ -251,6 +254,7 @@ function modalClose(jq) { // jq: target/event
     event = $.Event(EVENT_TYPE_CLOSE);
     if (isEvent) { event.from = jq; }
     else if (jqNextOpen) { event.from = jqNextOpen; }
+    if (isChild) { event.isChild = true; }
     jqTarget.trigger(event);
 
     if (jqNextOpen) {
@@ -276,6 +280,7 @@ function modalClose(jq) { // jq: target/event
       event = $.Event(EVENT_TYPE_BEFORECLOSE, {cancelable: cancelable});
       if (isEvent) { event.from = jq; }
       else if (jqNextOpen) { event.from = jqNextOpen; }
+      if (isChild) { event.isChild = true; }
       jqTarget.trigger(event);
       // jQuery doesn't support `cancelable`.
       if (!cancelable || !event.isDefaultPrevented()) {
