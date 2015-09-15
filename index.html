@@ -274,7 +274,7 @@ $(function() {
 <h3 id="open"><code>open</code></h3>
 <div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">element</span> <span class="o">=</span> <span class="nx">element</span><span class="p">.</span><span class="nx">plainModal</span><span class="p">(</span><span class="s1">&#39;open&#39;</span><span class="p">[,</span> <span class="nx">options</span><span class="p">])</span>
 </code></pre></div>
-<p>Show the specified element as the modal window.<br>If <code>options</code> (see <a href="#options">Options</a>) is specified, the element is initialized with specified <code>options</code> before it is shown. If the element is not initialized yet, the element is initialized even if <code>options</code> is not specified (with the default options).<br>The element can be initialized by new <code>options</code> any number of times.</p>
+<p>Show the specified element as the modal window.<br>If <code>options</code> (see <a href="#options">Options</a>) is specified, the element is initialized with specified <code>options</code> before it is shown. If the element is not initialized yet, it is initialized even if <code>options</code> is not specified (with the default options).<br>The element can be initialized by new <code>options</code> any number of times.</p>
 
 <h3 id="close"><code>close</code></h3>
 <div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">element</span> <span class="o">=</span> <span class="nx">element</span><span class="p">.</span><span class="nx">plainModal</span><span class="p">(</span><span class="s1">&#39;close&#39;</span><span class="p">)</span>
@@ -527,7 +527,7 @@ $(function() {
 
 <p>Type: String<br>Default: <code>&#39;plainmodal-close&#39;</code></p>
 
-<p>If the element that has this class name is found in the modal window, the <a href="#close"><code>close</code></a> method is attached to <code>click</code> event of it.<br>You can know that the element was clicked, via <a href="#from-property"><code>event.from</code></a>.</p>
+<p>If the element that has this class name is found in the modal window, the <a href="#close"><code>close</code></a> method is attached to <code>click</code> event of it.<br>You can know that the element was clicked, via <a href="#from"><code>event.from</code></a>.</p>
 <div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;div&gt;</span>
   <span class="nt">&lt;p&gt;</span>Lorem ipsum dolor ...<span class="nt">&lt;/p&gt;</span>
   <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;plainmodal-close&quot;</span><span class="nt">&gt;</span>Close<span class="nt">&lt;/div&gt;</span>
@@ -711,7 +711,7 @@ $(function() {
 
 <p>Type: jQuery object<br>Default: <code>undefined</code></p>
 
-<p>A child modal window or multiple child modal windows.<br>A parent modal window is already opened, and then a child modal window is opened. Now, a child modal window is activated and a parent modal window is blurred (status is &quot;closed&quot; but it is not hidden). And when a child modal window is closed, a parent modal window is activated again (re-opened).<br>You can trace or control those behavior via <a href="#from-property"><code>event.from</code></a>.</p>
+<p>A child modal window or multiple child modal windows.<br>A parent modal window is already opened, and then a child modal window is opened. Now, a child modal window is activated and a parent modal window is blurred (status is &quot;closed&quot; but it is not hidden). And when a child modal window is closed, a parent modal window is activated again (re-opened).<br>You can trace or control those behavior via <a href="#from"><code>event.from</code></a>.</p>
 <div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">child</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#child&#39;</span><span class="p">).</span><span class="nx">plainModal</span><span class="p">(),</span>
   <span class="nx">parent</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#parent&#39;</span><span class="p">).</span><span class="nx">plainModal</span><span class="p">({</span><span class="nx">child</span><span class="o">:</span> <span class="nx">child</span><span class="p">});</span>
 
@@ -759,7 +759,7 @@ $(function() {
 
 <p>Type: Boolean<br>Default: <code>false</code></p>
 
-<p>The only one modal window can open in the one window. Therefore the <a href="#open"><code>open</code></a> method is ignored when another modal window is already opened.<br>If the <a href="#open"><code>open</code></a> method of the modal window that is set <code>true</code> to <code>force</code> is called when another modal window is already opened, another modal window is closed immediately, and the target modal window is opened.<br>You can trace or control those behavior via <a href="#from-property"><code>event.from</code></a>.
+<p>The only one modal window can open in the one window. Therefore the <a href="#open"><code>open</code></a> method is ignored when another modal window is already opened.<br>If the <a href="#open"><code>open</code></a> method of the modal window that is set <code>true</code> to <code>force</code> is called when another modal window is already opened, another modal window is closed immediately, and the target modal window is opened.<br>You can trace or control those behavior via <a href="#from"><code>event.from</code></a>.
 <em>If you want to let the modal windows behave like the parent and child, you should consider <a href="#child"><code>options.child</code></a>.</em></p>
 <div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">modal1</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#modal1&#39;</span><span class="p">).</span><span class="nx">plainModal</span><span class="p">(),</span>
   <span class="nx">modal2</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#modal2&#39;</span><span class="p">).</span><span class="nx">plainModal</span><span class="p">({</span><span class="nx">force</span><span class="o">:</span> <span class="kc">true</span><span class="p">});</span>
@@ -823,21 +823,21 @@ $(function() {
 
 <h3 id="plainmodalopen"><code>plainmodalopen</code></h3>
 
-<p>Triggered when the modal window is opened. (after the <code>open</code> of <a href="#effect"><code>options.effect</code></a> took <a href="#duration"><code>options.duration</code></a> to complete.)<br>An event handler can be attached when initializing via <a href="#open-close-beforeopen-beforeclose"><code>options.open</code></a> as well.<br>The Event object that is passed to the event handler might have a <a href="#from-property"><code>from</code></a> property.</p>
+<p>Triggered when the modal window is opened. (after the <code>open</code> of <a href="#effect"><code>options.effect</code></a> took <a href="#duration"><code>options.duration</code></a> to complete.)<br>An event handler can be attached when initializing via <a href="#open-close-beforeopen-beforeclose"><code>options.open</code></a> as well.<br>The Event object that is passed to the event handler might have a <a href="#from"><code>from</code></a> property.</p>
 <div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#modal&#39;</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;plainmodalopen&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
   <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;textarea&#39;</span><span class="p">,</span> <span class="nx">event</span><span class="p">.</span><span class="nx">target</span><span class="p">).</span><span class="nx">addClass</span><span class="p">(</span><span class="s1">&#39;highlight&#39;</span><span class="p">);</span>
 <span class="p">});</span>
 </code></pre></div>
 <h3 id="plainmodalclose"><code>plainmodalclose</code></h3>
 
-<p>Triggered when the modal window is closeed. (after the <code>close</code> of <a href="#effect"><code>options.effect</code></a> took <a href="#duration"><code>options.duration</code></a> to complete.)<br>An event handler can be attached when initializing via <a href="#open-close-beforeopen-beforeclose"><code>options.close</code></a> as well.<br>The Event object that is passed to the event handler might have a <a href="#from-property"><code>from</code></a> property.</p>
+<p>Triggered when the modal window is closeed. (after the <code>close</code> of <a href="#effect"><code>options.effect</code></a> took <a href="#duration"><code>options.duration</code></a> to complete.)<br>An event handler can be attached when initializing via <a href="#open-close-beforeopen-beforeclose"><code>options.close</code></a> as well.<br>The Event object that is passed to the event handler might have a <a href="#from"><code>from</code></a> property.</p>
 <div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#modal&#39;</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;plainmodalclose&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
   <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#screen&#39;</span><span class="p">).</span><span class="nx">show</span><span class="p">();</span>
 <span class="p">});</span>
 </code></pre></div>
 <h3 id="plainmodalbeforeopen"><code>plainmodalbeforeopen</code></h3>
 
-<p>Triggered before the modal window is opened.<br>An event handler can be attached when initializing via <a href="#open-close-beforeopen-beforeclose"><code>options.beforeopen</code></a> as well.<br>The Event object that is passed to the event handler might have a <a href="#from-property"><code>from</code></a> property.</p>
+<p>Triggered before the modal window is opened.<br>An event handler can be attached when initializing via <a href="#open-close-beforeopen-beforeclose"><code>options.beforeopen</code></a> as well.<br>The Event object that is passed to the event handler might have a <a href="#from"><code>from</code></a> property.</p>
 
 <p>This event might be cancelable by calling <code>event.preventDefault()</code> in an event handler. The <code>plainmodalbeforeopen</code> event of the second modal window by <a href="#child"><code>options.child</code></a> or <a href="#force"><code>options.force</code></a> is not cancelable. Call <code>event.preventDefault()</code> in <a href="#plainmodalbeforeclose"><code>plainmodalbeforeclose</code></a> event of the first (i.e. parent) modal window to cancel that action.<br>You can know whether or not it is cancelable, via whether or not <code>event.cancelable</code> is <code>true</code>.</p>
 <div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#modal&#39;</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;plainmodalbeforeopen&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
@@ -848,7 +848,7 @@ $(function() {
 </code></pre></div>
 <h3 id="plainmodalbeforeclose"><code>plainmodalbeforeclose</code></h3>
 
-<p>Triggered before the modal window is closeed.<br>An event handler can be attached when initializing via <a href="#open-close-beforeopen-beforeclose"><code>options.beforeclose</code></a> as well.<br>The Event object that is passed to the event handler might have a <a href="#from-property"><code>from</code></a> property.</p>
+<p>Triggered before the modal window is closeed.<br>An event handler can be attached when initializing via <a href="#open-close-beforeopen-beforeclose"><code>options.beforeclose</code></a> as well.<br>The Event object that is passed to the event handler might have a <a href="#from"><code>from</code></a> property.</p>
 
 <p>This event is cancelable by calling <code>event.preventDefault()</code> in an event handler.</p>
 <div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#modal&#39;</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;plainmodalbeforeclose&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
@@ -858,7 +858,11 @@ $(function() {
   <span class="p">}</span>
 <span class="p">});</span>
 </code></pre></div>
-<h3 id="from-property"><code>from</code> Property</h3>
+<h3 id="properties">Properties</h3>
+
+<p>The Event object that is passed to the event handler might have additional properties.</p>
+
+<h4 id="from"><code>from</code></h4>
 
 <p>In some cases, the modal window is opened or closed without you calling <a href="#open"><code>open</code></a> method or <a href="#close"><code>close</code></a> method. For example, when the overlay or the button which is specified <a href="#closeclass"><code>options.closeClass</code></a> is clicked. Or the parent modal window is closed when the child modal window is closed. (See <a href="#child"><code>options.child</code></a>)<br>In those cases, the Event object that is passed to the event handler has the <code>from</code> property. It refers to:</p>
 
@@ -908,6 +912,10 @@ See Sample of <a href="#child"><code>options.child</code></a>. (Get the value of
     <span class="p">}</span>
   <span class="p">});</span>
 </code></pre></div>
+<h4 id="ischild"><code>isChild</code></h4>
+
+<p>A <code>true</code> is set, when a current modal window is handled as the child modal window.</p>
+
 <h2 id="note">Note</h2>
 
 <ul>
