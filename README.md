@@ -2,7 +2,7 @@
 
 The simple jQuery Plugin for fully customizable modal windows. plainModal has basic functions only, and it does not style. It has no image files and no CSS files. Just one small file.
 
-**See <a href="http://anseki.github.io/jquery-plainmodal">DEMO</a>**
+**See <a href="http://anseki.github.io/jquery-plainmodal/">DEMO</a>**
 
 Many great plugins already exist.
 
@@ -494,4 +494,4 @@ If your web site supports IE8- and it use `position:fixed`, HTML must include `<
 
 ## See Also
 
-[plainOverlay](http://anseki.github.io/jquery-plainoverlay) may be better, if you want the overlay that covers a page, elements or iframe-windows.
+[plainOverlay](http://anseki.github.io/jquery-plainoverlay/) may be better, if you want the overlay that covers a page, elements or iframe-windows.
