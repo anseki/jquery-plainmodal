@@ -18,7 +18,7 @@
   "dependencies": {
     "jquery": ">=1.8"
   },
-  "homepage": "http://anseki.github.io/jquery-plainmodal/",
+  "homepage": "https://anseki.github.io/jquery-plainmodal/",
   "repository": {
     "type": "git",
     "url": "git://github.com/anseki/jquery-plainmodal.git"
