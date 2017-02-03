@@ -1,5 +1,7 @@
 # plainModal
 
+[![npm](https://img.shields.io/npm/v/jquery-plainmodal.svg)](https://www.npmjs.com/package/jquery-plainmodal) [![GitHub issues](https://img.shields.io/github/issues/anseki/jquery-plainmodal.svg)](https://github.com/anseki/jquery-plainmodal/issues) [![David](https://img.shields.io/david/anseki/jquery-plainmodal.svg)](package.json) [![license](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE-MIT)
+
 The simple jQuery Plugin for fully customizable modal windows. plainModal has basic functions only, and it does not style. It has no image files and no CSS files. Just one small file.
 
 **See <a href="https://anseki.github.io/jquery-plainmodal/">DEMO</a>**

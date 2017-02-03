@@ -1,6 +1,6 @@
 /*
  * jQuery.plainModal
- * https://github.com/anseki/jquery-plainmodal
+ * https://anseki.github.io/jquery-plainmodal/
  *
  * Copyright (c) 2015 anseki
  * Licensed under the MIT license.
