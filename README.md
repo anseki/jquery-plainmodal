@@ -1,6 +1,11 @@
-# plainModal
+# jQuery-plainModal
 
 [![npm](https://img.shields.io/npm/v/jquery-plainmodal.svg)](https://www.npmjs.com/package/jquery-plainmodal) [![GitHub issues](https://img.shields.io/github/issues/anseki/jquery-plainmodal.svg)](https://github.com/anseki/jquery-plainmodal/issues) [![David](https://img.shields.io/david/anseki/jquery-plainmodal.svg)](package.json) [![license](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE-MIT)
+
+***Recommend: [PlainModal](https://anseki.github.io/plain-modal/) instead of "jQuery-plainModal"***  
+*No dependency, Modern browsers supported, Lightweight & Single file, and more features*
+
+---
 
 The simple jQuery Plugin for fully customizable modal windows. plainModal has basic functions only, and it does not style. It has no image files and no CSS files. Just one small file.
 
@@ -496,4 +501,5 @@ If your web site supports IE8- and it use `position:fixed`, HTML must include `<
 
 ## See Also
 
-[plainOverlay](https://anseki.github.io/jquery-plainoverlay/) may be better, if you want the overlay that covers a page, elements or iframe-windows.
+- [PlainOverlay](https://anseki.github.io/plain-overlay/) : The simple library for customizable overlay which covers all or part of a web page.
+- [PlainModal](https://anseki.github.io/plain-modal/) : The simple library for fully customizable modal window in a web page.
