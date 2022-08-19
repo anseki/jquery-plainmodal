@@ -1,6 +1,6 @@
 # jQuery-plainModal
 
-[![npm](https://img.shields.io/npm/v/jquery-plainmodal.svg)](https://www.npmjs.com/package/jquery-plainmodal) [![GitHub issues](https://img.shields.io/github/issues/anseki/jquery-plainmodal.svg)](https://github.com/anseki/jquery-plainmodal/issues) [![David](https://img.shields.io/david/anseki/jquery-plainmodal.svg)](package.json) [![license](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE-MIT)
+[![npm](https://img.shields.io/npm/v/jquery-plainmodal.svg)](https://www.npmjs.com/package/jquery-plainmodal) [![GitHub issues](https://img.shields.io/github/issues/anseki/jquery-plainmodal.svg)](https://github.com/anseki/jquery-plainmodal/issues) [![David](https://img.shields.io/david/anseki/jquery-plainmodal.svg)](package.json) [![license](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
 ***Recommend: [PlainModal](https://anseki.github.io/plain-modal/) instead of "jQuery-plainModal"***  
 *No dependency, Modern browsers supported, Lightweight & Single file, and more features*
